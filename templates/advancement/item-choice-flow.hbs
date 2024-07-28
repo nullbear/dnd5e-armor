@@ -10,7 +10,7 @@
         {{#if replaceable}}
         <div class="item-name">
             <label class="flexrow">
-                <h4>{{ localize "DND5E.AdvancementItemChoiceReplacementNone" }}</h4>
+                <h4>{{ localize "DND5A.AdvancementItemChoiceReplacementNone" }}</h4>
                 <input type="radio" name="replace" value="" {{ checked noReplacement }}>
             </label>
         </div>
@@ -18,7 +18,7 @@
 
         {{#if abilities.options}}
         <div class="form-group">
-            <label>{{ localize "DND5E.SpellAbility" }}</label>
+            <label>{{ localize "DND5A.SpellAbility" }}</label>
             <select name="ability" {{ disabled abilities.disabled }}>
                 {{ selectOptions abilities.options selected=abilities.selected }}
             </select>
@@ -26,7 +26,7 @@
         {{/if}}
 
         {{#each previousLevels}}
-        <h4 class="form-header">{{ localize "DND5E.AdvancementLevelHeader" level=@key }}</h4>
+        <h4 class="form-header">{{ localize "DND5A.AdvancementLevelHeader" level=@key }}</h4>
         {{#each this}}
         <div class="item-name flexrow {{#if replaced}}replaced{{/if}}">
             <div class="item-image" style="background-image: url('{{ img }}');"></div>
@@ -41,7 +41,7 @@
         {{/each}}
 
         <h4 class="form-header">
-            {{ localize "DND5E.AdvancementItemChoiceChosen" current=choices.current max=choices.max }}
+            {{ localize "DND5A.AdvancementItemChoiceChosen" current=choices.current max=choices.max }}
         </h4>
 
         {{#each items}}
@@ -52,8 +52,8 @@
                     <a data-uuid="{{this.uuid}}">{{ name }}</a>
                 </h4>
                 {{#if dropped}}
-                <a class="item-control item-delete" data-tooltip="DND5E.ItemDelete"
-                   aria-label="{{ localize 'DND5E.ItemDelete' }}">
+                <a class="item-control item-delete" data-tooltip="DND5A.ItemDelete"
+                   aria-label="{{ localize 'DND5A.ItemDelete' }}">
                     <i class="fa-solid fa-trash" inert></i>
                 </a>
                 <input type="hidden" name="{{ uuid }}" value="true" data-dtype="Boolean">
@@ -65,7 +65,7 @@
         {{/each}}
 
         {{#if advancement.configuration.allowDrops}}
-        <p class="hint centered">{{ localize "DND5E.AdvancementFlowDropAreaHint" }}</p>
+        <p class="hint centered">{{ localize "DND5A.AdvancementFlowDropAreaHint" }}</p>
         {{/if}}
     </div>
 </form>

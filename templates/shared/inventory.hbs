@@ -3,8 +3,8 @@
         {{#unless isNPC}}
         <ol class="currency flexrow">
             <h3>
-                {{#unless isContainer}}{{localize "DND5E.Currency"}}{{/unless}}
-                <a class="item-action" data-action="currency" data-tooltip="DND5E.CurrencyManager.Title">
+                {{#unless isContainer}}{{localize "DND5A.Currency"}}{{/unless}}
+                <a class="item-action" data-action="currency" data-tooltip="DND5A.CurrencyManager.Title">
                     <i class="fas fa-coins"></i>
                 </a>
             </h3>
@@ -16,13 +16,13 @@
         {{/unless}}
         {{#if isCharacter}}
         <div class="attunement">
-            <label>{{localize "DND5E.Attunement"}}</label>
+            <label>{{localize "DND5A.Attunement"}}</label>
             <span class="attunement-value">{{system.attributes.attunement.value}}</span>
             <span class="sep"> / </span>
-            <span class="attunement-max" {{#if overrides.attunement}}data-tooltip="DND5E.ActiveEffectOverrideWarning"{{/if}}>
+            <span class="attunement-max" {{#if overrides.attunement}}data-tooltip="DND5A.ActiveEffectOverrideWarning"{{/if}}>
                 {{system.attributes.attunement.max}}
                 {{#unless (or overrides.attunement (not editable))}}
-                <a class="attunement-max-override" data-tooltip="DND5E.AttunementOverride">
+                <a class="attunement-max-override" data-tooltip="DND5A.AttunementOverride">
                     <i class="fa-solid fa-edit"></i>
                 </a>
                 {{/unless}}
@@ -32,10 +32,10 @@
 
         {{#if inventoryFilters}}
         <ul class="filter-list flexrow" data-filter="inventory">
-            <li class="filter-item" data-filter="action">{{localize "DND5E.Action"}}</li>
-            <li class="filter-item" data-filter="bonus">{{localize "DND5E.BonusAction"}}</li>
-            <li class="filter-item" data-filter="reaction">{{localize "DND5E.Reaction"}}</li>
-            <li class="filter-item" data-filter="equipped">{{localize "DND5E.Equipped"}}</li>
+            <li class="filter-item" data-filter="action">{{localize "DND5A.Action"}}</li>
+            <li class="filter-item" data-filter="bonus">{{localize "DND5A.BonusAction"}}</li>
+            <li class="filter-item" data-filter="reaction">{{localize "DND5A.Reaction"}}</li>
+            <li class="filter-item" data-filter="equipped">{{localize "DND5A.Equipped"}}</li>
         </ul>
         {{/if}}
     </div>
@@ -51,21 +51,21 @@
             {{/each}}
             {{else}}
             {{#if (or @root.isCharacter @root.isContainer)}}
-            <div class="item-detail item-weight">{{localize "DND5E.Weight"}}</div>
+            <div class="item-detail item-weight">{{localize "DND5A.Weight"}}</div>
             {{/if}}
-            <div class="item-detail item-quantity">{{localize "DND5E.QuantityAbbr"}}</div>
+            <div class="item-detail item-quantity">{{localize "DND5A.QuantityAbbr"}}</div>
             {{#unless @root.isContainer}}
-            <div class="item-detail item-uses">{{localize "DND5E.Charges"}}</div>
-            <div class="item-detail item-action">{{localize "DND5E.Usage"}}</div>
+            <div class="item-detail item-uses">{{localize "DND5A.Charges"}}</div>
+            <div class="item-detail item-action">{{localize "DND5A.Usage"}}</div>
             {{/unless}}
             {{/if}}
 
             {{#if @root.owner}}
             <div class="item-controls flexrow">
                 {{#if section.dataset}}
-                <a class="item-control item-action" data-action="create" data-tooltip="DND5E.ItemCreate"
+                <a class="item-control item-action" data-action="create" data-tooltip="DND5A.ItemCreate"
                    {{#each section.dataset as |v k|}}data-{{k}}="{{v}}"{{/each}}>
-                    <i class="fas fa-plus"></i> {{localize "DND5E.Add"}}
+                    <i class="fas fa-plus"></i> {{localize "DND5A.Add"}}
                 </a>
                 {{/if}}
             </div>
@@ -74,7 +74,7 @@
 
         <ol class="item-list">
             {{#each section.items as |item iid|}}
-            {{#dnd5e-itemContext item as |ctx|}}
+            {{#dnd5a-itemContext item as |ctx|}}
                 <li class="item flexrow {{section.css}}" data-item-id="{{item.id}}"
                     {{#if section.editableName}}data-item-index="{{iid}}"{{/if}}>
                     <div class="item-name flexrow {{@root.rollableClass}}">
@@ -155,35 +155,35 @@
                         </a>
                         {{/if}}
                         {{#unless section.editableName}}
-                        <a class="item-control item-action" data-action="edit" data-tooltip="DND5E.ItemEdit">
+                        <a class="item-control item-action" data-action="edit" data-tooltip="DND5A.ItemEdit">
                             <i class="fas fa-edit"></i>
                         </a>
                         {{/unless}}
-                        <a class="item-control item-action" data-action="delete" data-tooltip="DND5E.ItemDelete">
+                        <a class="item-control item-action" data-action="delete" data-tooltip="DND5A.ItemDelete">
                             <i class="fas fa-trash"></i>
                         </a>
                     </div>
                     {{/if}}
 
                     {{#if ctx.expanded}}
-                        {{> "dnd5e.item-summary" ctx.expanded}}
+                        {{> "dnd5a.item-summary" ctx.expanded}}
                     {{/if}}
                 </li>
-            {{/dnd5e-itemContext}}
+            {{/dnd5a-itemContext}}
             {{/each}}
         </ol>
         {{/each}}
     </ol>
 
     {{#with capacity}}
-    <div class="capacity" role="meter" aria-label="{{localize 'DND5E.ItemContainerCapacity'}}"
+    <div class="capacity" role="meter" aria-label="{{localize 'DND5A.ItemContainerCapacity'}}"
          aria-value="{{pct}}" aria-valuetext="{{value}} {{units}}"
          aria-valuemin="0" aria-valuemax="{{max}}" style="--percentage: {{pct}}%">
     </div>
     {{/with}}
     {{#with encumbrance}}
     <div class="encumbrance {{~#if encumbered}} encumbered{{/if}}" role="meter"
-         aria-label="{{localize 'DND5E.Encumbrance'}}" aria-value="{{pct}}"
+         aria-label="{{localize 'DND5A.Encumbrance'}}" aria-value="{{pct}}"
          aria-valuetext="{{value}} {{@root.weightUnit}}" aria-valuemin="0"
          aria-valuemax="{{max}}" style="--percentage: {{pct}}%">
         <label>{{value}} / {{max}}</label>

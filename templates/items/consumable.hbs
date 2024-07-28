@@ -7,10 +7,10 @@
         <div class="header-details flexrow">
             <h1 class="charname">
                 {{#if system.identified}}
-                <input name="name" type="text" value="{{item.name}}" placeholder="{{ localize 'DND5E.ItemName' }}">
+                <input name="name" type="text" value="{{item.name}}" placeholder="{{ localize 'DND5A.ItemName' }}">
                 {{else}}
                 <input name="system.unidentified.name" type="text" value="{{system.unidentified.name}}"
-                       placeholder="{{ localize 'DND5E.NameUnidentified' }}">
+                       placeholder="{{ localize 'DND5A.NameUnidentified' }}">
                 {{/if}}
             </h1>
 
@@ -19,20 +19,20 @@
                 <label class="equipped">
                     <input type="checkbox" name="system.equipped" {{checked system.equipped}}>
                     {{#if system.equipped}}
-                        {{ localize "DND5E.Equipped" }}
+                        {{ localize "DND5A.Equipped" }}
                         {{#if editable}}<i class="fa-solid fa-toggle-on"></i>{{/if}}
                     {{else}}
-                        {{ localize "DND5E.Unequipped" }}
+                        {{ localize "DND5A.Unequipped" }}
                         {{#if editable}}<i class="fa-solid fa-toggle-off"></i>{{/if}}
                     {{/if}}
                 </label>
                 <label class="identified">
                     <input type="checkbox" name="system.identified" {{checked system.identified}}>
                     {{#if system.identified}}
-                        {{ localize "DND5E.Identified" }}
+                        {{ localize "DND5A.Identified" }}
                         {{#if editable}}<i class="fa-solid fa-toggle-on"></i>{{/if}}
                     {{else}}
-                        {{ localize "DND5E.Unidentified.Title" }}
+                        {{ localize "DND5A.Unidentified.Title" }}
                         {{#if editable}}<i class="fa-solid fa-toggle-off"></i>{{/if}}
                     {{/if}}
                 </label>
@@ -42,7 +42,7 @@
                 <li>{{ itemStatus }}</li>
                 <li>
                     {{#if concealDetails}}
-                    <span>{{ localize "DND5E.Unidentified.Title" }}</span>
+                    <span>{{ localize "DND5A.Unidentified.Title" }}</span>
                     {{else}}
                     <select name="system.rarity" {{~#if concealDetails}} inert{{/if}}>
                         {{selectOptions config.itemRarity selected=system.rarity blank=""}}
@@ -50,7 +50,7 @@
                     {{/if}}
                 </li>
                 <li>
-                    {{> "dnd5e.item-source"}}
+                    {{> "dnd5a.item-source"}}
                 </li>
             </ul>
         </div>
@@ -58,26 +58,26 @@
 
     {{!-- Item Sheet Navigation --}}
     <nav class="sheet-navigation tabs" data-group="primary">
-        <a class="item active" data-tab="description">{{ localize "DND5E.Description" }}</a>
-        <a class="item" data-tab="details">{{ localize "DND5E.Details" }}</a>
-        <a class="item" data-tab="effects">{{ localize "DND5E.Effects" }}</a>
+        <a class="item active" data-tab="description">{{ localize "DND5A.Description" }}</a>
+        <a class="item" data-tab="details">{{ localize "DND5A.Details" }}</a>
+        <a class="item" data-tab="effects">{{ localize "DND5A.Effects" }}</a>
     </nav>
 
     {{!-- Item Sheet Body --}}
     <section class="sheet-body">
 
         {{!-- Description Tab --}}
-        {{> "dnd5e.item-description"}}
+        {{> "dnd5a.item-description"}}
 
         {{!-- Details Tab --}}
         <div class="tab details" data-group="primary" data-tab="details">
-            {{#dnd5e-concealSection concealDetails}}
+            {{#dnd5a-concealSection concealDetails}}
 
-            <h3 class="form-header">{{ localize "DND5E.ItemConsumableDetails" }}</h3>
+            <h3 class="form-header">{{ localize "DND5A.ItemConsumableDetails" }}</h3>
 
             {{!-- Consumable Type --}}
             <div class="form-group">
-                <label>{{ localize "DND5E.ItemConsumableType" }}</label>
+                <label>{{ localize "DND5A.ItemConsumableType" }}</label>
                 <select name="system.type.value">
                     {{selectOptions config.consumableTypes selected=system.type.value labelAttr="label"}}
                 </select>
@@ -85,7 +85,7 @@
             {{#if itemSubtypes}}
             <div class="form-group">
                 <label>
-                    {{localize "DND5E.ItemConsumableSubtype"
+                    {{localize "DND5A.ItemConsumableSubtype"
                         category=(lookup (lookup config.consumableTypes system.type.value) "label")}}
                 </label>
                 <select name="system.type.subtype">
@@ -95,14 +95,14 @@
             {{/if}}
 
             <div class="form-group input-select">
-                <label>{{localize "DND5E.Attunement"}}</label>
+                <label>{{localize "DND5A.Attunement"}}</label>
                 <div class="form-fields">
                     <input type="checkbox" name="system.attuned" {{ checked system.attuned }}
                            {{ disabled (not system.attunement) }}
-                           data-tooltip="DND5E.Attuned" aria-label="{{ localize 'DND5E.Attuned' }}">
+                           data-tooltip="DND5A.Attuned" aria-label="{{ localize 'DND5A.Attuned' }}">
                     <select name="system.attunement">
                         {{selectOptions config.attunementTypes selected=system.attunement
-                                        blank=(localize "DND5E.AttunementNone")}}
+                                        blank=(localize "DND5A.AttunementNone")}}
                     </select>
                 </div>
             </div>
@@ -110,9 +110,9 @@
             {{!-- Consumable Properties --}}
             <div class="form-group stacked weapon-properties">
                 {{#if (eq system.type.value "ammo")}}
-                <label>{{ localize "DND5E.ItemAmmoProperties" }}</label>
+                <label>{{ localize "DND5A.ItemAmmoProperties" }}</label>
                 {{else}}
-                <label>{{ localize "DND5E.ItemConsumableProperties" }}</label>
+                <label>{{ localize "DND5A.ItemConsumableProperties" }}</label>
                 {{/if}}
                 {{#each properties}}
                 <label class="checkbox">
@@ -124,29 +124,29 @@
 
             {{#if (and properties.mgc.selected (eq system.type.value "ammo"))}}
             <div class="form-group">
-                <label>{{ localize "DND5E.MagicalBonus" }}</label>
+                <label>{{ localize "DND5A.MagicalBonus" }}</label>
                 <div class="form-fields">
                     {{ numberInput system.magicalBonus name="system.magicalBonus" min="0" step="1" placeholder="0" }}
                 </div>
             </div>
             {{/if}}
 
-            <h3 class="form-header">{{ localize "DND5E.ItemConsumableUsage" }}</h3>
+            <h3 class="form-header">{{ localize "DND5A.ItemConsumableUsage" }}</h3>
 
             {{!-- Item Activation Template --}}
-            {{> "dnd5e.item-activation"}}
+            {{> "dnd5a.item-activation"}}
 
-            <h3 class="form-header">{{ localize "DND5E.ItemConsumableActivation" }}</h3>
+            <h3 class="form-header">{{ localize "DND5A.ItemConsumableActivation" }}</h3>
 
             {{!-- Item Action Template --}}
-            {{> "dnd5e.item-action"}}
+            {{> "dnd5a.item-action"}}
 
-            {{/dnd5e-concealSection}}
+            {{/dnd5a-concealSection}}
         </div>
 
         {{!-- Effects Tab --}}
         <div class="tab effects flexcol" data-group="primary" data-tab="effects">
-            {{> "dnd5e.active-effects"}}
+            {{> "dnd5a.active-effects"}}
         </div>
     </section>
 </form>

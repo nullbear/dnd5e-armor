@@ -10,13 +10,13 @@
     {{!-- Ideals, Bonds, & Flaws --}}
     <div class="top flexrow">
 
-        {{~> "dnd5e.biography-textbox" name="system.details.ideal" value=system.details.ideal label="DND5E.Ideals"
+        {{~> "dnd5a.biography-textbox" name="system.details.ideal" value=system.details.ideal label="DND5A.Ideals"
             icon="fas fa-seedling" ~}}
 
-        {{~> "dnd5e.biography-textbox" name="system.details.bond" value=system.details.bond label="DND5E.Bonds"
+        {{~> "dnd5a.biography-textbox" name="system.details.bond" value=system.details.bond label="DND5A.Bonds"
             icon="fas fa-link" ~}}
 
-        {{~> "dnd5e.biography-textbox" name="system.details.flaw" value=system.details.flaw label="DND5E.Flaws"
+        {{~> "dnd5a.biography-textbox" name="system.details.flaw" value=system.details.flaw label="DND5A.Flaws"
             icon="fas fa-heart-crack" ~}}
 
     </div>
@@ -26,11 +26,11 @@
 
         <h3 class="icon">
             <a class="editor-edit" data-action="editDescription"
-               aria-label="{{ localize "DND5E.BiographyPublicEdit" }}">
+               aria-label="{{ localize "DND5A.BiographyPublicEdit" }}">
                 <i class="fas fa-feather"></i>
             </a>
-            <dnd5e-icon src="systems/dnd5e/icons/svg/ink-pot.svg"></dnd5e-icon>
-            <span class="roboto-upper">{{ localize "DND5E.Public" }}</span>
+            <dnd5a-icon src="systems/dnd5a/icons/svg/ink-pot.svg"></dnd5a-icon>
+            <span class="roboto-upper">{{ localize "DND5A.Public" }}</span>
         </h3>
 
         <div class="editor">
@@ -43,11 +43,11 @@
     <div class="bottom" data-target="system.details.biography.value">
 
         <h3 class="icon">
-            <a class="editor-edit" data-action="editDescription" aria-label="{{ localize "DND5E.DetailsEdit" }}">
+            <a class="editor-edit" data-action="editDescription" aria-label="{{ localize "DND5A.DetailsEdit" }}">
                 <i class="fas fa-feather"></i>
             </a>
-            <dnd5e-icon src="systems/dnd5e/icons/svg/ink-pot.svg"></dnd5e-icon>
-            <span class="roboto-upper">{{ localize "DND5E.Details" }}</span>
+            <dnd5a-icon src="systems/dnd5a/icons/svg/ink-pot.svg"></dnd5a-icon>
+            <span class="roboto-upper">{{ localize "DND5A.Details" }}</span>
         </h3>
 
         <div class="editor">

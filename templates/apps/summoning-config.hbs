@@ -1,45 +1,45 @@
 <form autocomplete="off">
     <h3 class="form-header flexrow">
-        {{ localize "DND5E.Summoning.Profile.LabelPl" }}
+        {{ localize "DND5A.Summoning.Profile.LabelPl" }}
         <button type="button" class="unbutton" data-action="add-profile">
             <i class="fa-solid fa-plus" aria-hidden="true"></i>
-            {{ localize 'DND5E.Summoning.Action.Add' }}
+            {{ localize 'DND5A.Summoning.Action.Add' }}
         </button>
     </h3>
     <div class="form-group">
-        <label>{{ localize "DND5E.Summoning.Mode.Label" }}</label>
+        <label>{{ localize "DND5A.Summoning.Mode.Label" }}</label>
         <select name="mode">
-            {{ selectOptions modes selected=summons.mode localize=true blank=(localize "DND5E.Summoning.Mode.Direct") }}
+            {{ selectOptions modes selected=summons.mode localize=true blank=(localize "DND5A.Summoning.Mode.Direct") }}
         </select>
     </div>
-    <ul class="dnd5e2 separated-list profiles flexcol">
+    <ul class="dnd5a2 separated-list profiles flexcol">
         {{#each profiles}}
-        <li class="profile dnd5e2" data-profile-id="{{ id }}">
+        <li class="profile dnd5a2" data-profile-id="{{ id }}">
             <div class="details flexrow">
                 <input type="text" name="profiles.{{ id }}.count" value="{{ count }}" placeholder="1"
-                    aria-label="{{ localize 'DND5E.Summoning.Count.Label' }}">
+                    aria-label="{{ localize 'DND5A.Summoning.Count.Label' }}">
                 <span class="sep">&times;</span>
                 {{#if (eq @root.summons.mode "cr")}}
                 <label>
-                    <strong>{{ localize 'DND5E.AbbreviationCR' }}</strong>
+                    <strong>{{ localize 'DND5A.AbbreviationCR' }}</strong>
                     <input type="text" name="profiles.{{ id }}.cr" value="{{ cr }}">
                 </label>
                 {{else}}
                 {{#if document}}
-                {{{ dnd5e-linkForUuid uuid }}}
+                {{{ dnd5a-linkForUuid uuid }}}
                 {{else}}
                 <div class="drop-area">
-                    {{ localize "DND5E.Summoning.DropHint" }}
+                    {{ localize "DND5A.Summoning.DropHint" }}
                 </div>
                 {{/if}}
                 {{/if}}
                 <input type="text" name="profiles.{{ id }}.name" value="{{ name }}" aria-label="{{ localize 'Name' }}"
                        placeholder="{{#if document}}{{ document.name }}{{else}}
-                       {{~ localize 'DND5E.Summoning.DisplayName' }}{{/if}}">
+                       {{~ localize 'DND5A.Summoning.DisplayName' }}{{/if}}">
                 <div class="list-controls">
                     <button type="button" class="unbutton" data-action="delete-profile"
-                            data-tooltip="DND5E.Summoning.Action.Remove"
-                            aria-label="{{ localize 'DND5E.Summoning.Action.Remove' }}">
+                            data-tooltip="DND5A.Summoning.Action.Remove"
+                            aria-label="{{ localize 'DND5A.Summoning.Action.Remove' }}">
                         <i class="fa-solid fa-trash fa-fw" inert></i>
                     </button>
                 </div>
@@ -49,14 +49,14 @@
             <div class="additional-tray collapsible {{ collapsed }}">
                 <label class="roboto-upper">
                     <i class="fa-solid fa-gears" inert></i>
-                    <span>{{ localize "DND5E.AdditionalSettings" }}</span>
+                    <span>{{ localize "DND5A.AdditionalSettings" }}</span>
                     <i class="fas fa-caret-down" inert></i>
                 </label>
                 <div class="collapsible-content">
                     <div class="wrapper">
                         {{#if (eq @root.summons.mode "cr")}}
                         <div class="form-group">
-                            <label>{{ localize "DND5E.Summoning.CreatureTypes.Label" }}</label>
+                            <label>{{ localize "DND5A.Summoning.CreatureTypes.Label" }}</label>
                             <multi-select name="profiles.{{ id }}.types">
                                 {{#each creatureTypes}}
                                 <option value="{{ @key }}" {{ selected }}>{{ label }}</option>
@@ -65,15 +65,15 @@
                         </div>
                         {{/if}}
                         <div class="form-group">
-                            <label>{{ localize "DND5E.LevelLimit.Label" }}</label>
+                            <label>{{ localize "DND5A.LevelLimit.Label" }}</label>
                             <div class="form-fields">
                                 <input type="number" name="profiles.{{ id }}.level.min" min="1" step="1" placeholder="0"
-                                       value="{{ level.min }}" aria-label="{{ localize 'DND5E.LevelLimit.Min' }}">
+                                       value="{{ level.min }}" aria-label="{{ localize 'DND5A.LevelLimit.Min' }}">
                                 <span class="sep">&ndash;</span>
                                 <input type="number" name="profiles.{{ id }}.level.max" min="1" step="1" placeholder="∞"
-                                       value="{{ level.max }}" aria-label="{{ localize 'DND5E.LevelLimit.Max' }}">
+                                       value="{{ level.max }}" aria-label="{{ localize 'DND5A.LevelLimit.Max' }}">
                             </div>
-                            <p class="hint">{{ localize "DND5E.Summoning.Level.Hint" }}</p>
+                            <p class="hint">{{ localize "DND5A.Summoning.Level.Hint" }}</p>
                         </div>
                     </div>
                 </div>
@@ -81,86 +81,86 @@
         </li>
         {{else}}
         <li class="empty">
-            {{#unless summons.mode}}{{ localize "DND5E.Summoning.Profile.EmptyDrop" }}
-            {{~else}}{{ localize "DND5E.Summoning.Profile.Empty" }}{{/unless}}
+            {{#unless summons.mode}}{{ localize "DND5A.Summoning.Profile.EmptyDrop" }}
+            {{~else}}{{ localize "DND5A.Summoning.Profile.Empty" }}{{/unless}}
         </li>
         {{/each}}
     </ul>
 
     {{#unless @root.isSpell}}
     <div class="form-group">
-        <label>{{ localize "DND5E.ClassIdentifier" }}</label>
+        <label>{{ localize "DND5A.ClassIdentifier" }}</label>
         <input type="text" name="classIdentifier" value="{{ summons.classIdentifier }}">
-        <p class="hint">{{ localize "DND5E.Summoning.Level.IdentifierHint" }}</p>
+        <p class="hint">{{ localize "DND5A.Summoning.Level.IdentifierHint" }}</p>
     </div>
     {{/unless}}
 
-    <h3 class="form-header">{{ localize "DND5E.Summoning.CreatureChanges.Label" }}</h3>
-    <p class="hint">{{ localize "DND5E.Summoning.CreatureChanges.Hint" }}</p>
+    <h3 class="form-header">{{ localize "DND5A.Summoning.CreatureChanges.Label" }}</h3>
+    <p class="hint">{{ localize "DND5A.Summoning.CreatureChanges.Hint" }}</p>
     <div class="form-group">
-        <label>{{ localize "DND5E.Summoning.Match.Proficiency.Label" }}</label>
+        <label>{{ localize "DND5A.Summoning.Match.Proficiency.Label" }}</label>
         <input type="checkbox" name="match.proficiency" {{ checked summons.match.proficiency }}>
-        <p class="hint">{{ localize "DND5E.Summoning.Match.Proficiency.Hint" }}</p>
+        <p class="hint">{{ localize "DND5A.Summoning.Match.Proficiency.Hint" }}</p>
     </div>
     <div class="form-group">
-        <label>{{ localize "DND5E.Summoning.Bonuses.ArmorClass.Label" }}</label>
+        <label>{{ localize "DND5A.Summoning.Bonuses.ArmorClass.Label" }}</label>
         <input type="text" name="bonuses.ac" value="{{ summons.bonuses.ac }}">
-        <p class="hint">{{ localize "DND5E.Summoning.Bonuses.ArmorClass.Hint" }}</p>
+        <p class="hint">{{ localize "DND5A.Summoning.Bonuses.ArmorClass.Hint" }}</p>
     </div>
     <div class="form-group">
-        <label>{{ localize "DND5E.Summoning.Bonuses.HitDice.Label" }}</label>
+        <label>{{ localize "DND5A.Summoning.Bonuses.HitDice.Label" }}</label>
         <input type="text" name="bonuses.hd" value="{{ summons.bonuses.hd }}">
-        <p class="hint">{{ localize "DND5E.Summoning.Bonuses.HitDice.Hint" }}</p>
+        <p class="hint">{{ localize "DND5A.Summoning.Bonuses.HitDice.Hint" }}</p>
     </div>
     <div class="form-group">
-        <label>{{ localize "DND5E.Summoning.Bonuses.HitPoints.Label" }}</label>
+        <label>{{ localize "DND5A.Summoning.Bonuses.HitPoints.Label" }}</label>
         <input type="text" name="bonuses.hp" value="{{ summons.bonuses.hp }}">
-        <p class="hint">{{ localize "DND5E.Summoning.Bonuses.HitPoints.Hint" }}</p>
+        <p class="hint">{{ localize "DND5A.Summoning.Bonuses.HitPoints.Hint" }}</p>
     </div>
     <div class="form-group">
-        <label>{{ localize "DND5E.Summoning.CreatureSizes.Label" }}</label>
+        <label>{{ localize "DND5A.Summoning.CreatureSizes.Label" }}</label>
         <multi-select name="creatureSizes">
             {{#each creatureSizes}}
             <option value="{{ @key }}" {{ selected }}>{{ label }}</option>
             {{/each}}
         </multi-select>
-        <p class="hint">{{ localize "DND5E.Summoning.CreatureSizes.Hint" }}</p>
+        <p class="hint">{{ localize "DND5A.Summoning.CreatureSizes.Hint" }}</p>
     </div>
     <div class="form-group">
-        <label>{{ localize "DND5E.Summoning.CreatureTypes.Label" }}</label>
+        <label>{{ localize "DND5A.Summoning.CreatureTypes.Label" }}</label>
         <multi-select name="creatureTypes">
             {{#each creatureTypes}}
             <option value="{{ @key }}" {{ selected }}>{{ label }}</option>
             {{/each}}
         </multi-select>
-        <p class="hint">{{ localize "DND5E.Summoning.CreatureTypes.Hint" }}</p>
+        <p class="hint">{{ localize "DND5A.Summoning.CreatureTypes.Hint" }}</p>
     </div>
 
-    <h3 class="form-header">{{ localize "DND5E.Summoning.ItemChanges.Label" }}</h3>
-    <p class="hint">{{ localize "DND5E.Summoning.ItemChanges.Hint" }}</p>
+    <h3 class="form-header">{{ localize "DND5A.Summoning.ItemChanges.Label" }}</h3>
+    <p class="hint">{{ localize "DND5A.Summoning.ItemChanges.Hint" }}</p>
     <div class="form-group">
-        <label>{{ localize "DND5E.Summoning.Match.Attacks.Label" }}</label>
+        <label>{{ localize "DND5A.Summoning.Match.Attacks.Label" }}</label>
         <input type="checkbox" name="match.attacks" {{ checked summons.match.attacks }}>
-        <p class="hint">{{ localize "DND5E.Summoning.Match.Attacks.Hint" }}</p>
+        <p class="hint">{{ localize "DND5A.Summoning.Match.Attacks.Hint" }}</p>
     </div>
     <div class="form-group">
-        <label>{{ localize "DND5E.Summoning.Match.Saves.Label" }}</label>
+        <label>{{ localize "DND5A.Summoning.Match.Saves.Label" }}</label>
         <input type="checkbox" name="match.saves" {{ checked summons.match.saves }}>
-        <p class="hint">{{ localize "DND5E.Summoning.Match.Saves.Hint" }}</p>
+        <p class="hint">{{ localize "DND5A.Summoning.Match.Saves.Hint" }}</p>
     </div>
     <div class="form-group">
-        <label>{{ localize "DND5E.Summoning.Bonuses.Attack.Label" }}</label>
+        <label>{{ localize "DND5A.Summoning.Bonuses.Attack.Label" }}</label>
         <input type="text" name="bonuses.attackDamage" value="{{ summons.bonuses.attackDamage }}">
-        <p class="hint">{{ localize "DND5E.Summoning.Bonuses.Attack.Hint" }}</p>
+        <p class="hint">{{ localize "DND5A.Summoning.Bonuses.Attack.Hint" }}</p>
     </div>
     <div class="form-group">
-        <label>{{ localize "DND5E.Summoning.Bonuses.Saves.Label" }}</label>
+        <label>{{ localize "DND5A.Summoning.Bonuses.Saves.Label" }}</label>
         <input type="text" name="bonuses.saveDamage" value="{{ summons.bonuses.saveDamage }}">
-        <p class="hint">{{ localize "DND5E.Summoning.Bonuses.Saves.Hint" }}</p>
+        <p class="hint">{{ localize "DND5A.Summoning.Bonuses.Saves.Hint" }}</p>
     </div>
     <div class="form-group">
-        <label>{{ localize "DND5E.Summoning.Bonuses.Healing.Label" }}</label>
+        <label>{{ localize "DND5A.Summoning.Bonuses.Healing.Label" }}</label>
         <input type="text" name="bonuses.healing" value="{{ summons.bonuses.healing }}">
-        <p class="hint">{{ localize "DND5E.Summoning.Bonuses.Healing.Hint" }}</p>
+        <p class="hint">{{ localize "DND5A.Summoning.Bonuses.Healing.Hint" }}</p>
     </div>
 </form>

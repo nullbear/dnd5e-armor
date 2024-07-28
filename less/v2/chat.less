@@ -7,10 +7,10 @@
   border-width: 1px;
   border-block-end-width: 2px;
   border-radius: 6px;
-  font-family: var(--dnd5e-font-roboto);
+  font-family: var(--dnd5a-font-roboto);
   font-size: var(--font-size-13);
   position: relative;
-  background: var(--dnd5e-color-parchment);
+  background: var(--dnd5a-color-parchment);
 
   &::before {
     content: "";
@@ -53,7 +53,7 @@
         object-position: top;
         border: none;
         flex: none;
-        background: var(--dnd5e-color-light-gray);
+        background: var(--dnd5a-color-light-gray);
       }
     }
 
@@ -67,7 +67,7 @@
     }
 
     .title {
-      font-family: var(--dnd5e-font-roboto-slab);
+      font-family: var(--dnd5a-font-roboto-slab);
       font-size: var(--font-size-16);
       font-weight: bold;
       color: var(--color-text-dark-primary);
@@ -104,7 +104,7 @@
 
   .dice-formula, .dice-total {
     border-radius: 3px;
-    background: var(--dnd5e-background-5);
+    background: var(--dnd5a-background-5);
     padding: .25rem;
     line-height: normal;
     flex: auto;
@@ -142,17 +142,17 @@
     }
 
     &.success, &.critical {
-      background: var(--dnd5e-color-success-background);
-      border: 1px solid var(--dnd5e-color-success);
-      color: var(--dnd5e-color-success-critical);
-      &::after { color: var(--dnd5e-color-success); }
+      background: var(--dnd5a-color-success-background);
+      border: 1px solid var(--dnd5a-color-success);
+      color: var(--dnd5a-color-success-critical);
+      &::after { color: var(--dnd5a-color-success); }
     }
 
     &.failure, &.fumble {
-      background: var(--dnd5e-color-failure-background);
-      border: 1px solid var(--dnd5e-color-failure);
-      color: var(--dnd5e-color-failure-critical);
-      &::after { color: var(--dnd5e-color-failure); }
+      background: var(--dnd5a-color-failure-background);
+      border: 1px solid var(--dnd5a-color-failure);
+      color: var(--dnd5a-color-failure-critical);
+      &::after { color: var(--dnd5a-color-failure); }
     }
 
     &.critical, &.fumble {
@@ -243,7 +243,7 @@
         }
 
         .label {
-          font-family: var(--dnd5e-font-roboto-condensed);
+          font-family: var(--dnd5a-font-roboto-condensed);
           font-size: var(--font-size-10);
           color: var(--color-text-dark-5);
           text-transform: uppercase;
@@ -335,7 +335,7 @@
 /*  Item Cards                        */
 /* ---------------------------------- */
 
-.dnd5e2.chat-card {
+.dnd5a2.chat-card {
   display: flex;
   flex-direction: column;
   gap: .375rem;
@@ -344,9 +344,9 @@
 
   .description {
     padding: .5rem;
-    border: 1px solid var(--dnd5e-color-gold);
+    border: 1px solid var(--dnd5a-color-gold);
     border-radius: 3px;
-    background: var(--dnd5e-color-card);
+    background: var(--dnd5a-color-card);
     overflow: hidden;
 
     .summary {
@@ -377,7 +377,7 @@
     }
 
     .details {
-      font-family: var(--dnd5e-font-roboto);
+      font-family: var(--dnd5a-font-roboto);
       font-size: var(--font-size-11);
       padding: 0;
       display: grid;
@@ -402,7 +402,7 @@
       border-style: double;
 
       .summary .subtitle {
-        color: var(--dnd5e-color-success);
+        color: var(--dnd5a-color-success);
         text-transform: uppercase;
       }
     }
@@ -444,8 +444,8 @@
 }
 
 /* Damage & Effects Trays */
-.dnd5e2 :is(.card-tray, .effects-tray),
-.dnd5e2.card-tray {
+.dnd5a2 :is(.card-tray, .effects-tray),
+.dnd5a2.card-tray {
   margin-top: .125rem;
   &:has(.effects:empty) { display: none; }
   &.damage-tray { margin-block-start: 8px; }
@@ -468,7 +468,7 @@
     &::before, &::after {
       content: "";
       flex-basis: 50%;
-      border-top: 1px dotted var(--dnd5e-color-gold);
+      border-top: 1px dotted var(--dnd5a-color-gold);
       align-self: center;
     }
   }
@@ -550,7 +550,7 @@
       grid-template-areas: "overlay";
       font-size: inherit;
       > * { grid-area: overlay; }
-      > dnd5e-icon { display: block; }
+      > dnd5a-icon { display: block; }
       > i { color: red; }
       &:not([aria-pressed="true"]) .fa-slash { display: none; }
       &:not([aria-pressed="mixed"]) .fa-arrow-turn-down { display: none; }
@@ -565,10 +565,10 @@
       padding-inline-end: 4px;
       font-size: var(--font-size-14);
       font-weight: bold;
-      color: var(--dnd5e-color-application-damage);
+      color: var(--dnd5a-color-application-damage);
 
-      &.healing { color: var(--dnd5e-color-application-healing); }
-      &.temp { color: var(--dnd5e-color-application-temp); }
+      &.healing { color: var(--dnd5a-color-application-healing); }
+      &.temp { color: var(--dnd5a-color-application-temp); }
     }
 
     .damage-multipliers {
@@ -583,7 +583,7 @@
         content: "\f00d";
         align-self: center;
         padding-inline-end: 2px;
-        color: var(--dnd5e-color-tan);
+        color: var(--dnd5a-color-tan);
         font-family: var(--font-awesome);
         font-weight: 900;
       }
@@ -602,12 +602,12 @@
           width: 8px;
           height: 8px;
           border-radius: 8px;
-          background-color: var(--dnd5e-color-faint);
+          background-color: var(--dnd5a-color-faint);
         }
 
         &[aria-pressed="true"] {
-          border-color: var(--dnd5e-color-crimson);
-          &::after { background-color: var(--dnd5e-color-crimson); }
+          border-color: var(--dnd5a-color-crimson);
+          &::after { background-color: var(--dnd5a-color-crimson); }
         }
       }
     }
@@ -638,10 +638,10 @@ enchantment-application {
     display: grid;
     gap: 4px;
     min-block-size: 40px;
-    border: 1px dashed var(--dnd5e-color-crimson);
+    border: 1px dashed var(--dnd5a-color-crimson);
     border-radius: 4px;
     padding: 4px;
-    background: var(--dnd5e-color-card);
+    background: var(--dnd5a-color-card);
 
     p {
       place-content: center;
@@ -665,7 +665,7 @@ enchantment-application {
       }
       > .name {
         flex: 1;
-        font-family: var(--dnd5e-font-roboto-slab);
+        font-family: var(--dnd5a-font-roboto-slab);
         font-weight: bold;
       }
       > a {
@@ -687,7 +687,7 @@ enchantment-application {
 /*  Target Evaluations                */
 /* ---------------------------------- */
 
-:is(.chat-popout, #chat-log) .message .dnd5e2.evaluation {
+:is(.chat-popout, #chat-log) .message .dnd5a2.evaluation {
   display: flex;
   flex-direction: column;
   gap: .25rem;
@@ -702,7 +702,7 @@ enchantment-application {
     > i { font-size: var(--font-size-14); }
 
     .name {
-      font-family: var(--dnd5e-font-roboto-slab);
+      font-family: var(--dnd5a-font-roboto-slab);
       font-size: var(--font-size-14);
       font-weight: bold;
     }
@@ -737,10 +737,10 @@ enchantment-application {
       }
     }
 
-    &.hit > i { color: var(--dnd5e-color-success); }
+    &.hit > i { color: var(--dnd5a-color-success); }
 
     &.miss > i {
-      color: var(--dnd5e-color-failure);
+      color: var(--dnd5a-color-failure);
       height: 12px;
     }
   }

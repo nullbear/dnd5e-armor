@@ -1,14 +1,14 @@
 <form id="long-rest" class="dialog-content" onsubmit="event.preventDefault();">
     <p>
-        {{#if isGroup}}{{ localize "DND5E.LongRestHintGroup" }}
-        {{else}}{{ localize "DND5E.LongRestHint" }}{{/if}}
+        {{#if isGroup}}{{ localize "DND5A.LongRestHintGroup" }}
+        {{else}}{{ localize "DND5A.LongRestHint" }}{{/if}}
     </p>
 
     {{#if promptNewDay}}
     <div class="form-group">
-        <label>{{ localize "DND5E.NewDay" }}</label>
+        <label>{{ localize "DND5A.NewDay" }}</label>
         <input type="checkbox" name="newDay" {{checked newDay}}/>
-        <p class="hint">{{ localize "DND5E.NewDayHint" }}</p>
+        <p class="hint">{{ localize "DND5A.NewDayHint" }}</p>
     </div>
     {{/if}}
 

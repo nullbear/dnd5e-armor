@@ -7,7 +7,7 @@
 
     {{#if (eq scaling "resource")}}
     <div class="form-group">
-        <label>{{ localize "DND5E.ConsumeScalingLabel" }}</label>
+        <label>{{ localize "DND5A.ConsumeScalingLabel" }}</label>
         <div class="form-fields">
             <select name="resourceAmount">
                 {{#if resourceArray}}
@@ -26,7 +26,7 @@
 
     {{#if (eq scaling "slot")}}
     <div class="form-group">
-        <label>{{ localize "DND5E.SpellCastUpcast" }}</label>
+        <label>{{ localize "DND5A.SpellCastUpcast" }}</label>
         <div class="form-fields">
             <select name="slotLevel">
                 {{#select slotLevel}}
@@ -41,7 +41,7 @@
     <div class="form-group">
         <label class="checkbox">
             <input type="checkbox" name="consumeSpellSlot" {{ checked consumeSpellSlot }}>
-            {{localize "DND5E.SpellCastConsume"}}
+            {{localize "DND5A.SpellCastConsume"}}
         </label>
     </div>
     {{/if}}
@@ -49,7 +49,7 @@
     {{#if (ne beginConcentrating null)}}
     {{#if concentration.show}}
     <div class="form-group">
-        <label>{{ localize "DND5E.ConcentratingEnd" }}</label>
+        <label>{{ localize "DND5A.ConcentratingEnd" }}</label>
         <div class="form-fields">
             <select name="endConcentration">
                 {{selectOptions concentration.options selected=endConcentration sort=true blank=concentration.optional nameAttr="name" labelAttr="label"}}
@@ -61,7 +61,7 @@
     <div class="form-group">
         <label class="checkbox">
             <input type="checkbox" name="beginConcentrating" {{checked beginConcentrating}}>
-            {{ localize "DND5E.Concentration" }}
+            {{ localize "DND5A.Concentration" }}
         </label>
     </div>
     {{/if}}
@@ -70,7 +70,7 @@
     <div class="form-group">
         <label class="checkbox">
             <input type="checkbox" name="consumeUsage" {{ checked consumeUsage }}>
-            {{localize "DND5E.AbilityUseConsume"}}
+            {{localize "DND5A.AbilityUseConsume"}}
         </label>
     </div>
     {{/if}}
@@ -79,7 +79,7 @@
     <div class="form-group">
         <label class="checkbox">
             <input type="checkbox" name="consumeResource" {{ checked consumeResource }}>
-            {{localize "DND5E.ConsumeResource"}}
+            {{localize "DND5A.ConsumeResource"}}
         </label>
     </div>
     {{/if}}
@@ -88,17 +88,17 @@
     <div class="form-group">
         <label class="checkbox">
             <input type="checkbox" name="createMeasuredTemplate" {{ checked createMeasuredTemplate }}>
-            {{ localize "DND5E.PlaceTemplate" }}
+            {{ localize "DND5A.PlaceTemplate" }}
         </label>
     </div>
     {{/if}}
 
     {{#if enchantmentOptions.profiles}}
     <div class="form-group">
-        <label>{{ localize "DND5E.Enchantment.Label" }}
+        <label>{{ localize "DND5A.Enchantment.Label" }}
         </label>
         <div class="form-fields">
-            <select name="enchantmentProfile" aria-label="{{ localize 'DND5E.Enchantment.Label' }}">
+            <select name="enchantmentProfile" aria-label="{{ localize 'DND5A.Enchantment.Label' }}">
                 {{ selectOptions enchantmentOptions.profiles selected=enchantmentProfile }}
             </select>
         </div>
@@ -111,11 +111,11 @@
     <div class="form-group">
         <label class="checkbox">
             <input type="checkbox" name="createSummons" {{ checked createSummons }}>
-            {{ localize "DND5E.Summoning.Action.Place" }}
+            {{ localize "DND5A.Summoning.Action.Place" }}
         </label>
         {{#if summoningOptions.profiles}}
         <div class="form-fields">
-            <select name="summonsProfile" aria-label="{{ localize 'DND5E.Summoning.Profile.Label' }}">
+            <select name="summonsProfile" aria-label="{{ localize 'DND5A.Summoning.Profile.Label' }}">
                 {{ selectOptions summoningOptions.profiles selected=summonsProfile }}
             </select>
         </div>
@@ -126,7 +126,7 @@
 
     {{#if summoningOptions.creatureSizes}}
     <div class="form-group">
-        <label>{{ localize "DND5E.Size" }}</label>
+        <label>{{ localize "DND5A.Size" }}</label>
         <div class="form-fields">
             <select name="summonsOptions.creatureSize">
                 {{ selectOptions summoningOptions.creatureSizes }}
@@ -137,7 +137,7 @@
 
     {{#if summoningOptions.creatureTypes}}
     <div class="form-group">
-        <label>{{ localize "DND5E.CreatureType" }}</label>
+        <label>{{ localize "DND5A.CreatureType" }}</label>
         <div class="form-fields">
             <select name="summonsOptions.creatureType">
                 {{ selectOptions summoningOptions.creatureTypes }}

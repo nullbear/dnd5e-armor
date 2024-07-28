@@ -1,4 +1,4 @@
-.dnd5e.sheet.item {
+.dnd5a.sheet.item {
   min-height: 400px;
   max-height: 95%;
   min-width: 480px;
@@ -21,7 +21,7 @@
       padding: 5px;
       text-align: right;
       white-space: nowrap;
-      color: var(--dnd5e-color-tan);
+      color: var(--dnd5a-color-tan);
 
       .item-type {
         flex-grow: 1;
@@ -100,7 +100,7 @@
       flex: 0 0 120px;
       margin: 0 5px 0 0;
       padding: 5px 5px 0 0;
-      border-right: var(--dnd5e-border-groove);
+      border-right: var(--dnd5a-border-groove);
       overflow: hidden auto;
       height: 100%;
 
@@ -123,7 +123,7 @@
           margin: 3px 0;
           padding: 0 2px;
           background: rgba(0, 0, 0, 0.05);
-          border: var(--dnd5e-border-groove);
+          border: var(--dnd5a-border-groove);
           text-align: center;
           font-size: var(--font-size-12);
           line-height: 18px;
@@ -132,7 +132,7 @@
 
       .properties-header {
         font-weight: bold;
-        color: var(--dnd5e-color-olive);
+        color: var(--dnd5a-color-olive);
         margin: 0.5em 0 0 0;
         font-size: var(--font-size-13);
       }
@@ -145,7 +145,7 @@
 
   .form-group, h4 {
     .config-button {
-      color: var(--dnd5e-color-olive);
+      color: var(--dnd5a-color-olive);
       font-size: var(--font-size-10);
       font-weight: normal;
       opacity: 0;
@@ -183,7 +183,7 @@
             inset-inline-end: 0;
             padding: 6px;
           }
-          
+
           &[aria-disabled] {
             cursor: not-allowed;
             &:hover { text-shadow: none; }
@@ -209,13 +209,13 @@
         opacity: 0.5;
         font-size: 0.75em;
       }
-      
+
       // Description @Embeds
       figure.content-embed {
 
         margin: 0.5em 0;
 
-        // "inline" captions (non-rolltables) need some 
+        // "inline" captions (non-rolltables) need some
         // space between the user provided
         // caption and the caption document link border
         strong.embed-caption {
@@ -252,7 +252,7 @@
             order: 2;
           }
 
-          // Removing padding from descriptions since 
+          // Removing padding from descriptions since
           // item sheets are usually smaller
           figcaption {
             padding: initial;
@@ -279,7 +279,7 @@
           }
         }
 
-        // When embedding in another item, it may be better 
+        // When embedding in another item, it may be better
         // for readability to suppress any table elements.
         &.no-tables table {
           display: none;
@@ -305,7 +305,7 @@
     input[type="number"],
     select {
       height: 24px;
-      border: 1px solid var(--dnd5e-color-tan);
+      border: 1px solid var(--dnd5a-color-tan);
       background: rgba(0, 0, 0, 0.05);
     }
 
@@ -313,7 +313,7 @@
       display: block;
       padding: 3px;
       float: right;
-      color: var(--dnd5e-color-tan);
+      color: var(--dnd5a-color-tan);
       font-size: var(--font-size-14);
       text-align: end;
     }
@@ -390,7 +390,7 @@
     padding: 0;
     font-weight: bold;
     line-height: 24px;
-    color: var(--dnd5e-color-olive);
+    color: var(--dnd5a-color-olive);
   }
 
   .damage-parts {
@@ -417,7 +417,7 @@
     line-height: 24px;
     float: right;
     text-align: right;
-    color: var(--dnd5e-color-tan);
+    color: var(--dnd5a-color-tan);
   }
 
   .recharge.form-group {
@@ -490,10 +490,10 @@
         margin-block-start: 4em;
         margin-inline: auto;
         padding: 2em;
-        border: 1px solid var(--dnd5e-color-tan);
+        border: 1px solid var(--dnd5a-color-tan);
         border-radius: 4px;
-        box-shadow: 0 0 12px var(--dnd5e-shadow-45);
-        background: var(--dnd5e-sheet-background);
+        box-shadow: 0 0 12px var(--dnd5a-shadow-45);
+        background: var(--dnd5a-sheet-background);
         text-align: center;
       }
 
@@ -508,7 +508,7 @@
 /*  Item Advancement                         */
 /* ----------------------------------------- */
 
-.dnd5e .advancement .items-list {
+.dnd5a .advancement .items-list {
   height: 100%;
 
   .main-controls {
@@ -537,7 +537,7 @@
     flex: 1 0 10em;
   }
   .item-controls {
-    border-left: 1px solid var(--dnd5e-color-faint);
+    border-left: 1px solid var(--dnd5a-color-faint);
     flex: 0 0 44px;
   }
   .item-summary {
@@ -546,7 +546,7 @@
     line-height: 16px;
     padding: 0 .5em .5em 34px;
     margin-top: -4px;
-    color: var(--dnd5e-color-dark);
+    color: var(--dnd5a-color-dark);
 
     .item-list {
       .item-name {
@@ -565,10 +565,10 @@
 /*  Starting Equipment Configuration         */
 /* ----------------------------------------- */
 
-.dnd5e.starting-equipment {
-  --background-depth-1: var(--dnd5e-color-card);
-  --background-depth-2: color-mix(in oklab, var(--dnd5e-color-card), black 5%);
-  --background-depth-3: color-mix(in oklab, var(--dnd5e-color-card), black 10%);
+.dnd5a.starting-equipment {
+  --background-depth-1: var(--dnd5a-color-card);
+  --background-depth-2: color-mix(in oklab, var(--dnd5a-color-card), black 5%);
+  --background-depth-3: color-mix(in oklab, var(--dnd5a-color-card), black 10%);
 
   select, input {
     height: calc(var(--form-field-height) + 1px);
@@ -584,9 +584,9 @@
     position: relative;
     padding: 8px;
     background: var(--background-depth-1);
-    border: 2px solid var(--dnd5e-color-gold);
+    border: 2px solid var(--dnd5a-color-gold);
     border-radius: 4px;
-    box-shadow: 0 0 4px var(--dnd5e-shadow-45);
+    box-shadow: 0 0 4px var(--dnd5a-shadow-45);
 
     &:has(.drag-bar) { padding-inline-end: 18px; }
     &[data-depth="2"] { background: var(--background-depth-2); }
@@ -606,7 +606,7 @@
       inset-inline-end: 0;
       inline-size: 16px;
       cursor: grab;
-      color: var(--dnd5e-color-faint);
+      color: var(--dnd5a-color-faint);
     }
     [data-action="delete-entry"] {
       --size: 26px;
@@ -650,7 +650,7 @@
 /*  Enchantment & Summoning Configuration    */
 /* ----------------------------------------- */
 
-.dnd5e:is(.enchantment-config, .summoning-config) {
+.dnd5a:is(.enchantment-config, .summoning-config) {
   max-block-size: 90vh;
 
   .unbutton {
@@ -709,7 +709,7 @@
       &::before, &::after {
         content: "";
         flex-basis: 50%;
-        border-top: 1px dotted var(--dnd5e-color-gold);
+        border-top: 1px dotted var(--dnd5a-color-gold);
         align-self: center;
       }
     }

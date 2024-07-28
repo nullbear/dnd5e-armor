@@ -21,18 +21,18 @@
     {{!-- Ideals, Bonds, Flaws, Personality Traits, & Appearance --}}
     <div class="middle flexrow">
         <div class="left">
-            {{~> "dnd5e.biography-textbox" name="system.details.ideal" value=system.details.ideal label="DND5E.Ideals"
+            {{~> "dnd5a.biography-textbox" name="system.details.ideal" value=system.details.ideal label="DND5A.Ideals"
                 icon="fas fa-seedling" class="textbox-half" ~}}
-            {{~> "dnd5e.biography-textbox" name="system.details.bond" value=system.details.bond label="DND5E.Bonds"
+            {{~> "dnd5a.biography-textbox" name="system.details.bond" value=system.details.bond label="DND5A.Bonds"
                 icon="fas fa-link" class="textbox-half" ~}}
-            {{~> "dnd5e.biography-textbox" name="system.details.flaw" value=system.details.flaw label="DND5E.Flaws"
+            {{~> "dnd5a.biography-textbox" name="system.details.flaw" value=system.details.flaw label="DND5A.Flaws"
                 icon="fas fa-heart-crack" class="textbox-half" ~}}
         </div>
         <div class="right">
-            {{~> "dnd5e.biography-textbox" name="system.details.trait" value=system.details.trait
-                label="DND5E.PersonalityTraits" icon="fas fa-puzzle-piece" class="textbox-half" ~}}
-            {{~> "dnd5e.biography-textbox" name="system.details.appearance" value=system.details.appearance
-                label="DND5E.Appearance" icon="fas fa-image-portrait" class="textbox-half" ~}}
+            {{~> "dnd5a.biography-textbox" name="system.details.trait" value=system.details.trait
+                label="DND5A.PersonalityTraits" icon="fas fa-puzzle-piece" class="textbox-half" ~}}
+            {{~> "dnd5a.biography-textbox" name="system.details.appearance" value=system.details.appearance
+                label="DND5A.Appearance" icon="fas fa-image-portrait" class="textbox-half" ~}}
         </div>
     </div>
 
@@ -40,8 +40,8 @@
     <div class="bottom">
         <h3 class="icon">
             <i class="fas fa-feather"></i>
-            <dnd5e-icon src="systems/dnd5e/icons/svg/ink-pot.svg"></dnd5e-icon>
-            <span class="roboto-upper">{{ localize "DND5E.Biography" }}</span>
+            <dnd5a-icon src="systems/dnd5a/icons/svg/ink-pot.svg"></dnd5a-icon>
+            <span class="roboto-upper">{{ localize "DND5A.Biography" }}</span>
         </h3>
         {{ editor biographyHTML target="system.details.biography.value" button=false editable=@root.editable
                   engine="prosemirror" collaborate=false }}

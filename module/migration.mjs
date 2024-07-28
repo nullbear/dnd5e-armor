@@ -33,7 +33,7 @@ export const migrateWorld = async function() {
         });
       }
     } catch(err) {
-      err.message = `Failed dnd5e system migration for Actor ${actor.name}: ${err.message}`;
+      err.message = `Failed dnd5a system migration for Actor ${actor.name}: ${err.message}`;
       console.error(err);
     }
   }
@@ -56,7 +56,7 @@ export const migrateWorld = async function() {
         });
       }
     } catch(err) {
-      err.message = `Failed dnd5e system migration for Item ${item.name}: ${err.message}`;
+      err.message = `Failed dnd5a system migration for Item ${item.name}: ${err.message}`;
       console.error(err);
     }
   }
@@ -70,7 +70,7 @@ export const migrateWorld = async function() {
         await m.update(updateData, {enforceTypes: false, render: false});
       }
     } catch(err) {
-      err.message = `Failed dnd5e system migration for Macro ${m.name}: ${err.message}`;
+      err.message = `Failed dnd5a system migration for Macro ${m.name}: ${err.message}`;
       console.error(err);
     }
   }
@@ -84,7 +84,7 @@ export const migrateWorld = async function() {
         await table.update(updateData, { enforceTypes: false, render: false });
       }
     } catch(err) {
-      err.message = `Failed dnd5e system migration for RollTable ${table.name}: ${err.message}`;
+      err.message = `Failed dnd5a system migration for RollTable ${table.name}: ${err.message}`;
       console.error(err);
     }
   }
@@ -98,7 +98,7 @@ export const migrateWorld = async function() {
         await s.update(updateData, {enforceTypes: false, render: false});
       }
     } catch(err) {
-      err.message = `Failed dnd5e system migration for Scene ${s.name}: ${err.message}`;
+      err.message = `Failed dnd5a system migration for Scene ${s.name}: ${err.message}`;
       console.error(err);
     }
 
@@ -127,7 +127,7 @@ export const migrateWorld = async function() {
           });
         }
       } catch(err) {
-        err.message = `Failed dnd5e system migration for ActorDelta [${token.id}]: ${err.message}`;
+        err.message = `Failed dnd5a system migration for ActorDelta [${token.id}]: ${err.message}`;
         console.error(err);
       }
     }
@@ -141,7 +141,7 @@ export const migrateWorld = async function() {
   }
 
   // Set the migration as complete
-  game.settings.set("dnd5e", "systemMigrationVersion", game.system.version);
+  game.settings.set("dnd5a", "systemMigrationVersion", game.system.version);
   ui.notifications.info(game.i18n.format("MIGRATION.5eComplete", {version}), {permanent: true});
 };
 
@@ -161,7 +161,7 @@ export const migrateCompendium = async function(pack) {
   // Unlock the pack for editing
   const wasLocked = pack.locked;
   await pack.configure({locked: false});
-  dnd5e.moduleArt.suppressArt = true;
+  dnd5a.moduleArt.suppressArt = true;
 
   // Begin by requesting server-side data model migration and get the migrated content
   await pack.migrate();
@@ -202,14 +202,14 @@ export const migrateCompendium = async function(pack) {
 
     // Handle migration failures
     catch(err) {
-      err.message = `Failed dnd5e system migration for document ${doc.name} in pack ${pack.collection}: ${err.message}`;
+      err.message = `Failed dnd5a system migration for document ${doc.name} in pack ${pack.collection}: ${err.message}`;
       console.error(err);
     }
   }
 
   // Apply the original locked status for the pack
   await pack.configure({locked: wasLocked});
-  dnd5e.moduleArt.suppressArt = false;
+  dnd5a.moduleArt.suppressArt = false;
   console.log(`Migrated all ${documentName} documents from Compendium ${pack.collection}`);
 };
 
@@ -270,7 +270,7 @@ export async function refreshAllCompendiums() {
  */
 export async function refreshCompendium(pack) {
   if ( !pack?.documentName ) return;
-  dnd5e.moduleArt.suppressArt = true;
+  dnd5a.moduleArt.suppressArt = true;
   const DocumentClass = CONFIG[pack.documentName].documentClass;
   const wasLocked = pack.locked;
   await pack.configure({locked: false});
@@ -284,7 +284,7 @@ export async function refreshCompendium(pack) {
     await DocumentClass.create(data, {keepId: true, keepEmbeddedIds: true, pack: pack.collection});
   }
   await pack.configure({locked: wasLocked});
-  dnd5e.moduleArt.suppressArt = false;
+  dnd5a.moduleArt.suppressArt = false;
   ui.notifications.info(`Refreshed all documents from Compendium ${pack.collection}`);
 }
 
@@ -303,7 +303,7 @@ export const migrateArmorClass = async function(pack) {
   await pack.configure({locked: false});
   const actors = await pack.getDocuments();
   const updates = [];
-  const armor = new Set(Object.keys(CONFIG.DND5E.armorTypes));
+  const armor = new Set(Object.keys(CONFIG.DND5A.armorTypes));
 
   for ( const actor of actors ) {
     try {
@@ -427,18 +427,18 @@ export function migrateItemData(item, migrationData, flags={}) {
   }
 
   // Migrate properties
-  const migratedProperties = foundry.utils.getProperty(item, "flags.dnd5e.migratedProperties");
+  const migratedProperties = foundry.utils.getProperty(item, "flags.dnd5a.migratedProperties");
   if ( migratedProperties?.length ) {
     flags.persistSourceMigration = true;
     const properties = new Set(foundry.utils.getProperty(item, "system.properties") ?? [])
       .union(new Set(migratedProperties));
     updateData["system.properties"] = Array.from(properties);
-    updateData["flags.dnd5e.-=migratedProperties"] = null;
+    updateData["flags.dnd5a.-=migratedProperties"] = null;
   }
 
-  if ( foundry.utils.getProperty(item, "flags.dnd5e.persistSourceMigration") ) {
+  if ( foundry.utils.getProperty(item, "flags.dnd5a.persistSourceMigration") ) {
     flags.persistSourceMigration = true;
-    updateData["flags.dnd5e.-=persistSourceMigration"] = null;
+    updateData["flags.dnd5a.-=persistSourceMigration"] = null;
   }
 
   return updateData;
@@ -583,8 +583,8 @@ export const migrateSceneData = function(scene, migrationData) {
 export const getMigrationData = async function() {
   const data = {};
   try {
-    const icons = await fetch("systems/dnd5e/json/icon-migration.json");
-    const spellIcons = await fetch("systems/dnd5e/json/spell-icon-migration.json");
+    const icons = await fetch("systems/dnd5a/json/icon-migration.json");
+    const spellIcons = await fetch("systems/dnd5a/json/spell-icon-migration.json");
     data.iconMap = {...await icons.json(), ...await spellIcons.json()};
   } catch(err) {
     console.warn(`Failed to retrieve icon migration data: ${err.message}`);
@@ -671,11 +671,11 @@ function _migrateActorAC(actorData, updateData) {
  */
 function _migrateActorMovementSenses(actorData, updateData) {
   if ( actorData._stats?.systemVersion && foundry.utils.isNewerVersion("2.4.0", actorData._stats.systemVersion) ) {
-    for ( const key of Object.keys(CONFIG.DND5E.movementTypes) ) {
+    for ( const key of Object.keys(CONFIG.DND5A.movementTypes) ) {
       const keyPath = `system.attributes.movement.${key}`;
       if ( foundry.utils.getProperty(actorData, keyPath) === 0 ) updateData[keyPath] = null;
     }
-    for ( const key of Object.keys(CONFIG.DND5E.senses) ) {
+    for ( const key of Object.keys(CONFIG.DND5A.senses) ) {
       const keyPath = `system.attributes.senses.${key}`;
       if ( foundry.utils.getProperty(actorData, keyPath) === 0 ) updateData[keyPath] = null;
     }
@@ -693,12 +693,12 @@ function _migrateActorMovementSenses(actorData, updateData) {
  * @private
  */
 function _migrateTokenImage(actorData, updateData) {
-  const oldSystemPNG = /^systems\/dnd5e\/tokens\/([a-z]+)\/([A-z]+).png$/;
+  const oldSystemPNG = /^systems\/dnd5a\/tokens\/([a-z]+)\/([A-z]+).png$/;
   for ( const path of ["texture.src", "prototypeToken.texture.src"] ) {
     const v = foundry.utils.getProperty(actorData, path);
     if ( oldSystemPNG.test(v) ) {
       const [type, fileName] = v.match(oldSystemPNG).slice(1);
-      updateData[path] = `systems/dnd5e/tokens/${type}/${fileName}.webp`;
+      updateData[path] = `systems/dnd5a/tokens/${type}/${fileName}.webp`;
     }
   }
   return updateData;
@@ -771,16 +771,16 @@ function _migrateTransferEffect(effect, parent, updateData) {
 /* -------------------------------------------- */
 
 /**
- * Migrate macros from the old 'dnd5e.rollItemMacro' and 'dnd5e.macros' commands to the new location.
+ * Migrate macros from the old 'dnd5a.rollItemMacro' and 'dnd5a.macros' commands to the new location.
  * @param {object} macro       Macro data to migrate.
  * @param {object} updateData  Existing update to expand upon.
  * @returns {object}           The updateData to apply.
  */
 function _migrateMacroCommands(macro, updateData) {
-  if ( macro.command.includes("game.dnd5e.rollItemMacro") ) {
-    updateData.command = macro.command.replaceAll("game.dnd5e.rollItemMacro", "dnd5e.documents.macro.rollItem");
-  } else if ( macro.command.includes("game.dnd5e.macros.") ) {
-    updateData.command = macro.command.replaceAll("game.dnd5e.macros.", "dnd5e.documents.macro.");
+  if ( macro.command.includes("game.dnd5a.rollItemMacro") ) {
+    updateData.command = macro.command.replaceAll("game.dnd5a.rollItemMacro", "dnd5a.documents.macro.rollItem");
+  } else if ( macro.command.includes("game.dnd5a.macros.") ) {
+    updateData.command = macro.command.replaceAll("game.dnd5a.macros.", "dnd5a.documents.macro.");
   }
   return updateData;
 }
@@ -794,8 +794,8 @@ function _migrateMacroCommands(macro, updateData) {
  */
 export async function purgeFlags(pack) {
   const cleanFlags = flags => {
-    const flags5e = flags.dnd5e || null;
-    return flags5e ? {dnd5e: flags5e} : {};
+    const flags5e = flags.dnd5a || null;
+    return flags5e ? {dnd5a: flags5e} : {};
   };
   await pack.configure({locked: false});
   const content = await pack.getDocuments();

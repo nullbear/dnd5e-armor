@@ -5,7 +5,7 @@
 
         <div class="header-details flexrow">
             <h1 class="charname">
-                <input name="name" type="text" value="{{item.name}}" placeholder="{{localize 'DND5E.RaceName'}}">
+                <input name="name" type="text" value="{{item.name}}" placeholder="{{localize 'DND5A.RaceName'}}">
             </h1>
 
             <div class="item-subtitle">
@@ -15,7 +15,7 @@
 
             <ul class="summary flexrow">
                 <li>
-                    {{> "dnd5e.item-source"}}
+                    {{> "dnd5a.item-source"}}
                 </li>
             </ul>
         </div>
@@ -23,9 +23,9 @@
 
     {{!-- Item Sheet Navigation --}}
     <nav class="sheet-navigation tabs" data-group="primary">
-        <a class="item active" data-tab="description">{{localize "DND5E.Description"}}</a>
-        <a class="item" data-tab="details">{{ localize "DND5E.Details" }}</a>
-        <a class="item" data-tab="advancement">{{localize "DND5E.AdvancementTitle"}}</a>
+        <a class="item active" data-tab="description">{{localize "DND5A.Description"}}</a>
+        <a class="item" data-tab="details">{{ localize "DND5A.Details" }}</a>
+        <a class="item" data-tab="advancement">{{localize "DND5A.AdvancementTitle"}}</a>
     </nav>
 
     {{!-- Item Sheet Body --}}
@@ -36,32 +36,32 @@
 
             <div class="item-properties">
                 <h4 class="properties-header">
-                    {{localize "DND5E.Type"}}
+                    {{localize "DND5A.Type"}}
                     {{#if editable}}<a class="config-button" data-action="type"><i class="fas fa-cog"></i></a>{{/if}}
                 </h4>
                 <ol class="properties-list">
                     <li>{{item.system.typeLabel}}</li>
                 </ol>
                 <h4 class="properties-header">
-                    {{localize "DND5E.Movement"}} 
+                    {{localize "DND5A.Movement"}}
                     {{#if editable}}<a class="config-button" data-action="movement"><i class="fas fa-cog"></i></a>{{/if}}
                 </h4>
                 <ol class="properties-list">
                     {{#each item.system.movementLabels}}
                     <li>{{this}}</li>
                     {{else}}
-                    <li>{{localize "DND5E.None"}}</li>
+                    <li>{{localize "DND5A.None"}}</li>
                     {{/each}}
                 </ol>
                 <h4 class="properties-header">
-                    {{localize "DND5E.Senses"}} 
+                    {{localize "DND5A.Senses"}}
                     {{#if editable}}<a class="config-button" data-action="senses"><i class="fas fa-cog"></i></a>{{/if}}
                 </h4>
                 <ol class="properties-list">
                     {{#each item.system.sensesLabels}}
                     <li>{{this}}</li>
                     {{else}}
-                    <li>{{localize "DND5E.None"}}</li>
+                    <li>{{localize "DND5A.None"}}</li>
                     {{/each}}
                 </ol>
             </div>
@@ -75,18 +75,18 @@
 
             {{!-- Identifier --}}
             <div class="form-group">
-                <label>{{ localize "DND5E.Identifier" }}</label>
+                <label>{{ localize "DND5A.Identifier" }}</label>
                 <div class="form-fields">
                     <input type="text" name="system.identifier" value="{{ system.identifier }}"
                            placeholder="{{ item.identifier }}">
                 </div>
-                <p class="hint">{{ localize "DND5E.IdentifierError" }}</p>
+                <p class="hint">{{ localize "DND5A.IdentifierError" }}</p>
             </div>
 
         </div>
 
         {{!-- Advancement Tab --}}
-        {{> "dnd5e.item-advancement"}}
-    
+        {{> "dnd5a.item-advancement"}}
+
     </section>
 </form>

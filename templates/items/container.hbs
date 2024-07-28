@@ -7,10 +7,10 @@
         <div class="header-details flexrow">
             <h1 class="charname">
                 {{#if system.identified}}
-                <input name="name" type="text" value="{{item.name}}" placeholder="{{ localize 'DND5E.ItemName' }}">
+                <input name="name" type="text" value="{{item.name}}" placeholder="{{ localize 'DND5A.ItemName' }}">
                 {{else}}
                 <input name="system.unidentified.name" type="text" value="{{system.unidentified.name}}"
-                       placeholder="{{ localize 'DND5E.NameUnidentified' }}">
+                       placeholder="{{ localize 'DND5A.NameUnidentified' }}">
                 {{/if}}
             </h1>
 
@@ -19,20 +19,20 @@
                 <label class="equipped">
                     <input type="checkbox" name="system.equipped" {{checked system.equipped}}>
                     {{#if system.equipped}}
-                        {{ localize "DND5E.Equipped" }}
+                        {{ localize "DND5A.Equipped" }}
                         {{#if editable}}<i class="fa-solid fa-toggle-on"></i>{{/if}}
                     {{else}}
-                        {{ localize "DND5E.Unequipped" }}
+                        {{ localize "DND5A.Unequipped" }}
                         {{#if editable}}<i class="fa-solid fa-toggle-off"></i>{{/if}}
                     {{/if}}
                 </label>
                 <label class="identified">
                     <input type="checkbox" name="system.identified" {{checked system.identified}}>
                     {{#if system.identified}}
-                    {{ localize "DND5E.Identified" }}
+                    {{ localize "DND5A.Identified" }}
                     {{#if editable}}<i class="fa-solid fa-toggle-on"></i>{{/if}}
                     {{else}}
-                    {{ localize "DND5E.Unidentified.Title" }}
+                    {{ localize "DND5A.Unidentified.Title" }}
                     {{#if editable}}<i class="fa-solid fa-toggle-off"></i>{{/if}}
                     {{/if}}
                 </label>
@@ -41,7 +41,7 @@
             <ul class="summary flexrow">
                 <li>
                     {{#if concealDetails}}
-                    <span>{{ localize "DND5E.Unidentified.Title" }}</span>
+                    <span>{{ localize "DND5A.Unidentified.Title" }}</span>
                     {{else}}
                     <select name="system.rarity" {{~#if concealDetails}} inert{{/if}}>
                         {{selectOptions config.itemRarity selected=system.rarity blank=""}}
@@ -49,7 +49,7 @@
                     {{/if}}
                 </li>
                 <li>
-                    {{> "dnd5e.item-source"}}
+                    {{> "dnd5a.item-source"}}
                 </li>
             </ul>
         </div>
@@ -57,30 +57,30 @@
 
     {{!-- Item Sheet Navigation --}}
     <nav class="sheet-navigation tabs" data-group="primary">
-        <a class="item" data-tab="contents">{{localize "DND5E.Contents"}}</a>
-        <a class="item" data-tab="description">{{localize "DND5E.Description"}}</a>
-        <a class="item" data-tab="details">{{localize "DND5E.Details"}}</a>
+        <a class="item" data-tab="contents">{{localize "DND5A.Contents"}}</a>
+        <a class="item" data-tab="description">{{localize "DND5A.Description"}}</a>
+        <a class="item" data-tab="details">{{localize "DND5A.Details"}}</a>
     </nav>
 
     {{!-- Item Sheet Body --}}
     <section class="sheet-body">
         {{!-- Contents Tab --}}
         <div class="tab inventory flexcol" data-group="primary" data-tab="contents">
-            {{> "dnd5e.inventory" sections=inventory}}
+            {{> "dnd5a.inventory" sections=inventory}}
         </div>
 
         {{!-- Description Tab --}}
-        {{> "dnd5e.item-description"}}
+        {{> "dnd5a.item-description"}}
 
         {{!-- Details Tab --}}
         <div class="tab details" data-group="primary" data-tab="details">
-            {{#dnd5e-concealSection concealDetails}}
+            {{#dnd5a-concealSection concealDetails}}
 
-            <h3 class="form-header">{{localize "DND5E.ItemContainerDetails"}}</h3>
+            <h3 class="form-header">{{localize "DND5A.ItemContainerDetails"}}</h3>
 
             {{!-- Container Properties --}}
             <div class="form-group stacked container-properties">
-                <label>{{ localize "DND5E.ItemContainerProperties" }}</label>
+                <label>{{ localize "DND5A.ItemContainerProperties" }}</label>
                 {{#each properties}}
                 <label class="checkbox">
                     <input type="checkbox" name="system.properties.{{ @key }}" {{ checked selected }}>
@@ -90,27 +90,27 @@
             </div>
 
             <div class="form-group">
-                <label>{{localize "DND5E.ItemContainerCapacity"}}</label>
+                <label>{{localize "DND5A.ItemContainerCapacity"}}</label>
                 <div class="form-fields">
                     {{numberInput system.capacity.value name="system.capacity.value" placeholder="—"}}
                 </div>
             </div>
 
             <div class="form-group">
-                <label>{{localize "DND5E.ItemContainerCapacityType"}}</label>
+                <label>{{localize "DND5A.ItemContainerCapacityType"}}</label>
                 <select name="system.capacity.type">
                     {{selectOptions config.itemCapacityTypes selected=system.capacity.type}}
                 </select>
             </div>
 
             <div class="form-group">
-                <label>{{localize "DND5E.Attunement"}}</label>
+                <label>{{localize "DND5A.Attunement"}}</label>
                 <select name="system.attunement" data-dtype="Number">
                     {{selectOptions config.attunements selected=system.attunement}}
                 </select>
             </div>
 
-            {{/dnd5e-concealSection}}
+            {{/dnd5a-concealSection}}
         </div>
     </section>
 </form>

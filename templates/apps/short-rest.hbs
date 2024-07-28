@@ -1,41 +1,41 @@
 <form id="short-rest-hd" class="dialog-content" onsubmit="event.preventDefault();">
     <p>
-        {{#if isGroup}}{{ localize "DND5E.ShortRestHintGroup" }}
-        {{else}}{{ localize "DND5E.ShortRestHint" }}{{/if}}
+        {{#if isGroup}}{{ localize "DND5A.ShortRestHintGroup" }}
+        {{else}}{{ localize "DND5A.ShortRestHint" }}{{/if}}
     </p>
 
     {{#if availableHD}}
     <div class="form-group">
-        <label>{{ localize "DND5E.ShortRestSelect" }}</label>
+        <label>{{ localize "DND5A.ShortRestSelect" }}</label>
         <div class="form-fields">
             <select name="hd">
                 {{#select denomination}}
                 {{#each availableHD as |num denom|}}
-                <option value="{{denom}}">{{denom}} ({{num}} {{ localize "DND5E.available" }})</option>
+                <option value="{{denom}}">{{denom}} ({{num}} {{ localize "DND5A.available" }})</option>
                 {{/each}}
                 {{/select}}
             </select>
             <button id="roll-hd" {{#unless canRoll}}disabled{{/unless}}>
-                <i class="fas fa-dice-d20"></i> {{ localize "DND5E.Roll" }}
+                <i class="fas fa-dice-d20"></i> {{ localize "DND5A.Roll" }}
             </button>
         </div>
         {{#unless canRoll}}
-        <p class="notes">{{ localize "DND5E.ShortRestNoHD" }}</p>
+        <p class="notes">{{ localize "DND5A.ShortRestNoHD" }}</p>
         {{/unless}}
     </div>
     {{else}}
     <div class="form-group">
-        <label>{{ localize "DND5E.HitDiceAutoSpend.Label" }}</label>
+        <label>{{ localize "DND5A.HitDiceAutoSpend.Label" }}</label>
         <input type="checkbox" name="autoHD">
-        <p class="hint">{{localize "DND5E.HitDiceAutoSpend.Hint" }}</p>
+        <p class="hint">{{localize "DND5A.HitDiceAutoSpend.Hint" }}</p>
     </div>
     {{/if}}
 
     {{#if promptNewDay}}
     <div class="form-group">
-        <label>{{ localize "DND5E.NewDay" }}</label>
+        <label>{{ localize "DND5A.NewDay" }}</label>
         <input type="checkbox" name="newDay" {{checked newDay}}>
-        <p class="hint">{{ localize "DND5E.NewDayHint" }}</p>
+        <p class="hint">{{ localize "DND5A.NewDayHint" }}</p>
     </div>
     {{/if}}
 

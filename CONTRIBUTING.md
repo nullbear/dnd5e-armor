@@ -1,4 +1,4 @@
-# Contributing to foundrynet/dnd5e
+# Contributing to foundrynet/dnd5a
 
 Code and content contributions are accepted. Please feel free to submit issues to the issue tracker or submit merge requests for code/content changes. Approval for such requests involves code and (if necessary) design review by the Maintainers of this repo. Please reach out on the [Foundry Community Discord](https://discord.gg/foundryvtt) with any questions.
 
@@ -6,7 +6,7 @@ Please ensure there is an open issue about whatever contribution you are submitt
 
 ## Developer Tooling
 
-Cloning this repository and either placing it in or symlinking it to your `Data/systems/dnd5e` user data directory is all that is necessary to run this within Foundry VTT. However, if you want to make changes to either the LESS stylesheets or the compendia, there are some developer tools which will make your life easier.
+Cloning this repository and either placing it in or symlinking it to your `Data/systems/dnd5a` user data directory is all that is necessary to run this within Foundry VTT. However, if you want to make changes to either the LESS stylesheets or the compendia, there are some developer tools which will make your life easier.
 
 If your system supports `npm`, you can run the following commands from the root of the project to get set up:
 
@@ -23,7 +23,7 @@ Runs all relevant build scripts:
 
 ### `npm run build:css`
 
-Converts the LESS in `./less` to the final `dnd5e.css`.
+Converts the LESS in `./less` to the final `dnd5a.css`.
 
 ### `npm run build:watch`
 
@@ -97,7 +97,7 @@ In general, content contributions will take the shape of fixing typos or bugs in
 
 ### Translations
 
-Non-English languages are not contained within the core dnd5e system, but instead they are managed by specialized [localization modules](https://foundryvtt.com/packages/tag/translation).
+Non-English languages are not contained within the core dnd5a system, but instead they are managed by specialized [localization modules](https://foundryvtt.com/packages/tag/translation).
 
 Instead of opening an PR with translation files, create one of these modules (or contribute to an existing one!).
 
@@ -168,7 +168,7 @@ If either of these conditions are not met on the commit that tag points at, the 
 - The `system.json` file's `download` url must match the expected outcome of the release CI artifact. This should simply be changing version numbers in the url to match the release version.
 
 ```text
-https://github.com/foundryvtt/dnd5e/releases/download/release-1.6.3/dnd5e-1.6.3.zip
+https://github.com/foundryvtt/dnd5a/releases/download/release-1.6.3/dnd5a-1.6.3.zip
                                                      └─ Tag Name ──┘     └─ V ─┘ (version)
 ```
 

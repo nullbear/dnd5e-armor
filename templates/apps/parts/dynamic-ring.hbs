@@ -1,43 +1,43 @@
 <div class="tab" data-group="appearance" data-tab="ring">
     <div class="form-group">
-        <label>{{localize "DND5E.TokenRings.Enabled"}}</label>
+        <label>{{localize "DND5A.TokenRings.Enabled"}}</label>
         <div class="form-fields">
-            <input type="checkbox" name="flags.dnd5e.tokenRing.enabled" {{checked flags.enabled}}>
+            <input type="checkbox" name="flags.dnd5a.tokenRing.enabled" {{checked flags.enabled}}>
         </div>
     </div>
     <div class="form-group">
-        <label>{{localize "DND5E.TokenRings.Subject.Label"}}</label>
+        <label>{{localize "DND5A.TokenRings.Subject.Label"}}</label>
         <div class="form-fields">
-            {{filePicker type="image" target="flags.dnd5e.tokenRing.textures.subject"}}
-            <input class="image" type="text" name="flags.dnd5e.tokenRing.textures.subject"
+            {{filePicker type="image" target="flags.dnd5a.tokenRing.textures.subject"}}
+            <input class="image" type="text" name="flags.dnd5a.tokenRing.textures.subject"
                    value="{{flags.textures.subject}}" placeholder="{{subjectPlaceholder}}">
         </div>
-        <p class="hint">{{localize "DND5E.TokenRings.Subject.Hint"}}</p>
+        <p class="hint">{{localize "DND5A.TokenRings.Subject.Hint"}}</p>
     </div>
     <div class="form-group">
-        <label>{{localize "DND5E.TokenRings.ScaleCorrection"}}</label>
+        <label>{{localize "DND5A.TokenRings.ScaleCorrection"}}</label>
         <div class="form-fields">
-            {{rangePicker name="flags.dnd5e.tokenRing.scaleCorrection" value=flags.scaleCorrection
+            {{rangePicker name="flags.dnd5a.tokenRing.scaleCorrection" value=flags.scaleCorrection
                           min=0.8 max=4 step=0.1}}
         </div>
     </div>
     <div class="form-group">
-        <label>{{localize "DND5E.TokenRings.RingColor"}}</label>
+        <label>{{localize "DND5A.TokenRings.RingColor"}}</label>
         <div class="form-fields">
-            {{colorPicker name="flags.dnd5e.tokenRing.colors.ring" value=flags.colors.ring}}
+            {{colorPicker name="flags.dnd5a.tokenRing.colors.ring" value=flags.colors.ring}}
         </div>
     </div>
     <div class="form-group">
-        <label>{{localize "DND5E.TokenRings.BackgroundColor"}}</label>
+        <label>{{localize "DND5A.TokenRings.BackgroundColor"}}</label>
         <div class="form-fields">
-            {{colorPicker name="flags.dnd5e.tokenRing.colors.background" value=flags.colors.background}}
+            {{colorPicker name="flags.dnd5a.tokenRing.colors.background" value=flags.colors.background}}
         </div>
     </div>
     {{#each effects}}
     <div class="form-group">
         <label>{{label}}</label>
         <div class="form-fields">
-            <input type="checkbox" name="flags.dnd5e.tokenRing.effects.{{@key}}" {{checked checked}}>
+            <input type="checkbox" name="flags.dnd5a.tokenRing.effects.{{@key}}" {{checked checked}}>
         </div>
     </div>
     {{/each}}

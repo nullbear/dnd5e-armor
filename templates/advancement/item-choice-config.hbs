@@ -1,24 +1,24 @@
 <form autocomplete="off" class="drop-target">
     <div class="left-column">
-        {{> "dnd5e.advancement-controls" }}
+        {{> "dnd5a.advancement-controls" }}
 
         <div class="form-group">
-            <label>{{ localize "DND5E.AdvancementConfigureAllowDrops" }}</label>
+            <label>{{ localize "DND5A.AdvancementConfigureAllowDrops" }}</label>
             <div class="form-fields">
                 <input type="checkbox" name="configuration.allowDrops" {{ checked configuration.allowDrops }}>
             </div>
-            <p class="hint">{{ localize "DND5E.AdvancementConfigureAllowDropsHint" }}</p>
+            <p class="hint">{{ localize "DND5A.AdvancementConfigureAllowDropsHint" }}</p>
         </div>
 
         <div class="form-group">
-            <label>{{ localize "DND5E.AdvancementItemChoiceType" }}</label>
+            <label>{{ localize "DND5A.AdvancementItemChoiceType" }}</label>
             <div class="form-fields">
                 <select name="configuration.type">
                     {{ selectOptions validTypes selected=configuration.type
-                                     blank=(localize "DND5E.AdvancementItemChoiceTypeAny") }}
+                                     blank=(localize "DND5A.AdvancementItemChoiceTypeAny") }}
                 </select>
             </div>
-            <p class="hint">{{ localize "DND5E.AdvancementItemChoiceTypeHint" }}</p>
+            <p class="hint">{{ localize "DND5A.AdvancementItemChoiceTypeHint" }}</p>
         </div>
 
         {{#if typeRestriction}}
@@ -47,7 +47,7 @@
 
         {{#if showSpellConfig}}
             <div class="form-group">
-                <label>{{ localize "DND5E.SpellLevel" }}</label>
+                <label>{{ localize "DND5A.SpellLevel" }}</label>
                 <div class="form-fields">
                     <select name="configuration.restriction.level">
                         {{#select configuration.restriction.level}}
@@ -56,15 +56,15 @@
                         <option value="{{ @key }}">{{ this }}</option>
                         {{/each}}
                         <option value="available">
-                            {{ localize "DND5E.AdvancementItemChoiceSpellLevelAvailable" }}
+                            {{ localize "DND5A.AdvancementItemChoiceSpellLevelAvailable" }}
                         </option>
                         {{/select}}
                     </select>
                 </div>
-                <p class="hint">{{localize "DND5E.AdvancementItemChoiceSpellLevelHint"}}</p>
+                <p class="hint">{{localize "DND5A.AdvancementItemChoiceSpellLevelHint"}}</p>
             </div>
 
-            {{> "dnd5e.advancement-spell-config"}}
+            {{> "dnd5a.advancement-spell-config"}}
         {{/if}}
     </div>
 
@@ -73,35 +73,35 @@
             <li class="items-header flexrow"><h3 class="item-name">{{ localize "DOCUMENT.Items" }}</h3></li>
             {{#each configuration.pool}}
             <li class="item flexrow" data-item-uuid="{{ uuid }}">
-                <div class="item-name">{{{ dnd5e-linkForUuid uuid }}}</div>
+                <div class="item-name">{{{ dnd5a-linkForUuid uuid }}}</div>
                 <div class="item-controls flexrow">
-                    <a class="item-control item-action" data-action="delete" data-tooltip="DND5E.ItemDelete"
-                       aria-label="{{ localize 'DND5E.ItemDelete' }}">
+                    <a class="item-control item-action" data-action="delete" data-tooltip="DND5A.ItemDelete"
+                       aria-label="{{ localize 'DND5A.ItemDelete' }}">
                         <i class="fas fa-trash" inert></i>
                     </a>
                 </div>
             </li>
             {{/each}}
         </ol>
-        
+
         {{#if showContainerWarning}}
-        <p class="hint centered warning">{{ localize "DND5E.AdvancementItemGrantContainerWarning" }}</p>
+        <p class="hint centered warning">{{ localize "DND5A.AdvancementItemGrantContainerWarning" }}</p>
         {{/if}}
-        <p class="hint centered">{{ localize "DND5E.AdvancementConfigureDropAreaHint" }}</p>
+        <p class="hint centered">{{ localize "DND5A.AdvancementConfigureDropAreaHint" }}</p>
     </div>
 
     <div class="right-column level-list">
         <ol class="items-list">
             <li class="items-header flexrow">
                 <span class="level-header">
-                    {{ localize "DND5E.AbbreviationLevel" }}
+                    {{ localize "DND5A.AbbreviationLevel" }}
                 </span>
                 <span id="{{ appId }}-choices" class="choices-header">
-                    {{ localize "DND5E.AdvancementItemChoiceChoices" }}
+                    {{ localize "DND5A.AdvancementItemChoiceChoices" }}
                 </span>
                 <span id="{{ appId }}-replacement" class="replacement-header">
-                    <i class="fa-solid fa-shuffle" data-tooltip="DND5E.AdvancementItemChoiceReplacement"
-                       aria-label="{{ localize 'DND5E.AdvancementItemChoiceReplacement' }}"></i>
+                    <i class="fa-solid fa-shuffle" data-tooltip="DND5A.AdvancementItemChoiceReplacement"
+                       aria-label="{{ localize 'DND5A.AdvancementItemChoiceReplacement' }}"></i>
                 </span>
             </li>
         </ol>

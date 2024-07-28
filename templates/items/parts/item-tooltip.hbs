@@ -3,7 +3,7 @@
         {{#if school}}
         <div class="school">
             {{#with (lookup @root.config.spellSchools school) as |schoolConfig|}}
-            <dnd5e-icon src="{{ schoolConfig.icon }}"></dnd5e-icon>
+            <dnd5a-icon src="{{ schoolConfig.icon }}"></dnd5a-icon>
             {{/with}}
         </div>
         {{/if}}
@@ -18,7 +18,7 @@
             <div class="price">
                 {{#if price}}
                 <i class="currency {{ price.denomination }}"></i>
-                <span>{{ dnd5e-numberFormat price.value }}</span>
+                <span>{{ dnd5a-numberFormat price.value }}</span>
                 {{/if}}
             </div>
 
@@ -27,7 +27,7 @@
                 <span class="value">{{ uses.value }}</span>
                 <span class="separator">&sol;</span>
                 <span class="max">{{ uses.max }}</span>
-                <span>{{ localize "DND5E.Charges" }}</span>
+                <span>{{ localize "DND5A.Charges" }}</span>
                 {{/if}}
             </div>
             <div class="weight">
@@ -41,7 +41,7 @@
     {{#if (eq type "spell")}}
     <ul class="info unlist">
         <li>
-            <strong>{{ localize "DND5E.SpellCastTime" }}:</strong>
+            <strong>{{ localize "DND5A.SpellCastTime" }}:</strong>
             <span class="value">
                 {{ labels.activation }}
                 {{#if activation.condition}}
@@ -50,15 +50,15 @@
             </span>
         </li>
         <li>
-            <strong>{{ localize "DND5E.Range" }}:</strong>
+            <strong>{{ localize "DND5A.Range" }}:</strong>
             <span class="value">{{ labels.range }}</span>
         </li>
         <li>
-            <strong>{{ localize "DND5E.Target" }}:</strong>
+            <strong>{{ localize "DND5A.Target" }}:</strong>
             <span class="value">{{ labels.target }}</span>
         </li>
         <li>
-            <strong>{{ localize "DND5E.Components" }}:</strong>
+            <strong>{{ localize "DND5A.Components" }}:</strong>
             <span class="value">
                 {{ labels.components.vsm }}
                 {{#if materials.value}}
@@ -67,7 +67,7 @@
             </span>
         </li>
         <li>
-            <strong>{{ localize "DND5E.Duration" }}:</strong>
+            <strong>{{ localize "DND5A.Duration" }}:</strong>
             <span class="value">{{ labels.concentrationDuration }}</span>
         </li>
     </ul>
@@ -90,8 +90,8 @@
     </ul>
     {{#if controlHints}}
     <div class="lock-hint">
-        <img src="systems/dnd5e/icons/svg/mouse-middle.svg" alt="{{ localize "DND5E.Controls.MiddleClick" }}">
-        <span>{{ localize "DND5E.Controls.LockHint" }}</span>
+        <img src="systems/dnd5a/icons/svg/mouse-middle.svg" alt="{{ localize "DND5A.Controls.MiddleClick" }}">
+        <span>{{ localize "DND5A.Controls.LockHint" }}</span>
     </div>
     {{/if}}
 </section>

@@ -71,7 +71,7 @@ export default class Tooltips5e {
     // Sheet-specific tooltips
     if ( loading?.dataset.uuid ) {
       const doc = await fromUuid(loading.dataset.uuid);
-      if ( doc instanceof dnd5e.documents.Actor5e ) return this._onHoverActor(doc);
+      if ( doc instanceof dnd5a.documents.Actor5e ) return this._onHoverActor(doc);
       return this._onHoverContentLink(doc);
     }
 
@@ -122,19 +122,19 @@ export default class Tooltips5e {
    * @protected
    */
   async _onHoverPassive(skill, ability, dc) {
-    const skillConfig = CONFIG.DND5E.skills[skill];
-    const abilityConfig = CONFIG.DND5E.abilities[ability ?? skillConfig.ability];
+    const skillConfig = CONFIG.DND5A.skills[skill];
+    const abilityConfig = CONFIG.DND5A.abilities[ability ?? skillConfig.ability];
 
     let label;
     if ( skillConfig ) {
-      label = game.i18n.format("DND5E.SkillPassiveSpecificHint", { skill: skillConfig.label, ability: abilityConfig.label });
+      label = game.i18n.format("DND5A.SkillPassiveSpecificHint", { skill: skillConfig.label, ability: abilityConfig.label });
     } else {
       // If no skill was provided, we're doing a passive ability check.
       // This isn't technically a thing in the rules, but we can support it anyway if people want to use it.
-      label = game.i18n.format("DND5E.SkillPassiveHint", { skill: abilityConfig.label });
+      label = game.i18n.format("DND5A.SkillPassiveHint", { skill: abilityConfig.label });
     }
 
-    const party = game.settings.get("dnd5e", "primaryParty")?.actor;
+    const party = game.settings.get("dnd5a", "primaryParty")?.actor;
     if ( !party ) {
       this.tooltip.innerHTML = label;
       return;
@@ -163,8 +163,8 @@ export default class Tooltips5e {
       context.party.push(data);
     }
 
-    this.tooltip.classList.add("dnd5e-tooltip", "passive-tooltip");
-    this.tooltip.innerHTML = await renderTemplate("systems/dnd5e/templates/journal/passive-tooltip.hbs", context);
+    this.tooltip.classList.add("dnd5a-tooltip", "passive-tooltip");
+    this.tooltip.innerHTML = await renderTemplate("systems/dnd5a/templates/journal/passive-tooltip.hbs", context);
     game.tooltip._setAnchor(TooltipManager.TOOLTIP_DIRECTIONS.DOWN);
   }
 

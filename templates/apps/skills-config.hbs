@@ -1,5 +1,5 @@
 <form autocomplete="off">
-    <header>{{ localize "DND5E.SkillsConfig" }}</header>
+    <header>{{ localize "DND5A.SkillsConfig" }}</header>
     <div class="card">
         <ol class="unlist form-grid form-grid-50 skills-list" style="--skill-rows: {{ rows }};">
             {{#each skills}}
@@ -7,9 +7,9 @@
                 <proficiency-cycle type="skill" name="system.skills.{{ key }}.value" value="{{ value }}"
                                    data-tooltip="{{ tooltip }}" aria-label="{{ localize tooltip }}"></proficiency-cycle>
                 <span class="name">{{ label }}</span>
-                <div class="bonus">{{ dnd5e-formatModifier total }}</div>
-                <a class="config-button" data-action="configure" data-tooltip="DND5E.SkillConfigure"
-                   aria-label="{{ localize "DND5E.SkillConfigure" }}">
+                <div class="bonus">{{ dnd5a-formatModifier total }}</div>
+                <a class="config-button" data-action="configure" data-tooltip="DND5A.SkillConfigure"
+                   aria-label="{{ localize "DND5A.SkillConfigure" }}">
                     <i class="fas fa-cog"></i>
                 </a>
             </li>

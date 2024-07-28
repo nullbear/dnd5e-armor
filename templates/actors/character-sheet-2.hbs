@@ -10,12 +10,12 @@
         <div class="mod">
             {{#if @root.editable}}
             <a class="config-button" data-action="ability"
-               data-tooltip="{{ localize "DND5E.AbilityConfigure" ability=label }}"
-               aria-label="{{ localize "DND5E.AbilityConfigure" ability=label }}">
+               data-tooltip="{{ localize "DND5A.AbilityConfigure" ability=label }}"
+               aria-label="{{ localize "DND5A.AbilityConfigure" ability=label }}">
                 <i class="fas fa-cog"></i>
             </a>
             {{else}}
-            {{ dnd5e-formatModifier mod }}
+            {{ dnd5a-formatModifier mod }}
             {{/if}}
         </div>
         <div class="score">
@@ -52,29 +52,29 @@
         <div class="right">
 
             {{!-- Level --}}
-            <div class="level-badge badge" aria-label="{{ localize "DND5E.LevelNumber" level=system.details.level }}">
+            <div class="level-badge badge" aria-label="{{ localize "DND5A.LevelNumber" level=system.details.level }}">
                 {{ system.details.level }}
             </div>
 
             {{!-- Inspiration --}}
             <button type="button" class="inspiration unbutton" data-action="toggleInspiration"
-                    aria-label="{{ localize "DND5E.Inspiration" }}" data-tooltip="DND5E.Inspiration"
+                    aria-label="{{ localize "DND5A.Inspiration" }}" data-tooltip="DND5A.Inspiration"
                     aria-pressed="{{ system.attributes.inspiration }}"></button>
 
             <div>
                 {{!-- Resting & Special Traits --}}
                 {{#if actor.isOwner}}
                 <div class="sheet-header-buttons">
-                    <button type="button" class="short-rest gold-button" data-tooltip="DND5E.ShortRest"
-                            aria-label="{{ localize "DND5E.ShortRest" }}">
+                    <button type="button" class="short-rest gold-button" data-tooltip="DND5A.ShortRest"
+                            aria-label="{{ localize "DND5A.ShortRest" }}">
                         <i class="fas fa-utensils"></i>
                     </button>
-                    <button type="button" class="long-rest gold-button" data-tooltip="DND5E.LongRest"
-                            aria-label="{{ localize "DND5E.LongRest" }}">
+                    <button type="button" class="long-rest gold-button" data-tooltip="DND5A.LongRest"
+                            aria-label="{{ localize "DND5A.LongRest" }}">
                         <i class="fas fa-campground"></i>
                     </button>
                     <button type="button" class="config-button gold-button" data-action="flags"
-                            data-tooltip="DND5E.SpecialTraits" aria-label="{{ localize "DND5E.SpecialTraits" }}">
+                            data-tooltip="DND5A.SpecialTraits" aria-label="{{ localize "DND5A.SpecialTraits" }}">
                         <i class="fas fa-star"></i>
                     </button>
                 </div>
@@ -88,12 +88,12 @@
                     <input type="text" name="system.details.xp.value" class="value uninput" data-dtype="Number"
                            value="{{ value }}">
                     {{else}}
-                    <span class="value">{{ dnd5e-numberFormat value }}</span>
+                    <span class="value">{{ dnd5a-numberFormat value }}</span>
                     {{/if}}
                     <span class="separator">&sol;</span>
-                    <span class="max">{{ dnd5e-numberFormat max }}</span>
+                    <span class="max">{{ dnd5a-numberFormat max }}</span>
                 </div>
-                <div class="xp-bar" role="meter" aria-label="{{ localize "DND5E.ExperiencePointsLabel" }}"
+                <div class="xp-bar" role="meter" aria-label="{{ localize "DND5A.ExperiencePointsLabel" }}"
                      aria-valuemin="{{ min }}" aria-valuenow="{{ value }}" aria-valuemax="{{ max }}"
                      aria-valuetext="{{ pct }}%" style="--bar-percentage: {{ pct }}%;"></div>
                 {{/with}}
@@ -128,13 +128,13 @@
                     <div class="portrait {{#if portrait.token}}token{{/if}}">
                         {{#if editable}}
                         <label class="slide-toggle roboto-upper">
-                            <input type="checkbox" name="flags.dnd5e.showTokenPortrait" {{ checked portrait.token }}>
+                            <input type="checkbox" name="flags.dnd5a.showTokenPortrait" {{ checked portrait.token }}>
                             {{#if portrait.token}}
                             <i class="fas fa-toggle-on"></i>
                             {{ localize "DOCUMENT.Token" }}
                             {{else}}
                             <i class="fas fa-toggle-off"></i>
-                            {{ localize "DND5E.Portrait" }}
+                            {{ localize "DND5A.Portrait" }}
                             {{/if}}
                         </label>
                         {{/if}}
@@ -156,14 +156,14 @@
                             </div>
 
                             {{!-- AC --}}
-                            <div class="ac-badge badge" aria-label="{{ localize "DND5E.ArmorClass" }}">
+                            <div class="ac-badge badge" aria-label="{{ localize "DND5A.ArmorClass" }}">
                                 {{#if editable}}
-                                <a class="config-button" data-action="armor" data-tooltip="DND5E.ArmorConfig"
-                                   aria-label="{{ localize "DND5E.ArmorConfig" }}">
+                                <a class="config-button" data-action="armor" data-tooltip="DND5A.ArmorConfig"
+                                   aria-label="{{ localize "DND5A.ArmorConfig" }}">
                                     <i class="fas fa-cog"></i>
                                 </a>
                                 {{else}}
-                                <div data-attribution="attributes.ac" data-attribution-caption="DND5E.ArmorClass"
+                                <div data-attribution="attributes.ac" data-attribution-caption="DND5A.ArmorClass"
                                      data-tooltip-direction="DOWN">
                                     {{ system.attributes.ac.value }}
                                 </div>
@@ -186,24 +186,24 @@
                                 <div class="value">
                                     {{#if editable}}
                                     <a class="config-button" data-action="initiative"
-                                       data-tooltip="DND5E.InitiativeConfig"
-                                       aria-label="{{ localize "DND5E.InitiativeConfig" }}">
+                                       data-tooltip="DND5A.InitiativeConfig"
+                                       aria-label="{{ localize "DND5A.InitiativeConfig" }}">
                                         <i class="fas fa-cog"></i>
                                     </a>
                                     {{else}}
                                     <span>
-                                        {{ dnd5e-numberFormat system.attributes.init.total signDisplay="always" }}
+                                        {{ dnd5a-numberFormat system.attributes.init.total signDisplay="always" }}
                                     </span>
                                     {{/if}}
                                 </div>
-                                <div class="label roboto-condensed-upper">{{ localize "DND5E.Initiative" }}</div>
+                                <div class="label roboto-condensed-upper">{{ localize "DND5A.Initiative" }}</div>
                             </div>
 
                             {{!-- Speed --}}
                             <div class="lozenge" data-attribution="attributes.movement">
                                 <div class="value">
                                     {{#if editable}}
-                                    <a class="config-button" data-action="movement" data-tooltip="DND5E.MovementConfig">
+                                    <a class="config-button" data-action="movement" data-tooltip="DND5A.MovementConfig">
                                         <i class="fas fa-cog"></i>
                                     </a>
                                     {{else}}
@@ -216,19 +216,19 @@
                             {{!-- Proficiency --}}
                             <div class="lozenge">
                                 <div class="value">
-                                    {{ dnd5e-numberFormat system.attributes.prof signDisplay="always" }}
+                                    {{ dnd5a-numberFormat system.attributes.prof signDisplay="always" }}
                                 </div>
-                                <div class="label roboto-condensed-upper">{{ localize "DND5E.Proficiency" }}</div>
+                                <div class="label roboto-condensed-upper">{{ localize "DND5A.Proficiency" }}</div>
                             </div>
                         </div>
 
                         {{!-- Hit Points --}}
                         <div class="meter-group">
                             <div class="label roboto-condensed-upper">
-                                <span>{{ localize "DND5E.HitPoints" }}</span>
+                                <span>{{ localize "DND5A.HitPoints" }}</span>
                                 {{#if editable}}
-                                <a class="config-button" data-action="hitPoints" data-tooltip="DND5E.HitPointsConfig"
-                                   aria-label="{{ localize "DND5E.HitPointsConfig" }}">
+                                <a class="config-button" data-action="hitPoints" data-tooltip="DND5A.HitPointsConfig"
+                                   aria-label="{{ localize "DND5A.HitPointsConfig" }}">
                                     <i class="fas fa-cog"></i>
                                 </a>
                                 {{/if}}
@@ -245,7 +245,7 @@
                                         <span class="separator">&sol;</span>
                                         <span class="max">{{ effectiveMax }}</span>
                                         {{#if tempmax}}
-                                        <span class="bonus">{{dnd5e-numberFormat tempmax signDisplay="always"}}</span>
+                                        <span class="bonus">{{dnd5a-numberFormat tempmax signDisplay="always"}}</span>
                                         {{/if}}
                                     </div>
                                     <input type="text" name="system.attributes.hp.value" data-dtype="Number"
@@ -253,7 +253,7 @@
                                 </div>
                                 <div class="tmp">
                                     <input type="text" name="system.attributes.hp.temp" data-dtype="Number"
-                                           placeholder="{{ localize "DND5E.TMP" }}" value="{{ temp }}">
+                                           placeholder="{{ localize "DND5A.TMP" }}" value="{{ temp }}">
                                 </div>
                             </div>
                             {{/with}}
@@ -263,10 +263,10 @@
                         {{#with system.attributes.hd}}
                         <div class="meter-group">
                             <div class="label roboto-condensed-upper">
-                                <span>{{ localize "DND5E.HitDice" }}</span>
+                                <span>{{ localize "DND5A.HitDice" }}</span>
                                 {{#if @root.editable}}
-                                <a class="config-button" data-action="hitDice" data-tooltip="DND5E.HitDiceConfig"
-                                   aria-label="{{ localize "DND5E.HitDiceConfig" }}">
+                                <a class="config-button" data-action="hitDice" data-tooltip="DND5A.HitDiceConfig"
+                                   aria-label="{{ localize "DND5A.HitDiceConfig" }}">
                                     <i class="fas fa-cog"></i>
                                 </a>
                                 {{/if}}
@@ -296,10 +296,10 @@
                             </div>
 
                             {{!-- Roll Death Save --}}
-                            <button type="button" data-action="rollDeathSave" data-tooltip="DND5E.DeathSaveRoll"
-                                    aria-label="{{ localize "DND5E.DeathSaveRoll" }}"
+                            <button type="button" data-action="rollDeathSave" data-tooltip="DND5A.DeathSaveRoll"
+                                    aria-label="{{ localize "DND5A.DeathSaveRoll" }}"
                                     class="{{ rollableClass }} death-save unbutton">
-                                <dnd5e-icon src="systems/dnd5e/icons/svg/statuses/dead.svg"></dnd5e-icon>
+                                <dnd5a-icon src="systems/dnd5a/icons/svg/statuses/dead.svg"></dnd5a-icon>
                             </button>
 
                             {{!-- Failures --}}
@@ -313,9 +313,9 @@
 
                         <button type="button" class="death-tab card-tab horizontal unbutton interface-only"
                                 {{#if death.open}}
-                                    data-tooltip="DND5E.DeathSaveShow" aria-label="{{ localize "DND5E.DeathSaveShow" }}"
+                                    data-tooltip="DND5A.DeathSaveShow" aria-label="{{ localize "DND5A.DeathSaveShow" }}"
                                 {{else}}
-                                    data-tooltip="DND5E.DeathSaveHide" aria-label="{{ localize "DND5E.DeathSaveHide" }}"
+                                    data-tooltip="DND5A.DeathSaveHide" aria-label="{{ localize "DND5A.DeathSaveHide" }}"
                                 {{/if}}>
                             <i class="fas fa-skull"></i>
                         </button>
@@ -327,7 +327,7 @@
                 <div class="favorites">
                     <h3 class="icon">
                         <i class="fas fa-star"></i>
-                        <span class="roboto-upper">{{ localize "DND5E.Favorites" }}</span>
+                        <span class="roboto-upper">{{ localize "DND5A.Favorites" }}</span>
                     </h3>
                     <ul class="unlist">
                         {{#each favorites}}
@@ -350,8 +350,8 @@
                                 {{!-- Favorite Deletion --}}
                                 {{#if @root.editable}}
                                 <a class="deletion-control" data-action="removeFavorite" data-tooltip-class
-                                   data-tooltip-direction data-tooltip="DND5E.FavoriteRemove"
-                                   aria-label="{{ localize "DND5E.FavoriteRemove" }}">
+                                   data-tooltip-direction data-tooltip="DND5A.FavoriteRemove"
+                                   aria-label="{{ localize "DND5A.FavoriteRemove" }}">
                                     <i class="fas fa-circle-xmark"></i>
                                 </a>
                                 {{/if}}
@@ -385,7 +385,7 @@
 
                                     {{!-- Modifiers --}}
                                     {{else if modifier includeZero=true}}
-                                    {{ dnd5e-formatModifier modifier }}
+                                    {{ dnd5a-formatModifier modifier }}
 
                                     {{!-- Passive Score --}}
                                     {{#if passive}}
@@ -456,7 +456,7 @@
                         {{/each}}
 
                         {{!-- Drop Indicator --}}
-                        <li class="drop roboto-upper">{{ localize "DND5E.FavoriteDrop" }}</li>
+                        <li class="drop roboto-upper">{{ localize "DND5A.FavoriteDrop" }}</li>
                     </ul>
                 </div>
             </div>
@@ -465,31 +465,31 @@
             <section class="tab-body">
 
                 {{!-- Character Details --}}
-                {{> "dnd5e.character-details" }}
+                {{> "dnd5a.character-details" }}
 
                 {{!-- Inventory --}}
                 <div class="tab inventory" data-group="primary" data-tab="inventory">
-                    {{> "dnd5e.inventory2" sections=inventory }}
+                    {{> "dnd5a.inventory2" sections=inventory }}
                 </div>
 
                 {{!-- Features --}}
                 <div class="tab features" data-group="primary" data-tab="features">
-                    {{> "dnd5e.creature-features" sections=features.sections filters=features.filters
+                    {{> "dnd5a.creature-features" sections=features.sections filters=features.filters
                         showClassDrop=true }}
                 </div>
 
                 {{!-- Spells --}}
                 <div class="tab spells" data-group="primary" data-tab="spells">
-                    {{> "dnd5e.creature-spells" }}
+                    {{> "dnd5a.creature-spells" }}
                 </div>
 
                 {{!-- Effects --}}
                 <div class="tab effects" data-group="primary" data-tab="effects">
-                    {{> "dnd5e.active-effects2" }}
+                    {{> "dnd5a.active-effects2" }}
                 </div>
 
                 {{!-- Biography --}}
-                {{~> "dnd5e.character-biography" ~}}
+                {{~> "dnd5a.character-biography" ~}}
 
             </section>
 
@@ -520,6 +520,6 @@
     </button>
 
     {{!-- Warnings --}}
-    {{> "dnd5e.actor-warnings-dialog" }}
+    {{> "dnd5a.actor-warnings-dialog" }}
 
 </form>

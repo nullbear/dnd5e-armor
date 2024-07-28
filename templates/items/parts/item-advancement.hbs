@@ -6,20 +6,20 @@
                 {{#if isEmbedded}}
                 {{#if advancementEditable}}
                 <a class="item-control" data-action="toggle-configuration"
-                     data-tooltip="DND5E.AdvancementConfigurationActionDisable">
-                    <i class="fas fa-lock-open"></i> {{localize "DND5E.AdvancementConfigurationModeEnabled"}}
+                     data-tooltip="DND5A.AdvancementConfigurationActionDisable">
+                    <i class="fas fa-lock-open"></i> {{localize "DND5A.AdvancementConfigurationModeEnabled"}}
                 </a>
                 {{else}}
                 <a class="item-control" data-action="toggle-configuration"
-                     data-tooltip="DND5E.AdvancementConfigurationActionEnable">
-                    <i class="fas fa-lock"></i> {{localize "DND5E.AdvancementConfigurationModeDisabled"}}
+                     data-tooltip="DND5A.AdvancementConfigurationActionEnable">
+                    <i class="fas fa-lock"></i> {{localize "DND5A.AdvancementConfigurationModeDisabled"}}
                 </a>
                 {{/if}}
                 {{/if}}
             </div>
             {{#if advancementEditable}}
             <div class="item-controls flexrow add-button">
-                <a class="item-control" data-action="add" data-tooltip="DND5E.AdvancementControlCreate">
+                <a class="item-control" data-action="add" data-tooltip="DND5A.AdvancementControlCreate">
                     <i class="fas fa-plus"></i>
                 </a>
             </div>
@@ -31,26 +31,26 @@
         <li class="items-header flexrow" data-level="{{level}}">
             <h3 class="item-name flexrow">
                 {{#if (eq level "0")}}
-                {{localize "DND5E.AdvancementLevelAnyHeader"}}
+                {{localize "DND5A.AdvancementLevelAnyHeader"}}
                 {{else if (eq level "unconfigured")}}
-                {{localize "DND5E.AdvancementLevelNoneHeader"}}
+                {{localize "DND5A.AdvancementLevelNoneHeader"}}
                 {{else}}
-                {{localize "DND5E.AdvancementLevelHeader" level=level}}
+                {{localize "DND5A.AdvancementLevelHeader" level=level}}
                 {{/if}}
             </h3>
 
             {{#if (and @root.editable data.configured (ne level "unconfigured"))}}
             <div>
-                <a class="item-control" data-action="modify-choices">{{localize "DND5E.AdvancementModifyChoices"}}</a>
+                <a class="item-control" data-action="modify-choices">{{localize "DND5A.AdvancementModifyChoices"}}</a>
             </div>
             {{/if}}
 
             {{#if (eq data.configured "full")}}
-            <div class="item-checkmark" data-tooltip="DND5E.AdvancementConfiguredComplete">
+            <div class="item-checkmark" data-tooltip="DND5A.AdvancementConfiguredComplete">
                 <i class="fas fa-check-circle"></i>
             </div>
             {{else if (eq data.configured "partial")}}
-            <div class="item-warning" data-tooltip="DND5E.AdvancementConfiguredIncomplete">
+            <div class="item-warning" data-tooltip="DND5A.AdvancementConfiguredIncomplete">
                 <i class="fas fa-exclamation-triangle"></i>
             </div>
             {{/if}}
@@ -65,20 +65,20 @@
                 {{#if (or @root.advancementEditable (not @root.isEmbedded))}}
                 <div class="flexrow">
                     {{#if (eq this.classRestriction "primary")}}
-                        {{localize "DND5E.AdvancementClassRestrictionPrimary"}}
+                        {{localize "DND5A.AdvancementClassRestrictionPrimary"}}
                     {{else if (eq this.classRestriction "secondary")}}
-                        {{localize "DND5E.AdvancementClassRestrictionSecondary"}}
+                        {{localize "DND5A.AdvancementClassRestrictionSecondary"}}
                     {{/if}}
                 </div>
                 {{/if}}
                 {{#if @root.advancementEditable}}
                 <div class="item-controls flexrow">
-                    <a class="item-control" data-action="edit" data-tooltip="DND5E.AdvancementControlEdit"
-                       aria-label="{{ localize 'DND5E.AdvancementControlEdit' }}">
+                    <a class="item-control" data-action="edit" data-tooltip="DND5A.AdvancementControlEdit"
+                       aria-label="{{ localize 'DND5A.AdvancementControlEdit' }}">
                         <i class="fas fa-edit" aria-hidden="true"></i>
                     </a>
-                    <a class="item-control" data-action="delete" data-tooltip="DND5E.AdvancementControlDelete"
-                       aria-label="{{ localize 'DND5E.AdvancementControlDelete' }}">
+                    <a class="item-control" data-action="delete" data-tooltip="DND5A.AdvancementControlDelete"
+                       aria-label="{{ localize 'DND5A.AdvancementControlDelete' }}">
                         <i class="fas fa-trash" aria-hidden="true"></i>
                     </a>
                 </div>

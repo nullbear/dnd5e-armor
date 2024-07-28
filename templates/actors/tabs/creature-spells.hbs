@@ -15,26 +15,26 @@
             {{/if}}
             {{else}}
             <button type="button" class="radio-button" data-action="spellcasting"
-                    data-tooltip="DND5E.SpellAbilitySet" aria-pressed="{{#if primary}}true{{else}}false{{/if}}"
-                    aria-label="{{ localize "DND5E.SpellAbilitySet" }}"></button>
+                    data-tooltip="DND5A.SpellAbilitySet" aria-pressed="{{#if primary}}true{{else}}false{{/if}}"
+                    aria-label="{{ localize "DND5A.SpellAbilitySet" }}"></button>
             {{/if}}
         </div>
         <div class="info">
             <div class="ability">
-                <span class="label">{{ localize "DND5E.Ability" }}</span>
-                <span class="value">{{ dnd5e-formatModifier ability.mod }}</span>
+                <span class="label">{{ localize "DND5A.Ability" }}</span>
+                <span class="value">{{ dnd5a-formatModifier ability.mod }}</span>
             </div>
             <div class="attack">
-                <span class="label">{{ localize "DND5E.Attack" }}</span>
-                <span class="value">{{ dnd5e-formatModifier attack }}</span>
+                <span class="label">{{ localize "DND5A.Attack" }}</span>
+                <span class="value">{{ dnd5a-formatModifier attack }}</span>
             </div>
             <div class="save">
-                <span class="label">{{ localize "DND5E.SpellDC" }}</span>
+                <span class="label">{{ localize "DND5A.SpellDC" }}</span>
                 <span class="value">{{ save }}</span>
             </div>
             {{#if @root.isNPC}}
             <div class="level">
-                <span class="label">{{ localize "DND5E.Level" }}</span>
+                <span class="label">{{ localize "DND5A.Level" }}</span>
                 {{#if (and @root.editable noSpellcaster)}}
                 {{ numberInput @root.system.details.spellLevel name="system.details.spellLevel" min=0 step=1
                                placeholder="—" }}
@@ -43,13 +43,13 @@
                 {{/if}}
             </div>
             <div class="concentration" data-ability="concentration">
-                <a class="label saving-throw {{ @root.rollableClass }}">{{ localize "DND5E.Concentration" }}</a>
+                <a class="label saving-throw {{ @root.rollableClass }}">{{ localize "DND5A.Concentration" }}</a>
                 {{#if @root.editable}}
                 <a class="config-button" data-action="ability" data-tooltip="{{ tooltip }}" aria-label="{{ tooltip }}">
                     <i class="fas fa-cog"></i>
                 </a>
                 {{else}}
-                <span class="value">{{ dnd5e-formatModifier concentration.mod }}</span>
+                <span class="value">{{ dnd5a-formatModifier concentration.mod }}</span>
                 {{/if}}
             </div>
             {{/if}}
@@ -62,15 +62,15 @@
 <{{ elements.inventory }} class="inventory-element" v2>
 
     {{!-- Searching & Filtering --}}
-    <item-list-controls for="spellbook" label="{{ localize "DND5E.SpellsSearch" }}" sort="multi" sort-modes="apm"
+    <item-list-controls for="spellbook" label="{{ localize "DND5A.SpellsSearch" }}" sort="multi" sort-modes="apm"
                         collection="items" keep-empty>
         <datalist>
-            <option value="action">{{ localize "DND5E.Action" }}</option>
-            <option value="bonus">{{ localize "DND5E.BonusAction" }}</option>
-            <option value="reaction">{{ localize "DND5E.Reaction" }}</option>
-            <option value="concentration">{{ localize "DND5E.Concentration" }}</option>
-            <option value="ritual">{{ localize "DND5E.Ritual" }}</option>
-            <option value="prepared">{{ localize "DND5E.Prepared" }}</option>
+            <option value="action">{{ localize "DND5A.Action" }}</option>
+            <option value="bonus">{{ localize "DND5A.BonusAction" }}</option>
+            <option value="reaction">{{ localize "DND5A.Reaction" }}</option>
+            <option value="concentration">{{ localize "DND5A.Concentration" }}</option>
+            <option value="ritual">{{ localize "DND5A.Ritual" }}</option>
+            <option value="prepared">{{ localize "DND5A.Prepared" }}</option>
             {{#each config.spellSchools}}
             <option value="{{ @key }}">{{ label }}</option>
             {{/each}}
@@ -82,22 +82,22 @@
 
         {{!-- Sections --}}
         {{#each spellbook}}
-        <div class="items-section card" {{ dnd5e-dataset dataset }}>
+        <div class="items-section card" {{ dnd5a-dataset dataset }}>
 
             {{!-- Section Header --}}
             <div class="items-header header">
                 <h3 class="item-name spell-header">{{ localize label }}</h3>
-                <div class="item-header item-school">{{ localize "DND5E.SpellHeader.School" }}</div>
-                <div class="item-header item-usage">{{ localize "DND5E.SpellHeader.Time" }}</div>
-                <div class="item-header item-range">{{ localize "DND5E.SpellHeader.Range" }}</div>
-                <div class="item-header item-target">{{ localize "DND5E.SpellHeader.Target" }}</div>
-                <div class="item-header item-roll">{{ localize "DND5E.SpellHeader.Roll" }}</div>
-                <div class="item-header item-uses spell-uses">{{ localize "DND5E.Uses" }}</div>
-                <div class="item-header item-formula spell-formula">{{ localize "DND5E.SpellHeader.Formula" }}</div>
+                <div class="item-header item-school">{{ localize "DND5A.SpellHeader.School" }}</div>
+                <div class="item-header item-usage">{{ localize "DND5A.SpellHeader.Time" }}</div>
+                <div class="item-header item-range">{{ localize "DND5A.SpellHeader.Range" }}</div>
+                <div class="item-header item-target">{{ localize "DND5A.SpellHeader.Target" }}</div>
+                <div class="item-header item-roll">{{ localize "DND5A.SpellHeader.Roll" }}</div>
+                <div class="item-header item-uses spell-uses">{{ localize "DND5A.Uses" }}</div>
+                <div class="item-header item-formula spell-formula">{{ localize "DND5A.SpellHeader.Formula" }}</div>
                 <div class="item-header item-controls"></div>
                 {{#if (and usesSlots @root.editable)}}
-                <a class="config-button" data-action="spellSlots" data-tooltip="DND5E.SpellSlotsConfig"
-                   aria-label="{{ localize "DND5E.SpellSlotsConfig" }}">
+                <a class="config-button" data-action="spellSlots" data-tooltip="DND5A.SpellSlotsConfig"
+                   aria-label="{{ localize "DND5A.SpellSlotsConfig" }}">
                     <i class="fas fa-cog"></i>
                 </a>
                 {{/if}}
@@ -109,7 +109,7 @@
                 {{#each pips}}
                 <button type="button" class="{{ classes }}" data-n="{{ n }}" data-tooltip="{{ tooltip }}"
                         aria-label="{{ label }}" aria-pressed="{{ filled }}">
-                    <dnd5e-icon src="systems/dnd5e/icons/svg/spell-slot.svg"></dnd5e-icon>
+                    <dnd5a-icon src="systems/dnd5a/icons/svg/spell-slot.svg"></dnd5a-icon>
                 </button>
                 {{/each}}
             </div>
@@ -118,7 +118,7 @@
             {{!-- Section Contents --}}
             <ol class="item-list unlist">
                 {{#each spells as |item|}}
-                {{#dnd5e-itemContext item as |ctx|}}
+                {{#dnd5a-itemContext item as |ctx|}}
 
                 {{!-- Spells --}}
                 <li class="item collapsible {{#unless ctx.isExpanded}}collapsed{{/unless}}" data-item-id="{{ item.id }}"
@@ -134,7 +134,7 @@
                              data-action="use" aria-label="{{ item.name }}">
                             {{#if ctx.concentration}}
                             <i class="concentration fas fa-arrow-rotate-left fa-spin fa-spin-reverse"
-                               aria-label="{{ localize "DND5E.Concentration" }}"></i>
+                               aria-label="{{ localize "DND5A.Concentration" }}"></i>
                             {{/if}}
                             <img class="item-image gold-icon" src="{{ item.img }}" alt="{{ item.name }}">
                             <div class="name name-stacked">
@@ -152,7 +152,7 @@
                                 {{#each item.labels.components.all}}
                                 {{#if tag}}
                                 <span aria-label="{{ label }}">
-                                    <dnd5e-icon src="{{ icon }}"></dnd5e-icon>
+                                    <dnd5a-icon src="{{ icon }}"></dnd5a-icon>
                                 </span>
                                 {{/if}}
                                 {{/each}}
@@ -163,7 +163,7 @@
                         <div class="item-detail item-school" data-tooltip="{{ item.labels.school }}"
                              aria-label="{{ item.labels.school }}">
                             {{#with (lookup @root.config.spellSchools item.system.school) as |schoolConfig|}}
-                            <dnd5e-icon src="{{ schoolConfig.icon }}"></dnd5e-icon>
+                            <dnd5a-icon src="{{ schoolConfig.icon }}"></dnd5a-icon>
                             {{/with}}
                         </div>
 
@@ -194,7 +194,7 @@
                         {{!-- Spell Attack / DC --}}
                         <div class="item-detail item-roll {{#if (and (not item.system.save.ability) (eq ctx.toHit null))}}empty{{/if}}">
                             {{#if ctx.toHit}}
-                            <span class="value">{{ dnd5e-formatModifier ctx.toHit }}</span>
+                            <span class="value">{{ dnd5a-formatModifier ctx.toHit }}</span>
                             {{else if item.system.save.ability}}
                             <div class="stacked">
                                 <span class="ability">
@@ -222,7 +222,7 @@
                                 <span class="formula">{{ formula }}</span>
                                 {{#with (lookup @root.labels.damageAndHealing damageType)}}
                                 <span data-tooltip="{{ label }}" aria-label="{{ label }}">
-                                    <dnd5e-icon src="{{ icon }}"></dnd5e-icon>
+                                    <dnd5a-icon src="{{ icon }}"></dnd5a-icon>
                                 </span>
                                 {{/with}}
                             </div>
@@ -234,14 +234,14 @@
 
                             {{#if @root.editable}}
                             {{!-- Editing --}}
-                            <a class="item-control item-action" data-action="edit" data-tooltip="DND5E.ItemEdit"
-                               aria-label="{{ localize "DND5E.ItemEdit" }}">
+                            <a class="item-control item-action" data-action="edit" data-tooltip="DND5A.ItemEdit"
+                               aria-label="{{ localize "DND5A.ItemEdit" }}">
                                 <i class="fas fa-pen-to-square"></i>
                             </a>
 
                             {{!-- Deleting --}}
-                            <a class="item-control item-action" data-action="delete" data-tooltip="DND5E.ItemDelete"
-                               aria-label="{{ localize "DND5E.ItemDelete" }}">
+                            <a class="item-control item-action" data-action="delete" data-tooltip="DND5A.ItemDelete"
+                               aria-label="{{ localize "DND5A.ItemDelete" }}">
                                 <i class="fas fa-trash"></i>
                             </a>
                             {{else if @root.owner}}
@@ -258,7 +258,7 @@
 
                             {{!-- Expand/Collapse --}}
                             <a class="item-control interface-only" data-toggle-description
-                               aria-label="{{ localize "DND5E.ToggleDescription" }}">
+                               aria-label="{{ localize "DND5A.ToggleDescription" }}">
                                 {{#if ctx.isExpanded}}
                                 <i class="fas fa-compress"></i>
                                 {{else}}
@@ -268,7 +268,7 @@
 
                             {{!-- Context Menu --}}
                             <a class="item-control interface-only" data-context-menu
-                               aria-label="{{ localize "DND5E.AdditionalControls" }}">
+                               aria-label="{{ localize "DND5A.AdditionalControls" }}">
                                 <i class="fas fa-ellipsis-vertical"></i>
                             </a>
 
@@ -279,14 +279,14 @@
                     <div class="item-description collapsible-content">
                         <div class="wrapper">
                             {{#if ctx.isExpanded}}
-                                {{> "dnd5e.item-summary" ctx.expanded }}
+                                {{> "dnd5a.item-summary" ctx.expanded }}
                             {{/if}}
                         </div>
                     </div>
 
                 </li>
 
-                {{/dnd5e-itemContext}}
+                {{/dnd5a-itemContext}}
                 {{/each}}
             </ol>
 

@@ -1,14 +1,14 @@
 {{!-- Classes --}}
 {{#unless isNPC}}
-    {{> "dnd5e.actor-classes" }}
+    {{> "dnd5a.actor-classes" }}
 {{/unless}}
 
 {{!-- Features --}}
 <{{elements.inventory}} class="inventory-element" v2>
 
     {{!-- Searching, Filtering, & Sorting --}}
-    <item-list-controls for="features" label="{{ localize "DND5E.FeatureSearch" }}" sort="toggle" group
-                        group-label="{{ localize "DND5E.FilterGroupOrigin" }}" collection="items">
+    <item-list-controls for="features" label="{{ localize "DND5A.FeatureSearch" }}" sort="toggle" group
+                        group-label="{{ localize "DND5A.FilterGroupOrigin" }}" collection="items">
         <datalist>
             {{#each filters}}
             <option value="{{ key }}">{{ localize label }}</option>
@@ -21,7 +21,7 @@
 
         {{!-- Sections / Categories --}}
         {{#each sections}}
-        <div class="items-section card" {{ dnd5e-dataset dataset }}>
+        <div class="items-section card" {{ dnd5a-dataset dataset }}>
 
             {{!-- Section Header --}}
             <div class="items-header header">
@@ -34,7 +34,7 @@
             {{!-- Section Contents --}}
             <ol class="item-list unlist">
                 {{#each items as |item|}}
-                {{#dnd5e-itemContext item as |ctx|}}
+                {{#dnd5a-itemContext item as |ctx|}}
 
                 {{!-- Items --}}
                 <li class="item collapsible {{#unless ctx.isExpanded}}collapsed{{/unless}}" data-item-id="{{ item.id }}"
@@ -57,7 +57,7 @@
                                 {{#each item.labels.properties}}
                                 {{#if icon}}
                                 <span aria-label="{{ label }}">
-                                    <dnd5e-icon src="{{ icon }}"></dnd5e-icon>
+                                    <dnd5a-icon src="{{ icon }}"></dnd5a-icon>
                                 </span>
                                 {{/if}}
                                 {{/each}}
@@ -73,14 +73,14 @@
                     <div class="item-description collapsible-content">
                         <div class="wrapper">
                             {{#if ctx.isExpanded}}
-                                {{> "dnd5e.item-summary" ctx.expanded }}
+                                {{> "dnd5a.item-summary" ctx.expanded }}
                             {{/if}}
                         </div>
                     </div>
 
                 </li>
 
-                {{/dnd5e-itemContext}}
+                {{/dnd5a-itemContext}}
                 {{/each}}
             </ol>
 

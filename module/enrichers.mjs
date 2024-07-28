@@ -109,12 +109,12 @@ async function enrichAward(config, label, options) {
   }
 
   const block = document.createElement("span");
-  block.classList.add("award-block", "dnd5e2");
+  block.classList.add("award-block", "dnd5a2");
   block.dataset.awardCommand = command;
 
   const entries = [];
   for ( let [key, amount] of Object.entries(parsed.currency) ) {
-    const label = CONFIG.DND5E.currencies[key].label;
+    const label = CONFIG.DND5A.currencies[key].label;
     amount = Number.isNumeric(amount) ? formatNumber(amount) : amount;
     entries.push(`
       <span class="award-entry">
@@ -124,17 +124,17 @@ async function enrichAward(config, label, options) {
   }
   if ( parsed.xp ) entries.push(`
     <span class="award-entry">
-      ${formatNumber(parsed.xp)} ${game.i18n.localize("DND5E.ExperiencePointsAbbr")}
+      ${formatNumber(parsed.xp)} ${game.i18n.localize("DND5A.ExperiencePointsAbbr")}
     </span>
   `);
 
   let award = game.i18n.getListFormatter({ type: "unit" }).format(entries);
-  if ( parsed.each ) award = game.i18n.format("EDITOR.DND5E.Inline.AwardEach", { award });
+  if ( parsed.each ) award = game.i18n.format("EDITOR.DND5A.Inline.AwardEach", { award });
 
   block.innerHTML += `
     ${award}
     <a class="award-link" data-action="awardRequest">
-      <i class="fa-solid fa-trophy"></i> ${label ?? game.i18n.localize("DND5E.Award.Action")}
+      <i class="fa-solid fa-trophy"></i> ${label ?? game.i18n.localize("DND5A.Award.Action")}
     </a>
   `;
 
@@ -202,16 +202,16 @@ async function enrichAward(config, label, options) {
 async function enrichCheck(config, label, options) {
   for ( let value of config.values ) {
     value = foundry.utils.getType(value) === "string" ? slugify(value) : value;
-    if ( value in CONFIG.DND5E.enrichmentLookup.abilities ) config.ability = value;
-    else if ( value in CONFIG.DND5E.enrichmentLookup.skills ) config.skill = value;
-    else if ( value in CONFIG.DND5E.enrichmentLookup.tools ) config.tool = value;
+    if ( value in CONFIG.DND5A.enrichmentLookup.abilities ) config.ability = value;
+    else if ( value in CONFIG.DND5A.enrichmentLookup.skills ) config.skill = value;
+    else if ( value in CONFIG.DND5A.enrichmentLookup.tools ) config.tool = value;
     else if ( Number.isNumeric(value) ) config.dc = Number(value);
     else config[value] = true;
   }
 
   let invalid = false;
 
-  const skillConfig = CONFIG.DND5E.enrichmentLookup.skills[slugify(config.skill)];
+  const skillConfig = CONFIG.DND5A.enrichmentLookup.skills[slugify(config.skill)];
   if ( config.skill && !skillConfig ) {
     console.warn(`Skill ${config.skill} not found while enriching ${config._input}.`);
     invalid = true;
@@ -220,14 +220,14 @@ async function enrichCheck(config, label, options) {
   }
   if ( skillConfig?.key ) config.skill = skillConfig.key;
 
-  const toolUUID = CONFIG.DND5E.enrichmentLookup.tools[slugify(config.tool)];
+  const toolUUID = CONFIG.DND5A.enrichmentLookup.tools[slugify(config.tool)];
   const toolIndex = toolUUID ? Trait.getBaseItem(toolUUID, { indexOnly: true }) : null;
   if ( config.tool && !toolIndex ) {
     console.warn(`Tool ${config.tool} not found while enriching ${config._input}.`);
     invalid = true;
   }
 
-  let abilityConfig = CONFIG.DND5E.enrichmentLookup.abilities[slugify(config.ability)];
+  let abilityConfig = CONFIG.DND5A.enrichmentLookup.abilities[slugify(config.ability)];
   if ( config.ability && !abilityConfig ) {
     console.warn(`Ability ${config.ability} not found while enriching ${config._input}.`);
     invalid = true;
@@ -285,12 +285,12 @@ async function enrichCheck(config, label, options) {
  */
 async function enrichSave(config, label, options) {
   for ( const value of config.values ) {
-    if ( value in CONFIG.DND5E.enrichmentLookup.abilities ) config.ability = value;
+    if ( value in CONFIG.DND5A.enrichmentLookup.abilities ) config.ability = value;
     else if ( Number.isNumeric(value) ) config.dc = Number(value);
     else config[value] = true;
   }
 
-  const abilityConfig = CONFIG.DND5E.enrichmentLookup.abilities[config.ability];
+  const abilityConfig = CONFIG.DND5A.enrichmentLookup.abilities[config.ability];
   if ( !abilityConfig && !config._isConcentration ) {
     console.warn(`Ability ${config.ability} not found while enriching ${config._input}.`);
     return null;
@@ -355,8 +355,8 @@ async function enrichDamage(config, label, options) {
   const formulaParts = [];
   if ( config.formula ) formulaParts.push(config.formula);
   for ( const value of config.values ) {
-    if ( value in CONFIG.DND5E.damageTypes ) config.type = value;
-    else if ( value in CONFIG.DND5E.healingTypes ) config.type = value;
+    if ( value in CONFIG.DND5A.damageTypes ) config.type = value;
+    else if ( value in CONFIG.DND5A.healingTypes ) config.type = value;
     else if ( value === "average" ) config.average = true;
     else if ( value === "temp" ) config.type = "temphp";
     else formulaParts.push(value);
@@ -368,7 +368,7 @@ async function enrichDamage(config, label, options) {
 
   if ( label ) return createRollLink(label, config);
 
-  const typeConfig = CONFIG.DND5E.damageTypes[config.damageType] ?? CONFIG.DND5E.healingTypes[config.damageType];
+  const typeConfig = CONFIG.DND5A.damageTypes[config.damageType] ?? CONFIG.DND5A.healingTypes[config.damageType];
   const localizationData = {
     formula: createRollLink(config.formula, config).outerHTML,
     type: game.i18n.localize(typeConfig?.label ?? "").toLowerCase()
@@ -387,7 +387,7 @@ async function enrichDamage(config, label, options) {
   }
 
   const span = document.createElement("span");
-  span.innerHTML = game.i18n.format(`EDITOR.DND5E.Inline.Damage${localizationType}`, localizationData);
+  span.innerHTML = game.i18n.format(`EDITOR.DND5A.Inline.Damage${localizationType}`, localizationData);
   return span;
 }
 
@@ -774,12 +774,12 @@ function enrichLookup(config, fallback, options) {
  * ```html
  * <span class="reference-link">
  *   <a class="content-link" draggable="true"
- *      data-uuid="Compendium.dnd5e.rules.JournalEntry.w7eitkpD7QQTB6j0.JournalEntryPage.UWw13ISmMxDzmwbd"
+ *      data-uuid="Compendium.dnd5a.rules.JournalEntry.w7eitkpD7QQTB6j0.JournalEntryPage.UWw13ISmMxDzmwbd"
  *      data-type="JournalEntryPage" data-tooltip="Text Page">
  *     <i class="fas fa-book-open"></i> Label
  *   </a>
  *   <a class="enricher-action" data-action="apply" data-status="unconscious"
- *      data-tooltip="EDITOR.DND5E.Inline.ApplyStatus" aria-label="Apply Status to Selected Tokens">
+ *      data-tooltip="EDITOR.DND5A.Inline.ApplyStatus" aria-label="Apply Status to Selected Tokens">
  *     <i class="fas fa-fw fa-reply-all fa-flip-horizontal"></i>
  *   </a>
  * </span>
@@ -789,14 +789,14 @@ async function enrichReference(config, label, options) {
   let key;
   let source;
   let isCondition = "condition" in config;
-  const type = Object.keys(config).find(k => k in CONFIG.DND5E.ruleTypes);
+  const type = Object.keys(config).find(k => k in CONFIG.DND5A.ruleTypes);
   if ( type ) {
     key = slugify(config[type]);
-    source = foundry.utils.getProperty(CONFIG.DND5E, CONFIG.DND5E.ruleTypes[type].references)?.[key];
+    source = foundry.utils.getProperty(CONFIG.DND5A, CONFIG.DND5A.ruleTypes[type].references)?.[key];
   } else if ( config.values.length ) {
     key = slugify(config.values.join(""));
-    for ( const [type, { references }] of Object.entries(CONFIG.DND5E.ruleTypes) ) {
-      source = foundry.utils.getProperty(CONFIG.DND5E, references)[key];
+    for ( const [type, { references }] of Object.entries(CONFIG.DND5A.ruleTypes) ) {
+      source = foundry.utils.getProperty(CONFIG.DND5A, references)[key];
       if ( source ) {
         if ( type === "condition" ) isCondition = true;
         break;
@@ -818,7 +818,7 @@ async function enrichReference(config, label, options) {
     apply.classList.add("enricher-action");
     apply.dataset.action = "apply";
     apply.dataset.status = key;
-    apply.dataset.tooltip = "EDITOR.DND5E.Inline.ApplyStatus";
+    apply.dataset.tooltip = "EDITOR.DND5A.Inline.ApplyStatus";
     apply.setAttribute("aria-label", game.i18n.localize(apply.dataset.tooltip));
     apply.innerHTML = '<i class="fas fa-fw fa-reply-all fa-flip-horizontal"></i>';
     span.append(apply);
@@ -951,9 +951,9 @@ function createPassiveTag(label, dataset) {
  * @returns {string}
  */
 export function createRollLabel(config) {
-  const { label: ability, abbreviation } = CONFIG.DND5E.abilities[config.ability] ?? {};
-  const skill = CONFIG.DND5E.skills[config.skill]?.label;
-  const toolUUID = CONFIG.DND5E.enrichmentLookup.tools[config.tool];
+  const { label: ability, abbreviation } = CONFIG.DND5A.abilities[config.ability] ?? {};
+  const skill = CONFIG.DND5A.skills[config.skill]?.label;
+  const toolUUID = CONFIG.DND5A.enrichmentLookup.tools[config.tool];
   const tool = toolUUID ? Trait.getBaseItem(toolUUID, { indexOnly: true })?.name : null;
   const longSuffix = config.format === "long" ? "Long" : "Short";
   const showDC = config.dc && !config.hideDC;
@@ -964,23 +964,23 @@ export function createRollLabel(config) {
     case "skill":
     case "tool":
       if ( ability && (skill || tool) ) {
-        label = game.i18n.format("EDITOR.DND5E.Inline.SpecificCheck", { ability, type: skill ?? tool });
+        label = game.i18n.format("EDITOR.DND5A.Inline.SpecificCheck", { ability, type: skill ?? tool });
       } else {
         label = ability;
       }
       if ( config.passive ) {
-        label = game.i18n.format(`EDITOR.DND5E.Inline.DCPassive${longSuffix}`, { dc: config.dc, check: label });
+        label = game.i18n.format(`EDITOR.DND5A.Inline.DCPassive${longSuffix}`, { dc: config.dc, check: label });
       } else {
-        if ( showDC ) label = game.i18n.format("EDITOR.DND5E.Inline.DC", { dc: config.dc, check: label });
-        label = game.i18n.format(`EDITOR.DND5E.Inline.Check${longSuffix}`, { check: label });
+        if ( showDC ) label = game.i18n.format("EDITOR.DND5A.Inline.DC", { dc: config.dc, check: label });
+        label = game.i18n.format(`EDITOR.DND5A.Inline.Check${longSuffix}`, { check: label });
       }
       break;
     case "concentration":
     case "save":
       if ( config.type === "save" ) label = ability;
-      else label = `${game.i18n.localize("DND5E.Concentration")} ${ability ? `(${abbreviation})` : ""}`;
-      if ( showDC ) label = game.i18n.format("EDITOR.DND5E.Inline.DC", { dc: config.dc, check: label });
-      label = game.i18n.format(`EDITOR.DND5E.Inline.Save${longSuffix}`, { save: label });
+      else label = `${game.i18n.localize("DND5A.Concentration")} ${ability ? `(${abbreviation})` : ""}`;
+      if ( showDC ) label = game.i18n.format("EDITOR.DND5A.Inline.DC", { dc: config.dc, check: label });
+      label = game.i18n.format(`EDITOR.DND5A.Inline.Save${longSuffix}`, { save: label });
       break;
     default:
       return "";
@@ -990,7 +990,7 @@ export function createRollLabel(config) {
     switch ( config.type ) {
       case "check":
       case "skill":
-        label = `<i class="dnd5e-icon" data-src="systems/dnd5e/icons/svg/ability-score-improvement.svg"></i>${label}`;
+        label = `<i class="dnd5a-icon" data-src="systems/dnd5a/icons/svg/ability-score-improvement.svg"></i>${label}`;
         break;
       case "tool":
         label = `<i class="fas fa-hammer"></i>${label}`;
@@ -1029,7 +1029,7 @@ function createRollLink(label, dataset) {
     const gmLink = document.createElement("a");
     gmLink.classList.add("enricher-action");
     gmLink.dataset.action = "request";
-    gmLink.dataset.tooltip = "EDITOR.DND5E.Inline.RequestRoll";
+    gmLink.dataset.tooltip = "EDITOR.DND5A.Inline.RequestRoll";
     gmLink.setAttribute("aria-label", game.i18n.localize(gmLink.dataset.tooltip));
     gmLink.innerHTML = '<i class="fa-solid fa-comment-dots"></i>';
     span.insertAdjacentElement("beforeend", gmLink);
@@ -1100,7 +1100,7 @@ async function rollAction(event) {
 
       const tokens = getSceneTargets();
       if ( !tokens.length ) {
-        ui.notifications.warn("EDITOR.DND5E.Inline.Warning.NoActor", { localize: true });
+        ui.notifications.warn("EDITOR.DND5A.Inline.Warning.NoActor", { localize: true });
         return;
       }
 
@@ -1111,7 +1111,7 @@ async function rollAction(event) {
             await actor.rollAbilityTest(ability, options);
             break;
           case "concentration":
-            if ( ability in CONFIG.DND5E.abilities ) options.ability = ability;
+            if ( ability in CONFIG.DND5A.abilities ) options.ability = ability;
             await actor.rollConcentration(options);
             break;
           case "save":
@@ -1137,12 +1137,12 @@ async function rollAction(event) {
     const MessageClass = getDocumentClass("ChatMessage");
     const chatData = {
       user: game.user.id,
-      content: await renderTemplate("systems/dnd5e/templates/chat/request-card.hbs", {
+      content: await renderTemplate("systems/dnd5a/templates/chat/request-card.hbs", {
         buttonLabel: createRollLabel({ ...target.dataset, format: "short", icon: true }),
         hiddenLabel: createRollLabel({ ...target.dataset, format: "short", icon: true, hideDC: true }),
         dataset: { ...target.dataset, action: "rollRequest" }
       }),
-      flavor: game.i18n.localize("EDITOR.DND5E.Inline.RollRequest"),
+      flavor: game.i18n.localize("EDITOR.DND5A.Inline.RollRequest"),
       speaker: MessageClass.getSpeaker({user: game.user})
     };
     // TODO: Remove when v11 support is dropped.
@@ -1162,8 +1162,8 @@ async function rollDamage(event) {
   const target = event.target.closest(".roll-link");
   const { formula, damageType } = target.dataset;
 
-  const isHealing = damageType in CONFIG.DND5E.healingTypes;
-  const title = game.i18n.localize(`DND5E.${isHealing ? "Healing" : "Damage"}Roll`);
+  const isHealing = damageType in CONFIG.DND5A.healingTypes;
+  const title = game.i18n.localize(`DND5A.${isHealing ? "Healing" : "Damage"}Roll`);
   const rollConfig = {
     rollConfigs: [{
       parts: [formula],
@@ -1173,7 +1173,7 @@ async function rollDamage(event) {
     event,
     title,
     messageData: {
-      "flags.dnd5e": {
+      "flags.dnd5a": {
         targets: Item5e._formatAttackTargets(),
         roll: {type: "damage"}
       },
@@ -1181,9 +1181,9 @@ async function rollDamage(event) {
     }
   };
 
-  if ( Hooks.call("dnd5e.preRollDamage", undefined, rollConfig) === false ) return;
+  if ( Hooks.call("dnd5a.preRollDamage", undefined, rollConfig) === false ) return;
   const roll = await damageRoll(rollConfig);
-  if ( roll ) Hooks.callAll("dnd5e.rollDamage", undefined, roll);
+  if ( roll ) Hooks.callAll("dnd5a.rollDamage", undefined, roll);
 }
 
 /* -------------------------------------------- */
@@ -1225,7 +1225,7 @@ async function useItem({ rollItemUuid, rollItemName, rollItemActor }={}) {
   if ( item ) return item.use();
 
   // If no item could be found at all, display a warning
-  ui.notifications.warn(game.i18n.format("EDITOR.DND5E.Inline.Warning.NoItemOnActor", {
+  ui.notifications.warn(game.i18n.format("EDITOR.DND5A.Inline.Warning.NoItemOnActor", {
     actor: actor.name, name: rollItemName, type: game.i18n.localize("DOCUMENT.Item")
   }));
 }

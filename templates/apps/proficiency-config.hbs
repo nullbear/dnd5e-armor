@@ -1,31 +1,31 @@
 <form autocomplete="off">
-    <p class="notes">{{localize "DND5E.ProficiencyConfigurationHint"}}</p>
+    <p class="notes">{{localize "DND5A.ProficiencyConfigurationHint"}}</p>
     <div class="form-group">
-        <label>{{localize "DND5E.ProficiencyLevel"}}</label>
+        <label>{{localize "DND5A.ProficiencyLevel"}}</label>
         <select name="system.{{property}}.{{key}}.value" data-dtype="Number">
             {{selectOptions proficiencyLevels selected=entry.value}}
         </select>
     </div>
     <div class="form-group">
-        <label>{{localize "DND5E.AbilityModifier"}}</label>
+        <label>{{localize "DND5A.AbilityModifier"}}</label>
         <select name="system.{{property}}.{{key}}.ability">
             {{selectOptions abilities selected=entry.ability labelAttr="label"}}
         </select>
     </div>
     <div class="form-group">
-        <label>{{localize "DND5E.CheckBonus"}}</label>
+        <label>{{localize "DND5A.CheckBonus"}}</label>
         <input name="system.{{property}}.{{key}}.bonuses.check" type="text" value="{{entry.bonuses.check}}">
     </div>
     {{#if isSkill}}
     <div class="form-group">
-        <label>{{localize "DND5E.SkillBonusPassive"}}</label>
+        <label>{{localize "DND5A.SkillBonusPassive"}}</label>
         <input name="system.skills.{{key}}.bonuses.passive" type="text" value="{{entry.bonuses.passive}}">
     </div>
     <hr>
     <div class="form-group">
-        <label>{{localize "DND5E.BonusAbilitySkill"}}</label>
+        <label>{{localize "DND5A.BonusAbilitySkill"}}</label>
         <input name="system.bonuses.abilities.skill" type="text" value="{{system.bonuses.abilities.skill}}">
-        <p class="notes">{{localize "DND5E.SkillGlobalBonusCheckHint"}}</p>
+        <p class="notes">{{localize "DND5A.SkillGlobalBonusCheckHint"}}</p>
     </div>
     {{/if}}
     <button type="submit"><i class="far fa-save"></i> {{localize "Submit"}}</button>

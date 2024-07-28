@@ -116,7 +116,7 @@ export function replaceFormulaData(formula, data, { actor, item, missing="0", pr
   actor ??= item?.parent;
   if ( (missingReferences.size > 0) && actor && property ) {
     const listFormatter = new Intl.ListFormat(game.i18n.lang, { style: "long", type: "conjunction" });
-    const message = game.i18n.format("DND5E.FormulaMissingReferenceWarn", {
+    const message = game.i18n.format("DND5A.FormulaMissingReferenceWarn", {
       property, name: item?.name ?? actor.name, references: listFormatter.format(missingReferences)
     });
     actor._preparationWarnings.push({ message, link: item?.uuid ?? actor.uuid, type: "warning" });
@@ -275,12 +275,12 @@ export function getSceneTargets() {
  */
 export function convertWeight(value, from, to) {
   if ( from === to ) return value;
-  const message = unit => `Weight unit ${unit} not defined in CONFIG.DND5E.weightUnits`;
-  if ( !CONFIG.DND5E.weightUnits[from] ) throw new Error(message(from));
-  if ( !CONFIG.DND5E.weightUnits[to] ) throw new Error(message(to));
+  const message = unit => `Weight unit ${unit} not defined in CONFIG.DND5A.weightUnits`;
+  if ( !CONFIG.DND5A.weightUnits[from] ) throw new Error(message(from));
+  if ( !CONFIG.DND5A.weightUnits[to] ) throw new Error(message(to));
   return value
-    * CONFIG.DND5E.weightUnits[from].conversion
-    / CONFIG.DND5E.weightUnits[to].conversion;
+    * CONFIG.DND5A.weightUnits[from].conversion
+    / CONFIG.DND5A.weightUnits[to].conversion;
 }
 
 /* -------------------------------------------- */
@@ -307,66 +307,66 @@ export const validators = {
 /**
  * Define a set of template paths to pre-load. Pre-loaded templates are compiled and cached for fast access when
  * rendering. These paths will also be available as Handlebars partials by using the file name
- * (e.g. "dnd5e.actor-traits").
+ * (e.g. "dnd5a.actor-traits").
  * @returns {Promise}
  */
 export async function preloadHandlebarsTemplates() {
   const partials = [
     // Shared Partials
-    "systems/dnd5e/templates/shared/active-effects.hbs",
-    "systems/dnd5e/templates/shared/active-effects2.hbs",
-    "systems/dnd5e/templates/shared/inventory.hbs",
-    "systems/dnd5e/templates/shared/inventory2.hbs",
-    "systems/dnd5e/templates/apps/parts/trait-list.hbs",
+    "systems/dnd5a/templates/shared/active-effects.hbs",
+    "systems/dnd5a/templates/shared/active-effects2.hbs",
+    "systems/dnd5a/templates/shared/inventory.hbs",
+    "systems/dnd5a/templates/shared/inventory2.hbs",
+    "systems/dnd5a/templates/apps/parts/trait-list.hbs",
 
     // Actor Sheet Partials
-    "systems/dnd5e/templates/actors/parts/actor-classes.hbs",
-    "systems/dnd5e/templates/actors/parts/actor-trait-pills.hbs",
-    "systems/dnd5e/templates/actors/parts/actor-traits.hbs",
-    "systems/dnd5e/templates/actors/parts/actor-features.hbs",
-    "systems/dnd5e/templates/actors/parts/actor-inventory.hbs",
-    "systems/dnd5e/templates/actors/parts/actor-spellbook.hbs",
-    "systems/dnd5e/templates/actors/parts/actor-warnings.hbs",
-    "systems/dnd5e/templates/actors/parts/actor-warnings-dialog.hbs",
-    "systems/dnd5e/templates/actors/parts/biography-textbox.hbs",
-    "systems/dnd5e/templates/actors/tabs/character-biography.hbs",
-    "systems/dnd5e/templates/actors/tabs/character-details.hbs",
-    "systems/dnd5e/templates/actors/tabs/creature-features.hbs",
-    "systems/dnd5e/templates/actors/tabs/creature-spells.hbs",
-    "systems/dnd5e/templates/actors/tabs/group-members.hbs",
-    "systems/dnd5e/templates/actors/tabs/npc-biography.hbs",
+    "systems/dnd5a/templates/actors/parts/actor-classes.hbs",
+    "systems/dnd5a/templates/actors/parts/actor-trait-pills.hbs",
+    "systems/dnd5a/templates/actors/parts/actor-traits.hbs",
+    "systems/dnd5a/templates/actors/parts/actor-features.hbs",
+    "systems/dnd5a/templates/actors/parts/actor-inventory.hbs",
+    "systems/dnd5a/templates/actors/parts/actor-spellbook.hbs",
+    "systems/dnd5a/templates/actors/parts/actor-warnings.hbs",
+    "systems/dnd5a/templates/actors/parts/actor-warnings-dialog.hbs",
+    "systems/dnd5a/templates/actors/parts/biography-textbox.hbs",
+    "systems/dnd5a/templates/actors/tabs/character-biography.hbs",
+    "systems/dnd5a/templates/actors/tabs/character-details.hbs",
+    "systems/dnd5a/templates/actors/tabs/creature-features.hbs",
+    "systems/dnd5a/templates/actors/tabs/creature-spells.hbs",
+    "systems/dnd5a/templates/actors/tabs/group-members.hbs",
+    "systems/dnd5a/templates/actors/tabs/npc-biography.hbs",
 
     // Actor Sheet Item Summary Columns
-    "systems/dnd5e/templates/actors/parts/columns/column-feature-controls.hbs",
-    "systems/dnd5e/templates/actors/parts/columns/column-formula.hbs",
-    "systems/dnd5e/templates/actors/parts/columns/column-recovery.hbs",
-    "systems/dnd5e/templates/actors/parts/columns/column-roll.hbs",
-    "systems/dnd5e/templates/actors/parts/columns/column-uses.hbs",
+    "systems/dnd5a/templates/actors/parts/columns/column-feature-controls.hbs",
+    "systems/dnd5a/templates/actors/parts/columns/column-formula.hbs",
+    "systems/dnd5a/templates/actors/parts/columns/column-recovery.hbs",
+    "systems/dnd5a/templates/actors/parts/columns/column-roll.hbs",
+    "systems/dnd5a/templates/actors/parts/columns/column-uses.hbs",
 
     // Item Sheet Partials
-    "systems/dnd5e/templates/items/parts/item-action.hbs",
-    "systems/dnd5e/templates/items/parts/item-activation.hbs",
-    "systems/dnd5e/templates/items/parts/item-advancement.hbs",
-    "systems/dnd5e/templates/items/parts/item-description.hbs",
-    "systems/dnd5e/templates/items/parts/item-mountable.hbs",
-    "systems/dnd5e/templates/items/parts/item-spellcasting.hbs",
-    "systems/dnd5e/templates/items/parts/item-source.hbs",
-    "systems/dnd5e/templates/items/parts/item-summary.hbs",
-    "systems/dnd5e/templates/items/parts/item-tooltip.hbs",
+    "systems/dnd5a/templates/items/parts/item-action.hbs",
+    "systems/dnd5a/templates/items/parts/item-activation.hbs",
+    "systems/dnd5a/templates/items/parts/item-advancement.hbs",
+    "systems/dnd5a/templates/items/parts/item-description.hbs",
+    "systems/dnd5a/templates/items/parts/item-mountable.hbs",
+    "systems/dnd5a/templates/items/parts/item-spellcasting.hbs",
+    "systems/dnd5a/templates/items/parts/item-source.hbs",
+    "systems/dnd5a/templates/items/parts/item-summary.hbs",
+    "systems/dnd5a/templates/items/parts/item-tooltip.hbs",
 
     // Journal Partials
-    "systems/dnd5e/templates/journal/parts/journal-table.hbs",
+    "systems/dnd5a/templates/journal/parts/journal-table.hbs",
 
     // Advancement Partials
-    "systems/dnd5e/templates/advancement/parts/advancement-ability-score-control.hbs",
-    "systems/dnd5e/templates/advancement/parts/advancement-controls.hbs",
-    "systems/dnd5e/templates/advancement/parts/advancement-spell-config.hbs"
+    "systems/dnd5a/templates/advancement/parts/advancement-ability-score-control.hbs",
+    "systems/dnd5a/templates/advancement/parts/advancement-controls.hbs",
+    "systems/dnd5a/templates/advancement/parts/advancement-spell-config.hbs"
   ];
 
   const paths = {};
   for ( const path of partials ) {
     paths[path.replace(".hbs", ".html")] = path;
-    paths[`dnd5e.${path.split("/").pop().replace(".hbs", "")}`] = path;
+    paths[`dnd5a.${path.split("/").pop().replace(".hbs", "")}`] = path;
   }
 
   return loadTemplates(paths);
@@ -450,7 +450,7 @@ function groupedSelectOptions(choices, options) {
  * @returns {string}
  */
 function itemContext(context, options) {
-  if ( arguments.length !== 2 ) throw new Error("#dnd5e-itemContext requires exactly one argument");
+  if ( arguments.length !== 2 ) throw new Error("#dnd5a-itemContext requires exactly one argument");
   if ( foundry.utils.getType(context) === "function" ) context = context.call(this);
 
   const ctx = options.data.root.itemContext?.[context.id];
@@ -479,8 +479,8 @@ function concealSection(conceal, options) {
   </div>
   <div class="unidentified-notice">
       <div>
-          <strong>${game.i18n.localize("DND5E.Unidentified.Title")}</strong>
-          <p>${game.i18n.localize("DND5E.Unidentified.Notice")}</p>
+          <strong>${game.i18n.localize("DND5A.Unidentified.Title")}</strong>
+          <p>${game.i18n.localize("DND5A.Unidentified.Notice")}</p>
       </div>
   </div>`;
   return content;
@@ -494,15 +494,15 @@ function concealSection(conceal, options) {
 export function registerHandlebarsHelpers() {
   Handlebars.registerHelper({
     getProperty: foundry.utils.getProperty,
-    "dnd5e-concealSection": concealSection,
-    "dnd5e-dataset": dataset,
-    "dnd5e-formatCR": formatCR,
-    "dnd5e-formatModifier": formatModifier,
-    "dnd5e-groupedSelectOptions": groupedSelectOptions,
-    "dnd5e-itemContext": itemContext,
-    "dnd5e-linkForUuid": (uuid, options) => linkForUuid(uuid, options.hash),
-    "dnd5e-numberFormat": (context, options) => formatNumber(context, options.hash),
-    "dnd5e-textFormat": formatText
+    "dnd5a-concealSection": concealSection,
+    "dnd5a-dataset": dataset,
+    "dnd5a-formatCR": formatCR,
+    "dnd5a-formatModifier": formatModifier,
+    "dnd5a-groupedSelectOptions": groupedSelectOptions,
+    "dnd5a-itemContext": itemContext,
+    "dnd5a-linkForUuid": (uuid, options) => linkForUuid(uuid, options.hash),
+    "dnd5a-numberFormat": (context, options) => formatNumber(context, options.hash),
+    "dnd5a-textFormat": formatText
   });
 }
 
@@ -519,7 +519,7 @@ const _preLocalizationRegistrations = {};
 
 /**
  * Mark the provided config key to be pre-localized during the init stage.
- * @param {string} configKeyPath          Key path within `CONFIG.DND5E` to localize.
+ * @param {string} configKeyPath          Key path within `CONFIG.DND5A` to localize.
  * @param {object} [options={}]
  * @param {string} [options.key]          If each entry in the config enum is an object,
  *                                        localize and sort using this property.
@@ -536,7 +536,7 @@ export function preLocalize(configKeyPath, { key, keys=[], sort=false }={}) {
 
 /**
  * Execute previously defined pre-localization tasks on the provided config object.
- * @param {object} config  The `CONFIG.DND5E` object to localize and sort. *Will be mutated.*
+ * @param {object} config  The `CONFIG.DND5A` object to localize and sort. *Will be mutated.*
  */
 export function performPreLocalization(config) {
   for ( const [keyPath, settings] of Object.entries(_preLocalizationRegistrations) ) {
@@ -615,7 +615,7 @@ export function getHumanReadableAttributeLabel(attr, { actor }={}) {
   }
 
   if ( (attr === "details.xp.value") && (actor?.type === "npc") ) {
-    return game.i18n.localize("DND5E.ExperiencePointsValue");
+    return game.i18n.localize("DND5A.ExperiencePointsValue");
   }
 
   if ( attr.startsWith(".") && actor ) {
@@ -628,36 +628,36 @@ export function getHumanReadableAttributeLabel(attr, { actor }={}) {
   if ( label ) return label;
 
   // Derived fields.
-  if ( attr === "attributes.init.total" ) label = "DND5E.InitiativeBonus";
-  else if ( attr === "attributes.ac.value" ) label = "DND5E.ArmorClass";
-  else if ( attr === "attributes.spelldc" ) label = "DND5E.SpellDC";
+  if ( attr === "attributes.init.total" ) label = "DND5A.InitiativeBonus";
+  else if ( attr === "attributes.ac.value" ) label = "DND5A.ArmorClass";
+  else if ( attr === "attributes.spelldc" ) label = "DND5A.SpellDC";
 
   // Abilities.
   else if ( attr.startsWith("abilities.") ) {
     const [, key] = attr.split(".");
-    label = game.i18n.format("DND5E.AbilityScoreL", { ability: CONFIG.DND5E.abilities[key].label });
+    label = game.i18n.format("DND5A.AbilityScoreL", { ability: CONFIG.DND5A.abilities[key].label });
   }
 
   // Skills.
   else if ( attr.startsWith("skills.") ) {
     const [, key] = attr.split(".");
-    label = game.i18n.format("DND5E.SkillPassiveScore", { skill: CONFIG.DND5E.skills[key].label });
+    label = game.i18n.format("DND5A.SkillPassiveScore", { skill: CONFIG.DND5A.skills[key].label });
   }
 
   // Spell slots.
   else if ( attr.startsWith("spells.") ) {
     const [, key] = attr.split(".");
-    if ( !/spell\d+/.test(key) ) label = `DND5E.SpellSlots${key.capitalize()}`;
+    if ( !/spell\d+/.test(key) ) label = `DND5A.SpellSlots${key.capitalize()}`;
     else {
       const plurals = new Intl.PluralRules(game.i18n.lang, {type: "ordinal"});
       const level = Number(key.slice(5));
-      label = game.i18n.format(`DND5E.SpellSlotsN.${plurals.select(level)}`, { n: level });
+      label = game.i18n.format(`DND5A.SpellSlotsN.${plurals.select(level)}`, { n: level });
     }
   }
 
   // Attempt to find the attribute in a data model.
   if ( !label ) {
-    const { CharacterData, NPCData, VehicleData, GroupData } = dnd5e.dataModels.actor;
+    const { CharacterData, NPCData, VehicleData, GroupData } = dnd5a.dataModels.actor;
     for ( const model of [CharacterData, NPCData, VehicleData, GroupData] ) {
       const field = model.schema.getField(attr);
       if ( field ) {

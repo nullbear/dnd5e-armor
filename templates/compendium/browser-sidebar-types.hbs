@@ -1,8 +1,8 @@
 {{#*inline "type-entry"}}
 <div class="type-entry">
     <label>
-        <dnd5e-checkbox value="{{ @key }}" data-action="setType" {{ checked chosen }}
-                        {{ disabled @root.isLocked.types }}></dnd5e-checkbox>
+        <dnd5a-checkbox value="{{ @key }}" data-action="setType" {{ checked chosen }}
+                        {{ disabled @root.isLocked.types }}></dnd5a-checkbox>
         <span>{{ localize label }}</span>
     </label>
 </div>
@@ -14,8 +14,8 @@
     <div class="type-group collapsible">
         <div class="type-group-header">
             <label>
-                <dnd5e-checkbox data-action="setType" {{ checked chosen }}
-                                {{ disabled @root.isLocked.types }}></dnd5e-checkbox>
+                <dnd5a-checkbox data-action="setType" {{ checked chosen }}
+                                {{ disabled @root.isLocked.types }}></dnd5a-checkbox>
                 <span>{{ localize label }}</span>
             </label>
             <div data-action="toggleCollapse"><i class="fa-solid fa-caret-down"></i></div>

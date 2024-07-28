@@ -1,9 +1,9 @@
 <form autocomplete="off">
     <div class="left-column">
-        {{> "dnd5e.advancement-controls"}}
+        {{> "dnd5a.advancement-controls"}}
 
         <div class="form-group">
-            <label>{{localize "DND5E.AdvancementTraitMode"}}</label>
+            <label>{{localize "DND5A.AdvancementTraitMode"}}</label>
             <div class="form-fields">
                 <select name="configuration.mode">
                     {{selectOptions CONFIG.traitModes selected=configuration.mode labelAttr="label"}}
@@ -13,17 +13,17 @@
         </div>
 
         <div class="form-group">
-            <label>{{localize "DND5E.AdvancementTraitAllowReplacements"}}</label>
+            <label>{{localize "DND5A.AdvancementTraitAllowReplacements"}}</label>
             <div class="form-fields">
                 <input name="configuration.allowReplacements" id="allowReplacements"
                              type="checkbox" {{checked configuration.allowReplacements}}>
             </div>
-            <p class="hint">{{localize "DND5E.AdvancementTraitAllowReplacementsHint"}}</p>
+            <p class="hint">{{localize "DND5A.AdvancementTraitAllowReplacementsHint"}}</p>
         </div>
 
         <fieldset class="selected-trait">
-            <legend>{{localize "DND5E.AdvancementTraitGrants"}}</legend>
-            <p class="hint">{{localize "DND5E.AdvancementTraitGrantsHint"}}</p>
+            <legend>{{localize "DND5A.AdvancementTraitGrants"}}</legend>
+            <p class="hint">{{localize "DND5A.AdvancementTraitGrantsHint"}}</p>
             <ul>
                 <li>
                     <label {{~#if grants.selected}} class="selected"{{/if}}>
@@ -40,8 +40,8 @@
         </fieldset>
 
         <fieldset class="selected-trait">
-            <legend>{{localize "DND5E.AdvancementTraitChoices"}}</legend>
-            <p class="hint">{{localize "DND5E.AdvancementTraitChoicesHint"}}</p>
+            <legend>{{localize "DND5A.AdvancementTraitChoices"}}</legend>
+            <p class="hint">{{localize "DND5A.AdvancementTraitChoicesHint"}}</p>
             <ul>
                 {{#each choices}}
                 <li>
@@ -54,14 +54,14 @@
                         {{/if}}
                         <span>{{this.label}}</span>
                     </label>
-                    <a data-action="remove-choice" data-tooltip="DND5E.AdvancementTraitActionRemoveChoice">
+                    <a data-action="remove-choice" data-tooltip="DND5A.AdvancementTraitActionRemoveChoice">
                         <i class="fa-solid fa-trash"></i>
                     </a>
                 </li>
                 {{/each}}
             </ul>
             <a data-action="add-choice">
-                <i class="fas fa-plus"></i> {{localize "DND5E.AdvancementTraitActionAddChoice"}}
+                <i class="fas fa-plus"></i> {{localize "DND5A.AdvancementTraitActionAddChoice"}}
             </a>
         </fieldset>
     </div>
@@ -70,7 +70,7 @@
     <div class="right-column trait-selector">
         {{#if (ne selectedIndex -1)}}
         <div class="form-group">
-            <label>{{localize "DND5E.AdvancementTraitCount"}}</label>
+            <label>{{localize "DND5A.AdvancementTraitCount"}}</label>
             <div class="form-fields">
                 <input name="configuration.count" type="number" step="1" value="{{count}}">
             </div>
@@ -78,7 +78,7 @@
         {{/if}}
 
         <div class="form-group">
-            <label>{{localize "DND5E.AdvancementTraitType"}}</label>
+            <label>{{localize "DND5A.AdvancementTraitType"}}</label>
             <div class="form-fields">
                 <select name="selectedTrait">
                     {{selectOptions validTraitTypes selected=selectedTrait localize=true}}
@@ -86,7 +86,7 @@
             </div>
         </div>
 
-        {{> "dnd5e.trait-list" choices=choiceOptions prefix="configuration.checked"}}
+        {{> "dnd5a.trait-list" choices=choiceOptions prefix="configuration.checked"}}
     </div>
     {{/if}}
 </form>

@@ -1,4 +1,4 @@
-<div class="dnd5e2 chat-card item-card" data-actor-id="{{ actor.id }}" data-item-id="{{ item.id }}"
+<div class="dnd5a2 chat-card item-card" data-actor-id="{{ actor.id }}" data-item-id="{{ item.id }}"
      {{#if tokenId}}data-token-id="{{tokenId}}"{{/if}} {{#if isSpell}}data-spell-level="{{ item.system.level }}"{{/if}}>
 
     {{!-- Collapsible Item Details --}}
@@ -34,8 +34,8 @@
         {{!-- Attacks --}}
         {{#if hasAttack}}
         <button type="button" data-action="attack">
-            <i class="dnd5e-icon" data-src="systems/dnd5e/icons/svg/trait-weapon-proficiencies.svg"></i>
-            {{ localize "DND5E.Attack" }}
+            <i class="dnd5a-icon" data-src="systems/dnd5a/icons/svg/trait-weapon-proficiencies.svg"></i>
+            {{ localize "DND5A.Attack" }}
         </button>
         {{/if}}
 
@@ -43,11 +43,11 @@
         {{#if hasDamage}}
         <button type="button" data-action="damage">
             {{#if isHealing}}
-            <i class="dnd5e-icon" data-src="systems/dnd5e/icons/svg/damage/healing.svg"></i>
-            {{ localize "DND5E.Healing" }}
+            <i class="dnd5a-icon" data-src="systems/dnd5a/icons/svg/damage/healing.svg"></i>
+            {{ localize "DND5A.Healing" }}
             {{else}}
             <i class="fas fa-burst"></i>
-            {{ localize "DND5E.Damage" }}
+            {{ localize "DND5A.Damage" }}
             {{/if}}
         </button>
         {{/if}}
@@ -55,8 +55,8 @@
         {{!-- Versatile --}}
         {{#if isVersatile}}
         <button type="button" data-action="versatile">
-            <i class="dnd5e-icon" data-src="systems/dnd5e/icons/svg/versatile.svg"></i>
-            {{ localize "DND5E.Versatile" }}
+            <i class="dnd5a-icon" data-src="systems/dnd5a/icons/svg/versatile.svg"></i>
+            {{ localize "DND5A.Versatile" }}
         </button>
         {{/if}}
 
@@ -66,8 +66,8 @@
         <button type="button" data-action="save" data-ability="{{ ability }}" data-dc="{{ dc }}">
             <i class="fas fa-shield-heart"></i>
             {{#with (lookup (lookup @root.config.abilities ability) "label") as |abilityLabel|}}
-            <span class="visible-dc">{{ localize "DND5E.SavingThrowDC" dc=../dc ability=abilityLabel }}</span>
-            <span class="hidden-dc">{{ localize "DND5E.SavePromptTitle" ability=abilityLabel }}</span>
+            <span class="visible-dc">{{ localize "DND5A.SavingThrowDC" dc=../dc ability=abilityLabel }}</span>
+            <span class="hidden-dc">{{ localize "DND5A.SavePromptTitle" ability=abilityLabel }}</span>
             {{/with}}
         </button>
         {{/with}}
@@ -77,7 +77,7 @@
         {{#if item.system.formula}}
         <button type="button" data-action="formula">
             <i class="fas fa-ellipsis"></i>
-            {{ localize "DND5E.OtherFormula"}}
+            {{ localize "DND5A.OtherFormula"}}
         </button>
         {{/if}}
 
@@ -85,7 +85,7 @@
         {{#if hasAreaTarget}}
         <button type="button" data-action="placeTemplate">
             <i class="fas fa-bullseye"></i>
-            {{ localize "DND5E.PlaceTemplate" }}
+            {{ localize "DND5A.PlaceTemplate" }}
         </button>
         {{/if}}
 
@@ -93,7 +93,7 @@
         {{#if item.system.hasSummoning}}
         <button type="button" data-action="summon">
             <i class="fa-solid fa-spaghetti-monster-flying"></i>
-            {{ localize "DND5E.Summoning.Action.Summon" }}
+            {{ localize "DND5A.Summoning.Action.Summon" }}
         </button>
         {{/if}}
 
@@ -101,14 +101,14 @@
         {{#if isTool}}
         <button type="button" data-action="toolCheck" data-ability="{{ item.system.ability }}">
             <i class="fas fa-hammer"></i>
-            {{ localize "DND5E.UseItem" item=item.name }}
+            {{ localize "DND5A.UseItem" item=item.name }}
         </button>
         {{/if}}
 
         {{!-- Ability Check --}}
         {{#if hasAbilityCheck}}
         <button type="button" data-action="abilityCheck" data-ability="{{ item.system.ability }}">
-            <i class="dnd5e-icon" data-src="systems/dnd5e/icons/svg/ability-score-improvement.svg"></i>
+            <i class="dnd5a-icon" data-src="systems/dnd5a/icons/svg/ability-score-improvement.svg"></i>
             {{ labels.abilityCheck }}
         </button>
         {{/if}}
@@ -117,7 +117,7 @@
         {{#if consumeUsage}}
         <button type="button" data-action="consumeUsage">
             <i class="fa-solid fa-xmarks-lines" inert></i>
-            {{ localize "DND5E.AbilityUseConsumeAction" }}
+            {{ localize "DND5A.AbilityUseConsumeAction" }}
         </button>
         {{/if}}
 
@@ -125,7 +125,7 @@
         {{#if consumeResource}}
         <button type="button" data-action="consumeResource">
             <i class="fa-solid fa-cubes-stacked" inert></i>
-            {{ localize "DND5E.ConsumeResourceAction" }}
+            {{ localize "DND5A.ConsumeResourceAction" }}
         </button>
         {{/if}}
     </div>
@@ -133,12 +133,12 @@
 
     {{!-- Reactions --}}
     {{#if (and data.activation.condition (eq data.activation.type "reaction"))}}
-    <p class="supplement"><strong>{{ localize "DND5E.Reaction" }}</strong>{{ data.activation.condition }}</p>
+    <p class="supplement"><strong>{{ localize "DND5A.Reaction" }}</strong>{{ data.activation.condition }}</p>
     {{/if}}
 
     {{!-- Materials --}}
     {{#if data.materials.value}}
-    <p class="supplement"><strong>{{ localize "DND5E.Materials" }}</strong>{{ data.materials.value }}</p>
+    <p class="supplement"><strong>{{ localize "DND5A.Materials" }}</strong>{{ data.materials.value }}</p>
     {{/if}}
 
     {{!-- Item Properties --}}
@@ -161,7 +161,7 @@
     <div class="card-tray effects-tray collapsible collapsed">
         <label class="roboto-upper">
             <i class="fas fa-bolt"></i>
-            <span>{{ localize "DND5E.Effects" }}</span>
+            <span>{{ localize "DND5A.Effects" }}</span>
             <i class="fas fa-caret-down"></i>
         </label>
         <div class="collapsible-content">
@@ -174,7 +174,7 @@
                         <span class="subtitle">{{ duration.label }}</span>
                     </div>
                     <button type="button" class="apply-effect" data-action="applyEffect"
-                            data-tooltip="DND5E.EffectsApplyTokens" aria-label="{{ localize "DND5E.EffectsApplyTokens" }}">
+                            data-tooltip="DND5A.EffectsApplyTokens" aria-label="{{ localize "DND5A.EffectsApplyTokens" }}">
                         <i class="fas fa-reply-all fa-flip-horizontal"></i>
                     </button>
                 </li>

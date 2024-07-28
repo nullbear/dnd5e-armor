@@ -8,8 +8,8 @@
                     {{ selectOptions validTypes selected=entry.type localize=true }}
                 </select>
                 <button type="button" class="unbutton" data-action="delete-entry"
-                        data-tooltip="DND5E.StartingEquipment.Action.RemoveEntry"
-                        aria-label="{{ localize 'DND5E.StartingEquipment.Action.RemoveEntry' }}">
+                        data-tooltip="DND5A.StartingEquipment.Action.RemoveEntry"
+                        aria-label="{{ localize 'DND5A.StartingEquipment.Action.RemoveEntry' }}">
                     <i class="fa-solid fa-trash fa-fw" inert></i>
                 </button>
             </div>
@@ -21,10 +21,10 @@
                    placeholder=1 step=1 min=1 }}
                 {{#if (eq entry.type "linked")}}
                 {{#if linked}}
-                {{{ dnd5e-linkForUuid entry.key }}}
+                {{{ dnd5a-linkForUuid entry.key }}}
                 {{else}}
                 <div class="drop-area">
-                    {{ localize "DND5E.StartingEquipment.DropHint" }}
+                    {{ localize "DND5A.StartingEquipment.DropHint" }}
                 </div>
                 {{/if}}
                 <input type="hidden" name="startingEquipment.{{ id }}.key" value="{{ entry.key }}">
@@ -38,7 +38,7 @@
                 <label class="flexrow require-proficiency">
                     <input type="checkbox" name="startingEquipment.{{ id }}.requiresProficiency"
                            {{ checked entry.requiresProficiency }}>
-                    {{ localize "DND5E.StartingEquipment.RequireProficiency" }}
+                    {{ localize "DND5A.StartingEquipment.RequireProficiency" }}
                 </label>
                 {{else}}
                 <input type="hidden" name="startingEquipment.{{ id }}.requiresProficiency"
@@ -51,10 +51,10 @@
             <input type="hidden" name="startingEquipment.{{ id }}.sort" value="{{ entry.sort }}" data-dtype="Number">
         </li>
         {{/each}}
-        <li class="dnd5e2" data-depth="{{ depth }}">
+        <li class="dnd5a2" data-depth="{{ depth }}">
             <button type="button" data-action="add-entry">
                 <i class="fa-solid fa-plus" inert></i>
-                {{ localize "DND5E.StartingEquipment.Action.AddEntry" }}
+                {{ localize "DND5A.StartingEquipment.Action.AddEntry" }}
             </button>
         </li>
     </ul>

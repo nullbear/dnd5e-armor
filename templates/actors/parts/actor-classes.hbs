@@ -1,7 +1,7 @@
 <section class="classes pills-lg {{#if @root.editable}}editing{{/if}}">
     {{#each classes as |cls|}}
     {{#if (eq cls.type "class")}}
-    {{#dnd5e-itemContext cls as |ctx|}}
+    {{#dnd5a-itemContext cls as |ctx|}}
     <div class="class pill-lg" data-item-id="{{ cls.id }}" style="--underlay: url('{{ ctx.prefixedImage }}');">
         <div class="icons {{#if cls.subclass}}subclass{{/if}}">
             <img class="gold-icon item-tooltip" src="{{ cls.img }}" alt="{{ cls.name }}" data-action="edit"
@@ -13,14 +13,14 @@
             {{#if @root.editable}}
             <div class="controls">
                 <a class="deletion-control item-control item-action" data-action="delete"
-                   data-tooltip="DND5E.ItemDelete" data-item-id="{{ cls.id }}"
-                   aria-label="{{ localize "DND5E.ItemDelete" }}">
+                   data-tooltip="DND5A.ItemDelete" data-item-id="{{ cls.id }}"
+                   aria-label="{{ localize "DND5A.ItemDelete" }}">
                     <i class="fas fa-circle-xmark"></i>
                 </a>
                 {{#if cls.subclass}}
                 <a class="deletion-control item-control item-action" data-action="delete"
-                   data-tooltip="DND5E.ItemDelete" data-item-id="{{ cls.subclass.id }}"
-                   aria-label="{{ localize "DND5E.ItemDelete" }}">
+                   data-tooltip="DND5A.ItemDelete" data-item-id="{{ cls.subclass.id }}"
+                   aria-label="{{ localize "DND5A.ItemDelete" }}">
                     <i class="fas fa-circle-xmark"></i>
                 </a>
                 {{/if}}
@@ -40,7 +40,7 @@
                 {{#each ctx.availableLevels}}
                 <option value="{{ delta }}" {{ disabled this.disabled }}>
                     {{ level }}
-                    {{#if delta}}({{ dnd5e-numberFormat delta signDisplay="always"}}){{/if}}
+                    {{#if delta}}({{ dnd5a-numberFormat delta signDisplay="always"}}){{/if}}
                 </option>
                 {{/each}}
                 {{/select}}
@@ -50,12 +50,12 @@
             {{/if}}
         </div>
     </div>
-    {{/dnd5e-itemContext}}
+    {{/dnd5a-itemContext}}
     {{/if}}
     {{else}}
     {{#if showClassDrop}}
     <div class="pill-lg empty roboto-upper" data-action="findItem" data-item-type="class">
-        {{ localize "DND5E.ClassAdd" }}
+        {{ localize "DND5A.ClassAdd" }}
     </div>
     {{/if}}
     {{/each}}
