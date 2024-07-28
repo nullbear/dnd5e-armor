@@ -533,13 +533,14 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
       default:
         let formula = ac.calc === "custom" ? ac.formula : cfg.formula;
         if ( armors.length ) {
-          if ( armors.length > 1 ) this._preparationWarnings.push({
-            message: game.i18n.localize("DND5A.WarnMultipleArmor"), type: "warning"
-          });
+          //if ( armors.length > 1 ) this._preparationWarnings.push({
+          //  message: game.i18n.localize("DND5A.WarnMultipleArmor"), type: "warning"
+          //}); Removed pending piecemeal armor implementation.
           const armorData = armors[0].system.armor;
-          const isHeavy = armors[0].system.type.value === "heavy";
+          // const isHeavy = armors[0].system.type.value === "heavy"; Removed pending armor has dex penalty.
           ac.armor = armorData.value ?? ac.armor;
-          ac.dex = isHeavy ? 0 : Math.min(armorData.dex ?? Infinity, this.system.abilities.dex?.mod ?? 0);
+          //ac.dex = isHeavy ? 0 :
+          Math.min(armorData.dex ?? Infinity, this.system.abilities.dex?.mod ?? 0);
           ac.equippedArmor = armors[0];
         }
         else ac.dex = this.system.abilities.dex?.mod ?? 0;

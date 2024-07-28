@@ -111,7 +111,7 @@ export default class AttributesFields {
    */
   static prepareBaseArmorClass() {
     const ac = this.attributes.ac;
-    ac.armor = 10;
+    ac.armor = 5;
     ac.shield = ac.cover = 0;
     ac.bonus = "";
   }
