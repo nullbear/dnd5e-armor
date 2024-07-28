@@ -207,14 +207,14 @@ DND5A.skills = {
   his: {
     label: "DND5A.SkillHis",
     ability: "int",
-    fullKey: "history",
+    fullKey: "society",
     reference: "Compendium.dnd5a.rules.JournalEntry.NizgRXLNUqtdlC1s.JournalEntryPage.kRBZbdWMGW9K3wdY",
     icon: "icons/sundries/books/book-embossed-bound-brown.webp"
   },
   ins: {
     label: "DND5A.SkillIns",
     ability: "wis",
-    fullKey: "insight",
+    fullKey: "intuition",
     reference: "Compendium.dnd5a.rules.JournalEntry.NizgRXLNUqtdlC1s.JournalEntryPage.8R5SMbAGbECNgO8z",
     icon: "icons/magic/perception/orb-crystal-ball-scrying-blue.webp"
   },
@@ -228,14 +228,14 @@ DND5A.skills = {
   inv: {
     label: "DND5A.SkillInv",
     ability: "int",
-    fullKey: "investigation",
+    fullKey: "engineering",
     reference: "Compendium.dnd5a.rules.JournalEntry.NizgRXLNUqtdlC1s.JournalEntryPage.Y7nmbQAruWOs7WRM",
     icon: "icons/tools/scribal/magnifying-glass.webp"
   },
   med: {
     label: "DND5A.SkillMed",
     ability: "wis",
-    fullKey: "medicine",
+    fullKey: "occultism",
     reference: "Compendium.dnd5a.rules.JournalEntry.NizgRXLNUqtdlC1s.JournalEntryPage.GeYmM7BVfSCAga4o",
     icon: "icons/tools/cooking/mortar-herbs-yellow.webp"
   },
@@ -270,7 +270,7 @@ DND5A.skills = {
   rel: {
     label: "DND5A.SkillRel",
     ability: "int",
-    fullKey: "religion",
+    fullKey: "medicine",
     reference: "Compendium.dnd5a.rules.JournalEntry.NizgRXLNUqtdlC1s.JournalEntryPage.CXVzERHdP4qLhJXM",
     icon: "icons/magic/holy/saint-glass-portrait-halo.webp"
   },
@@ -349,7 +349,8 @@ preLocalize("attunements");
  */
 DND5A.weaponProficiencies = {
   sim: "DND5A.WeaponSimpleProficiency",
-  mar: "DND5A.WeaponMartialProficiency"
+  mar: "DND5A.WeaponMartialProficiency",
+  exo: "DND5A.WeaponExoticProficiency"
 };
 preLocalize("weaponProficiencies");
 
@@ -362,7 +363,9 @@ DND5A.weaponProficienciesMap = {
   simpleM: "sim",
   simpleR: "sim",
   martialM: "mar",
-  martialR: "mar"
+  martialR: "mar",
+  exoticM: "exo",
+  exoticR: "exo"
 };
 
 /**
@@ -407,7 +410,24 @@ DND5A.weaponIds = {
   trident: "F65ANO66ckP8FDMa",
   warpick: "2YdfjN1PIIrSHZii",
   warhammer: "F0Df164Xv1gWcYt0",
-  whip: "QKTyxoO0YDnAsbYe"
+  whip: "QKTyxoO0YDnAsbYe",
+  elfsword: "FZInmdD0NScPhqNt",
+  elfbow: "XRAfevV0FKuHziFl",
+  halfclub: "EYHmlcC0MRbOgpMs",
+  dwarfhammer: "LFOtsjJ0TYiVnwTz",
+  dwarfaxe: "SMVazqQ0AFpCudAg",
+  dwarfwaraxe: "ZTChgxX0HMwJbkHn",
+  dwarfbow: "GAJoneE0OTdQirOu",
+  gnomehammer: "NHQvulL0VAkXpyVb",
+  gnomebow: "UOXcbsS0CHrEwfCi",
+  orcspear: "BVEjizZ0JOyLdmJp",
+  orcbow: "ICLqpgG0QVfSktQw",
+  gunhand: "PJSxwnN0XCmZraXd",
+  gunrifle: "WQZeduU0EJtGyhEk",
+  gunrepeating: "DXGlkbB0LQaNfoLr",
+  gunsiege: "KENsriI0SXhUmvSy",
+  gunexotic: "RLUzypP0ZEoBtcZf",
+  explosive: "YSBgfwW0GLvIajGm"
 };
 
 /* -------------------------------------------- */
@@ -420,7 +440,9 @@ DND5A.ammoIds = {
   arrow: "3c7JXOzsv55gqJS5",
   blowgunNeedle: "gBQ8xqTA5f8wP5iu",
   crossbowBolt: "SItCnYBqhzqBoaWG",
-  slingBullet: "z9SbsMIBZzuhZOqT"
+  slingBullet: "z9SbsMIBZzuhZOqT",
+  gunbullet: "3j7QEVgzc55nxQZ5",
+  siegebullet: "3q7XLCngj55ueXG5",
 };
 
 /* -------------------------------------------- */
@@ -455,7 +477,7 @@ preLocalize("toolProficiencies", { sort: true });
  */
 DND5A.toolIds = {
   alchemist: "SztwZhbhZeCqyAes",
-  bagpipes: "yxHi57T5mmVt0oDr",
+  reed: "yxHi57T5mmVt0oDr",
   brewer: "Y9S75go1hLMXUD48",
   calligrapher: "jhjo20QoiD5exf09",
   card: "YwlHI3BVJapz4a3E",
@@ -467,23 +489,20 @@ DND5A.toolIds = {
   dice: "iBuTM09KD9IoM5L8",
   disg: "IBhDAr7WkhWPYLVn",
   drum: "69Dpr25pf4BjkHKb",
-  dulcimer: "NtdDkjmpdIMiX7I2",
-  flute: "eJOrPcAz9EcquyRQ",
+  strings: "NtdDkjmpdIMiX7I2",
+  woodwind: "eJOrPcAz9EcquyRQ",
   forg: "cG3m4YlHfbQlLEOx",
   glassblower: "rTbVrNcwApnuTz5E",
   herb: "i89okN7GFTWHsvPy",
-  horn: "aa9KuBy4dst7WIW9",
+  brasswind: "aa9KuBy4dst7WIW9",
   jeweler: "YfBwELTgPFHmQdHh",
   leatherworker: "PUMfwyVUbtyxgYbD",
-  lute: "qBydtUUIkv520DT7",
-  lyre: "EwG1EtmbgR3bM68U",
+  keyboard: "qBydtUUIkv520DT7",
   mason: "skUih6tBvcBbORzA",
   navg: "YHCmjsiXxZ9UdUhU",
   painter: "ccm5xlWhx74d6lsK",
-  panflute: "G5m5gYIx9VAUWC3J",
   pois: "il2GNi8C0DvGLL9P",
   potter: "hJS8yEVkqgJjwfWa",
-  shawm: "G3cqbejJpfB91VhP",
   smith: "KndVe2insuctjIaj",
   thief: "woWZ1sO5IUVGzo58",
   tinker: "0d08g1i5WXnNrCNA",
@@ -881,6 +900,7 @@ preLocalize("itemRarity");
  */
 DND5A.limitedUseFormulaPeriods = {
   charges: "DND5A.Charges",
+  magsize: "DND5A.Magazine",
   dawn: "DND5A.Dawn",
   dusk: "DND5A.Dusk"
 };
@@ -1000,7 +1020,9 @@ preLocalize("equipmentTypes", { sort: true });
 DND5A.vehicleTypes = {
   air: "DND5A.VehicleTypeAir",
   land: "DND5A.VehicleTypeLand",
-  space: "DND5A.VehicleTypeSpace",
+  rail: "DND5A.VehicleTypeRail",
+  mech: "DND5A.VehicleTypeMech",
+  fuel: "DND5A.VehicleTypeFuel",
   water: "DND5A.VehicleTypeWater"
 };
 preLocalize("vehicleTypes", { sort: true });
@@ -1119,6 +1141,9 @@ DND5A.consumableTypes = {
     label: "DND5A.ConsumableAmmo",
     subtypes: {
       arrow: "DND5A.ConsumableAmmoArrow",
+      shot: "DND5A.ConsumableAmmoShot",
+      mortar: "DND5A.ConsumableAmmoMortar",
+      fuel: "DND5A.ConsumableAmmoFuel",
       blowgunNeedle: "DND5A.ConsumableAmmoBlowgunNeedle",
       crossbowBolt: "DND5A.ConsumableAmmoCrossbowBolt",
       slingBullet: "DND5A.ConsumableAmmoSlingBullet"
@@ -1142,8 +1167,8 @@ DND5A.consumableTypes = {
   scroll: {
     label: "DND5A.ConsumableScroll"
   },
-  wand: {
-    label: "DND5A.ConsumableWand"
+  device: {
+    label: "DND5A.ConsumableDevice"
   },
   rod: {
     label: "DND5A.ConsumableRod"
@@ -1312,6 +1337,12 @@ DND5A.itemProperties = {
     label: "DND5A.Item.Property.Adamantine",
     isPhysical: true
   },
+  cont: {
+    label: "DND5A.Item.Property.Contraption",
+  },
+  pow: {
+    label: "DND5A.Item.Property.Powered",
+  },
   amm: {
     label: "DND5A.Item.Property.Ammunition"
   },
@@ -1409,7 +1440,9 @@ preLocalize("itemProperties", { keys: ["label", "abbreviation"], sort: true });
  */
 DND5A.validProperties = {
   consumable: new Set([
-    "mgc"
+    "cont",
+    "mgc",
+    "pow"
   ]),
   container: new Set([
     "mgc",
@@ -1417,7 +1450,9 @@ DND5A.validProperties = {
   ]),
   equipment: new Set([
     "concentration",
+    "cont",
     "mgc",
+    "pow",
     "stealthDisadvantage"
   ]),
   feat: new Set([
@@ -1425,11 +1460,14 @@ DND5A.validProperties = {
     "mgc"
   ]),
   loot: new Set([
-    "mgc"
+    "mgc",
+    "pow",
+    "cont"
   ]),
   weapon: new Set([
     "ada",
     "amm",
+    "cont",
     "fin",
     "fir",
     "foc",
@@ -1437,6 +1475,7 @@ DND5A.validProperties = {
     "lgt",
     "lod",
     "mgc",
+    "pow",
     "rch",
     "rel",
     "ret",
@@ -1455,7 +1494,9 @@ DND5A.validProperties = {
   ]),
   tool: new Set([
     "concentration",
-    "mgc"
+    "cont",
+    "mgc",
+    "pow"
   ])
 };
 
@@ -1515,7 +1556,7 @@ DND5A.currencies = {
   pp: {
     label: "DND5A.CurrencyPP",
     abbreviation: "DND5A.CurrencyAbbrPP",
-    conversion: 0.1
+    conversion: 0.2
   },
   gp: {
     label: "DND5A.CurrencyGP",
@@ -1530,12 +1571,12 @@ DND5A.currencies = {
   sp: {
     label: "DND5A.CurrencySP",
     abbreviation: "DND5A.CurrencyAbbrSP",
-    conversion: 10
+    conversion: 5
   },
   cp: {
     label: "DND5A.CurrencyCP",
     abbreviation: "DND5A.CurrencyAbbrCP",
-    conversion: 100
+    conversion: 50
   }
 };
 preLocalize("currencies", { keys: ["label", "abbreviation"] });
@@ -1701,9 +1742,7 @@ preLocalize("movementTypes", { sort: true });
  */
 DND5A.movementUnits = {
   ft: "DND5A.DistFt",
-  mi: "DND5A.DistMi",
-  m: "DND5A.DistM",
-  km: "DND5A.DistKm"
+  mi: "DND5A.DistMi"
 };
 preLocalize("movementUnits");
 
@@ -1972,15 +2011,15 @@ DND5A.hitDieTypes = ["d4", "d6", "d8", "d10", "d12"];
 DND5A.restTypes = {
   short: {
     duration: {
-      normal: 60,
-      gritty: 480,
+      normal: 30,
+      gritty: 60,
       epic: 1
     }
   },
   long: {
     duration: {
-      normal: 480,
-      gritty: 10080,
+      normal: 1140,
+      gritty: 480,
       epic: 60
     }
   }
@@ -2406,6 +2445,8 @@ DND5A.weaponTypes = {
   simpleR: "DND5A.WeaponSimpleR",
   martialM: "DND5A.WeaponMartialM",
   martialR: "DND5A.WeaponMartialR",
+  exoticM: "DND5A.WeaponExoticM",
+  exoticR: "DND5A.WeaponExoticR",
   natural: "DND5A.WeaponNatural",
   improv: "DND5A.WeaponImprov",
   siege: "DND5A.WeaponSiege"
