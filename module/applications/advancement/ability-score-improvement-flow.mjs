@@ -25,7 +25,7 @@ export default class AbilityScoreImprovementFlow extends AdvancementFlow {
   static get defaultOptions() {
     return foundry.utils.mergeObject(super.defaultOptions, {
       dragDrop: [{ dropSelector: "form" }],
-      template: "systems/dnd5e/templates/advancement/ability-score-improvement-flow.hbs"
+      template: "systems/dnd5a/templates/advancement/ability-score-improvement-flow.hbs"
     });
   }
 
@@ -44,7 +44,7 @@ export default class AbilityScoreImprovementFlow extends AdvancementFlow {
   /** @inheritdoc */
   async getData() {
     const points = {
-      assigned: Object.keys(CONFIG.DND5E.abilities).reduce((assigned, key) => {
+      assigned: Object.keys(CONFIG.DND5A.abilities).reduce((assigned, key) => {
         if ( !this.advancement.canImprove(key) || this.advancement.configuration.fixed[key] ) return assigned;
         return assigned + (this.assignments[key] ?? 0);
       }, 0),
@@ -55,7 +55,7 @@ export default class AbilityScoreImprovementFlow extends AdvancementFlow {
 
     const formatter = new Intl.NumberFormat(game.i18n.lang, { signDisplay: "always" });
 
-    const abilities = Object.entries(CONFIG.DND5E.abilities).reduce((obj, [key, data]) => {
+    const abilities = Object.entries(CONFIG.DND5A.abilities).reduce((obj, [key, data]) => {
       if ( !this.advancement.canImprove(key) ) return obj;
       const ability = this.advancement.actor.system.abilities[key];
       const assignment = this.assignments[key] ?? 0;
@@ -84,10 +84,10 @@ export default class AbilityScoreImprovementFlow extends AdvancementFlow {
       feat: this.feat,
       staticIncrease: !this.advancement.configuration.points,
       pointCap: game.i18n.format(
-        `DND5E.AdvancementAbilityScoreImprovementCapDisplay.${pluralRules.select(points.cap)}`, {points: points.cap}
+        `DND5A.AdvancementAbilityScoreImprovementCapDisplay.${pluralRules.select(points.cap)}`, {points: points.cap}
       ),
       pointsRemaining: game.i18n.format(
-        `DND5E.AdvancementAbilityScoreImprovementPointsRemaining.${pluralRules.select(points.available)}`,
+        `DND5A.AdvancementAbilityScoreImprovementPointsRemaining.${pluralRules.select(points.available)}`,
         {points: points.available}
       )
     });
@@ -199,13 +199,13 @@ export default class AbilityScoreImprovementFlow extends AdvancementFlow {
     const item = await Item.implementation.fromDropData(data);
 
     if ( (item.type !== "feat") || (item.system.type.value !== "feat") ) {
-      ui.notifications.error("DND5E.AdvancementAbilityScoreImprovementFeatWarning", {localize: true});
+      ui.notifications.error("DND5A.AdvancementAbilityScoreImprovementFeatWarning", {localize: true});
       return null;
     }
 
     // If a feat has a level pre-requisite, make sure it is less than or equal to current character level
     if ( (item.system.prerequisites?.level ?? -Infinity) > this.advancement.actor.system.details.level ) {
-      ui.notifications.error(game.i18n.format("DND5E.AdvancementAbilityScoreImprovementFeatLevelWarning", {
+      ui.notifications.error(game.i18n.format("DND5A.AdvancementAbilityScoreImprovementFeatLevelWarning", {
         level: item.system.prerequisites.level
       }));
       return null;

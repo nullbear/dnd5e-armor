@@ -8,29 +8,29 @@ const { BooleanField, NumberField, SchemaField, StringField } = foundry.data.fie
  * Data model template for items that can be used as some sort of action.
  *
  * @property {object} activation            Effect's activation conditions.
- * @property {string} activation.type       Activation type as defined in `DND5E.abilityActivationTypes`.
+ * @property {string} activation.type       Activation type as defined in `DND5A.abilityActivationTypes`.
  * @property {number} activation.cost       How much of the activation type is needed to use this item's effect.
  * @property {string} activation.condition  Special conditions required to activate the item.
  * @property {object} duration              Effect's duration.
  * @property {number} duration.value        How long the effect lasts.
- * @property {string} duration.units        Time duration period as defined in `DND5E.timePeriods`.
+ * @property {string} duration.units        Time duration period as defined in `DND5A.timePeriods`.
  * @property {number} cover                 Amount of cover does this item affords to its crew on a vehicle.
  * @property {object} target                Effect's valid targets.
  * @property {string} target.value          Length or radius of target depending on targeting mode selected.
  * @property {number} target.width          Width of line when line type is selected.
- * @property {string} target.units          Units used for value and width as defined in `DND5E.distanceUnits`.
- * @property {string} target.type           Targeting mode as defined in `DND5E.targetTypes`.
+ * @property {string} target.units          Units used for value and width as defined in `DND5A.distanceUnits`.
+ * @property {string} target.type           Targeting mode as defined in `DND5A.targetTypes`.
  * @property {boolean} target.prompt        Should the player be prompted to place the template?
  * @property {object} range                 Effect's range.
  * @property {number} range.value           Regular targeting distance for item's effect.
  * @property {number} range.long            Maximum targeting distance for features that have a separate long range.
- * @property {string} range.units           Units used for value and long as defined in `DND5E.distanceUnits`.
+ * @property {string} range.units           Units used for value and long as defined in `DND5A.distanceUnits`.
  * @property {object} uses                  Effect's limited uses.
  * @property {number} uses.value            Current available uses.
  * @property {string} uses.max              Maximum possible uses or a formula to derive that number.
- * @property {string} uses.per              Recharge time for limited uses as defined in `DND5E.limitedUsePeriods`.
+ * @property {string} uses.per              Recharge time for limited uses as defined in `DND5A.limitedUsePeriods`.
  * @property {object} consume               Effect's resource consumption.
- * @property {string} consume.type          Type of resource to consume as defined in `DND5E.abilityConsumptionTypes`.
+ * @property {string} consume.type          Type of resource to consume as defined in `DND5A.abilityConsumptionTypes`.
  * @property {string} consume.target        Item ID or resource key path of resource to consume.
  * @property {number} consume.amount        Quantity of the resource to consume per use.
  * @mixin
@@ -40,39 +40,39 @@ export default class ActivatedEffectTemplate extends SystemDataModel {
   static defineSchema() {
     return {
       activation: new SchemaField({
-        type: new StringField({required: true, blank: true, label: "DND5E.ItemActivationType"}),
-        cost: new NumberField({required: true, label: "DND5E.ItemActivationCost"}),
-        condition: new StringField({required: true, label: "DND5E.ItemActivationCondition"})
-      }, {label: "DND5E.ItemActivation"}),
+        type: new StringField({required: true, blank: true, label: "DND5A.ItemActivationType"}),
+        cost: new NumberField({required: true, label: "DND5A.ItemActivationCost"}),
+        condition: new StringField({required: true, label: "DND5A.ItemActivationCondition"})
+      }, {label: "DND5A.ItemActivation"}),
       duration: new SchemaField({
-        value: new FormulaField({required: true, deterministic: true, label: "DND5E.Duration"}),
-        units: new StringField({required: true, blank: true, label: "DND5E.DurationType"})
-      }, {label: "DND5E.Duration"}),
+        value: new FormulaField({required: true, deterministic: true, label: "DND5A.Duration"}),
+        units: new StringField({required: true, blank: true, label: "DND5A.DurationType"})
+      }, {label: "DND5A.Duration"}),
       cover: new NumberField({
-        required: true, nullable: true, min: 0, max: 1, label: "DND5E.Cover"
+        required: true, nullable: true, min: 0, max: 1, label: "DND5A.Cover"
       }),
-      crewed: new BooleanField({label: "DND5E.Crewed"}),
+      crewed: new BooleanField({label: "DND5A.Crewed"}),
       target: new SchemaField({
-        value: new FormulaField({required: true, deterministic: true, label: "DND5E.TargetValue"}),
-        width: new NumberField({required: true, min: 0, label: "DND5E.TargetWidth"}),
-        units: new StringField({required: true, blank: true, label: "DND5E.TargetUnits"}),
-        type: new StringField({required: true, blank: true, label: "DND5E.TargetType"}),
-        prompt: new BooleanField({initial: true, label: "DND5E.TemplatePrompt"})
-      }, {label: "DND5E.Target"}),
+        value: new FormulaField({required: true, deterministic: true, label: "DND5A.TargetValue"}),
+        width: new NumberField({required: true, min: 0, label: "DND5A.TargetWidth"}),
+        units: new StringField({required: true, blank: true, label: "DND5A.TargetUnits"}),
+        type: new StringField({required: true, blank: true, label: "DND5A.TargetType"}),
+        prompt: new BooleanField({initial: true, label: "DND5A.TemplatePrompt"})
+      }, {label: "DND5A.Target"}),
       range: new SchemaField({
-        value: new NumberField({required: true, min: 0, label: "DND5E.RangeNormal"}),
-        long: new NumberField({required: true, min: 0, label: "DND5E.RangeLong"}),
-        units: new StringField({required: true, blank: true, label: "DND5E.RangeUnits"})
-      }, {label: "DND5E.Range"}),
-      uses: new this.ItemUsesField({}, {label: "DND5E.LimitedUses"}),
+        value: new NumberField({required: true, min: 0, label: "DND5A.RangeNormal"}),
+        long: new NumberField({required: true, min: 0, label: "DND5A.RangeLong"}),
+        units: new StringField({required: true, blank: true, label: "DND5A.RangeUnits"})
+      }, {label: "DND5A.Range"}),
+      uses: new this.ItemUsesField({}, {label: "DND5A.LimitedUses"}),
       consume: new SchemaField({
-        type: new StringField({required: true, blank: true, label: "DND5E.ConsumeType"}),
+        type: new StringField({required: true, blank: true, label: "DND5A.ConsumeType"}),
         target: new StringField({
-          required: true, nullable: true, initial: null, label: "DND5E.ConsumeTarget"
+          required: true, nullable: true, initial: null, label: "DND5A.ConsumeTarget"
         }),
-        amount: new NumberField({required: true, integer: true, label: "DND5E.ConsumeAmount"}),
-        scale: new BooleanField({label: "DND5E.ConsumeScaling"})
-      }, {label: "DND5E.ConsumeTitle"})
+        amount: new NumberField({required: true, integer: true, label: "DND5A.ConsumeAmount"}),
+        scale: new BooleanField({label: "DND5A.ConsumeScaling"})
+      }, {label: "DND5A.ConsumeTitle"})
     };
   }
 
@@ -86,14 +86,14 @@ export default class ActivatedEffectTemplate extends SystemDataModel {
     constructor(extraSchema, options) {
       super(SystemDataModel.mergeSchema({
         value: new NumberField({
-          required: true, min: 0, integer: true, label: "DND5E.LimitedUsesAvailable"
+          required: true, min: 0, integer: true, label: "DND5A.LimitedUsesAvailable"
         }),
-        max: new FormulaField({required: true, deterministic: true, label: "DND5E.LimitedUsesMax"}),
+        max: new FormulaField({required: true, deterministic: true, label: "DND5A.LimitedUsesMax"}),
         per: new StringField({
-          required: true, nullable: true, blank: false, initial: null, label: "DND5E.LimitedUsesPer"
+          required: true, nullable: true, blank: false, initial: null, label: "DND5A.LimitedUsesPer"
         }),
-        recovery: new FormulaField({required: true, label: "DND5E.RecoveryFormula"}),
-        prompt: new BooleanField({initial: true, label: "DND5E.LimitedUsesPrompt"})
+        recovery: new FormulaField({required: true, label: "DND5A.RecoveryFormula"}),
+        prompt: new BooleanField({initial: true, label: "DND5A.LimitedUsesPrompt"})
       }, extraSchema), options);
     }
   };
@@ -124,40 +124,40 @@ export default class ActivatedEffectTemplate extends SystemDataModel {
 
     // Prepare duration, targets, and max uses formulas
     const rollData = this.getRollData({ deterministic: true });
-    this._prepareFinalFormula("duration.value", { label: "DND5E.Duration", rollData });
-    this._prepareFinalFormula("target.value", { label: "DND5E.TargetValue", rollData });
-    this._prepareFinalFormula("uses.max", { label: "DND5E.UsesMax", rollData });
+    this._prepareFinalFormula("duration.value", { label: "DND5A.Duration", rollData });
+    this._prepareFinalFormula("target.value", { label: "DND5A.TargetValue", rollData });
+    this._prepareFinalFormula("uses.max", { label: "DND5A.UsesMax", rollData });
 
     // Prepare labels
     this.parent.labels ??= {};
-    this.parent.labels.duration = [this.duration.value, CONFIG.DND5E.timePeriods[this.duration.units]].filterJoin(" ");
+    this.parent.labels.duration = [this.duration.value, CONFIG.DND5A.timePeriods[this.duration.units]].filterJoin(" ");
     this.parent.labels.activation = this.activation.type ? [
-      (this.activation.type in CONFIG.DND5E.staticAbilityActivationTypes) ? null : this.activation.cost,
-      CONFIG.DND5E.abilityActivationTypes[this.activation.type]
+      (this.activation.type in CONFIG.DND5A.staticAbilityActivationTypes) ? null : this.activation.cost,
+      CONFIG.DND5A.abilityActivationTypes[this.activation.type]
     ].filterJoin(" ") : "";
 
     if ( this.hasTarget ) {
       const target = [this.target.value];
       if ( this.hasAreaTarget ) {
-        if ( this.target.units in CONFIG.DND5E.movementUnits ) {
-          target.push(game.i18n.localize(`DND5E.Dist${this.target.units.capitalize()}Abbr`));
+        if ( this.target.units in CONFIG.DND5A.movementUnits ) {
+          target.push(game.i18n.localize(`DND5A.Dist${this.target.units.capitalize()}Abbr`));
         }
-        else target.push(CONFIG.DND5E.distanceUnits[this.target.units]);
+        else target.push(CONFIG.DND5A.distanceUnits[this.target.units]);
       }
-      target.push(CONFIG.DND5E.targetTypes[this.target.type]);
+      target.push(CONFIG.DND5A.targetTypes[this.target.type]);
       this.parent.labels.target = target.filterJoin(" ");
     }
 
     if ( this.isActive && this.range.units ) {
       const range = [this.range.value, this.range.long ? `/ ${this.range.long}` : null];
-      if ( this.range.units in CONFIG.DND5E.movementUnits ) {
-        range.push(game.i18n.localize(`DND5E.Dist${this.range.units.capitalize()}Abbr`));
+      if ( this.range.units in CONFIG.DND5A.movementUnits ) {
+        range.push(game.i18n.localize(`DND5A.Dist${this.range.units.capitalize()}Abbr`));
       }
-      else range.push(CONFIG.DND5E.distanceUnits[this.range.units]);
+      else range.push(CONFIG.DND5A.distanceUnits[this.range.units]);
       this.parent.labels.range = range.filterJoin(" ");
-    } else this.parent.labels.range = game.i18n.localize("DND5E.None");
+    } else this.parent.labels.range = game.i18n.localize("DND5A.None");
 
-    if ( this.recharge ) this.parent.labels.recharge = `${game.i18n.localize("DND5E.Recharge")} [${
+    if ( this.recharge ) this.parent.labels.recharge = `${game.i18n.localize("DND5A.Recharge")} [${
       `${this.recharge.value}${parseInt(this.recharge.value) < 6 ? "+" : ""}`
     }]`;
 
@@ -192,7 +192,7 @@ export default class ActivatedEffectTemplate extends SystemDataModel {
       }
     } catch(err) {
       if ( this.parent.isEmbedded ) {
-        const message = game.i18n.format("DND5E.FormulaMalformedError", { property, name: this.parent.name });
+        const message = game.i18n.format("DND5A.FormulaMalformedError", { property, name: this.parent.name });
         this.parent.actor._preparationWarnings.push({ message, link: this.parent.uuid, type: "error" });
         console.error(message, err);
       }
@@ -321,7 +321,7 @@ export default class ActivatedEffectTemplate extends SystemDataModel {
    * @type {boolean}
    */
   get hasAreaTarget() {
-    return this.isActive && (this.target.type in CONFIG.DND5E.areaTargetTypes);
+    return this.isActive && (this.target.type in CONFIG.DND5A.areaTargetTypes);
   }
 
   /* -------------------------------------------- */
@@ -331,7 +331,7 @@ export default class ActivatedEffectTemplate extends SystemDataModel {
    * @type {boolean}
    */
   get hasIndividualTarget() {
-    return this.isActive && (this.target.type in CONFIG.DND5E.individualTargetTypes);
+    return this.isActive && (this.target.type in CONFIG.DND5A.individualTargetTypes);
   }
 
   /* -------------------------------------------- */
@@ -341,7 +341,7 @@ export default class ActivatedEffectTemplate extends SystemDataModel {
    * @type {boolean}
    */
   get hasLimitedUses() {
-    return this.isActive && (this.uses.per in CONFIG.DND5E.limitedUsePeriods) && (this.uses.max > 0);
+    return this.isActive && (this.uses.per in CONFIG.DND5A.limitedUsePeriods) && (this.uses.max > 0);
   }
 
   /* -------------------------------------------- */
@@ -373,7 +373,7 @@ export default class ActivatedEffectTemplate extends SystemDataModel {
    * @type {boolean}
    */
   get hasScalarDuration() {
-    return this.duration.units in CONFIG.DND5E.scalarTimePeriods;
+    return this.duration.units in CONFIG.DND5A.scalarTimePeriods;
   }
 
   /* -------------------------------------------- */
@@ -383,7 +383,7 @@ export default class ActivatedEffectTemplate extends SystemDataModel {
    * @type {boolean}
    */
   get hasScalarRange() {
-    return this.range.units in CONFIG.DND5E.movementUnits;
+    return this.range.units in CONFIG.DND5A.movementUnits;
   }
 
   /* -------------------------------------------- */

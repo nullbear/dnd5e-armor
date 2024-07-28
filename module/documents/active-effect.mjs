@@ -11,8 +11,8 @@ export default class ActiveEffect5e extends ActiveEffect {
    * @type {Record<string, string>}
    */
   static ID = {
-    ENCUMBERED: staticID("dnd5eencumbered"),
-    EXHAUSTION: staticID("dnd5eexhaustion")
+    ENCUMBERED: staticID("dnd5aencumbered"),
+    EXHAUSTION: staticID("dnd5aexhaustion")
   };
 
   /* -------------------------------------------- */
@@ -40,7 +40,7 @@ export default class ActiveEffect5e extends ActiveEffect {
    * @type {boolean}
    */
   get isAppliedEnchantment() {
-    return (this.getFlag("dnd5e", "type") === "enchantment")
+    return (this.getFlag("dnd5a", "type") === "enchantment")
       && !!this.origin && (this.origin !== this.parent.uuid);
   }
 
@@ -59,7 +59,7 @@ export default class ActiveEffect5e extends ActiveEffect {
    * @returns {Promise<Actor5e|Item5e|null>}
    */
   async getSource() {
-    if ( (this.target instanceof dnd5e.documents.Actor5e) && (this.parent instanceof dnd5e.documents.Item5e) ) {
+    if ( (this.target instanceof dnd5a.documents.Actor5e) && (this.parent instanceof dnd5a.documents.Item5e) ) {
       return this.parent;
     }
     return fromUuid(this.origin);
@@ -115,7 +115,7 @@ export default class ActiveEffect5e extends ActiveEffect {
 
   /** @inheritdoc */
   apply(actor, change) {
-    if ( change.key.startsWith("flags.dnd5e.") ) change = this._prepareFlagChange(actor, change);
+    if ( change.key.startsWith("flags.dnd5a.") ) change = this._prepareFlagChange(actor, change);
 
     // Determine type using DataField
     let field = change.key.startsWith("system.")
@@ -279,7 +279,7 @@ export default class ActiveEffect5e extends ActiveEffect {
    */
   _prepareFlagChange(actor, change) {
     const { key, value } = change;
-    const data = CONFIG.DND5E.characterFlags[key.replace("flags.dnd5e.", "")];
+    const data = CONFIG.DND5A.characterFlags[key.replace("flags.dnd5a.", "")];
     if ( !data ) return change;
 
     // Set flag to initial value if it isn't present
@@ -307,8 +307,8 @@ export default class ActiveEffect5e extends ActiveEffect {
    */
   determineSuppression() {
     this.isSuppressed = false;
-    if ( this.getFlag("dnd5e", "type") === "enchantment" ) return;
-    if ( this.parent instanceof dnd5e.documents.Item5e ) this.isSuppressed = this.parent.areEffectsSuppressed;
+    if ( this.getFlag("dnd5a", "type") === "enchantment" ) return;
+    if ( this.parent instanceof dnd5a.documents.Item5e ) this.isSuppressed = this.parent.areEffectsSuppressed;
   }
 
   /* -------------------------------------------- */
@@ -347,16 +347,16 @@ export default class ActiveEffect5e extends ActiveEffect {
    * @protected
    */
   _prepareExhaustionLevel() {
-    const config = CONFIG.DND5E.conditionTypes.exhaustion;
-    let level = this.getFlag("dnd5e", "exhaustionLevel");
+    const config = CONFIG.DND5A.conditionTypes.exhaustion;
+    let level = this.getFlag("dnd5a", "exhaustionLevel");
     if ( !Number.isFinite(level) ) level = 1;
     // TODO: Remove when v11 support is dropped.
     if ( game.release.version < 12 ) this.icon = this.constructor._getExhaustionImage(level);
     else this.img = this.constructor._getExhaustionImage(level);
-    this.name = `${game.i18n.localize("DND5E.Exhaustion")} ${level}`;
+    this.name = `${game.i18n.localize("DND5A.Exhaustion")} ${level}`;
     if ( level >= config.levels ) {
       this.statuses.add("dead");
-      CONFIG.DND5E.statusEffects.dead.statuses?.forEach(s => this.statuses.add(s));
+      CONFIG.DND5A.statusEffects.dead.statuses?.forEach(s => this.statuses.add(s));
     }
   }
 
@@ -390,7 +390,7 @@ export default class ActiveEffect5e extends ActiveEffect {
     if ( !riders.size ) return;
 
     const createRider = async id => {
-      const existing = this.parent.effects.get(staticID(`dnd5e${id}`));
+      const existing = this.parent.effects.get(staticID(`dnd5a${id}`));
       if ( existing ) return;
       const effect = await ActiveEffect.implementation.fromStatusEffect(id);
       return ActiveEffect.implementation.create(effect, { parent: this.parent, keepId: true });
@@ -410,11 +410,11 @@ export default class ActiveEffect5e extends ActiveEffect {
     if ( !origin ) return;
 
     // Create Effects
-    const riderEffects = (this.getFlag("dnd5e", "enchantment.riders.effect") ?? []).map(id => {
+    const riderEffects = (this.getFlag("dnd5a", "enchantment.riders.effect") ?? []).map(id => {
       const effectData = origin.effects.get(id)?.toObject();
       if ( effectData ) {
         delete effectData._id;
-        delete effectData.flags?.dnd5e?.rider;
+        delete effectData.flags?.dnd5a?.rider;
         effectData.origin = this.origin;
       }
       return effectData;
@@ -424,11 +424,11 @@ export default class ActiveEffect5e extends ActiveEffect {
     // Create Items
     let createdItems = [];
     if ( this.parent.isEmbedded ) {
-      const riderItems = await Promise.all((this.getFlag("dnd5e", "enchantment.riders.item") ?? []).map(async uuid => {
+      const riderItems = await Promise.all((this.getFlag("dnd5a", "enchantment.riders.item") ?? []).map(async uuid => {
         const itemData = (await fromUuid(uuid))?.toObject();
         if ( itemData ) {
           delete itemData._id;
-          foundry.utils.setProperty(itemData, "flags.dnd5e.enchantment", { origin: this.uuid });
+          foundry.utils.setProperty(itemData, "flags.dnd5a.enchantment", { origin: this.uuid });
         }
         return itemData;
       }));
@@ -448,8 +448,8 @@ export default class ActiveEffect5e extends ActiveEffect {
     if ( options.keepOrigin === false ) this.updateSource({ origin: this.parent.uuid });
 
     // Enchantments cannot be added directly to actors
-    if ( (this.getFlag("dnd5e", "type") === "enchantment") && (this.parent instanceof Actor) ) {
-      ui.notifications.error("DND5E.Enchantment.Warning.NotOnActor", { localize: true });
+    if ( (this.getFlag("dnd5a", "type") === "enchantment") && (this.parent instanceof Actor) ) {
+      ui.notifications.error("DND5A.Enchantment.Warning.NotOnActor", { localize: true });
       return false;
     }
 
@@ -484,9 +484,9 @@ export default class ActiveEffect5e extends ActiveEffect {
   /** @inheritDoc */
   _onUpdate(data, options, userId) {
     super._onUpdate(data, options, userId);
-    const originalLevel = foundry.utils.getProperty(options, "dnd5e.originalExhaustion");
-    const newLevel = foundry.utils.getProperty(data, "flags.dnd5e.exhaustionLevel");
-    const originalEncumbrance = foundry.utils.getProperty(options, "dnd5e.originalEncumbrance");
+    const originalLevel = foundry.utils.getProperty(options, "dnd5a.originalExhaustion");
+    const newLevel = foundry.utils.getProperty(data, "flags.dnd5a.exhaustionLevel");
+    const originalEncumbrance = foundry.utils.getProperty(options, "dnd5a.originalEncumbrance");
     const newEncumbrance = data.statuses?.[0];
     const name = this.name;
 
@@ -505,7 +505,7 @@ export default class ActiveEffect5e extends ActiveEffect {
       if ( newEncumbrance === originalEncumbrance ) return;
       const increase = !originalEncumbrance || ((originalEncumbrance === "encumbered") && newEncumbrance)
         || (newEncumbrance === "exceedingCarryingCapacity");
-      if ( !increase ) this.name = CONFIG.DND5E.encumbrance.effects[originalEncumbrance].name;
+      if ( !increase ) this.name = CONFIG.DND5A.encumbrance.effects[originalEncumbrance].name;
       this._displayScrollingStatus(increase);
       this.name = name;
     }
@@ -517,7 +517,7 @@ export default class ActiveEffect5e extends ActiveEffect {
   async _preDelete(options, user) {
     const dependents = this.getDependents();
     if ( dependents.length && !game.users.activeGM ) {
-      ui.notifications.warn("DND5E.ConcentrationBreakWarning", { localize: true });
+      ui.notifications.warn("DND5A.ConcentrationBreakWarning", { localize: true });
       return false;
     }
     return super._preDelete(options, user);
@@ -552,18 +552,18 @@ export default class ActiveEffect5e extends ActiveEffect {
     const statusEffect = CONFIG.statusEffects.find(e => e.id === CONFIG.specialStatusEffects.CONCENTRATING);
     const effectData = foundry.utils.mergeObject({
       ...statusEffect,
-      name: `${game.i18n.localize("EFFECT.DND5E.StatusConcentrating")}: ${item.name}`,
-      description: game.i18n.format("DND5E.ConcentratingOn", {
+      name: `${game.i18n.localize("EFFECT.DND5A.StatusConcentrating")}: ${item.name}`,
+      description: game.i18n.format("DND5A.ConcentratingOn", {
         name: item.name,
         type: game.i18n.localize(`TYPES.Item.${item.type}`)
       }),
       duration: ActiveEffect5e.getEffectDurationFromItem(item),
-      "flags.dnd5e.itemData": item.actor.items.has(item.id) ? item.id : item.toObject(),
+      "flags.dnd5a.itemData": item.actor.items.has(item.id) ? item.id : item.toObject(),
       origin: item.uuid,
       statuses: [statusEffect.id].concat(statusEffect.statuses ?? [])
     }, data, {inplace: false});
     delete effectData.id;
-    if ( item.type === "spell" ) effectData["flags.dnd5e.spellLevel"] = item.system.level;
+    if ( item.type === "spell" ) effectData["flags.dnd5a.spellLevel"] = item.system.level;
 
     return effectData;
   }
@@ -606,7 +606,7 @@ export default class ActiveEffect5e extends ActiveEffect {
    * @returns {string}
    */
   static _getExhaustionImage(level) {
-    const split = CONFIG.DND5E.conditionTypes.exhaustion.icon.split(".");
+    const split = CONFIG.DND5A.conditionTypes.exhaustion.icon.split(".");
     const ext = split.pop();
     const path = split.join(".");
     return `${path}-${level}.${ext}`;
@@ -666,7 +666,7 @@ export default class ActiveEffect5e extends ActiveEffect {
     event.stopPropagation();
     if ( event.button === 0 ) level++;
     else level--;
-    const max = CONFIG.DND5E.conditionTypes.exhaustion.levels;
+    const max = CONFIG.DND5A.conditionTypes.exhaustion.levels;
     actor.update({ "system.attributes.exhaustion": Math.clamp(level, 0, max) });
   }
 
@@ -687,16 +687,16 @@ export default class ActiveEffect5e extends ActiveEffect {
       return;
     }
     const choices = effects.reduce((acc, effect) => {
-      const data = effect.getFlag("dnd5e", "itemData");
-      acc[effect.id] = data?.name ?? actor.items.get(data)?.name ?? game.i18n.localize("DND5E.ConcentratingItemless");
+      const data = effect.getFlag("dnd5a", "itemData");
+      acc[effect.id] = data?.name ?? actor.items.get(data)?.name ?? game.i18n.localize("DND5A.ConcentratingItemless");
       return acc;
     }, {});
     const options = HandlebarsHelpers.selectOptions(choices, { hash: { sort: true } });
     const content = `
-    <form class="dnd5e">
-      <p>${game.i18n.localize("DND5E.ConcentratingEndChoice")}</p>
+    <form class="dnd5a">
+      <p>${game.i18n.localize("DND5A.ConcentratingEndChoice")}</p>
       <div class="form-group">
-        <label>${game.i18n.localize("DND5E.Source")}</label>
+        <label>${game.i18n.localize("DND5A.Source")}</label>
         <div class="form-fields">
           <select name="source">${options}</select>
         </div>
@@ -709,8 +709,8 @@ export default class ActiveEffect5e extends ActiveEffect {
         if ( source ) actor.endConcentration(source);
       },
       rejectClose: false,
-      title: game.i18n.localize("DND5E.Concentration"),
-      label: game.i18n.localize("DND5E.Confirm")
+      title: game.i18n.localize("DND5A.Concentration"),
+      label: game.i18n.localize("DND5A.Confirm")
     });
   }
 
@@ -722,9 +722,9 @@ export default class ActiveEffect5e extends ActiveEffect {
    * @returns {Promise<ActiveEffect5e>}
    */
   addDependent(...dependent) {
-    const dependents = this.getFlag("dnd5e", "dependents") ?? [];
+    const dependents = this.getFlag("dnd5a", "dependents") ?? [];
     dependents.push(...dependent.map(d => ({ uuid: d.uuid })));
-    return this.setFlag("dnd5e", "dependents", dependents);
+    return this.setFlag("dnd5a", "dependents", dependents);
   }
 
   /* -------------------------------------------- */
@@ -734,7 +734,7 @@ export default class ActiveEffect5e extends ActiveEffect {
    * @returns {Array<ActiveEffect5e|Item5e>}
    */
   getDependents() {
-    return (this.getFlag("dnd5e", "dependents") || []).reduce((arr, { uuid }) => {
+    return (this.getFlag("dnd5a", "dependents") || []).reduce((arr, { uuid }) => {
       const effect = fromUuidSync(uuid);
       if ( effect ) arr.push(effect);
       return arr;
@@ -770,15 +770,15 @@ export default class ActiveEffect5e extends ActiveEffect {
    */
   async richTooltip(enrichmentOptions={}) {
     const properties = [];
-    if ( this.isSuppressed ) properties.push("DND5E.EffectType.Unavailable");
-    else if ( this.disabled ) properties.push("DND5E.EffectType.Inactive");
-    else if ( this.isTemporary ) properties.push("DND5E.EffectType.Temporary");
-    else properties.push("DND5E.EffectType.Passive");
-    if ( this.getFlag("dnd5e", "type") === "enchantment" ) properties.push("DND5E.Enchantment.Label");
+    if ( this.isSuppressed ) properties.push("DND5A.EffectType.Unavailable");
+    else if ( this.disabled ) properties.push("DND5A.EffectType.Inactive");
+    else if ( this.isTemporary ) properties.push("DND5A.EffectType.Temporary");
+    else properties.push("DND5A.EffectType.Passive");
+    if ( this.getFlag("dnd5a", "type") === "enchantment" ) properties.push("DND5A.Enchantment.Label");
 
     return {
       content: await renderTemplate(
-        "systems/dnd5e/templates/effects/parts/effect-tooltip.hbs", {
+        "systems/dnd5a/templates/effects/parts/effect-tooltip.hbs", {
           effect: this,
           description: await TextEditor.enrichHTML(this.description ?? "", {
             async: true, relativeTo: this, ...enrichmentOptions
@@ -787,7 +787,7 @@ export default class ActiveEffect5e extends ActiveEffect {
           properties: properties.map(p => game.i18n.localize(p))
         }
       ),
-      classes: ["dnd5e2", "dnd5e-tooltip", "effect-tooltip"]
+      classes: ["dnd5a2", "dnd5a-tooltip", "effect-tooltip"]
     };
   }
 }

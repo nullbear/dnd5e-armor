@@ -125,23 +125,23 @@ export default class DamageApplicationElement extends ChatTrayElement {
       div.innerHTML = `
         <label class="roboto-upper">
           <i class="fa-solid fa-heart-crack"></i>
-          <span>${game.i18n.localize("DND5E.Apply")}</span>
+          <span>${game.i18n.localize("DND5A.Apply")}</span>
           <i class="fa-solid fa-caret-down"></i>
         </label>
         <div class="collapsible-content">
           <div class="wrapper">
             <div class="target-source-control">
               <button type="button" class="unbutton" data-mode="targeted" aria-pressed="false">
-                <i class="fa-solid fa-bullseye" inert></i> ${game.i18n.localize("DND5E.Tokens.Targeted")}
+                <i class="fa-solid fa-bullseye" inert></i> ${game.i18n.localize("DND5A.Tokens.Targeted")}
               </button>
               <button type="button" class="unbutton" data-mode="selected" aria-pressed="false">
-                <i class="fa-solid fa-expand" inert></i> ${game.i18n.localize("DND5E.Tokens.Selected")}
+                <i class="fa-solid fa-expand" inert></i> ${game.i18n.localize("DND5A.Tokens.Selected")}
               </button>
             </div>
             <ul class="targets unlist"></ul>
             <button class="apply-damage" type="button" data-action="applyDamage">
               <i class="fa-solid fa-reply-all fa-flip-horizontal" inert></i>
-              ${game.i18n.localize("DND5E.Apply")}
+              ${game.i18n.localize("DND5A.Apply")}
             </button>
           </div>
         </div>
@@ -154,7 +154,7 @@ export default class DamageApplicationElement extends ChatTrayElement {
       this.targetSourceControl.querySelectorAll("button").forEach(b =>
         b.addEventListener("click", this._onChangeTargetMode.bind(this))
       );
-      if ( !this.chatMessage.getFlag("dnd5e", "targets")?.length ) this.targetSourceControl.hidden = true;
+      if ( !this.chatMessage.getFlag("dnd5a", "targets")?.length ) this.targetSourceControl.hidden = true;
       div.addEventListener("click", this._handleClickHeader.bind(this));
     }
 
@@ -170,7 +170,7 @@ export default class DamageApplicationElement extends ChatTrayElement {
     let targetedTokens;
     switch ( this.targetingMode ) {
       case "targeted":
-        targetedTokens = (this.chatMessage.getFlag("dnd5e", "targets") ?? []).map(t => t.uuid);
+        targetedTokens = (this.chatMessage.getFlag("dnd5a", "targets") ?? []).map(t => t.uuid);
         break;
       case "selected":
         targetedTokens = canvas.tokens?.controlled?.map(t => t.actor?.uuid) ?? [];
@@ -182,7 +182,7 @@ export default class DamageApplicationElement extends ChatTrayElement {
     else {
       const li = document.createElement("li");
       li.classList.add("none");
-      li.innerText = game.i18n.localize(`DND5E.Tokens.None${this.targetingMode.capitalize()}`);
+      li.innerText = game.i18n.localize(`DND5A.Tokens.None${this.targetingMode.capitalize()}`);
       this.targetList.replaceChildren(li);
     }
   }
@@ -205,7 +205,7 @@ export default class DamageApplicationElement extends ChatTrayElement {
     const types = [];
     for ( const [change, values] of Object.entries(active) ) {
       for ( const type of values ) {
-        const config = CONFIG.DND5E.damageTypes[type] ?? CONFIG.DND5E.healingTypes[type];
+        const config = CONFIG.DND5A.damageTypes[type] ?? CONFIG.DND5A.healingTypes[type];
         if ( !config ) continue;
         const data = { type, change, icon: config.icon };
         types.push(data);
@@ -216,7 +216,7 @@ export default class DamageApplicationElement extends ChatTrayElement {
       acc += `
         <button class="change-source unbutton" type="button" data-type="${type}" data-change="${change}"
                 data-tooltip="${label}" aria-label="${label}" aria-pressed="${pressed}">
-          <dnd5e-icon src="${icon}" inert></dnd5e-icon>
+          <dnd5a-icon src="${icon}" inert></dnd5a-icon>
           <i class="fa-solid fa-slash" inert></i>
           <i class="fa-solid fa-arrow-turn-down" inert></i>
         </button>
@@ -236,7 +236,7 @@ export default class DamageApplicationElement extends ChatTrayElement {
       <div class="calculated damage">
         ${total}
       </div>
-      <div class="calculated temp" data-tooltip="DND5E.HitPointsTemp">
+      <div class="calculated temp" data-tooltip="DND5A.HitPointsTemp">
         ${temp}
       </div>
       <menu class="damage-multipliers unlist"></menu>
@@ -313,11 +313,11 @@ export default class DamageApplicationElement extends ChatTrayElement {
     if ( options.ignore?.[change]?.has(type) ) mode = "ignore";
     else if ( (change === "immunity") && options.downgrade?.has(type) ) mode = "downgrade";
 
-    let label = game.i18n.format(`DND5E.DamageApplication.Change.${change.capitalize()}`, {
-      type: CONFIG.DND5E.damageTypes[type]?.label ?? CONFIG.DND5E.healingTypes[type]?.label
+    let label = game.i18n.format(`DND5A.DamageApplication.Change.${change.capitalize()}`, {
+      type: CONFIG.DND5A.damageTypes[type]?.label ?? CONFIG.DND5A.healingTypes[type]?.label
     });
-    if ( mode === "ignore" ) label = game.i18n.format("DND5E.DamageApplication.Ignoring", { source: label });
-    if ( mode === "downgrade" ) label = game.i18n.format("DND5E.DamageApplication.Downgrading", { source: label });
+    if ( mode === "ignore" ) label = game.i18n.format("DND5A.DamageApplication.Ignoring", { source: label });
+    if ( mode === "downgrade" ) label = game.i18n.format("DND5A.DamageApplication.Downgrading", { source: label });
 
     return { label, pressed: mode === "active" ? "false" : mode === "ignore" ? "true" : "mixed" };
   }
@@ -335,7 +335,7 @@ export default class DamageApplicationElement extends ChatTrayElement {
     const calculatedDamage = entry.querySelector(".calculated.damage");
     calculatedDamage.innerText = formatNumber(-total, { signDisplay: "exceptZero" });
     calculatedDamage.classList.toggle("healing", total < 0);
-    calculatedDamage.dataset.tooltip = `DND5E.${total < 0 ? "Healing" : "Damage"}`;
+    calculatedDamage.dataset.tooltip = `DND5A.${total < 0 ? "Healing" : "Damage"}`;
     calculatedDamage.hidden = !total && !!temp;
     const calculatedTemp = entry.querySelector(".calculated.temp");
     calculatedTemp.innerText = temp;

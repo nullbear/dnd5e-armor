@@ -8,10 +8,10 @@ export default class ItemChoiceConfig extends AdvancementConfig {
   /** @inheritDoc */
   static get defaultOptions() {
     return foundry.utils.mergeObject(super.defaultOptions, {
-      classes: ["dnd5e", "advancement", "item-choice", "three-column"],
+      classes: ["dnd5a", "advancement", "item-choice", "three-column"],
       dragDrop: [{ dropSelector: ".drop-target" }],
       dropKeyPath: "pool",
-      template: "systems/dnd5e/templates/advancement/item-choice-config.hbs",
+      template: "systems/dnd5a/templates/advancement/item-choice-config.hbs",
       width: 780
     });
   }
@@ -23,7 +23,7 @@ export default class ItemChoiceConfig extends AdvancementConfig {
     const indexes = this.advancement.configuration.pool.map(i => fromUuidSync(i.uuid));
     const context = {
       ...super.getData(options),
-      abilities: Object.entries(CONFIG.DND5E.abilities).reduce((obj, [k, c]) => {
+      abilities: Object.entries(CONFIG.DND5A.abilities).reduce((obj, [k, c]) => {
         obj[k] = { label: c.label, selected: this.advancement.configuration.spell?.ability.has(k) ? "selected" : "" };
         return obj;
       }, {}),
@@ -39,11 +39,11 @@ export default class ItemChoiceConfig extends AdvancementConfig {
       return obj;
     }, {});
     if ( this.advancement.configuration.type === "feat" ) {
-      const selectedType = CONFIG.DND5E.featureTypes[this.advancement.configuration.restriction.type];
+      const selectedType = CONFIG.DND5A.featureTypes[this.advancement.configuration.restriction.type];
       context.typeRestriction = {
-        typeLabel: game.i18n.localize("DND5E.ItemFeatureType"),
-        typeOptions: CONFIG.DND5E.featureTypes,
-        subtypeLabel: game.i18n.format("DND5E.ItemFeatureSubtype", {category: selectedType?.label}),
+        typeLabel: game.i18n.localize("DND5A.ItemFeatureType"),
+        typeOptions: CONFIG.DND5A.featureTypes,
+        subtypeLabel: game.i18n.format("DND5A.ItemFeatureSubtype", {category: selectedType?.label}),
         subtypeOptions: selectedType?.subtypes
       };
     }

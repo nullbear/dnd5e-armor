@@ -15,7 +15,7 @@ import CurrencyTemplate from "../shared/currency.mjs";
  * @mixes CurrencyTemplate
  *
  * @property {object} capacity              Information on container's carrying capacity.
- * @property {string} capacity.type         Method for tracking max capacity as defined in `DND5E.itemCapacityTypes`.
+ * @property {string} capacity.type         Method for tracking max capacity as defined in `DND5A.itemCapacityTypes`.
  * @property {number} capacity.value        Total amount of the type this container can carry.
  */
 export default class ContainerData extends ItemDataModel.mixin(
@@ -26,16 +26,16 @@ export default class ContainerData extends ItemDataModel.mixin(
     return this.mergeSchema(super.defineSchema(), {
       quantity: new foundry.data.fields.NumberField({min: 1, max: 1}),
       properties: new foundry.data.fields.SetField(new foundry.data.fields.StringField(), {
-        label: "DND5E.ItemContainerProperties"
+        label: "DND5A.ItemContainerProperties"
       }),
       capacity: new foundry.data.fields.SchemaField({
         type: new foundry.data.fields.StringField({
-          required: true, initial: "weight", blank: false, label: "DND5E.ItemContainerCapacityType"
+          required: true, initial: "weight", blank: false, label: "DND5A.ItemContainerCapacityType"
         }),
         value: new foundry.data.fields.NumberField({
-          required: true, min: 0, label: "DND5E.ItemContainerCapacityMax"
+          required: true, min: 0, label: "DND5A.ItemContainerCapacityMax"
         })
-      }, {label: "DND5E.ItemContainerCapacity"})
+      }, {label: "DND5A.ItemContainerCapacity"})
     });
   }
 
@@ -77,7 +77,7 @@ export default class ContainerData extends ItemDataModel.mixin(
    */
   static _migrateWeightlessData(source) {
     if ( foundry.utils.getProperty(source, "system.capacity.weightless") === true ) {
-      foundry.utils.setProperty(source, "flags.dnd5e.migratedProperties", ["weightlessContents"]);
+      foundry.utils.setProperty(source, "flags.dnd5a.migratedProperties", ["weightlessContents"]);
     }
   }
 
@@ -250,10 +250,10 @@ export default class ContainerData extends ItemDataModel.mixin(
     const context = { max: value ?? Infinity };
     if ( type === "weight" ) {
       context.value = await this.contentsWeight;
-      context.units = game.i18n.localize("DND5E.AbbreviationLbs");
+      context.units = game.i18n.localize("DND5A.AbbreviationLbs");
     } else {
       context.value = await this.contentsCount;
-      context.units = game.i18n.localize("DND5E.ItemContainerCapacityItems");
+      context.units = game.i18n.localize("DND5A.ItemContainerCapacityItems");
     }
     context.pct = Math.clamp(context.max ? (context.value / context.max) * 100 : 0, 0, 100);
     return context;

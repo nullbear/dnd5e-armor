@@ -87,7 +87,7 @@ export class EnchantmentData extends foundry.abstract.DataModel {
    * @type {ActiveEffect5e[]}
    */
   get enchantments() {
-    return this.item.effects.filter(ae => ae.getFlag("dnd5e", "type") === "enchantment");
+    return this.item.effects.filter(ae => ae.getFlag("dnd5a", "type") === "enchantment");
   }
 
   /* -------------------------------------------- */
@@ -119,8 +119,8 @@ export class EnchantmentData extends foundry.abstract.DataModel {
    */
   static isEnchantmentSource(data) {
     return !this.isEnchantment(data)
-      && CONFIG.DND5E.featureTypes[data.type?.value]?.subtypes?.[data.type?.subtype]
-      && (data.type?.subtype in CONFIG.DND5E.featureTypes.enchantment.subtypes);
+      && CONFIG.DND5A.featureTypes[data.type?.value]?.subtypes?.[data.type?.subtype]
+      && (data.type?.subtype in CONFIG.DND5A.featureTypes.enchantment.subtypes);
   }
 
   /**
@@ -159,8 +159,8 @@ export class EnchantmentData extends foundry.abstract.DataModel {
         : "details.level";
     const level = foundry.utils.getProperty(item.getRollData(), keyPath) ?? 0;
     return item.effects.filter(e => {
-      if ( (e.getFlag("dnd5e", "type") !== "enchantment") || e.isAppliedEnchantment ) return false;
-      const { min, max } = e.getFlag("dnd5e", "enchantment.level") ?? {};
+      if ( (e.getFlag("dnd5a", "type") !== "enchantment") || e.isAppliedEnchantment ) return false;
+      const { min, max } = e.getFlag("dnd5a", "enchantment.level") ?? {};
       return ((min ?? -Infinity) <= level) && (level <= (max ?? Infinity));
     });
   }
@@ -176,11 +176,11 @@ export class EnchantmentData extends foundry.abstract.DataModel {
     const errors = [];
 
     if ( !this.restrictions.allowMagical && item.system.properties?.has("mgc") ) {
-      errors.push(new EnchantmentError(game.i18n.localize("DND5E.Enchantment.Warning.NoMagicalItems")));
+      errors.push(new EnchantmentError(game.i18n.localize("DND5A.Enchantment.Warning.NoMagicalItems")));
     }
 
     if ( this.restrictions.type && (item.type !== this.restrictions.type) ) {
-      errors.push(new EnchantmentError(game.i18n.format("DND5E.Enchantment.Warning.WrongType", {
+      errors.push(new EnchantmentError(game.i18n.format("DND5A.Enchantment.Warning.WrongType", {
         incorrectType: game.i18n.localize(CONFIG.Item.typeLabels[item.type]),
         allowedType: game.i18n.localize(CONFIG.Item.typeLabels[this.restrictions.type])
       })));

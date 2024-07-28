@@ -18,8 +18,8 @@ export default class RaceData extends ItemDataModel.mixin(ItemDescriptionTemplat
   /** @inheritdoc */
   static defineSchema() {
     return this.mergeSchema(super.defineSchema(), {
-      identifier: new IdentifierField({label: "DND5E.Identifier"}),
-      advancement: new foundry.data.fields.ArrayField(new AdvancementField(), {label: "DND5E.AdvancementTitle"}),
+      identifier: new IdentifierField({label: "DND5A.Identifier"}),
+      advancement: new foundry.data.fields.ArrayField(new AdvancementField(), {label: "DND5A.AdvancementTitle"}),
       movement: new MovementField(),
       senses: new SensesField(),
       type: new CreatureTypeField({ swarm: false }, { initial: { value: "humanoid" } })
@@ -39,7 +39,7 @@ export default class RaceData extends ItemDataModel.mixin(ItemDescriptionTemplat
   static get compendiumBrowserFilters() {
     return new Map([
       ["hasDarkvision", {
-        label: "DND5E.CompendiumBrowser.Filters.HasDarkvision",
+        label: "DND5A.CompendiumBrowser.Filters.HasDarkvision",
         type: "boolean",
         createFilter: (filters, value, def) => {
           if ( value === 0 ) return;
@@ -60,8 +60,8 @@ export default class RaceData extends ItemDataModel.mixin(ItemDescriptionTemplat
    * @returns {Object<string>}
    */
   get movementLabels() {
-    const units = CONFIG.DND5E.movementUnits[this.movement.units || Object.keys(CONFIG.DND5E.movementUnits)[0]];
-    return Object.entries(CONFIG.DND5E.movementTypes).reduce((obj, [k, label]) => {
+    const units = CONFIG.DND5A.movementUnits[this.movement.units || Object.keys(CONFIG.DND5A.movementUnits)[0]];
+    return Object.entries(CONFIG.DND5A.movementTypes).reduce((obj, [k, label]) => {
       const value = this.movement[k];
       if ( value ) obj[k] = `${label} ${value} ${units}`;
       return obj;
@@ -75,8 +75,8 @@ export default class RaceData extends ItemDataModel.mixin(ItemDescriptionTemplat
    * @returns {Object<string>}
    */
   get sensesLabels() {
-    const units = CONFIG.DND5E.movementUnits[this.senses.units || Object.keys(CONFIG.DND5E.movementUnits)[0]];
-    return Object.entries(CONFIG.DND5E.senses).reduce((arr, [k, label]) => {
+    const units = CONFIG.DND5A.movementUnits[this.senses.units || Object.keys(CONFIG.DND5A.movementUnits)[0]];
+    return Object.entries(CONFIG.DND5A.senses).reduce((arr, [k, label]) => {
       const value = this.senses[k];
       if ( value ) arr.push(`${label} ${value} ${units}`);
       return arr;
@@ -113,7 +113,7 @@ export default class RaceData extends ItemDataModel.mixin(ItemDescriptionTemplat
       { type: "Trait", configuration: { grants: ["languages:standard:common"] } }
     ];
     this.parent.updateSource({"system.advancement": toCreate.map(c => {
-      const config = CONFIG.DND5E.advancementTypes[c.type];
+      const config = CONFIG.DND5A.advancementTypes[c.type];
       const cls = config.documentClass ?? config;
       return new cls(c, { parent: this.parent }).toObject();
     })});

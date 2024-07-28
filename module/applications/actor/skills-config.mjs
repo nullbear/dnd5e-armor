@@ -5,8 +5,8 @@ export default class ActorSkillsConfig extends DialogMixin(DocumentSheet) {
   /** @inheritDoc */
   static get defaultOptions() {
     return foundry.utils.mergeObject(super.defaultOptions, {
-      classes: ["dnd5e2", "dialog", "skills-config"],
-      template: "systems/dnd5e/templates/apps/skills-config.hbs",
+      classes: ["dnd5a2", "dialog", "skills-config"],
+      template: "systems/dnd5a/templates/apps/skills-config.hbs",
       width: 500,
       height: "auto",
       sheetConfig: false,
@@ -27,10 +27,10 @@ export default class ActorSkillsConfig extends DialogMixin(DocumentSheet) {
     for ( const [key, skill] of Object.entries(skills) ) {
       context.skills.push({
         key,
-        label: CONFIG.DND5E.skills[key]?.label,
+        label: CONFIG.DND5A.skills[key]?.label,
         value: source[key]?.value,
         total: skill.total,
-        tooltip: CONFIG.DND5E.proficiencyLevels[skill.value]
+        tooltip: CONFIG.DND5A.proficiencyLevels[skill.value]
       });
     }
 

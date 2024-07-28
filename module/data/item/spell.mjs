@@ -20,10 +20,10 @@ import ItemDescriptionTemplate from "./templates/item-description.mjs";
  * @property {number} materials.cost             GP cost for the required components.
  * @property {number} materials.supply           Quantity of this component available.
  * @property {object} preparation                Details on how this spell is prepared.
- * @property {string} preparation.mode           Spell preparation mode as defined in `DND5E.spellPreparationModes`.
+ * @property {string} preparation.mode           Spell preparation mode as defined in `DND5A.spellPreparationModes`.
  * @property {boolean} preparation.prepared      Is the spell currently prepared?
  * @property {object} scaling                    Details on how casting at higher levels affects this spell.
- * @property {string} scaling.mode               Spell scaling mode as defined in `DND5E.spellScalingModes`.
+ * @property {string} scaling.mode               Spell scaling mode as defined in `DND5A.spellScalingModes`.
  * @property {string} scaling.formula            Dice formula used for scaling.
  */
 export default class SpellData extends ItemDataModel.mixin(
@@ -33,33 +33,33 @@ export default class SpellData extends ItemDataModel.mixin(
   static defineSchema() {
     return this.mergeSchema(super.defineSchema(), {
       level: new foundry.data.fields.NumberField({
-        required: true, integer: true, initial: 1, min: 0, label: "DND5E.SpellLevel"
+        required: true, integer: true, initial: 1, min: 0, label: "DND5A.SpellLevel"
       }),
-      school: new foundry.data.fields.StringField({required: true, label: "DND5E.SpellSchool"}),
-      sourceClass: new foundry.data.fields.StringField({label: "DND5E.SpellSourceClass"}),
+      school: new foundry.data.fields.StringField({required: true, label: "DND5A.SpellSchool"}),
+      sourceClass: new foundry.data.fields.StringField({label: "DND5A.SpellSourceClass"}),
       properties: new foundry.data.fields.SetField(new foundry.data.fields.StringField(), {
-        label: "DND5E.SpellComponents"
+        label: "DND5A.SpellComponents"
       }),
       materials: new foundry.data.fields.SchemaField({
-        value: new foundry.data.fields.StringField({required: true, label: "DND5E.SpellMaterialsDescription"}),
-        consumed: new foundry.data.fields.BooleanField({required: true, label: "DND5E.SpellMaterialsConsumed"}),
+        value: new foundry.data.fields.StringField({required: true, label: "DND5A.SpellMaterialsDescription"}),
+        consumed: new foundry.data.fields.BooleanField({required: true, label: "DND5A.SpellMaterialsConsumed"}),
         cost: new foundry.data.fields.NumberField({
-          required: true, initial: 0, min: 0, label: "DND5E.SpellMaterialsCost"
+          required: true, initial: 0, min: 0, label: "DND5A.SpellMaterialsCost"
         }),
         supply: new foundry.data.fields.NumberField({
-          required: true, initial: 0, min: 0, label: "DND5E.SpellMaterialsSupply"
+          required: true, initial: 0, min: 0, label: "DND5A.SpellMaterialsSupply"
         })
-      }, {label: "DND5E.SpellMaterials"}),
+      }, {label: "DND5A.SpellMaterials"}),
       preparation: new foundry.data.fields.SchemaField({
         mode: new foundry.data.fields.StringField({
-          required: true, initial: "prepared", label: "DND5E.SpellPreparationMode"
+          required: true, initial: "prepared", label: "DND5A.SpellPreparationMode"
         }),
-        prepared: new foundry.data.fields.BooleanField({required: true, label: "DND5E.SpellPrepared"})
-      }, {label: "DND5E.SpellPreparation"}),
+        prepared: new foundry.data.fields.BooleanField({required: true, label: "DND5A.SpellPrepared"})
+      }, {label: "DND5A.SpellPreparation"}),
       scaling: new foundry.data.fields.SchemaField({
-        mode: new foundry.data.fields.StringField({required: true, initial: "none", label: "DND5E.ScalingMode"}),
-        formula: new FormulaField({required: true, nullable: true, initial: null, label: "DND5E.ScalingFormula"})
-      }, {label: "DND5E.LevelScaling"})
+        mode: new foundry.data.fields.StringField({required: true, initial: "none", label: "DND5A.ScalingMode"}),
+        formula: new FormulaField({required: true, nullable: true, initial: null, label: "DND5A.ScalingFormula"})
+      }, {label: "DND5A.LevelScaling"})
     });
   }
 
@@ -69,19 +69,19 @@ export default class SpellData extends ItemDataModel.mixin(
   static get compendiumBrowserFilters() {
     return new Map([
       ["level", {
-        label: "DND5E.Level",
+        label: "DND5A.Level",
         type: "range",
         config: {
           keyPath: "system.level",
           min: 0,
-          max: Object.keys(CONFIG.DND5E.spellLevels).length - 1
+          max: Object.keys(CONFIG.DND5A.spellLevels).length - 1
         }
       }],
       ["school", {
-        label: "DND5E.School",
+        label: "DND5A.School",
         type: "set",
         config: {
-          choices: CONFIG.DND5E.spellSchools,
+          choices: CONFIG.DND5A.spellSchools,
           keyPath: "system.school"
         }
       }],
@@ -108,7 +108,7 @@ export default class SpellData extends ItemDataModel.mixin(
   static _migrateComponentData(source) {
     const components = filteredKeys(source.system?.components ?? {});
     if ( components.length ) {
-      foundry.utils.setProperty(source, "flags.dnd5e.migratedProperties", components);
+      foundry.utils.setProperty(source, "flags.dnd5a.migratedProperties", components);
     }
   }
 
@@ -146,7 +146,7 @@ export default class SpellData extends ItemDataModel.mixin(
   async getCardData(enrichmentOptions={}) {
     const context = await super.getCardData(enrichmentOptions);
     context.isSpell = true;
-    context.subtitle = [this.parent.labels.level, CONFIG.DND5E.spellSchools[this.school]?.label].filterJoin(" &bull; ");
+    context.subtitle = [this.parent.labels.level, CONFIG.DND5A.spellSchools[this.school]?.label].filterJoin(" &bull; ");
     if ( this.parent.labels.components.vsm ) context.tags = [this.parent.labels.components.vsm, ...context.tags];
     return context;
   }
@@ -192,7 +192,7 @@ export default class SpellData extends ItemDataModel.mixin(
 
   /** @inheritdoc */
   get _typeCriticalThreshold() {
-    return this.parent?.actor?.flags.dnd5e?.spellCriticalThreshold ?? Infinity;
+    return this.parent?.actor?.flags.dnd5a?.spellCriticalThreshold ?? Infinity;
   }
 
   /* -------------------------------------------- */

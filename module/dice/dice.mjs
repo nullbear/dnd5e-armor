@@ -100,7 +100,7 @@ export async function d20Roll({
   // Attach original message ID to the message
   messageData = foundry.utils.expandObject(messageData);
   const messageId = event?.target.closest("[data-message-id]")?.dataset.messageId;
-  if ( messageId ) foundry.utils.setProperty(messageData, "flags.dnd5e.originatingMessage", messageId);
+  if ( messageId ) foundry.utils.setProperty(messageData, "flags.dnd5a.originatingMessage", messageId);
 
   // Create a Chat Message
   if ( roll && chatMessage ) await roll.toMessage(messageData);
@@ -178,8 +178,8 @@ export async function damageRoll({
   const {isCritical, isFF} = _determineCriticalMode({critical, fastForward, event});
   const rolls = [];
   flavor ??= title;
-  multiplyNumeric ??= game.settings.get("dnd5e", "criticalDamageModifiers");
-  powerfulCritical ??= game.settings.get("dnd5e", "criticalDamageMaxDice");
+  multiplyNumeric ??= game.settings.get("dnd5a", "criticalDamageModifiers");
+  powerfulCritical ??= game.settings.get("dnd5a", "criticalDamageMaxDice");
   critical = isFF ? isCritical : false;
   for ( const [index, { parts, type, properties }] of rollConfigs.entries() ) {
     const formula = parts.join(" + ");
@@ -214,7 +214,7 @@ export async function damageRoll({
   // Attach original message ID to the message
   messageData = foundry.utils.expandObject(messageData);
   const messageId = event?.target.closest("[data-message-id]")?.dataset.messageId;
-  if ( messageId ) foundry.utils.setProperty(messageData, "flags.dnd5e.originatingMessage", messageId);
+  if ( messageId ) foundry.utils.setProperty(messageData, "flags.dnd5a.originatingMessage", messageId);
 
   // Create a Chat Message
   if ( rolls?.length && chatMessage ) await CONFIG.Dice.DamageRoll.toMessage(rolls, messageData, { rollMode });

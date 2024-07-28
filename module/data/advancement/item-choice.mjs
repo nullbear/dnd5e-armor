@@ -39,26 +39,26 @@ export class ItemChoiceConfigurationData extends foundry.abstract.DataModel {
     return {
       choices: new MappingField(new SchemaField({
         count: new NumberField({integer: true, min: 0}),
-        replacement: new BooleanField({label: "DND5E.AdvancementItemChoiceReplacement"})
+        replacement: new BooleanField({label: "DND5A.AdvancementItemChoiceReplacement"})
       }), {
-        hint: "DND5E.AdvancementItemChoiceLevelsHint"
+        hint: "DND5A.AdvancementItemChoiceLevelsHint"
       }),
       allowDrops: new BooleanField({
-        initial: true, label: "DND5E.AdvancementConfigureAllowDrops",
-        hint: "DND5E.AdvancementConfigureAllowDropsHint"
+        initial: true, label: "DND5A.AdvancementConfigureAllowDrops",
+        hint: "DND5A.AdvancementConfigureAllowDropsHint"
       }),
       type: new StringField({
         blank: false, nullable: true, initial: null,
-        label: "DND5E.AdvancementItemChoiceType", hint: "DND5E.AdvancementItemChoiceTypeHint"
+        label: "DND5A.AdvancementItemChoiceType", hint: "DND5A.AdvancementItemChoiceTypeHint"
       }),
       pool: new ArrayField(new SchemaField({
         uuid: new StringField()
       }), {label: "DOCUMENT.Items"}),
       spell: new EmbeddedDataField(SpellConfigurationData, {nullable: true, initial: null}),
       restriction: new SchemaField({
-        type: new StringField({label: "DND5E.Type"}),
-        subtype: new StringField({label: "DND5E.Subtype"}),
-        level: new StringField({label: "DND5E.SpellLevel"})
+        type: new StringField({label: "DND5A.Type"}),
+        subtype: new StringField({label: "DND5A.Subtype"}),
+        level: new StringField({label: "DND5A.SpellLevel"})
       })
     };
   }

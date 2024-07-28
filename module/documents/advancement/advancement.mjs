@@ -78,7 +78,7 @@ export default class Advancement extends BaseAdvancement {
     return {
       order: 100,
       icon: "icons/svg/upgrade.svg",
-      title: game.i18n.localize("DND5E.AdvancementTitle"),
+      title: game.i18n.localize("DND5A.AdvancementTitle"),
       hint: "",
       multiLevel: false,
       validItemTypes: new Set(["background", "class", "race", "subclass"]),
@@ -353,8 +353,8 @@ export default class Advancement extends BaseAdvancement {
     if ( !source ) return null;
     return source.clone({
       _id: id ?? foundry.utils.randomID(),
-      "flags.dnd5e.sourceId": uuid,
-      "flags.dnd5e.advancementOrigin": `${this.item.id}.${this.id}`
+      "flags.dnd5a.sourceId": uuid,
+      "flags.dnd5a.advancementOrigin": `${this.item.id}.${this.id}`
     }, {keepId: true}).toObject();
   }
 }

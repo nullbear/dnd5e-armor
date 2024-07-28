@@ -34,27 +34,27 @@ export default class SpellListJournalPageData extends foundry.abstract.DataModel
   static defineSchema() {
     return {
       type: new StringField({
-        initial: "class", label: "JOURNALENTRYPAGE.DND5E.SpellList.Type.Label"
+        initial: "class", label: "JOURNALENTRYPAGE.DND5A.SpellList.Type.Label"
       }),
-      identifier: new IdentifierField({label: "DND5E.Identifier"}),
+      identifier: new IdentifierField({label: "DND5A.Identifier"}),
       grouping: new StringField({
         initial: "level", choices: this.GROUPING_MODES,
-        label: "JOURNALENTRYPAGE.DND5E.SpellList.Grouping.Label",
-        hint: "JOURNALENTRYPAGE.DND5E.SpellList.Grouping.Hint"
+        label: "JOURNALENTRYPAGE.DND5A.SpellList.Grouping.Label",
+        hint: "JOURNALENTRYPAGE.DND5A.SpellList.Grouping.Hint"
       }),
       description: new SchemaField({
-        value: new HTMLField({label: "DND5E.Description"})
+        value: new HTMLField({label: "DND5A.Description"})
       }),
-      spells: new SetField(new StringField(), {label: "DND5E.ItemTypeSpellPl"}),
+      spells: new SetField(new StringField(), {label: "DND5A.ItemTypeSpellPl"}),
       unlinkedSpells: new ArrayField(new SchemaField({
         _id: new DocumentIdField({initial: () => foundry.utils.randomID()}),
         name: new StringField({required: true, label: "Name"}),
         system: new SchemaField({
-          level: new NumberField({min: 0, integer: true, label: "DND5E.Level"}),
-          school: new StringField({label: "DND5E.School"})
+          level: new NumberField({min: 0, integer: true, label: "DND5A.Level"}),
+          school: new StringField({label: "DND5A.School"})
         }),
         source: new SourceField({license: false, uuid: new StringField()})
-      }), {label: "JOURNALENTRYPAGE.DND5E.SpellList.UnlinkedSpells.Label"})
+      }), {label: "JOURNALENTRYPAGE.DND5A.SpellList.UnlinkedSpells.Label"})
     };
   }
 
@@ -65,9 +65,9 @@ export default class SpellListJournalPageData extends foundry.abstract.DataModel
    * @enum {string}
    */
   static GROUPING_MODES = {
-    none: "JOURNALENTRYPAGE.DND5E.SpellList.Grouping.None",
-    alphabetical: "JOURNALENTRYPAGE.DND5E.SpellList.Grouping.Alphabetical",
-    level: "JOURNALENTRYPAGE.DND5E.SpellList.Grouping.Level",
-    school: "JOURNALENTRYPAGE.DND5E.SpellList.Grouping.School"
+    none: "JOURNALENTRYPAGE.DND5A.SpellList.Grouping.None",
+    alphabetical: "JOURNALENTRYPAGE.DND5A.SpellList.Grouping.Alphabetical",
+    level: "JOURNALENTRYPAGE.DND5A.SpellList.Grouping.Level",
+    school: "JOURNALENTRYPAGE.DND5A.SpellList.Grouping.School"
   };
 }

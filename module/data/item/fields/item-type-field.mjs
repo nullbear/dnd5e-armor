@@ -11,13 +11,13 @@ export default class ItemTypeField extends foundry.data.fields.SchemaField {
   constructor(options={}, schemaOptions={}) {
     const fields = {
       value: new foundry.data.fields.StringField({
-        required: true, blank: true, initial: options.value ?? "", label: "DND5E.Type"
+        required: true, blank: true, initial: options.value ?? "", label: "DND5A.Type"
       }),
       subtype: new foundry.data.fields.StringField({
-        required: true, blank: true, initial: options.subtype ?? "", label: "DND5E.Subtype"
+        required: true, blank: true, initial: options.subtype ?? "", label: "DND5A.Subtype"
       }),
       baseItem: new foundry.data.fields.StringField({
-        required: true, blank: true, initial: options.baseItem ?? "", label: "DND5E.BaseItem"
+        required: true, blank: true, initial: options.baseItem ?? "", label: "DND5A.BaseItem"
       })
     };
     if ( options.subtype === false ) delete fields.subtype;

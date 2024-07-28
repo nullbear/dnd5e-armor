@@ -7,11 +7,11 @@ export default class SpellConfigurationData extends foundry.abstract.DataModel {
   static defineSchema() {
     return {
       ability: new SetField(new StringField()),
-      preparation: new StringField({label: "DND5E.SpellPreparationMode"}),
+      preparation: new StringField({label: "DND5A.SpellPreparationMode"}),
       uses: new SchemaField({
-        max: new FormulaField({deterministic: true, label: "DND5E.UsesMax"}),
-        per: new StringField({label: "DND5E.UsesPeriod"})
-      }, {label: "DND5E.LimitedUses"})
+        max: new FormulaField({deterministic: true, label: "DND5A.UsesMax"}),
+        per: new StringField({label: "DND5A.UsesPeriod"})
+      }, {label: "DND5A.LimitedUses"})
     };
   }
 

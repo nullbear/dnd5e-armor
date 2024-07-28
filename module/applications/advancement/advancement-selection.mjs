@@ -24,9 +24,9 @@ export default class AdvancementSelection extends Dialog {
   /** @inheritDoc */
   static get defaultOptions() {
     return foundry.utils.mergeObject(super.defaultOptions, {
-      classes: ["dnd5e", "sheet", "advancement"],
-      template: "systems/dnd5e/templates/advancement/advancement-selection.hbs",
-      title: "DND5E.AdvancementSelectionTitle",
+      classes: ["dnd5a", "sheet", "advancement"],
+      template: "systems/dnd5a/templates/advancement/advancement-selection.hbs",
+      title: "DND5A.AdvancementSelectionTitle",
       width: 500,
       height: "auto"
     });
@@ -44,7 +44,7 @@ export default class AdvancementSelection extends Dialog {
   /** @inheritDoc */
   getData() {
     const context = { types: {} };
-    for ( let [name, config] of Object.entries(CONFIG.DND5E.advancementTypes) ) {
+    for ( let [name, config] of Object.entries(CONFIG.DND5A.advancementTypes) ) {
       if ( config.prototype instanceof Advancement ) {
         foundry.utils.logCompatibilityWarning(
           "Advancement type configuration changed into an object with `documentClass` defining the advancement class.",
@@ -64,7 +64,7 @@ export default class AdvancementSelection extends Dialog {
         disabled: !advancement.availableForItem(this.item)
       };
     }
-    context.types = dnd5e.utils.sortObjectEntries(context.types, "label");
+    context.types = dnd5a.utils.sortObjectEntries(context.types, "label");
     return context;
   }
 
@@ -98,7 +98,7 @@ export default class AdvancementSelection extends Dialog {
   static async createDialog(item, { rejectClose=false, options={} }={}) {
     return new Promise((resolve, reject) => {
       const dialog = new this(item, {
-        title: `${game.i18n.localize("DND5E.AdvancementSelectionTitle")}: ${item.name}`,
+        title: `${game.i18n.localize("DND5A.AdvancementSelectionTitle")}: ${item.name}`,
         buttons: {
           submit: {
             callback: html => {

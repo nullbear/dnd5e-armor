@@ -8,10 +8,10 @@ export default class ItemGrantConfig extends AdvancementConfig {
   /** @inheritDoc */
   static get defaultOptions() {
     return foundry.utils.mergeObject(super.defaultOptions, {
-      classes: ["dnd5e", "advancement", "item-grant"],
+      classes: ["dnd5a", "advancement", "item-grant"],
       dragDrop: [{ dropSelector: ".drop-target" }],
       dropKeyPath: "items",
-      template: "systems/dnd5e/templates/advancement/item-grant-config.hbs"
+      template: "systems/dnd5a/templates/advancement/item-grant-config.hbs"
     });
   }
 
@@ -21,7 +21,7 @@ export default class ItemGrantConfig extends AdvancementConfig {
   getData(options={}) {
     const context = super.getData(options);
     const indexes = context.configuration.items.map(i => fromUuidSync(i.uuid));
-    context.abilities = Object.entries(CONFIG.DND5E.abilities).reduce((obj, [k, c]) => {
+    context.abilities = Object.entries(CONFIG.DND5A.abilities).reduce((obj, [k, c]) => {
       obj[k] = { label: c.label, selected: context.configuration.spell?.ability.has(k) ? "selected" : "" };
       return obj;
     }, {});

@@ -16,7 +16,7 @@ const { ArrayField, ForeignDocumentField, HTMLField, NumberField, SchemaField, S
  */
 
 /**
- * A data model and API layer which handles the schema and functionality of "group" type Actors in the dnd5e system.
+ * A data model and API layer which handles the schema and functionality of "group" type Actors in the dnd5a system.
  * @mixes CurrencyTemplate
  *
  * @property {object} type
@@ -35,7 +35,7 @@ const { ArrayField, ForeignDocumentField, HTMLField, NumberField, SchemaField, S
  * @property {number} details.xp.value           XP currently available to be distributed to a party.
  *
  * @example Create a new Group
- * const g = new dnd5e.documents.Actor5e({
+ * const g = new dnd5a.documents.Actor5e({
  *  type: "group",
  *  name: "Test Group",
  *  system: {
@@ -48,33 +48,33 @@ export default class GroupActor extends ActorDataModel.mixin(CurrencyTemplate) {
   static defineSchema() {
     return this.mergeSchema(super.defineSchema(), {
       type: new SchemaField({
-        value: new StringField({initial: "party", label: "DND5E.Group.Type"})
+        value: new StringField({initial: "party", label: "DND5A.Group.Type"})
       }),
       description: new SchemaField({
-        full: new HTMLField({label: "DND5E.Description"}),
-        summary: new HTMLField({label: "DND5E.DescriptionSummary"})
+        full: new HTMLField({label: "DND5A.Description"}),
+        summary: new HTMLField({label: "DND5A.DescriptionSummary"})
       }),
       members: new ArrayField(new SchemaField({
         actor: new ForeignDocumentField(foundry.documents.BaseActor),
         quantity: new SchemaField({
-          value: new NumberField({initial: 1, integer: true, min: 0, label: "DND5E.Quantity"}),
-          formula: new FormulaField({label: "DND5E.QuantityFormula"})
+          value: new NumberField({initial: 1, integer: true, min: 0, label: "DND5A.Quantity"}),
+          formula: new FormulaField({label: "DND5A.QuantityFormula"})
         })
-      }), {label: "DND5E.GroupMembers"}),
+      }), {label: "DND5A.GroupMembers"}),
       attributes: new SchemaField({
         movement: new SchemaField({
-          land: new NumberField({nullable: false, min: 0, step: 0.1, initial: 0, label: "DND5E.MovementLand"}),
-          water: new NumberField({nullable: false, min: 0, step: 0.1, initial: 0, label: "DND5E.MovementWater"}),
-          air: new NumberField({nullable: false, min: 0, step: 0.1, initial: 0, label: "DND5E.MovementAir"})
+          land: new NumberField({nullable: false, min: 0, step: 0.1, initial: 0, label: "DND5A.MovementLand"}),
+          water: new NumberField({nullable: false, min: 0, step: 0.1, initial: 0, label: "DND5A.MovementWater"}),
+          air: new NumberField({nullable: false, min: 0, step: 0.1, initial: 0, label: "DND5A.MovementAir"})
         })
-      }, {label: "DND5E.Attributes"}),
+      }, {label: "DND5A.Attributes"}),
       details: new SchemaField({
         xp: new foundry.data.fields.SchemaField({
           value: new foundry.data.fields.NumberField({
-            integer: true, min: 0, label: "DND5E.ExperiencePointsCurrent"
+            integer: true, min: 0, label: "DND5A.ExperiencePointsCurrent"
           })
-        }, {label: "DND5E.ExperiencePoints"})
-      }, {label: "DND5E.Details"})
+        }, {label: "DND5A.ExperiencePoints"})
+      }, {label: "DND5A.Details"})
     });
   }
 
@@ -287,12 +287,12 @@ export default class GroupActor extends ActorDataModel.mixin(CurrencyTemplate) {
 
     /**
      * A hook event that fires when the rest process is completed for a group.
-     * @function dnd5e.groupRestCompleted
+     * @function dnd5a.groupRestCompleted
      * @memberof hookEvents
      * @param {Actor5e} group                         The group that just completed resting.
      * @param {Map<Actor5e, RestResult|null>} result  Details on the rests completed.
      */
-    Hooks.callAll("dnd5e.groupRestCompleted", this.parent, results);
+    Hooks.callAll("dnd5a.groupRestCompleted", this.parent, results);
 
     return false;
   }
@@ -311,8 +311,8 @@ export default class GroupActor extends ActorDataModel.mixin(CurrencyTemplate) {
    */
   _onUpdate(changed, options, userId) {
     if ( !foundry.utils.hasProperty(changed, "system.type.value") || (game.user !== game.users.activeGM)
-      || (game.settings.get("dnd5e", "primaryParty")?.actor !== this.parent)
+      || (game.settings.get("dnd5a", "primaryParty")?.actor !== this.parent)
       || (foundry.utils.getProperty(changed, "system.type.value") === "party") ) return;
-    game.settings.set("dnd5e", "primaryParty", { actor: null });
+    game.settings.set("dnd5a", "primaryParty", { actor: null });
   }
 }

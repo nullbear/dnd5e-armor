@@ -19,22 +19,22 @@
 export class TraitConfigurationData extends foundry.abstract.DataModel {
   static defineSchema() {
     return {
-      mode: new foundry.data.fields.StringField({initial: "default", label: "DND5E.AdvancementTraitMode"}),
+      mode: new foundry.data.fields.StringField({initial: "default", label: "DND5A.AdvancementTraitMode"}),
       allowReplacements: new foundry.data.fields.BooleanField({
-        required: true, label: "DND5E.AdvancementTraitAllowReplacements",
-        hint: "DND5E.AdvancementTraitAllowReplacementsHint"
+        required: true, label: "DND5A.AdvancementTraitAllowReplacements",
+        hint: "DND5A.AdvancementTraitAllowReplacementsHint"
       }),
       grants: new foundry.data.fields.SetField(new foundry.data.fields.StringField(), {
-        required: true, label: "DND5E.AdvancementTraitGrants"
+        required: true, label: "DND5A.AdvancementTraitGrants"
       }),
       choices: new foundry.data.fields.ArrayField(new foundry.data.fields.SchemaField({
         count: new foundry.data.fields.NumberField({
-          required: true, positive: true, integer: true, initial: 1, label: "DND5E.AdvancementTraitCount"
+          required: true, positive: true, integer: true, initial: 1, label: "DND5A.AdvancementTraitCount"
         }),
         pool: new foundry.data.fields.SetField(new foundry.data.fields.StringField(), {
           required: false, label: "DOCUMENT.Items"
         })
-      }), {label: "DND5E.AdvancementTraitChoices"})
+      }), {label: "DND5A.AdvancementTraitChoices"})
     };
   }
 

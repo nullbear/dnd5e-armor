@@ -34,24 +34,24 @@ export default class TokenSystemFlags extends foundry.abstract.DataModel {
       }),
       previousActorData: new ObjectField({required: false, initial: undefined}),
       tokenRing: new SchemaField({
-        enabled: new BooleanField({label: "DND5E.TokenRings.Enabled"}),
+        enabled: new BooleanField({label: "DND5A.TokenRings.Enabled"}),
         colors: new SchemaField({
-          ring: new ColorField({required: false, label: "DND5E.TokenRings.RingColor"}),
-          background: new ColorField({required: false, label: "DND5E.TokenRings.RingColor"})
+          ring: new ColorField({required: false, label: "DND5A.TokenRings.RingColor"}),
+          background: new ColorField({required: false, label: "DND5A.TokenRings.RingColor"})
         }, {required: false, initial: undefined}),
         effects: new NumberField({
-          initial: 1, min: 0, max: 8388607, integer: true, label: "DND5E.TokenRings.Effects.Label"
+          initial: 1, min: 0, max: 8388607, integer: true, label: "DND5A.TokenRings.Effects.Label"
         }),
         scaleCorrection: new NumberField({
-          required: false, initial: 1, min: 0, label: "DND5E.TokenRings.ScaleCorrection"
+          required: false, initial: 1, min: 0, label: "DND5A.TokenRings.ScaleCorrection"
         }),
         textures: new SchemaField({
           subject: new FilePathField({
-            required: false, categories: ["IMAGE"], label: "DND5E.TokenRings.Subject.Label",
-            hint: "DND5E.TokenRings.Subject.Hint"
+            required: false, categories: ["IMAGE"], label: "DND5A.TokenRings.Subject.Label",
+            hint: "DND5A.TokenRings.Subject.Hint"
           })
         }, {required: false, initial: undefined})
-      }, {required: false, initial: undefined, label: "DND5E.TokenRings.Title"})
+      }, {required: false, initial: undefined, label: "DND5A.TokenRings.Title"})
     };
   }
 }

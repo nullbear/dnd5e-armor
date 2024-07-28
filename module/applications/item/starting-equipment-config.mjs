@@ -9,9 +9,9 @@ export default class StartingEquipmentConfig extends DocumentSheet {
   /** @inheritDoc */
   static get defaultOptions() {
     return foundry.utils.mergeObject(super.defaultOptions, {
-      classes: ["dnd5e", "starting-equipment"],
+      classes: ["dnd5a", "starting-equipment"],
       dragDrop: [{ dragSelector: ".drag-bar", dropSelector: "form" }],
-      template: "systems/dnd5e/templates/apps/starting-equipment-config.hbs",
+      template: "systems/dnd5a/templates/apps/starting-equipment-config.hbs",
       width: 480,
       height: "auto",
       sheetConfig: false,
@@ -27,7 +27,7 @@ export default class StartingEquipmentConfig extends DocumentSheet {
 
   /** @inheritDoc */
   get title() {
-    return `${game.i18n.localize("DND5E.StartingEquipment.Action.Configure")}: ${this.document.name}`;
+    return `${game.i18n.localize("DND5A.StartingEquipment.Action.Configure")}: ${this.document.name}`;
   }
 
   /* -------------------------------------------- */
@@ -164,7 +164,7 @@ export default class StartingEquipmentConfig extends DocumentSheet {
 
     // Validate that this is a physical item
     if ( !item.system.constructor._schemaTemplates?.includes(PhysicalItemTemplate) ) {
-      ui.notifications.error(game.i18n.format("DND5E.StartingEquipment.Warning.ItemTypeInvalid", {
+      ui.notifications.error(game.i18n.format("DND5A.StartingEquipment.Warning.ItemTypeInvalid", {
         type: game.i18n.localize(CONFIG.Item.typeLabels[item.type])
       }));
       return null;
@@ -216,7 +216,7 @@ export default class StartingEquipmentConfig extends DocumentSheet {
         if ( dragEntry.children.some(c => c.type in EquipmentEntryData.GROUPING_TYPES) ) depth += 1;
       }
       if ( depth > 3 ) {
-        ui.notifications.warn("DND5E.StartingEquipment.Warning.Depth", { localize: true });
+        ui.notifications.warn("DND5A.StartingEquipment.Warning.Depth", { localize: true });
         return;
       }
       updateData = { [`startingEquipment.${dragEntry._id}.group`]: dropEntry._id };

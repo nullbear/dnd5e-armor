@@ -27,21 +27,21 @@ export default class CommonTemplate extends ActorDataModel.mixin(CurrencyTemplat
     return this.mergeSchema(super.defineSchema(), {
       abilities: new MappingField(new foundry.data.fields.SchemaField({
         value: new foundry.data.fields.NumberField({
-          required: true, nullable: false, integer: true, min: 0, initial: 10, label: "DND5E.AbilityScore"
+          required: true, nullable: false, integer: true, min: 0, initial: 10, label: "DND5A.AbilityScore"
         }),
         proficient: new foundry.data.fields.NumberField({
-          required: true, integer: true, min: 0, max: 1, initial: 0, label: "DND5E.ProficiencyLevel"
+          required: true, integer: true, min: 0, max: 1, initial: 0, label: "DND5A.ProficiencyLevel"
         }),
         max: new foundry.data.fields.NumberField({
-          required: true, integer: true, nullable: true, min: 0, initial: null, label: "DND5E.AbilityScoreMax"
+          required: true, integer: true, nullable: true, min: 0, initial: null, label: "DND5A.AbilityScoreMax"
         }),
         bonuses: new foundry.data.fields.SchemaField({
-          check: new FormulaField({required: true, label: "DND5E.AbilityCheckBonus"}),
-          save: new FormulaField({required: true, label: "DND5E.SaveBonus"})
-        }, {label: "DND5E.AbilityBonuses"})
+          check: new FormulaField({required: true, label: "DND5A.AbilityCheckBonus"}),
+          save: new FormulaField({required: true, label: "DND5A.SaveBonus"})
+        }, {label: "DND5A.AbilityBonuses"})
       }), {
-        initialKeys: CONFIG.DND5E.abilities, initialValue: this._initialAbilityValue.bind(this),
-        initialKeysOnly: true, label: "DND5E.Abilities"
+        initialKeys: CONFIG.DND5A.abilities, initialValue: this._initialAbilityValue.bind(this),
+        initialKeysOnly: true, label: "DND5A.Abilities"
       })
     });
   }
@@ -57,7 +57,7 @@ export default class CommonTemplate extends ActorDataModel.mixin(CurrencyTemplat
    * @private
    */
   static _initialAbilityValue(key, initial, existing) {
-    const config = CONFIG.DND5E.abilities[key];
+    const config = CONFIG.DND5A.abilities[key];
     if ( config ) {
       let defaultValue = config.defaults?.[this._systemType] ?? initial.value;
       if ( typeof defaultValue === "string" ) defaultValue = existing?.[defaultValue]?.value ?? initial.value;
@@ -125,7 +125,7 @@ export default class CommonTemplate extends ActorDataModel.mixin(CurrencyTemplat
    * @param {object} [options.originalSaves]  Original ability data for transformed actors.
    */
   prepareAbilities({ rollData={}, originalSaves }={}) {
-    const flags = this.parent.flags.dnd5e ?? {};
+    const flags = this.parent.flags.dnd5a ?? {};
     const prof = this.attributes?.prof ?? 0;
     const checkBonus = simplifyBonus(this.bonuses?.abilities?.check, rollData);
     const saveBonus = simplifyBonus(this.bonuses?.abilities?.save, rollData);
@@ -147,7 +147,7 @@ export default class CommonTemplate extends ActorDataModel.mixin(CurrencyTemplat
       if ( Number.isNumeric(abl.saveProf.term) ) abl.save += abl.saveProf.flat;
       abl.dc = 8 + abl.mod + prof + dcBonus;
 
-      if ( !Number.isFinite(abl.max) ) abl.max = CONFIG.DND5E.maxAbilityScore;
+      if ( !Number.isFinite(abl.max) ) abl.max = CONFIG.DND5A.maxAbilityScore;
 
       // If we merged saves when transforming, take the highest bonus here.
       if ( originalSaves && abl.proficient ) abl.save = Math.max(abl.save, originalSaves[id].save);

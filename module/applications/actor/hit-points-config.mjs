@@ -19,8 +19,8 @@ export default class ActorHitPointsConfig extends BaseConfigSheet {
   /** @override */
   static get defaultOptions() {
     return foundry.utils.mergeObject(super.defaultOptions, {
-      classes: ["dnd5e", "actor-hit-points-config"],
-      template: "systems/dnd5e/templates/apps/hit-points-config.hbs",
+      classes: ["dnd5a", "actor-hit-points-config"],
+      template: "systems/dnd5a/templates/apps/hit-points-config.hbs",
       width: 320,
       height: "auto"
     });
@@ -30,7 +30,7 @@ export default class ActorHitPointsConfig extends BaseConfigSheet {
 
   /** @inheritdoc */
   get title() {
-    return `${game.i18n.localize("DND5E.HitPointsConfig")}: ${this.document.name}`;
+    return `${game.i18n.localize("DND5A.HitPointsConfig")}: ${this.document.name}`;
   }
 
   /* -------------------------------------------- */
@@ -98,7 +98,7 @@ export default class ActorHitPointsConfig extends BaseConfigSheet {
       this.clone.updateSource({"system.attributes.hp.max": roll.total});
       this.render();
     } catch(error) {
-      ui.notifications.error("DND5E.HPFormulaError", {localize: true});
+      ui.notifications.error("DND5A.HPFormulaError", {localize: true});
       throw error;
     }
   }

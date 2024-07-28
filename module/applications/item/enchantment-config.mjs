@@ -8,9 +8,9 @@ export default class EnchantmentConfig extends DocumentSheet {
   /** @inheritDoc */
   static get defaultOptions() {
     return foundry.utils.mergeObject(super.defaultOptions, {
-      classes: ["dnd5e", "enchantment-config"],
+      classes: ["dnd5a", "enchantment-config"],
       dragDrop: [{ dropSelector: "form" }],
-      template: "systems/dnd5e/templates/apps/enchantment-config.hbs",
+      template: "systems/dnd5a/templates/apps/enchantment-config.hbs",
       width: 500,
       height: "auto",
       sheetConfig: false,
@@ -34,7 +34,7 @@ export default class EnchantmentConfig extends DocumentSheet {
 
   /** @inheritDoc */
   get title() {
-    return `${game.i18n.localize("DND5E.Enchantment.Configuration")}: ${this.document.name}`;
+    return `${game.i18n.localize("DND5A.Enchantment.Configuration")}: ${this.document.name}`;
   }
 
   /* -------------------------------------------- */
@@ -56,7 +56,7 @@ export default class EnchantmentConfig extends DocumentSheet {
     const effects = [];
     context.enchantments = [];
     for ( const effect of this.document.effects ) {
-      if ( effect.getFlag("dnd5e", "type") !== "enchantment" ) effects.push(effect);
+      if ( effect.getFlag("dnd5a", "type") !== "enchantment" ) effects.push(effect);
       else if ( !effect.isAppliedEnchantment ) context.enchantments.push(effect);
     }
     context.enchantments = context.enchantments.map(effect => ({
@@ -66,9 +66,9 @@ export default class EnchantmentConfig extends DocumentSheet {
       flags: effect.flags,
       collapsed: this.expandedEnchantments.get(effect.id) ? "" : "collapsed",
       riderEffects: effects.map(({ id, name }) => ({
-        id, name, selected: effect.flags.dnd5e?.enchantment?.riders?.effect?.includes(id) ? "selected" : ""
+        id, name, selected: effect.flags.dnd5a?.enchantment?.riders?.effect?.includes(id) ? "selected" : ""
       })),
-      riderItems: effect.flags.dnd5e?.enchantment?.riders?.item?.join(",") ?? ""
+      riderItems: effect.flags.dnd5a?.enchantment?.riders?.item?.join(",") ?? ""
     }));
 
     return context;
@@ -116,17 +116,17 @@ export default class EnchantmentConfig extends DocumentSheet {
     const effectsChanges = Object.entries(effects ?? {}).map(([_id, changes]) => {
       const updates = { _id, ...changes };
       // Fix bug with <multi-select> in V11
-      if ( !foundry.utils.hasProperty(updates, "flags.dnd5e.enchantment.riders.effect") ) {
-        foundry.utils.setProperty(updates, "flags.dnd5e.enchantment.riders.effect", []);
+      if ( !foundry.utils.hasProperty(updates, "flags.dnd5a.enchantment.riders.effect") ) {
+        foundry.utils.setProperty(updates, "flags.dnd5a.enchantment.riders.effect", []);
       }
       // End bug fix
-      riderIds.add(...(foundry.utils.getProperty(updates, "flags.dnd5e.enchantment.riders.effect") ?? []));
+      riderIds.add(...(foundry.utils.getProperty(updates, "flags.dnd5a.enchantment.riders.effect") ?? []));
       return updates;
     });
     for ( const effect of this.document.effects ) {
-      if ( effect.getFlag("dnd5e", "type") === "enchantment" ) continue;
-      if ( riderIds.has(effect.id) ) effectsChanges.push({ _id: effect.id, "flags.dnd5e.rider": true });
-      else effectsChanges.push({ _id: effect.id, "flags.dnd5e.-=rider": null });
+      if ( effect.getFlag("dnd5a", "type") === "enchantment" ) continue;
+      if ( riderIds.has(effect.id) ) effectsChanges.push({ _id: effect.id, "flags.dnd5a.rider": true });
+      else effectsChanges.push({ _id: effect.id, "flags.dnd5a.-=rider": null });
     }
     if ( effectsChanges.length ) await this.document.updateEmbeddedDocuments("ActiveEffect", effectsChanges);
 
@@ -136,7 +136,7 @@ export default class EnchantmentConfig extends DocumentSheet {
         const effect = await ActiveEffect.implementation.create({
           name: this.document.name,
           icon: this.document.img,
-          "flags.dnd5e.type": "enchantment"
+          "flags.dnd5a.type": "enchantment"
         }, { parent: this.document });
         effect.sheet.render(true);
         break;

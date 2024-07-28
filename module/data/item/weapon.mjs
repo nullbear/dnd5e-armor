@@ -34,11 +34,11 @@ export default class WeaponData extends ItemDataModel.mixin(
   /** @inheritdoc */
   static defineSchema() {
     return this.mergeSchema(super.defineSchema(), {
-      type: new ItemTypeField({value: "simpleM", subtype: false}, {label: "DND5E.ItemWeaponType"}),
-      magicalBonus: new NumberField({min: 0, integer: true, label: "DND5E.MagicalBonus"}),
-      properties: new SetField(new StringField(), {label: "DND5E.ItemWeaponProperties"}),
+      type: new ItemTypeField({value: "simpleM", subtype: false}, {label: "DND5A.ItemWeaponType"}),
+      magicalBonus: new NumberField({min: 0, integer: true, label: "DND5A.MagicalBonus"}),
+      properties: new SetField(new StringField(), {label: "DND5A.ItemWeaponProperties"}),
       proficient: new NumberField({
-        required: true, min: 0, max: 1, integer: true, initial: null, label: "DND5E.ProficiencyLevel"
+        required: true, min: 0, max: 1, integer: true, initial: null, label: "DND5A.ProficiencyLevel"
       })
     });
   }
@@ -58,10 +58,10 @@ export default class WeaponData extends ItemDataModel.mixin(
   static get compendiumBrowserFilters() {
     return new Map([
       ["type", {
-        label: "DND5E.ItemWeaponType",
+        label: "DND5A.ItemWeaponType",
         type: "set",
         config: {
-          choices: CONFIG.DND5E.weaponTypes,
+          choices: CONFIG.DND5A.weaponTypes,
           keyPath: "system.type.value"
         }
       }],
@@ -110,7 +110,7 @@ export default class WeaponData extends ItemDataModel.mixin(
   /** @inheritDoc */
   prepareDerivedData() {
     super.prepareDerivedData();
-    this.type.label = CONFIG.DND5E.weaponTypes[this.type.value] ?? game.i18n.localize(CONFIG.Item.typeLabels.weapon);
+    this.type.label = CONFIG.DND5A.weaponTypes[this.type.value] ?? game.i18n.localize(CONFIG.Item.typeLabels.weapon);
   }
 
   /* -------------------------------------------- */
@@ -126,7 +126,7 @@ export default class WeaponData extends ItemDataModel.mixin(
   /** @inheritDoc */
   async getFavoriteData() {
     return foundry.utils.mergeObject(await super.getFavoriteData(), {
-      subtitle: CONFIG.DND5E.itemActionTypes[this.actionType],
+      subtitle: CONFIG.DND5A.itemActionTypes[this.actionType],
       modifier: this.parent.labels.modifier,
       range: this.range
     });
@@ -172,7 +172,7 @@ export default class WeaponData extends ItemDataModel.mixin(
 
   /** @inheritdoc */
   get _typeCriticalThreshold() {
-    return this.parent?.actor?.flags.dnd5e?.weaponCriticalThreshold ?? Infinity;
+    return this.parent?.actor?.flags.dnd5a?.weaponCriticalThreshold ?? Infinity;
   }
 
   /* -------------------------------------------- */
@@ -197,11 +197,11 @@ export default class WeaponData extends ItemDataModel.mixin(
     const actor = this.parent.actor;
     if ( !actor ) return 0;
     if ( actor.type === "npc" ) return 1; // NPCs are always considered proficient with any weapon in their stat block.
-    const config = CONFIG.DND5E.weaponProficienciesMap;
+    const config = CONFIG.DND5A.weaponProficienciesMap;
     const itemProf = config[this.type.value];
     const actorProfs = actor.system.traits?.weaponProf?.value ?? new Set();
     const natural = this.type.value === "natural";
-    const improvised = (this.type.value === "improv") && !!actor.getFlag("dnd5e", "tavernBrawlerFeat");
+    const improvised = (this.type.value === "improv") && !!actor.getFlag("dnd5a", "tavernBrawlerFeat");
     const isProficient = natural || improvised || actorProfs.has(itemProf) || actorProfs.has(this.type.baseItem);
     return Number(isProficient);
   }

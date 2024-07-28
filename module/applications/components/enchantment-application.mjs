@@ -63,7 +63,7 @@ export default class EnchantmentApplicationElement extends HTMLElement {
 
     // Calculate the maximum targets
     let item = this.enchantmentItem;
-    const spellLevel = this.chatMessage.getFlag("dnd5e", "use.spellLevel");
+    const spellLevel = this.chatMessage.getFlag("dnd5a", "use.spellLevel");
     if ( spellLevel ) {
       item = item.clone({ "system.level": spellLevel });
       item.prepareData();
@@ -77,7 +77,7 @@ export default class EnchantmentApplicationElement extends HTMLElement {
         this.querySelector(".enchantment-control").append(div);
         this.countArea = this.querySelector(".count-area");
       }
-      this.countArea.innerHTML = game.i18n.format("DND5E.Enchantment.Enchanted", {
+      this.countArea.innerHTML = game.i18n.format("DND5A.Enchantment.Enchanted", {
         current: '<span class="current">0</span>',
         max: `<span class="max">${maxTargets}<span>`
       });
@@ -106,9 +106,9 @@ export default class EnchantmentApplicationElement extends HTMLElement {
       `;
       if ( item.isOwner ) {
         const control = document.createElement("a");
-        control.ariaLabel = game.i18n.localize("DND5E.Enchantment.Action.Remove");
+        control.ariaLabel = game.i18n.localize("DND5A.Enchantment.Action.Remove");
         control.dataset.action = "removeEnchantment";
-        control.dataset.tooltip = "DND5E.Enchantment.Action.Remove";
+        control.dataset.tooltip = "DND5A.Enchantment.Action.Remove";
         control.innerHTML = '<i class="fa-solid fa-rotate-left" inert></i>';
         div.append(control);
       }
@@ -117,7 +117,7 @@ export default class EnchantmentApplicationElement extends HTMLElement {
     if ( enchantedItems.length ) {
       this.dropArea.replaceChildren(...enchantedItems);
     } else {
-      this.dropArea.innerHTML = `<p>${game.i18n.localize("DND5E.Enchantment.DropArea")}</p>`;
+      this.dropArea.innerHTML = `<p>${game.i18n.localize("DND5A.Enchantment.DropArea")}</p>`;
     }
     if ( this.countArea ) {
       this.countArea.querySelector(".current").innerText = enchantedItems.length;
@@ -135,7 +135,7 @@ export default class EnchantmentApplicationElement extends HTMLElement {
   async _onDrop(event) {
     event.preventDefault();
     const data = TextEditor.getDragEventData(event);
-    const effect = this.enchantmentItem.effects.get(this.chatMessage.getFlag("dnd5e", "use.enchantmentProfile"));
+    const effect = this.enchantmentItem.effects.get(this.chatMessage.getFlag("dnd5a", "use.enchantmentProfile"));
     if ( (data.type !== "Item") || !effect ) return;
     const droppedItem = await Item.implementation.fromDropData(data);
 
@@ -147,14 +147,14 @@ export default class EnchantmentApplicationElement extends HTMLElement {
     }
 
     // If concentration is required, ensure it is still being maintained & GM is present
-    const concentrationId = this.chatMessage.getFlag("dnd5e", "use.concentrationId");
+    const concentrationId = this.chatMessage.getFlag("dnd5a", "use.concentrationId");
     const concentration = effect.parent.actor.effects.get(concentrationId);
     if ( concentrationId && !concentration ) {
-      ui.notifications.error("DND5E.Enchantment.Warning.ConcentrationEnded", { localize: true });
+      ui.notifications.error("DND5A.Enchantment.Warning.ConcentrationEnded", { localize: true });
       return;
     }
     if ( !game.user.isGM && concentration && !concentration.actor?.isOwner ) {
-      ui.notifications.error("DND5E.EffectApplyWarningConcentration", { localize: true });
+      ui.notifications.error("DND5A.EffectApplyWarningConcentration", { localize: true });
       return;
     }
 

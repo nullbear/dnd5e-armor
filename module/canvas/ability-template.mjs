@@ -35,7 +35,7 @@ export default class AbilityTemplate extends MeasuredTemplate {
    */
   static fromItem(item, options={}) {
     const target = item.system.target ?? {};
-    const templateShape = dnd5e.config.areaTargetTypes[target.type]?.template;
+    const templateShape = dnd5a.config.areaTargetTypes[target.type]?.template;
     if ( !templateShape ) return null;
 
     // Prepare template data
@@ -47,7 +47,7 @@ export default class AbilityTemplate extends MeasuredTemplate {
       x: 0,
       y: 0,
       fillColor: game.user.color,
-      flags: { dnd5e: { origin: item.uuid, spellLevel: item.system.level } }
+      flags: { dnd5a: { origin: item.uuid, spellLevel: item.system.level } }
     }, options);
 
     // Additional type-specific data
@@ -57,7 +57,7 @@ export default class AbilityTemplate extends MeasuredTemplate {
         break;
       case "rect": // 5e rectangular AoEs are always cubes
         templateData.width = target.value;
-        if ( game.settings.get("dnd5e", "gridAlignedSquareTemplates") ) {
+        if ( game.settings.get("dnd5a", "gridAlignedSquareTemplates") ) {
           templateData.distance = Math.hypot(target.value, target.value);
           templateData.direction = 45;
         } else {
@@ -74,13 +74,13 @@ export default class AbilityTemplate extends MeasuredTemplate {
 
     /**
      * A hook event that fires before a template is created for an Item.
-     * @function dnd5e.preCreateItemTemplate
+     * @function dnd5a.preCreateItemTemplate
      * @memberof hookEvents
      * @param {Item5e} item                     Item for which the template is being placed.
      * @param {object} templateData             Data used to create the new template.
      * @returns {boolean}                       Explicitly return false to prevent the template from being placed.
      */
-    if ( Hooks.call("dnd5e.preCreateItemTemplate", item, templateData) === false ) return null;
+    if ( Hooks.call("dnd5a.preCreateItemTemplate", item, templateData) === false ) return null;
 
     // Return the template constructed from the item data
     const cls = CONFIG.MeasuredTemplate.documentClass;
@@ -91,12 +91,12 @@ export default class AbilityTemplate extends MeasuredTemplate {
 
     /**
      * A hook event that fires after a template is created for an Item.
-     * @function dnd5e.createItemTemplate
+     * @function dnd5a.createItemTemplate
      * @memberof hookEvents
      * @param {Item5e} item                Item for which the template is being placed.
      * @param {AbilityTemplate} template   The template being placed.
      */
-    Hooks.callAll("dnd5e.createItemTemplate", item, object);
+    Hooks.callAll("dnd5a.createItemTemplate", item, object);
 
     return object;
   }

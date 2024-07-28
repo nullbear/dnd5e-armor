@@ -68,11 +68,11 @@ export default class Token5e extends Token {
     // Allocate percentages of the total
     const tempPct = Math.clamp(temp, 0, displayMax) / displayMax;
     const colorPct = Math.clamp(value, 0, effectiveMax) / displayMax;
-    const hpColor = dnd5e.documents.Actor5e.getHPColor(value, effectiveMax);
+    const hpColor = dnd5a.documents.Actor5e.getHPColor(value, effectiveMax);
 
     // Determine colors to use
     const blk = 0x000000;
-    const c = CONFIG.DND5E.tokenHPColors;
+    const c = CONFIG.DND5A.tokenHPColors;
 
     // Determine the container size (logic borrowed from core)
     const w = this.w;
@@ -122,10 +122,10 @@ export default class Token5e extends Token {
     if ( shapeChange ) this.ring.configureNames();
 
     // Do we have some token ring flag changes?
-    if ( !foundry.utils.hasProperty(data, "flags.dnd5e.tokenRing") ) return;
+    if ( !foundry.utils.hasProperty(data, "flags.dnd5a.tokenRing") ) return;
 
     // Do we need to trigger a full redraw? We need to do so if a token ring texture has been updated
-    const dataFlag = data.flags.dnd5e.tokenRing;
+    const dataFlag = data.flags.dnd5a.tokenRing;
     const redraw = ("textures" in dataFlag) || ("enabled" in dataFlag);
     if ( redraw ) return this.renderFlags.set({redraw});
 
@@ -133,7 +133,7 @@ export default class Token5e extends Token {
     if ( ("scaleCorrection" in dataFlag) && !shapeChange ) this.ring.configureUVs(dataFlag.scaleCorrection);
 
     // If we don't need a full redraw, we're just updating the visuals properties
-    const tokenRingFlag = this.document.getFlag("dnd5e", "tokenRing") || {};
+    const tokenRingFlag = this.document.getFlag("dnd5a", "tokenRing") || {};
     this.ring.configureVisuals({...tokenRingFlag});
   }
 
@@ -154,7 +154,7 @@ export default class Token5e extends Token {
     if ( applicableEffects.includes(statusId) ) {
       if ( game.release.generation < 12 ) {
         if ( this.ring.enabled ) {
-          const tokenRingFlag = this.document.getFlag("dnd5e", "tokenRing") || {};
+          const tokenRingFlag = this.document.getFlag("dnd5a", "tokenRing") || {};
           this.ring.configureVisuals(foundry.utils.deepClone(tokenRingFlag));
         }
       } else if ( this.hasDynamicRing ) this.renderFlags.set({refreshRingVisuals: true});

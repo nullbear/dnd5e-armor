@@ -6,9 +6,9 @@ export default class SummoningConfig extends DocumentSheet {
   /** @inheritDoc */
   static get defaultOptions() {
     return foundry.utils.mergeObject(super.defaultOptions, {
-      classes: ["dnd5e", "summoning-config"],
+      classes: ["dnd5a", "summoning-config"],
       dragDrop: [{ dropSelector: "form" }],
-      template: "systems/dnd5e/templates/apps/summoning-config.hbs",
+      template: "systems/dnd5a/templates/apps/summoning-config.hbs",
       width: 500,
       height: "auto",
       sheetConfig: false,
@@ -42,7 +42,7 @@ export default class SummoningConfig extends DocumentSheet {
 
   /** @inheritDoc */
   get title() {
-    return `${game.i18n.localize("DND5E.Summoning.Configuration")}: ${this.document.name}`;
+    return `${game.i18n.localize("DND5A.Summoning.Configuration")}: ${this.document.name}`;
   }
 
   /* -------------------------------------------- */
@@ -54,13 +54,13 @@ export default class SummoningConfig extends DocumentSheet {
     const context = await super.getData(options);
     context.isSpell = this.document.type === "spell";
     context.modes = {
-      cr: "DND5E.Summoning.Mode.CR"
+      cr: "DND5A.Summoning.Mode.CR"
     };
     context.profiles = this.profiles.map(p => {
       const profile = { id: p._id, ...p, collapsed: this.expandedProfiles.get(p._id) ? "" : "collapsed" };
       if ( p.uuid ) profile.document = fromUuidSync(p.uuid);
       if ( this.document.system.summons.mode === "cr" ) {
-        profile.creatureTypes = Object.entries(CONFIG.DND5E.creatureTypes).reduce((obj, [k, c]) => {
+        profile.creatureTypes = Object.entries(CONFIG.DND5A.creatureTypes).reduce((obj, [k, c]) => {
           obj[k] = { label: c.label, selected: p.types.has(k) ? "selected" : "" };
           return obj;
         }, {});
@@ -70,11 +70,11 @@ export default class SummoningConfig extends DocumentSheet {
       (lhs.name || lhs.document?.name || "").localeCompare(rhs.name || rhs.document?.name || "", game.i18n.lang)
     );
     context.summons = this.document.system.summons;
-    context.creatureSizes = Object.entries(CONFIG.DND5E.actorSizes).reduce((obj, [k, c]) => {
+    context.creatureSizes = Object.entries(CONFIG.DND5A.actorSizes).reduce((obj, [k, c]) => {
       obj[k] = { label: c.label, selected: context.summons?.creatureSizes.has(k) ? "selected" : "" };
       return obj;
     }, {});
-    context.creatureTypes = Object.entries(CONFIG.DND5E.creatureTypes).reduce((obj, [k, c]) => {
+    context.creatureTypes = Object.entries(CONFIG.DND5A.creatureTypes).reduce((obj, [k, c]) => {
       obj[k] = { label: c.label, selected: context.summons?.creatureTypes.has(k) ? "selected" : "" };
       return obj;
     }, {});

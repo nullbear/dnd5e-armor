@@ -12,10 +12,10 @@ import ProficiencyCycleElement from "./proficiency-cycle.mjs";
 import SlideToggleElement from "./slide-toggle.mjs";
 
 window.customElements.define("damage-application", DamageApplicationElement);
-window.customElements.define("dnd5e-checkbox", CheckboxElement);
-window.customElements.define("dnd5e-effects", EffectsElement);
-window.customElements.define("dnd5e-icon", IconElement);
-window.customElements.define("dnd5e-inventory", InventoryElement);
+window.customElements.define("dnd5a-checkbox", CheckboxElement);
+window.customElements.define("dnd5a-effects", EffectsElement);
+window.customElements.define("dnd5a-icon", IconElement);
+window.customElements.define("dnd5a-inventory", InventoryElement);
 window.customElements.define("enchantment-application", EnchantmentApplicationElement);
 window.customElements.define("filigree-box", FiligreeBoxElement);
 window.customElements.define("filter-state", FilterStateElement);

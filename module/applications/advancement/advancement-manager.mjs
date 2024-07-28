@@ -61,8 +61,8 @@ export default class AdvancementManager extends Application {
   /** @inheritdoc */
   static get defaultOptions() {
     return foundry.utils.mergeObject(super.defaultOptions, {
-      classes: ["dnd5e", "advancement", "flow"],
-      template: "systems/dnd5e/templates/advancement/advancement-manager.hbs",
+      classes: ["dnd5a", "advancement", "flow"],
+      template: "systems/dnd5a/templates/advancement/advancement-manager.hbs",
       width: 460,
       height: "auto"
     });
@@ -74,11 +74,11 @@ export default class AdvancementManager extends Application {
   get title() {
     const visibleSteps = this.steps.filter(s => !s.automatic);
     const visibleIndex = visibleSteps.indexOf(this.step);
-    const step = visibleIndex < 0 ? "" : game.i18n.format("DND5E.AdvancementManagerSteps", {
+    const step = visibleIndex < 0 ? "" : game.i18n.format("DND5A.AdvancementManagerSteps", {
       current: visibleIndex + 1,
       total: visibleSteps.length
     });
-    return `${game.i18n.localize("DND5E.AdvancementManagerTitle")} ${step}`;
+    return `${game.i18n.localize("DND5A.AdvancementManagerTitle")} ${step}`;
   }
 
   /* -------------------------------------------- */
@@ -416,7 +416,7 @@ export default class AdvancementManager extends Application {
       actor: this.clone,
       flowId: this.step.flow.id,
       header: item.name,
-      subheader: level ? game.i18n.format("DND5E.AdvancementLevelHeader", { level }) : "",
+      subheader: level ? game.i18n.format("DND5A.AdvancementLevelHeader", { level }) : "",
       steps: {
         current: visibleIndex + 1,
         total: visibleSteps.length,
@@ -442,11 +442,11 @@ export default class AdvancementManager extends Application {
 
     /**
      * A hook event that fires when an AdvancementManager is about to be processed.
-     * @function dnd5e.preAdvancementManagerRender
+     * @function dnd5a.preAdvancementManagerRender
      * @memberof hookEvents
      * @param {AdvancementManager} advancementManager The advancement manager about to be rendered
      */
-    const allowed = Hooks.call("dnd5e.preAdvancementManagerRender", this);
+    const allowed = Hooks.call("dnd5a.preAdvancementManagerRender", this);
 
     // Abort if not allowed
     if ( allowed === false ) return this;
@@ -507,17 +507,17 @@ export default class AdvancementManager extends Application {
   async close(options={}) {
     if ( !options.skipConfirmation ) {
       return new Dialog({
-        title: `${game.i18n.localize("DND5E.AdvancementManagerCloseTitle")}: ${this.actor.name}`,
-        content: game.i18n.localize("DND5E.AdvancementManagerCloseMessage"),
+        title: `${game.i18n.localize("DND5A.AdvancementManagerCloseTitle")}: ${this.actor.name}`,
+        content: game.i18n.localize("DND5A.AdvancementManagerCloseMessage"),
         buttons: {
           close: {
             icon: '<i class="fas fa-times"></i>',
-            label: game.i18n.localize("DND5E.AdvancementManagerCloseButtonStop"),
+            label: game.i18n.localize("DND5A.AdvancementManagerCloseButtonStop"),
             callback: () => super.close(options)
           },
           continue: {
             icon: '<i class="fas fa-chevron-right"></i>',
-            label: game.i18n.localize("DND5E.AdvancementManagerCloseButtonContinue")
+            label: game.i18n.localize("DND5A.AdvancementManagerCloseButtonContinue")
           }
         },
         default: "close"
@@ -627,8 +627,8 @@ export default class AdvancementManager extends Application {
    */
   async _restart(event) {
     const restart = await Dialog.confirm({
-      title: game.i18n.localize("DND5E.AdvancementManagerRestartConfirmTitle"),
-      content: game.i18n.localize("DND5E.AdvancementManagerRestartConfirm")
+      title: game.i18n.localize("DND5A.AdvancementManagerRestartConfirmTitle"),
+      content: game.i18n.localize("DND5A.AdvancementManagerRestartConfirm")
     });
     if ( !restart ) return;
     // While there is still a renderable step.
@@ -665,7 +665,7 @@ export default class AdvancementManager extends Application {
     /**
      * A hook event that fires at the final stage of a character's advancement process, before actor and item updates
      * are applied.
-     * @function dnd5e.preAdvancementManagerComplete
+     * @function dnd5a.preAdvancementManagerComplete
      * @memberof hookEvents
      * @param {AdvancementManager} advancementManager  The advancement manager.
      * @param {object} actorUpdates                    Updates to the actor.
@@ -673,7 +673,7 @@ export default class AdvancementManager extends Application {
      * @param {object[]} toUpdate                      Items that will be updated on the actor.
      * @param {string[]} toDelete                      IDs of items that will be deleted on the actor.
      */
-    if ( Hooks.call("dnd5e.preAdvancementManagerComplete", this, updates, toCreate, toUpdate, toDelete) === false ) {
+    if ( Hooks.call("dnd5a.preAdvancementManagerComplete", this, updates, toCreate, toUpdate, toDelete) === false ) {
       console.log("AdvancementManager completion was prevented by the 'preAdvancementManagerComplete' hook.");
       return this.close({ skipConfirmation: true });
     }
@@ -688,11 +688,11 @@ export default class AdvancementManager extends Application {
 
     /**
      * A hook event that fires when an AdvancementManager is done modifying an actor.
-     * @function dnd5e.advancementManagerComplete
+     * @function dnd5a.advancementManagerComplete
      * @memberof hookEvents
      * @param {AdvancementManager} advancementManager The advancement manager that just completed
      */
-    Hooks.callAll("dnd5e.advancementManagerComplete", this);
+    Hooks.callAll("dnd5a.advancementManagerComplete", this);
 
     // Close prompt
     return this.close({ skipConfirmation: true });

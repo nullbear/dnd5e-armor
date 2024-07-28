@@ -36,7 +36,7 @@ export default class DamageRoll extends Roll {
    * The HTML template path used to configure evaluation of this Roll
    * @type {string}
    */
-  static EVALUATION_TEMPLATE = "systems/dnd5e/templates/chat/roll-dialog.hbs";
+  static EVALUATION_TEMPLATE = "systems/dnd5a/templates/chat/roll-dialog.hbs";
 
   /* -------------------------------------------- */
 
@@ -132,7 +132,7 @@ export default class DamageRoll extends Roll {
           if ( this.options.powerfulCritical ) {
             let bonus = term.number * term.faces;
             if ( bonus > 0 ) {
-              const flavor = term.flavor?.toLowerCase().trim() ?? game.i18n.localize("DND5E.PowerfulCritical");
+              const flavor = term.flavor?.toLowerCase().trim() ?? game.i18n.localize("DND5A.PowerfulCritical");
               flatBonus.set(flavor, (flatBonus.get(flavor) ?? 0) + bonus);
             }
             cm = Math.max(1, cm-1);
@@ -211,7 +211,7 @@ export default class DamageRoll extends Roll {
       isCritical ||= roll.isCritical;
     }
     if ( isCritical ) {
-      const label = game.i18n.localize("DND5E.CriticalHit");
+      const label = game.i18n.localize("DND5A.CriticalHit");
       messageData.flavor = messageData.flavor ? `${messageData.flavor} (${label})` : label;
     }
 
@@ -279,8 +279,8 @@ export default class DamageRoll extends Roll {
     const content = await renderTemplate(template ?? this.EVALUATION_TEMPLATE, {
       formulas: rolls.map((roll, index) => ({
         formula: `${roll.formula}${index === 0 ? " + @bonus" : ""}`,
-        type: CONFIG.DND5E.damageTypes[roll.options.type]?.label
-          ?? CONFIG.DND5E.healingTypes[roll.options.type]?.label ?? null
+        type: CONFIG.DND5A.damageTypes[roll.options.type]?.label
+          ?? CONFIG.DND5A.healingTypes[roll.options.type]?.label ?? null
       })),
       defaultRollMode,
       rollModes: CONFIG.Dice.rollModes
@@ -294,11 +294,11 @@ export default class DamageRoll extends Roll {
         buttons: {
           critical: {
             condition: allowCritical,
-            label: game.i18n.localize("DND5E.CriticalHit"),
+            label: game.i18n.localize("DND5A.CriticalHit"),
             callback: html => resolve(rolls.map((r, i) => r._onDialogSubmit(html, true, i === 0)))
           },
           normal: {
-            label: game.i18n.localize(allowCritical ? "DND5E.Normal" : "DND5E.Roll"),
+            label: game.i18n.localize(allowCritical ? "DND5A.Normal" : "DND5A.Roll"),
             callback: html => resolve(rolls.map((r, i) => r._onDialogSubmit(html, false, i === 0)))
           }
         },

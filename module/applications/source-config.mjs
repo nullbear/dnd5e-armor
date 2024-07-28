@@ -6,8 +6,8 @@ export default class SourceConfig extends DocumentSheet {
   /** @inheritdoc */
   static get defaultOptions() {
     return foundry.utils.mergeObject(super.defaultOptions, {
-      classes: ["dnd5e", "source-config", "dialog"],
-      template: "systems/dnd5e/templates/apps/source-config.hbs",
+      classes: ["dnd5a", "source-config", "dialog"],
+      template: "systems/dnd5a/templates/apps/source-config.hbs",
       width: 400,
       height: "auto",
       sheetConfig: false,
@@ -19,7 +19,7 @@ export default class SourceConfig extends DocumentSheet {
 
   /** @override */
   get title() {
-    return `${game.i18n.localize("DND5E.SourceConfig")}: ${this.document.name}`;
+    return `${game.i18n.localize("DND5A.SourceConfig")}: ${this.document.name}`;
   }
 
   /* -------------------------------------------- */
@@ -30,7 +30,7 @@ export default class SourceConfig extends DocumentSheet {
   async getData(options) {
     const context = super.getData(options);
     context.appId = this.id;
-    context.CONFIG = CONFIG.DND5E;
+    context.CONFIG = CONFIG.DND5A;
     context.source = foundry.utils.getProperty(this.document, this.options.keyPath);
     context.sourceUuid = this.document._stats.compendiumSource
       ?? foundry.utils.getProperty(this.document, "flags.core.sourceId");

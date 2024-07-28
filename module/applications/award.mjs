@@ -9,9 +9,9 @@ export default class Award extends DialogMixin(FormApplication) {
   /** @inheritdoc */
   static get defaultOptions() {
     return foundry.utils.mergeObject(super.defaultOptions, {
-      classes: ["dnd5e2", "award", "dialog"],
-      template: "systems/dnd5e/templates/apps/award.hbs",
-      title: "DND5E.Award.Title",
+      classes: ["dnd5a2", "award", "dialog"],
+      template: "systems/dnd5a/templates/apps/award.hbs",
+      title: "DND5A.Award.Title",
       width: 350,
       height: "auto",
       currency: null,
@@ -32,7 +32,7 @@ export default class Award extends DialogMixin(FormApplication) {
   get transferDestinations() {
     if ( this.isPartyAward ) return this.object.system.transferDestinations ?? [];
     if ( !game.user.isGM ) return [];
-    const primaryParty = game.settings.get("dnd5e", "primaryParty")?.actor;
+    const primaryParty = game.settings.get("dnd5a", "primaryParty")?.actor;
     return primaryParty
       ? [primaryParty, ...primaryParty.system.transferDestinations]
       : game.users.map(u => u.character).filter(c => c);
@@ -56,15 +56,15 @@ export default class Award extends DialogMixin(FormApplication) {
   getData(options={}) {
     const context = super.getData(options);
 
-    context.CONFIG = CONFIG.DND5E;
-    context.currency = Object.entries(CONFIG.DND5E.currencies).reduce((obj, [k, { label }]) => {
+    context.CONFIG = CONFIG.DND5A;
+    context.currency = Object.entries(CONFIG.DND5A.currencies).reduce((obj, [k, { label }]) => {
       obj[k] = { label, value: this.options.currency ? this.options.currency[k] : this.object?.system.currency[k] };
       return obj;
     }, {});
     context.destinations = Award.prepareDestinations(this.transferDestinations, this.options.savedDestinations);
     context.each = this.options.each ?? false;
-    context.hideXP = game.settings.get("dnd5e", "disableExperienceTracking");
-    context.noPrimaryParty = !game.settings.get("dnd5e", "primaryParty")?.actor && !this.isPartyAward;
+    context.hideXP = game.settings.get("dnd5a", "disableExperienceTracking");
+    context.noPrimaryParty = !game.settings.get("dnd5a", "primaryParty")?.actor && !this.isPartyAward;
     context.xp = this.options.xp ?? this.object?.system.details.xp.value ?? this.object?.system.details.xp.derived;
 
     return context;
@@ -80,7 +80,7 @@ export default class Award extends DialogMixin(FormApplication) {
    */
   static prepareDestinations(destinations, savedDestinations) {
     const icons = {
-      container: '<dnd5e-icon class="fa-fw" src="systems/dnd5e/icons/svg/backpack.svg"></dnd5e-icon>',
+      container: '<dnd5a-icon class="fa-fw" src="systems/dnd5a/icons/svg/backpack.svg"></dnd5a-icon>',
       group: '<i class="fa-solid fa-people-group"></i>',
       vehicle: '<i class="fa-solid fa-sailboat"></i>'
     };
@@ -145,7 +145,7 @@ export default class Award extends DialogMixin(FormApplication) {
    */
   _saveDestinations(destinations) {
     const target = this.isPartyAward ? this.object : game.user;
-    target.setFlag("dnd5e", "awardDestinations", destinations);
+    target.setFlag("dnd5a", "awardDestinations", destinations);
   }
 
   /* -------------------------------------------- */
@@ -240,7 +240,7 @@ export default class Award extends DialogMixin(FormApplication) {
     for ( const [destination, result] of results ) {
       const entries = [];
       for ( const [key, amount] of Object.entries(result.currency ?? {}) ) {
-        const label = CONFIG.DND5E.currencies[key].label;
+        const label = CONFIG.DND5A.currencies[key].label;
         entries.push(`
           <span class="award-entry">
             ${formatNumber(amount)} <i class="currency ${key}" data-tooltip="${label}" aria-label="${label}"></i>
@@ -249,13 +249,13 @@ export default class Award extends DialogMixin(FormApplication) {
       }
       if ( result.xp ) entries.push(`
         <span class="award-entry">
-          ${formatNumber(result.xp)} ${game.i18n.localize("DND5E.ExperiencePointsAbbr")}
+          ${formatNumber(result.xp)} ${game.i18n.localize("DND5A.ExperiencePointsAbbr")}
         </span>
       `);
       if ( !entries.length ) continue;
 
-      const content = game.i18n.format("DND5E.Award.Message", {
-        name: destination.name, award: `<span class="dnd5e2">${game.i18n.getListFormatter().format(entries)}</span>`
+      const content = game.i18n.format("DND5A.Award.Message", {
+        name: destination.name, award: `<span class="dnd5a2">${game.i18n.getListFormatter().format(entries)}</span>`
       });
 
       const whisperTargets = game.users.filter(user => destination.testUserPermission(user, "OWNER"));
@@ -310,7 +310,7 @@ export default class Award extends DialogMixin(FormApplication) {
    */
   static async handleAward(message) {
     if ( !game.user.isGM ) {
-      ui.notifications.error("DND5E.Award.NotGMError", { localize: true });
+      ui.notifications.error("DND5A.Award.NotGMError", { localize: true });
       return;
     }
 
@@ -324,7 +324,7 @@ export default class Award extends DialogMixin(FormApplication) {
       }
 
       // If the party command is set, a primary party is set, and the award isn't empty, skip the UI
-      const primaryParty = game.settings.get("dnd5e", "primaryParty")?.actor;
+      const primaryParty = game.settings.get("dnd5a", "primaryParty")?.actor;
       if ( party && primaryParty && (xp || filteredKeys(currency).length) ) {
         const destinations = each ? primaryParty.system.playerCharacters : [primaryParty];
         const results = new Map();
@@ -335,7 +335,7 @@ export default class Award extends DialogMixin(FormApplication) {
 
       // Otherwise show the UI with defaults
       else {
-        const savedDestinations = game.user.getFlag("dnd5e", "awardDestinations");
+        const savedDestinations = game.user.getFlag("dnd5a", "awardDestinations");
         const app = new Award(null, { currency, xp, each, savedDestinations });
         app.render(true);
       }
@@ -365,7 +365,7 @@ export default class Award extends DialogMixin(FormApplication) {
       label = label?.toLowerCase();
       try {
         new Roll(amount);
-        if ( label in CONFIG.DND5E.currencies ) currency[label] = amount;
+        if ( label in CONFIG.DND5A.currencies ) currency[label] = amount;
         else if ( label === "xp" ) xp = Number(amount);
         else if ( part === "each" ) each = true;
         else if ( part === "party" ) party = true;
@@ -376,7 +376,7 @@ export default class Award extends DialogMixin(FormApplication) {
     }
 
     // Display warning about an unrecognized commands
-    if ( unrecognized.length ) throw new Error(game.i18n.format("DND5E.Award.UnrecognizedWarning", {
+    if ( unrecognized.length ) throw new Error(game.i18n.format("DND5A.Award.UnrecognizedWarning", {
       commands: game.i18n.getListFormatter().format(unrecognized.map(u => `"${u}"`))
     }));
 

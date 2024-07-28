@@ -8,8 +8,8 @@ export default class ActorConcentrationConfig extends BaseConfigSheet {
   /** @inheritDoc */
   static get defaultOptions() {
     return foundry.utils.mergeObject(super.defaultOptions, {
-      classes: ["dnd5e"],
-      template: "systems/dnd5e/templates/apps/concentration-config.hbs",
+      classes: ["dnd5a"],
+      template: "systems/dnd5a/templates/apps/concentration-config.hbs",
       width: 500,
       height: "auto"
     });
@@ -19,8 +19,8 @@ export default class ActorConcentrationConfig extends BaseConfigSheet {
 
   /** @override */
   get title() {
-    return `${game.i18n.format("DND5E.AbilityConfigure", {
-      ability: game.i18n.localize("DND5E.Concentration") })
+    return `${game.i18n.format("DND5A.AbilityConfigure", {
+      ability: game.i18n.localize("DND5A.Concentration") })
     }: ${this.document.name}`;
   }
 
@@ -32,13 +32,13 @@ export default class ActorConcentrationConfig extends BaseConfigSheet {
     const { ability, bonuses, limit, roll } = src.system.attributes.concentration;
     return {
       ability, limit,
-      abilities: CONFIG.DND5E.abilities,
+      abilities: CONFIG.DND5A.abilities,
       bonus: bonuses.save,
       mode: roll.mode,
       modes: {
-        "-1": "DND5E.Disadvantage",
-        0: "DND5E.Normal",
-        1: "DND5E.Advantage"
+        "-1": "DND5A.Disadvantage",
+        0: "DND5A.Normal",
+        1: "DND5A.Advantage"
       },
       bonusGlobalSave: src.system.bonuses?.abilities?.save
     };

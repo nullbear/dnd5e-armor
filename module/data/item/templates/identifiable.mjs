@@ -16,10 +16,10 @@ export default class IdentifiableTemplate extends SystemDataModel {
   /** @inheritdoc */
   static defineSchema() {
     return {
-      identified: new BooleanField({required: true, initial: true, label: "DND5E.Identified"}),
+      identified: new BooleanField({required: true, initial: true, label: "DND5A.Identified"}),
       unidentified: new SchemaField({
-        name: new StringField({label: "DND5E.NameUnidentified"}),
-        description: new HTMLField({label: "DND5E.DescriptionUnidentified"})
+        name: new StringField({label: "DND5A.NameUnidentified"}),
+        description: new HTMLField({label: "DND5A.DescriptionUnidentified"})
       })
     };
   }
@@ -82,11 +82,11 @@ export default class IdentifiableTemplate extends SystemDataModel {
     if ( !fetchName && !fetchDesc ) return;
 
     let baseItemIdentifier;
-    if ( this.parent.type === "weapon" ) baseItemIdentifier = CONFIG.DND5E.weaponIds[this.type.baseItem];
-    else if ( this.parent.type === "tool" ) baseItemIdentifier = CONFIG.DND5E.toolIds[this.type.baseItem];
+    if ( this.parent.type === "weapon" ) baseItemIdentifier = CONFIG.DND5A.weaponIds[this.type.baseItem];
+    else if ( this.parent.type === "tool" ) baseItemIdentifier = CONFIG.DND5A.toolIds[this.type.baseItem];
     else if ( this.parent.type === "equipment" ) {
-      if ( this.type.value === "shield" ) baseItemIdentifier = CONFIG.DND5E.shieldIds[this.type.baseItem];
-      else baseItemIdentifier = CONFIG.DND5E.armorIds[this.type.baseItem];
+      if ( this.type.value === "shield" ) baseItemIdentifier = CONFIG.DND5A.shieldIds[this.type.baseItem];
+      else baseItemIdentifier = CONFIG.DND5A.armorIds[this.type.baseItem];
     }
     const baseItem = await Trait.getBaseItem(baseItemIdentifier ?? "", { fullItem: fetchDesc });
 
@@ -94,7 +94,7 @@ export default class IdentifiableTemplate extends SystemDataModel {
     if ( baseItem ) {
       if ( fetchName ) {
         foundry.utils.setProperty(changed, "system.unidentified.name", game.i18n.format(
-          "DND5E.Unidentified.DefaultName", { name: baseItem.name }
+          "DND5A.Unidentified.DefaultName", { name: baseItem.name }
         ));
       }
       if ( fetchDesc ) {
@@ -105,7 +105,7 @@ export default class IdentifiableTemplate extends SystemDataModel {
 
     // Otherwise, set the name to match the item type
     if ( fetchName ) foundry.utils.setProperty(changed, "system.unidentified.name", game.i18n.format(
-      "DND5E.Unidentified.DefaultName", { name: game.i18n.localize(CONFIG.Item.typeLabels[this.parent.type]) }
+      "DND5A.Unidentified.DefaultName", { name: game.i18n.localize(CONFIG.Item.typeLabels[this.parent.type]) }
     ));
   }
 }

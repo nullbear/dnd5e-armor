@@ -44,8 +44,8 @@ export default class JournalSpellListPageSheet extends JournalPageSheet {
 
   /** @inheritDoc */
   get template() {
-    if ( this.options.displayAsTable ) return "systems/dnd5e/templates/journal/page-spell-list-table.hbs";
-    return `systems/dnd5e/templates/journal/page-spell-list-${this.isEditable ? "edit" : "view"}.hbs`;
+    if ( this.options.displayAsTable ) return "systems/dnd5a/templates/journal/page-spell-list-table.hbs";
+    return `systems/dnd5a/templates/journal/page-spell-list-${this.isEditable ? "edit" : "view"}.hbs`;
   }
 
   /* -------------------------------------------- */
@@ -53,7 +53,7 @@ export default class JournalSpellListPageSheet extends JournalPageSheet {
   /** @inheritDoc */
   async getData(options) {
     const context = super.getData(options);
-    context.CONFIG = CONFIG.DND5E;
+    context.CONFIG = CONFIG.DND5A;
     context.system = context.document.system;
     context.embedRendering = this.options.embedRendering ?? false;
 
@@ -76,11 +76,11 @@ export default class JournalSpellListPageSheet extends JournalPageSheet {
       switch ( context.grouping ) {
         case "level":
           const level = spell.system.level;
-          section = context.sections[level] ??= { header: CONFIG.DND5E.spellLevels[level], spells: [] };
+          section = context.sections[level] ??= { header: CONFIG.DND5A.spellLevels[level], spells: [] };
           break;
         case "school":
           const school = spell.system.school;
-          section = context.sections[school] ??= { header: CONFIG.DND5E.spellSchools[school]?.label, spells: [] };
+          section = context.sections[school] ??= { header: CONFIG.DND5A.spellSchools[school]?.label, spells: [] };
           break;
         case "alphabetical":
           const letter = spell.name.slice(0, 1).toLowerCase();

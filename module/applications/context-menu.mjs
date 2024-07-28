@@ -15,7 +15,7 @@ export default class ContextMenu5e extends ContextMenu {
     const { clientX, clientY } = window.event;
     const left = Math.min(clientX, clientWidth - width);
     this._expandUp = clientY + height > clientHeight;
-    html.classList.add("dnd5e2");
+    html.classList.add("dnd5a2");
     html.classList.toggle("expand-up", this._expandUp);
     html.classList.toggle("expand-down", !this._expandUp);
     html.style.visibility = "";

@@ -29,13 +29,13 @@ export default class FiligreeBoxElement extends AdoptedStyleSheetMixin(HTMLEleme
       position: relative;
       isolation: isolate;
       min-height: 56px;
-      filter: var(--filigree-drop-shadow, drop-shadow(0 0 12px var(--dnd5e-shadow-15)));
+      filter: var(--filigree-drop-shadow, drop-shadow(0 0 12px var(--dnd5a-shadow-15)));
     }
     .backdrop {
       --chamfer: 12px;
       position: absolute;
       inset: 0;
-      background: var(--filigree-background-color, var(--dnd5e-color-card));
+      background: var(--filigree-background-color, var(--dnd5a-color-card));
       z-index: -2;
       clip-path: polygon(
         var(--chamfer) 0,
@@ -50,7 +50,7 @@ export default class FiligreeBoxElement extends AdoptedStyleSheetMixin(HTMLEleme
     }
     .filigree {
       position: absolute;
-      fill: var(--filigree-border-color, var(--dnd5e-color-gold));
+      fill: var(--filigree-border-color, var(--dnd5a-color-gold));
       z-index: -1;
 
       &.top, &.bottom { height: 30px; }

@@ -19,8 +19,8 @@ export default class ProficiencyCycleElement extends AdoptedStyleSheetMixin(HTML
   /** @inheritDoc */
   static CSS = `
     :host { display: inline-block; }
-    div { --_fill: var(--proficiency-cycle-enabled-color, var(--dnd5e-color-blue)); }
-    div:has(:disabled, :focus-visible) { --_fill: var(--proficiency-cycle-disabled-color, var(--dnd5e-color-gold)); }
+    div { --_fill: var(--proficiency-cycle-enabled-color, var(--dnd5a-color-blue)); }
+    div:has(:disabled, :focus-visible) { --_fill: var(--proficiency-cycle-disabled-color, var(--dnd5a-color-gold)); }
     div:not(:has(:disabled)) { cursor: pointer; }
 
     div {
@@ -43,7 +43,7 @@ export default class ProficiencyCycleElement extends AdoptedStyleSheetMixin(HTML
       &:has([value="0.5"], [value="2"])::after {
         content: "";
         position: absolute;
-        background: var(--_fill);  
+        background: var(--_fill);
       }
 
       &:has([value="0.5"])::after {
@@ -217,7 +217,7 @@ export default class ProficiencyCycleElement extends AdoptedStyleSheetMixin(HTML
     const input = this.#shadowRoot.querySelector("input");
     input.setAttribute("value", this.#value);
     this.#internals.ariaValueNow = this.#value;
-    this.#internals.ariaValueText = CONFIG.DND5E.proficiencyLevels[this.#value];
+    this.#internals.ariaValueText = CONFIG.DND5A.proficiencyLevels[this.#value];
     this.#internals.setFormValue(this.#value);
   }
 

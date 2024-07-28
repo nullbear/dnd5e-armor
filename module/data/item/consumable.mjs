@@ -33,12 +33,12 @@ export default class ConsumableData extends ItemDataModel.mixin(
   /** @inheritdoc */
   static defineSchema() {
     return this.mergeSchema(super.defineSchema(), {
-      type: new ItemTypeField({value: "potion", baseItem: false}, {label: "DND5E.ItemConsumableType"}),
-      magicalBonus: new NumberField({min: 0, integer: true, label: "DND5E.MagicalBonus"}),
-      properties: new SetField(new StringField(), { label: "DND5E.ItemAmmoProperties" }),
+      type: new ItemTypeField({value: "potion", baseItem: false}, {label: "DND5A.ItemConsumableType"}),
+      magicalBonus: new NumberField({min: 0, integer: true, label: "DND5A.MagicalBonus"}),
+      properties: new SetField(new StringField(), { label: "DND5A.ItemAmmoProperties" }),
       uses: new ActivatedEffectTemplate.ItemUsesField({
-        autoDestroy: new BooleanField({required: true, label: "DND5E.ItemDestroyEmpty"})
-      }, {label: "DND5E.LimitedUses"})
+        autoDestroy: new BooleanField({required: true, label: "DND5A.ItemDestroyEmpty"})
+      }, {label: "DND5A.LimitedUses"})
     });
   }
 
@@ -57,10 +57,10 @@ export default class ConsumableData extends ItemDataModel.mixin(
   static get compendiumBrowserFilters() {
     return new Map([
       ["type", {
-        label: "DND5E.ItemConsumableType",
+        label: "DND5A.ItemConsumableType",
         type: "set",
         config: {
-          choices: CONFIG.DND5E.consumableTypes,
+          choices: CONFIG.DND5A.consumableTypes,
           keyPath: "system.type.value"
         }
       }],
@@ -99,7 +99,7 @@ export default class ConsumableData extends ItemDataModel.mixin(
   prepareDerivedData() {
     super.prepareDerivedData();
     if ( !this.type.value ) return;
-    const config = CONFIG.DND5E.consumableTypes[this.type.value];
+    const config = CONFIG.DND5A.consumableTypes[this.type.value];
     if ( config ) {
       this.type.label = config.subtypes?.[this.type.subtype] ?? config.label;
     } else {
@@ -137,7 +137,7 @@ export default class ConsumableData extends ItemDataModel.mixin(
   get chatProperties() {
     return [
       this.type.label,
-      this.hasLimitedUses ? `${this.uses.value}/${this.uses.max} ${game.i18n.localize("DND5E.Charges")}` : null,
+      this.hasLimitedUses ? `${this.uses.value}/${this.uses.max} ${game.i18n.localize("DND5A.Charges")}` : null,
       this.priceLabel
     ];
   }
@@ -157,7 +157,7 @@ export default class ConsumableData extends ItemDataModel.mixin(
    * @returns {number}
    */
   get proficiencyMultiplier() {
-    const isProficient = this.parent?.actor?.getFlag("dnd5e", "tavernBrawlerFeat");
+    const isProficient = this.parent?.actor?.getFlag("dnd5a", "tavernBrawlerFeat");
     return isProficient ? 1 : 0;
   }
 
@@ -166,10 +166,10 @@ export default class ConsumableData extends ItemDataModel.mixin(
   /** @inheritdoc */
   get validProperties() {
     const valid = super.validProperties;
-    if ( this.type.value === "ammo" ) Object.entries(CONFIG.DND5E.itemProperties).forEach(([k, v]) => {
+    if ( this.type.value === "ammo" ) Object.entries(CONFIG.DND5A.itemProperties).forEach(([k, v]) => {
       if ( v.isPhysical ) valid.add(k);
     });
-    else if ( this.type.value === "scroll" ) CONFIG.DND5E.validProperties.spell
+    else if ( this.type.value === "scroll" ) CONFIG.DND5A.validProperties.spell
       .filter(p => p !== "material").forEach(p => valid.add(p));
     return valid;
   }

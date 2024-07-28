@@ -23,10 +23,10 @@ export default class ItemGrantConfigurationData extends foundry.abstract.DataMod
     return {
       items: new ArrayField(new SchemaField({
         uuid: new StringField(),
-        optional: new BooleanField({label: "DND5E.AdvancementItemGrantOptional"})
+        optional: new BooleanField({label: "DND5A.AdvancementItemGrantOptional"})
       }), {required: true, label: "DOCUMENT.Items"}),
       optional: new BooleanField({
-        required: true, label: "DND5E.AdvancementItemGrantOptional", hint: "DND5E.AdvancementItemGrantOptionalHint"
+        required: true, label: "DND5A.AdvancementItemGrantOptional", hint: "DND5A.AdvancementItemGrantOptionalHint"
       }),
       spell: new EmbeddedDataField(SpellConfigurationData, {
         required: true, nullable: true, initial: null

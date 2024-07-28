@@ -5,7 +5,7 @@ export default class JournalSheet5e extends JournalSheet {
   /** @inheritDoc */
   static get defaultOptions() {
     const options = super.defaultOptions;
-    options.classes.push("dnd5e2-journal");
+    options.classes.push("dnd5a2-journal");
     return options;
   }
 
@@ -56,7 +56,7 @@ export default class JournalSheet5e extends JournalSheet {
       let element;
       if ( context.editable ) element = jQuery[0];
       else element = jQuery[0].parentElement;
-      element?.classList.add("dnd5e2-journal");
+      element?.classList.add("dnd5a2-journal");
     }
   }
 }

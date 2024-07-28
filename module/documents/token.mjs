@@ -16,7 +16,7 @@ export default class TokenDocument5e extends SystemFlagsMixin(TokenDocument) {
    * @type {boolean}
    */
   get hasDynamicRing() {
-    if ( game.release.generation < 12 ) return !!this.getFlag("dnd5e", "tokenRing.enabled");
+    if ( game.release.generation < 12 ) return !!this.getFlag("dnd5a", "tokenRing.enabled");
     return this.ring.enabled;
   }
 
@@ -30,7 +30,7 @@ export default class TokenDocument5e extends SystemFlagsMixin(TokenDocument) {
    */
   get subjectPath() {
     if ( game.release.generation >= 12 ) return this.ring.subject.texture;
-    const subject = this.getFlag("dnd5e", "tokenRing")?.textures?.subject;
+    const subject = this.getFlag("dnd5a", "tokenRing")?.textures?.subject;
     if ( subject ) return subject;
     this.#subjectPath ??= this.constructor.inferSubjectPath(this.texture.src);
     return this.#subjectPath;
@@ -88,7 +88,7 @@ export default class TokenDocument5e extends SystemFlagsMixin(TokenDocument) {
    * @returns {string[]}
    */
   static getConsumedAttributes(data) {
-    return CONFIG.DND5E.consumableResources;
+    return CONFIG.DND5A.consumableResources;
   }
 
   /* -------------------------------------------- */
@@ -117,11 +117,11 @@ export default class TokenDocument5e extends SystemFlagsMixin(TokenDocument) {
     }
 
     // Add new groups to choices.
-    if ( abilities.length ) groups[game.i18n.localize("DND5E.AbilityScorePl")] = abilities;
-    if ( movement.length ) groups[game.i18n.localize("DND5E.MovementSpeeds")] = movement;
-    if ( senses.length ) groups[game.i18n.localize("DND5E.Senses")] = senses;
-    if ( skills.length ) groups[game.i18n.localize("DND5E.SkillPassives")] = skills;
-    if ( slots.length ) groups[game.i18n.localize("JOURNALENTRYPAGE.DND5E.Class.SpellSlots")] = slots;
+    if ( abilities.length ) groups[game.i18n.localize("DND5A.AbilityScorePl")] = abilities;
+    if ( movement.length ) groups[game.i18n.localize("DND5A.MovementSpeeds")] = movement;
+    if ( senses.length ) groups[game.i18n.localize("DND5A.Senses")] = senses;
+    if ( skills.length ) groups[game.i18n.localize("DND5A.SkillPassives")] = skills;
+    if ( slots.length ) groups[game.i18n.localize("JOURNALENTRYPAGE.DND5A.Class.SpellSlots")] = slots;
     return groups;
   }
 
@@ -197,7 +197,7 @@ export default class TokenDocument5e extends SystemFlagsMixin(TokenDocument) {
       if ( deltaSize ) size = deltaSize;
     }
     if ( !size ) return;
-    const dts = CONFIG.DND5E.actorSizes[size].dynamicTokenScale ?? 1;
+    const dts = CONFIG.DND5A.actorSizes[size].dynamicTokenScale ?? 1;
     this.texture.scaleX = this._source.texture.scaleX * dts;
     this.texture.scaleY = this._source.texture.scaleY * dts;
   }
@@ -222,7 +222,7 @@ export default class TokenDocument5e extends SystemFlagsMixin(TokenDocument) {
   getRingColors() {
     const colors = {};
     if ( this.hasStatusEffect(CONFIG.specialStatusEffects.DEFEATED) ) {
-      colors.ring = CONFIG.DND5E.tokenRingColors.defeated;
+      colors.ring = CONFIG.DND5A.tokenRingColors.defeated;
     }
     return colors;
   }
@@ -249,7 +249,7 @@ export default class TokenDocument5e extends SystemFlagsMixin(TokenDocument) {
    */
   flashRing(type) {
     if ( !this.rendered ) return;
-    const color = CONFIG.DND5E.tokenRingColors[type];
+    const color = CONFIG.DND5A.tokenRingColors[type];
     if ( !color ) return;
     const options = {};
     if ( type === "damage" ) {
@@ -267,7 +267,7 @@ export default class TokenDocument5e extends SystemFlagsMixin(TokenDocument) {
   _onDelete(options, userId) {
     super._onDelete(options, userId);
 
-    const origin = this.actor?.getFlag("dnd5e", "summon.origin");
+    const origin = this.actor?.getFlag("dnd5a", "summon.origin");
     // TODO: Replace with parseUuid once V11 support is dropped
     if ( origin ) SummonsData.untrackSummon(origin.split(".Item.")[0], this.actor.uuid);
   }

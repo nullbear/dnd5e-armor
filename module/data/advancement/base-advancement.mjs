@@ -41,15 +41,15 @@ export default class BaseAdvancement extends SparseDataModel {
       configuration: new AdvancementDataField(this, {required: true}),
       value: new AdvancementDataField(this, {required: true}),
       level: new NumberField({
-        integer: true, initial: this.metadata?.multiLevel ? undefined : 0, min: 0, label: "DND5E.Level"
+        integer: true, initial: this.metadata?.multiLevel ? undefined : 0, min: 0, label: "DND5A.Level"
       }),
-      title: new StringField({initial: undefined, label: "DND5E.AdvancementCustomTitle"}),
-      hint: new StringField({label: "DND5E.AdvancementHint"}),
+      title: new StringField({initial: undefined, label: "DND5A.AdvancementCustomTitle"}),
+      hint: new StringField({label: "DND5A.AdvancementHint"}),
       icon: new FilePathField({
-        initial: undefined, categories: ["IMAGE"], label: "DND5E.AdvancementCustomIcon"
+        initial: undefined, categories: ["IMAGE"], label: "DND5A.AdvancementCustomIcon"
       }),
       classRestriction: new StringField({
-        initial: undefined, choices: ["primary", "secondary"], label: "DND5E.AdvancementClassRestriction"
+        initial: undefined, choices: ["primary", "secondary"], label: "DND5A.AdvancementClassRestriction"
       })
     };
   }

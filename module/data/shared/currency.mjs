@@ -13,7 +13,7 @@ export default class CurrencyTemplate extends SystemDataModel {
     return {
       currency: new MappingField(new foundry.data.fields.NumberField({
         required: true, nullable: false, integer: true, min: 0, initial: 0
-      }), {initialKeys: CONFIG.DND5E.currencies, initialKeysOnly: true, label: "DND5E.Currency"})
+      }), {initialKeys: CONFIG.DND5A.currencies, initialKeysOnly: true, label: "DND5A.Currency"})
     };
   }
 
@@ -26,11 +26,11 @@ export default class CurrencyTemplate extends SystemDataModel {
    * @returns {number}
    */
   get currencyWeight() {
-    if ( !game.settings.get("dnd5e", "currencyWeight") ) return 0;
+    if ( !game.settings.get("dnd5a", "currencyWeight") ) return 0;
     const count = Object.values(this.currency).reduce((count, value) => count + value, 0);
-    const currencyPerWeight = game.settings.get("dnd5e", "metricWeightUnits")
-      ? CONFIG.DND5E.encumbrance.currencyPerWeight.metric
-      : CONFIG.DND5E.encumbrance.currencyPerWeight.imperial;
+    const currencyPerWeight = game.settings.get("dnd5a", "metricWeightUnits")
+      ? CONFIG.DND5A.encumbrance.currencyPerWeight.metric
+      : CONFIG.DND5A.encumbrance.currencyPerWeight.imperial;
     return count / currencyPerWeight;
   }
 }

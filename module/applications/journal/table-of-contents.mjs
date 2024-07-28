@@ -6,7 +6,7 @@ export default class TableOfContentsCompendium extends Compendium {
   static get defaultOptions() {
     return foundry.utils.mergeObject(super.defaultOptions, {
       classes: ["table-of-contents"],
-      template: "systems/dnd5e/templates/journal/table-of-contents.hbs",
+      template: "systems/dnd5a/templates/journal/table-of-contents.hbs",
       width: 800,
       height: 950,
       resizable: true,
@@ -38,7 +38,7 @@ export default class TableOfContentsCompendium extends Compendium {
     context.chapters = [];
     const specialEntries = [];
     for ( const entry of documents ) {
-      const flags = entry.flags?.dnd5e;
+      const flags = entry.flags?.dnd5a;
       if ( !flags ) continue;
       const type = flags.type ?? "chapter";
 
@@ -57,7 +57,7 @@ export default class TableOfContentsCompendium extends Compendium {
         name: flags.title ?? entry.name,
         pages: Array.from(entry.pages).map(({ flags, id, name, sort }) => ({
           id, sort, flags,
-          name: flags.dnd5e?.title ?? name,
+          name: flags.dnd5a?.title ?? name,
           entryId: entry.id
         }))
       };

@@ -9,7 +9,7 @@ const { ArrayField, BooleanField, NumberField, SchemaField, StringField } = foun
  * Data model template for item actions.
  *
  * @property {string} ability               Ability score to use when determining modifier.
- * @property {string} actionType            Action type as defined in `DND5E.itemActionTypes`.
+ * @property {string} actionType            Action type as defined in `DND5A.itemActionTypes`.
  * @property {object} attack                Information how attacks are handled.
  * @property {string} attack.bonus          Numeric or dice bonus to attack rolls.
  * @property {boolean} attack.flat          Is the attack bonus the only bonus to attack rolls?
@@ -33,30 +33,30 @@ export default class ActionTemplate extends ItemDataModel {
   /** @inheritdoc */
   static defineSchema() {
     return {
-      ability: new StringField({required: true, nullable: true, initial: null, label: "DND5E.AbilityModifier"}),
-      actionType: new StringField({required: true, nullable: true, initial: null, label: "DND5E.ItemActionType"}),
+      ability: new StringField({required: true, nullable: true, initial: null, label: "DND5A.AbilityModifier"}),
+      actionType: new StringField({required: true, nullable: true, initial: null, label: "DND5A.ItemActionType"}),
       attack: new SchemaField({
-        bonus: new FormulaField({required: true, label: "DND5E.ItemAttackBonus"}),
-        flat: new BooleanField({label: "DND5E.ItemAttackFlat"})
+        bonus: new FormulaField({required: true, label: "DND5A.ItemAttackBonus"}),
+        flat: new BooleanField({label: "DND5A.ItemAttackFlat"})
       }),
-      chatFlavor: new StringField({required: true, label: "DND5E.ChatFlavor"}),
+      chatFlavor: new StringField({required: true, label: "DND5A.ChatFlavor"}),
       critical: new SchemaField({
         threshold: new NumberField({
-          required: true, integer: true, initial: null, positive: true, label: "DND5E.ItemCritThreshold"
+          required: true, integer: true, initial: null, positive: true, label: "DND5A.ItemCritThreshold"
         }),
-        damage: new FormulaField({required: true, label: "DND5E.ItemCritExtraDamage"})
+        damage: new FormulaField({required: true, label: "DND5A.ItemCritExtraDamage"})
       }),
       damage: new SchemaField({
         parts: new ArrayField(new ArrayField(new StringField({nullable: true})), {required: true}),
-        versatile: new FormulaField({required: true, label: "DND5E.VersatileDamage"})
-      }, {label: "DND5E.Damage"}),
+        versatile: new FormulaField({required: true, label: "DND5A.VersatileDamage"})
+      }, {label: "DND5A.Damage"}),
       enchantment: new EnchantmentField(),
-      formula: new FormulaField({required: true, label: "DND5E.OtherFormula"}),
+      formula: new FormulaField({required: true, label: "DND5A.OtherFormula"}),
       save: new SchemaField({
-        ability: new StringField({required: true, blank: true, label: "DND5E.Ability"}),
-        dc: new NumberField({required: true, min: 0, integer: true, label: "DND5E.AbbreviationDC"}),
-        scaling: new StringField({required: true, blank: false, initial: "spell", label: "DND5E.ScalingFormula"})
-      }, {label: "DND5E.SavingThrow"}),
+        ability: new StringField({required: true, blank: true, label: "DND5A.Ability"}),
+        dc: new NumberField({required: true, min: 0, integer: true, label: "DND5A.AbbreviationDC"}),
+        scaling: new StringField({required: true, blank: false, initial: "spell", label: "DND5A.ScalingFormula"})
+      }, {label: "DND5A.SavingThrow"}),
       summons: new SummonsField()
     };
   }

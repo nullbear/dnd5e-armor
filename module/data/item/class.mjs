@@ -13,11 +13,11 @@ const { ArrayField, NumberField, SchemaField, StringField } = foundry.data.field
  *
  * @property {string} identifier        Identifier slug for this class.
  * @property {number} levels            Current number of levels in this class.
- * @property {string} hitDice           Denomination of hit dice available as defined in `DND5E.hitDieTypes`.
+ * @property {string} hitDice           Denomination of hit dice available as defined in `DND5A.hitDieTypes`.
  * @property {number} hitDiceUsed       Number of hit dice consumed.
  * @property {object[]} advancement     Advancement objects for this class.
  * @property {object} spellcasting      Details on class's spellcasting ability.
- * @property {string} spellcasting.progression  Spell progression granted by class as from `DND5E.spellProgression`.
+ * @property {string} spellcasting.progression  Spell progression granted by class as from `DND5A.spellProgression`.
  * @property {string} spellcasting.ability      Ability score to use for spellcasting.
  * @property {string} wealth            Formula used to determine starting wealth.
  */
@@ -25,25 +25,25 @@ export default class ClassData extends ItemDataModel.mixin(ItemDescriptionTempla
   /** @inheritdoc */
   static defineSchema() {
     return this.mergeSchema(super.defineSchema(), {
-      identifier: new IdentifierField({required: true, label: "DND5E.Identifier"}),
+      identifier: new IdentifierField({required: true, label: "DND5A.Identifier"}),
       levels: new NumberField({
-        required: true, nullable: false, integer: true, min: 0, initial: 1, label: "DND5E.ClassLevels"
+        required: true, nullable: false, integer: true, min: 0, initial: 1, label: "DND5A.ClassLevels"
       }),
       hitDice: new StringField({
-        required: true, initial: "d6", blank: false, label: "DND5E.HitDice",
+        required: true, initial: "d6", blank: false, label: "DND5A.HitDice",
         validate: v => /d\d+/.test(v), validationError: "must be a dice value in the format d#"
       }),
       hitDiceUsed: new NumberField({
-        required: true, nullable: false, integer: true, initial: 0, min: 0, label: "DND5E.HitDiceUsed"
+        required: true, nullable: false, integer: true, initial: 0, min: 0, label: "DND5A.HitDiceUsed"
       }),
-      advancement: new ArrayField(new AdvancementField(), {label: "DND5E.AdvancementTitle"}),
+      advancement: new ArrayField(new AdvancementField(), {label: "DND5A.AdvancementTitle"}),
       spellcasting: new SchemaField({
         progression: new StringField({
-          required: true, initial: "none", blank: false, label: "DND5E.SpellProgression"
+          required: true, initial: "none", blank: false, label: "DND5A.SpellProgression"
         }),
-        ability: new StringField({required: true, label: "DND5E.SpellAbility"})
-      }, {label: "DND5E.Spellcasting"}),
-      wealth: new FormulaField({label: "DND5E.StartingEquipment.Wealth.Label"})
+        ability: new StringField({required: true, label: "DND5A.SpellAbility"})
+      }, {label: "DND5A.Spellcasting"}),
+      wealth: new FormulaField({label: "DND5A.StartingEquipment.Wealth.Label"})
     });
   }
 
@@ -53,7 +53,7 @@ export default class ClassData extends ItemDataModel.mixin(ItemDescriptionTempla
   static get compendiumBrowserFilters() {
     return new Map([
       ["hasSpellcasting", {
-        label: "DND5E.CompendiumBrowser.Filters.HasSpellcasting",
+        label: "DND5A.CompendiumBrowser.Filters.HasSpellcasting",
         type: "boolean",
         createFilter: (filters, value, def) => {
           if ( value === 0 ) return;
@@ -164,6 +164,6 @@ export default class ClassData extends ItemDataModel.mixin(ItemDescriptionTempla
       needsMigration = true;
     }
 
-    if ( needsMigration ) foundry.utils.setProperty(source, "flags.dnd5e.persistSourceMigration", true);
+    if ( needsMigration ) foundry.utils.setProperty(source, "flags.dnd5a.persistSourceMigration", true);
   }
 }

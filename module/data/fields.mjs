@@ -12,7 +12,7 @@ export class AdvancementField extends foundry.data.fields.ObjectField {
    * @returns {typeof BaseAdvancement|null}  The BaseAdvancement class, or null.
    */
   getModelForType(type) {
-    let config = CONFIG.DND5E.advancementTypes[type];
+    let config = CONFIG.DND5A.advancementTypes[type];
     if ( config?.prototype instanceof Advancement ) {
       foundry.utils.logCompatibilityWarning(
         "Advancement type configuration changed into an object with `documentClass` defining the advancement class.",
@@ -175,8 +175,8 @@ export class FormulaField extends foundry.data.fields.StringField {
 export class IdentifierField extends foundry.data.fields.StringField {
   /** @override */
   _validateType(value) {
-    if ( !dnd5e.utils.validators.isValidIdentifier(value) ) {
-      throw new Error(game.i18n.localize("DND5E.IdentifierError"));
+    if ( !dnd5a.utils.validators.isValidIdentifier(value) ) {
+      throw new Error(game.i18n.localize("DND5A.IdentifierError"));
     }
   }
 }

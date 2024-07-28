@@ -9,8 +9,8 @@ export default class SizeConfig extends AdvancementConfig {
   /** @inheritdoc */
   static get defaultOptions() {
     return foundry.utils.mergeObject(super.defaultOptions, {
-      classes: ["dnd5e", "advancement", "size"],
-      template: "systems/dnd5e/templates/advancement/size-config.hbs"
+      classes: ["dnd5a", "advancement", "size"],
+      template: "systems/dnd5a/templates/advancement/size-config.hbs"
     });
   }
 
@@ -23,7 +23,7 @@ export default class SizeConfig extends AdvancementConfig {
         hint: this.advancement.automaticHint
       },
       showLevelSelector: false,
-      sizes: Object.entries(CONFIG.DND5E.actorSizes).reduce((obj, [key, { label }]) => {
+      sizes: Object.entries(CONFIG.DND5A.actorSizes).reduce((obj, [key, { label }]) => {
         obj[key] = { label, chosen: this.advancement.configuration.sizes.has(key) };
         return obj;
       }, {})

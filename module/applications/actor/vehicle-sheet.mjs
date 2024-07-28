@@ -8,7 +8,7 @@ export default class ActorSheet5eVehicle extends ActorSheet5e {
   /** @inheritDoc */
   static get defaultOptions() {
     return foundry.utils.mergeObject(super.defaultOptions, {
-      classes: ["dnd5e", "sheet", "actor", "vehicle"]
+      classes: ["dnd5a", "sheet", "actor", "vehicle"]
     });
   }
 
@@ -49,11 +49,11 @@ export default class ActorSheet5eVehicle extends ActorSheet5e {
     // Determine crewed status
     const isCrewed = item.system.crewed;
     context.toggleClass = isCrewed ? "active" : "";
-    context.toggleTitle = game.i18n.localize(`DND5E.${isCrewed ? "Crewed" : "Uncrewed"}`);
+    context.toggleTitle = game.i18n.localize(`DND5A.${isCrewed ? "Crewed" : "Uncrewed"}`);
 
     // Handle crew actions
     if ( item.type === "feat" && item.system.activation.type === "crew" ) {
-      context.cover = game.i18n.localize(`DND5E.${item.system.cover ? "CoverTotal" : "None"}`);
+      context.cover = game.i18n.localize(`DND5A.${item.system.cover ? "CoverTotal" : "None"}`);
       if ( item.system.cover === .5 ) context.cover = "½";
       else if ( item.system.cover === .75 ) context.cover = "¾";
       else if ( item.system.cover === null ) context.cover = "—";
@@ -70,42 +70,42 @@ export default class ActorSheet5eVehicle extends ActorSheet5e {
   /** @override */
   _prepareItems(context) {
     const cargoColumns = [{
-      label: game.i18n.localize("DND5E.Quantity"),
+      label: game.i18n.localize("DND5A.Quantity"),
       css: "item-qty",
       property: "quantity",
       editable: "Number"
     }];
 
     const equipmentColumns = [{
-      label: game.i18n.localize("DND5E.Quantity"),
+      label: game.i18n.localize("DND5A.Quantity"),
       css: "item-qty",
       property: "system.quantity",
       editable: "Number"
     }, {
-      label: game.i18n.localize("DND5E.AC"),
+      label: game.i18n.localize("DND5A.AC"),
       css: "item-ac",
       property: "system.armor.value"
     }, {
-      label: game.i18n.localize("DND5E.HP"),
+      label: game.i18n.localize("DND5A.HP"),
       css: "item-hp",
       property: "system.hp.value",
       maxProperty: "system.hp.max",
       editable: "Number"
     }, {
-      label: game.i18n.localize("DND5E.Threshold"),
+      label: game.i18n.localize("DND5A.Threshold"),
       css: "item-threshold",
       property: "threshold"
     }];
 
     const features = {
       actions: {
-        label: game.i18n.localize("DND5E.ActionPl"),
+        label: game.i18n.localize("DND5A.ActionPl"),
         items: [],
         hasActions: true,
         crewable: true,
         dataset: {type: "feat", "activation.type": "crew"},
         columns: [{
-          label: game.i18n.localize("DND5E.Cover"),
+          label: game.i18n.localize("DND5A.Cover"),
           css: "item-cover",
           property: "cover"
         }]
@@ -118,12 +118,12 @@ export default class ActorSheet5eVehicle extends ActorSheet5e {
         columns: equipmentColumns
       },
       passive: {
-        label: game.i18n.localize("DND5E.Features"),
+        label: game.i18n.localize("DND5A.Features"),
         items: [],
         dataset: {type: "feat"}
       },
       reactions: {
-        label: game.i18n.localize("DND5E.ReactionPl"),
+        label: game.i18n.localize("DND5A.ReactionPl"),
         items: [],
         dataset: {type: "feat", "activation.type": "reaction"}
       },
@@ -146,7 +146,7 @@ export default class ActorSheet5eVehicle extends ActorSheet5e {
 
     const cargo = {
       crew: {
-        label: game.i18n.localize("DND5E.VehicleCrew"),
+        label: game.i18n.localize("DND5A.VehicleCrew"),
         items: context.actor.system.cargo.crew,
         css: "cargo-row crew",
         editableName: true,
@@ -154,7 +154,7 @@ export default class ActorSheet5eVehicle extends ActorSheet5e {
         columns: cargoColumns
       },
       passengers: {
-        label: game.i18n.localize("DND5E.VehiclePassengers"),
+        label: game.i18n.localize("DND5A.VehiclePassengers"),
         items: context.actor.system.cargo.passengers,
         css: "cargo-row passengers",
         editableName: true,
@@ -162,21 +162,21 @@ export default class ActorSheet5eVehicle extends ActorSheet5e {
         columns: cargoColumns
       },
       cargo: {
-        label: game.i18n.localize("DND5E.VehicleCargo"),
+        label: game.i18n.localize("DND5A.VehicleCargo"),
         items: [],
         dataset: {type: "loot"},
         columns: [{
-          label: game.i18n.localize("DND5E.Quantity"),
+          label: game.i18n.localize("DND5A.Quantity"),
           css: "item-qty",
           property: "system.quantity",
           editable: "Number"
         }, {
-          label: game.i18n.localize("DND5E.Price"),
+          label: game.i18n.localize("DND5A.Price"),
           css: "item-price",
           property: "system.price.value",
           editable: "Number"
         }, {
-          label: game.i18n.localize("DND5E.Weight"),
+          label: game.i18n.localize("DND5A.Weight"),
           css: "item-weight",
           property: "system.weight.value",
           editable: "Number"
@@ -190,7 +190,7 @@ export default class ActorSheet5eVehicle extends ActorSheet5e {
       this._prepareCrewedItem(item, ctx);
 
       // Handle cargo explicitly
-      const isCargo = item.flags.dnd5e?.vehicleCargo === true;
+      const isCargo = item.flags.dnd5a?.vehicleCargo === true;
       if ( isCargo ) {
         cargo.cargo.items.push(item);
         continue;
@@ -231,7 +231,7 @@ export default class ActorSheet5eVehicle extends ActorSheet5e {
     super.activateListeners(html);
     if ( !this.isEditable ) return;
 
-    html[0].querySelector('[data-tab="cargo"] dnd5e-inventory')
+    html[0].querySelector('[data-tab="cargo"] dnd5a-inventory')
       .addEventListener("inventory", this._onInventoryEvent.bind(this));
 
     html.find(".cargo-row input")
@@ -308,7 +308,7 @@ export default class ActorSheet5eVehicle extends ActorSheet5e {
   async _onDropSingleItem(itemData) {
     const cargoTypes = ["weapon", "equipment", "consumable", "tool", "loot", "container"];
     const isCargo = cargoTypes.includes(itemData.type) && (this._tabs[0].active === "cargo");
-    foundry.utils.setProperty(itemData, "flags.dnd5e.vehicleCargo", isCargo);
+    foundry.utils.setProperty(itemData, "flags.dnd5a.vehicleCargo", isCargo);
     return super._onDropSingleItem(itemData);
   }
 }

@@ -17,8 +17,8 @@ export default class ItemDescriptionTemplate extends SystemDataModel {
   static defineSchema() {
     return {
       description: new SchemaField({
-        value: new HTMLField({required: true, nullable: true, label: "DND5E.Description"}),
-        chat: new HTMLField({required: true, nullable: true, label: "DND5E.DescriptionChat"})
+        value: new HTMLField({required: true, nullable: true, label: "DND5A.Description"}),
+        chat: new HTMLField({required: true, nullable: true, label: "DND5A.DescriptionChat"})
       }),
       source: new SourceField()
     };
@@ -55,7 +55,7 @@ export default class ItemDescriptionTemplate extends SystemDataModel {
    * @returns {Set<string>}
    */
   get validProperties() {
-    return new Set(CONFIG.DND5E.validProperties[this.parent.type] ?? []);
+    return new Set(CONFIG.DND5A.validProperties[this.parent.type] ?? []);
   }
 
   /* -------------------------------------------- */
@@ -69,11 +69,11 @@ export default class ItemDescriptionTemplate extends SystemDataModel {
    */
   static compendiumBrowserPropertiesFilter(type) {
     return {
-      label: "DND5E.Properties",
+      label: "DND5A.Properties",
       type: "set",
       config: {
-        choices: Object.entries(CONFIG.DND5E.itemProperties).reduce((obj, [k, v]) => {
-          if ( CONFIG.DND5E.validProperties[type]?.has(k) ) obj[k] = v;
+        choices: Object.entries(CONFIG.DND5A.itemProperties).reduce((obj, [k, v]) => {
+          if ( CONFIG.DND5A.validProperties[type]?.has(k) ) obj[k] = v;
           return obj;
         }, {}),
         keyPath: "system.properties",

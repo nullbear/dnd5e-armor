@@ -12,8 +12,8 @@ export default class SpellsUnlinkedConfig extends DocumentSheet {
   /** @inheritDoc */
   static get defaultOptions() {
     return foundry.utils.mergeObject(super.defaultOptions, {
-      classes: ["dnd5e", "unlinked-spell-config"],
-      template: "systems/dnd5e/templates/journal/page-spell-list-unlinked-config.hbs",
+      classes: ["dnd5a", "unlinked-spell-config"],
+      template: "systems/dnd5a/templates/journal/page-spell-list-unlinked-config.hbs",
       width: 400,
       height: "auto",
       sheetConfig: false
@@ -35,7 +35,7 @@ export default class SpellsUnlinkedConfig extends DocumentSheet {
   /** @inheritDoc */
   get title() {
     return `${game.i18n.localize(
-      "JOURNALENTRYPAGE.DND5E.SpellList.UnlinkedSpells.Configuration")}: ${this.document.name}`;
+      "JOURNALENTRYPAGE.DND5A.SpellList.UnlinkedSpells.Configuration")}: ${this.document.name}`;
   }
 
   /* -------------------------------------------- */
@@ -48,7 +48,7 @@ export default class SpellsUnlinkedConfig extends DocumentSheet {
       ...super.getData(),
       ...this.document.system.unlinkedSpells.find(u => u._id === this.unlinkedId),
       appId: this.id,
-      CONFIG: CONFIG.DND5E
+      CONFIG: CONFIG.DND5A
     };
     return context;
   }

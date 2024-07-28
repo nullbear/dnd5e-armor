@@ -8,7 +8,7 @@ import TraitsFields from "./templates/traits.mjs";
 /**
  * System data definition for Vehicles.
  *
- * @property {string} vehicleType                      Type of vehicle as defined in `DND5E.vehicleTypes`.
+ * @property {string} vehicleType                      Type of vehicle as defined in `DND5A.vehicleTypes`.
  * @property {object} attributes
  * @property {object} attributes.ac
  * @property {number} attributes.ac.flat               Flat value used for flat or natural armor calculation.
@@ -51,73 +51,73 @@ export default class VehicleData extends CommonTemplate {
   /** @inheritdoc */
   static defineSchema() {
     return this.mergeSchema(super.defineSchema(), {
-      vehicleType: new foundry.data.fields.StringField({required: true, initial: "water", label: "DND5E.VehicleType"}),
+      vehicleType: new foundry.data.fields.StringField({required: true, initial: "water", label: "DND5A.VehicleType"}),
       attributes: new foundry.data.fields.SchemaField({
         ...AttributesFields.common,
         ac: new foundry.data.fields.SchemaField({
-          flat: new foundry.data.fields.NumberField({integer: true, min: 0, label: "DND5E.ArmorClassFlat"}),
-          calc: new foundry.data.fields.StringField({initial: "default", label: "DND5E.ArmorClassCalculation"}),
-          formula: new FormulaField({deterministic: true, label: "DND5E.ArmorClassFormula"}),
-          motionless: new foundry.data.fields.StringField({required: true, label: "DND5E.ArmorClassMotionless"})
-        }, {label: "DND5E.ArmorClass"}),
+          flat: new foundry.data.fields.NumberField({integer: true, min: 0, label: "DND5A.ArmorClassFlat"}),
+          calc: new foundry.data.fields.StringField({initial: "default", label: "DND5A.ArmorClassCalculation"}),
+          formula: new FormulaField({deterministic: true, label: "DND5A.ArmorClassFormula"}),
+          motionless: new foundry.data.fields.StringField({required: true, label: "DND5A.ArmorClassMotionless"})
+        }, {label: "DND5A.ArmorClass"}),
         hp: new foundry.data.fields.SchemaField({
           value: new foundry.data.fields.NumberField({
-            nullable: true, integer: true, min: 0, initial: null, label: "DND5E.HitPointsCurrent"
+            nullable: true, integer: true, min: 0, initial: null, label: "DND5A.HitPointsCurrent"
           }),
           max: new foundry.data.fields.NumberField({
-            nullable: true, integer: true, min: 0, initial: null, label: "DND5E.HitPointsMax"
+            nullable: true, integer: true, min: 0, initial: null, label: "DND5A.HitPointsMax"
           }),
-          temp: new foundry.data.fields.NumberField({integer: true, initial: 0, min: 0, label: "DND5E.HitPointsTemp"}),
-          tempmax: new foundry.data.fields.NumberField({integer: true, initial: 0, label: "DND5E.HitPointsTempMax"}),
+          temp: new foundry.data.fields.NumberField({integer: true, initial: 0, min: 0, label: "DND5A.HitPointsTemp"}),
+          tempmax: new foundry.data.fields.NumberField({integer: true, initial: 0, label: "DND5A.HitPointsTempMax"}),
           dt: new foundry.data.fields.NumberField({
-            required: true, integer: true, min: 0, label: "DND5E.DamageThreshold"
+            required: true, integer: true, min: 0, label: "DND5A.DamageThreshold"
           }),
           mt: new foundry.data.fields.NumberField({
-            required: true, integer: true, min: 0, label: "DND5E.VehicleMishapThreshold"
+            required: true, integer: true, min: 0, label: "DND5A.VehicleMishapThreshold"
           })
-        }, {label: "DND5E.HitPoints"}),
+        }, {label: "DND5A.HitPoints"}),
         actions: new foundry.data.fields.SchemaField({
-          stations: new foundry.data.fields.BooleanField({required: true, label: "DND5E.VehicleActionStations"}),
+          stations: new foundry.data.fields.BooleanField({required: true, label: "DND5A.VehicleActionStations"}),
           value: new foundry.data.fields.NumberField({
-            required: true, nullable: false, integer: true, initial: 0, min: 0, label: "DND5E.VehicleActionMax"
+            required: true, nullable: false, integer: true, initial: 0, min: 0, label: "DND5A.VehicleActionMax"
           }),
           thresholds: new foundry.data.fields.SchemaField({
             2: new foundry.data.fields.NumberField({
-              required: true, integer: true, min: 0, label: "DND5E.VehicleActionThresholdsFull"
+              required: true, integer: true, min: 0, label: "DND5A.VehicleActionThresholdsFull"
             }),
             1: new foundry.data.fields.NumberField({
-              required: true, integer: true, min: 0, label: "DND5E.VehicleActionThresholdsMid"
+              required: true, integer: true, min: 0, label: "DND5A.VehicleActionThresholdsMid"
             }),
             0: new foundry.data.fields.NumberField({
-              required: true, integer: true, min: 0, label: "DND5E.VehicleActionThresholdsMin"
+              required: true, integer: true, min: 0, label: "DND5A.VehicleActionThresholdsMin"
             })
-          }, {label: "DND5E.VehicleActionThresholds"})
-        }, {label: "DND5E.VehicleActions"}),
+          }, {label: "DND5A.VehicleActionThresholds"})
+        }, {label: "DND5A.VehicleActions"}),
         capacity: new foundry.data.fields.SchemaField({
-          creature: new foundry.data.fields.StringField({required: true, label: "DND5E.VehicleCreatureCapacity"}),
+          creature: new foundry.data.fields.StringField({required: true, label: "DND5A.VehicleCreatureCapacity"}),
           cargo: new foundry.data.fields.NumberField({
-            required: true, nullable: false, integer: true, initial: 0, min: 0, label: "DND5E.VehicleCargoCapacity"
+            required: true, nullable: false, integer: true, initial: 0, min: 0, label: "DND5A.VehicleCargoCapacity"
           })
-        }, {label: "DND5E.VehicleCargoCrew"})
-      }, {label: "DND5E.Attributes"}),
+        }, {label: "DND5A.VehicleCargoCrew"})
+      }, {label: "DND5A.Attributes"}),
       details: new foundry.data.fields.SchemaField({
         ...DetailsFields.common,
         source: new SourceField()
-      }, {label: "DND5E.Details"}),
+      }, {label: "DND5A.Details"}),
       traits: new foundry.data.fields.SchemaField({
         ...TraitsFields.common,
-        size: new foundry.data.fields.StringField({required: true, initial: "lg", label: "DND5E.Size"}),
-        di: TraitsFields.makeDamageTrait({label: "DND5E.DamImm"}, {initial: ["poison", "psychic"]}),
-        ci: TraitsFields.makeSimpleTrait({label: "DND5E.ConImm"}, {initial: [
+        size: new foundry.data.fields.StringField({required: true, initial: "lg", label: "DND5A.Size"}),
+        di: TraitsFields.makeDamageTrait({label: "DND5A.DamImm"}, {initial: ["poison", "psychic"]}),
+        ci: TraitsFields.makeSimpleTrait({label: "DND5A.ConImm"}, {initial: [
           "blinded", "charmed", "deafened", "frightened", "paralyzed",
           "petrified", "poisoned", "stunned", "unconscious"
         ]}),
-        dimensions: new foundry.data.fields.StringField({required: true, label: "DND5E.Dimensions"})
-      }, {label: "DND5E.Traits"}),
+        dimensions: new foundry.data.fields.StringField({required: true, label: "DND5A.Dimensions"})
+      }, {label: "DND5A.Traits"}),
       cargo: new foundry.data.fields.SchemaField({
-        crew: new foundry.data.fields.ArrayField(makePassengerData(), {label: "DND5E.VehicleCrew"}),
-        passengers: new foundry.data.fields.ArrayField(makePassengerData(), {label: "DND5E.VehiclePassengers"})
-      }, {label: "DND5E.VehicleCrewPassengers"})
+        crew: new foundry.data.fields.ArrayField(makePassengerData(), {label: "DND5A.VehicleCrew"}),
+        passengers: new foundry.data.fields.ArrayField(makePassengerData(), {label: "DND5A.VehiclePassengers"})
+      }, {label: "DND5A.VehicleCrewPassengers"})
     });
   }
 
@@ -162,7 +162,7 @@ export default class VehicleData extends CommonTemplate {
 
     this.prepareAbilities({ rollData, originalSaves });
     AttributesFields.prepareEncumbrance.call(this, rollData, { validateItem: item =>
-      (item.flags.dnd5e?.vehicleCargo === true) || !["weapon", "equipment"].includes(item.type)
+      (item.flags.dnd5a?.vehicleCargo === true) || !["weapon", "equipment"].includes(item.type)
     });
     AttributesFields.prepareHitPoints.call(this, this.attributes.hp);
   }
@@ -185,9 +185,9 @@ export default class VehicleData extends CommonTemplate {
  */
 function makePassengerData(schemaOptions={}) {
   return new foundry.data.fields.SchemaField({
-    name: new foundry.data.fields.StringField({required: true, label: "DND5E.VehiclePassengerName"}),
+    name: new foundry.data.fields.StringField({required: true, label: "DND5A.VehiclePassengerName"}),
     quantity: new foundry.data.fields.NumberField({
-      required: true, nullable: false, integer: true, initial: 0, min: 0, label: "DND5E.VehiclePassengerQuantity"
+      required: true, nullable: false, integer: true, initial: 0, min: 0, label: "DND5A.VehiclePassengerQuantity"
     })
   }, schemaOptions);
 }

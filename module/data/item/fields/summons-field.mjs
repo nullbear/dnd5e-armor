@@ -61,43 +61,43 @@ export class SummonsData extends foundry.abstract.DataModel {
     return {
       bonuses: new SchemaField({
         ac: new FormulaField({
-          label: "DND5E.Summoning.Bonuses.ArmorClass.Label", hint: "DND5E.Summoning.Bonuses.ArmorClass.hint"
+          label: "DND5A.Summoning.Bonuses.ArmorClass.Label", hint: "DND5A.Summoning.Bonuses.ArmorClass.hint"
         }),
         hd: new FormulaField({
-          label: "DND5E.Summoning.Bonuses.HitDice.Label", hint: "DND5E.Summoning.Bonuses.HitDice.hint"
+          label: "DND5A.Summoning.Bonuses.HitDice.Label", hint: "DND5A.Summoning.Bonuses.HitDice.hint"
         }),
         hp: new FormulaField({
-          label: "DND5E.Summoning.Bonuses.HitPoints.Label", hint: "DND5E.Summoning.Bonuses.HitPoints.hint"
+          label: "DND5A.Summoning.Bonuses.HitPoints.Label", hint: "DND5A.Summoning.Bonuses.HitPoints.hint"
         }),
         attackDamage: new FormulaField({
-          label: "DND5E.Summoning.Bonuses.Attack.Label", hint: "DND5E.Summoning.Bonuses.Attack.Hint"
+          label: "DND5A.Summoning.Bonuses.Attack.Label", hint: "DND5A.Summoning.Bonuses.Attack.Hint"
         }),
         saveDamage: new FormulaField({
-          label: "DND5E.Summoning.Bonuses.Saves.Label", hint: "DND5E.Summoning.Bonuses.Saves.Hint"
+          label: "DND5A.Summoning.Bonuses.Saves.Label", hint: "DND5A.Summoning.Bonuses.Saves.Hint"
         }),
         healing: new FormulaField({
-          label: "DND5E.Summoning.Bonuses.Healing.Label", hint: "DND5E.Summoning.Bonuses.Healing.Hint"
+          label: "DND5A.Summoning.Bonuses.Healing.Label", hint: "DND5A.Summoning.Bonuses.Healing.Hint"
         })
       }),
       classIdentifier: new IdentifierField(),
       creatureSizes: new SetField(new StringField(), {
-        label: "DND5E.Summoning.CreatureSizes.Label", hint: "DND5E.Summoning.CreatureSizes.Hint"
+        label: "DND5A.Summoning.CreatureSizes.Label", hint: "DND5A.Summoning.CreatureSizes.Hint"
       }),
       creatureTypes: new SetField(new StringField(), {
-        label: "DND5E.Summoning.CreatureTypes.Label", hint: "DND5E.Summoning.CreatureTypes.Hint"
+        label: "DND5A.Summoning.CreatureTypes.Label", hint: "DND5A.Summoning.CreatureTypes.Hint"
       }),
       match: new SchemaField({
         attacks: new BooleanField({
-          label: "DND5E.Summoning.Match.Attacks.Label", hint: "DND5E.Summoning.Match.Attacks.Hint"
+          label: "DND5A.Summoning.Match.Attacks.Label", hint: "DND5A.Summoning.Match.Attacks.Hint"
         }),
         proficiency: new BooleanField({
-          label: "DND5E.Summoning.Match.Proficiency.Label", hint: "DND5E.Summoning.Match.Proficiency.Hint"
+          label: "DND5A.Summoning.Match.Proficiency.Label", hint: "DND5A.Summoning.Match.Proficiency.Hint"
         }),
         saves: new BooleanField({
-          label: "DND5E.Summoning.Match.Saves.Label", hint: "DND5E.Summoning.Match.Saves.Hint"
+          label: "DND5A.Summoning.Match.Saves.Label", hint: "DND5A.Summoning.Match.Saves.Hint"
         })
       }),
-      mode: new StringField({label: "DND5E.Summoning.Mode.Label", hint: "DND5E.Summoning.Mode.Hint"}),
+      mode: new StringField({label: "DND5A.Summoning.Mode.Label", hint: "DND5A.Summoning.Mode.Hint"}),
       profiles: new ArrayField(new SchemaField({
         _id: new DocumentIdField({initial: () => foundry.utils.randomID()}),
         count: new FormulaField(),
@@ -111,7 +111,7 @@ export class SummonsData extends foundry.abstract.DataModel {
         uuid: new StringField()
       })),
       prompt: new BooleanField({
-        initial: true, label: "DND5E.Summoning.Prompt.Label", hint: "DND5E.Summoning.Prompt.Hint"
+        initial: true, label: "DND5A.Summoning.Prompt.Label", hint: "DND5A.Summoning.Prompt.Hint"
       })
     };
   }
@@ -125,7 +125,7 @@ export class SummonsData extends foundry.abstract.DataModel {
    * @type {boolean}
    */
   static get canSummon() {
-    return game.user.can("TOKEN_CREATE") && (game.user.isGM || game.settings.get("dnd5e", "allowSummoning"));
+    return game.user.can("TOKEN_CREATE") && (game.user.isGM || game.settings.get("dnd5a", "allowSummoning"));
   }
 
   get canSummon() {
@@ -167,7 +167,7 @@ export class SummonsData extends foundry.abstract.DataModel {
   get summonedCreatures() {
     if ( !this.item.actor ) return [];
     return SummonsData.summonedCreatures(this.item.actor)
-      .filter(i => i?.getFlag("dnd5e", "summon.origin") === this.item.uuid);
+      .filter(i => i?.getFlag("dnd5a", "summon.origin") === this.item.uuid);
   }
 
   /* -------------------------------------------- */
@@ -193,19 +193,19 @@ export class SummonsData extends foundry.abstract.DataModel {
 
     const profile = this.profiles.find(p => p._id === profileId);
     if ( !profile ) {
-      throw new Error(game.i18n.format("DND5E.Summoning.Warning.NoProfile", { profileId, item: this.item.name }));
+      throw new Error(game.i18n.format("DND5A.Summoning.Warning.NoProfile", { profileId, item: this.item.name }));
     }
 
     /**
      * A hook event that fires before summoning is performed.
-     * @function dnd5e.preSummon
+     * @function dnd5a.preSummon
      * @memberof hookEvents
      * @param {Item5e} item               The item that is performing the summoning.
      * @param {SummonsProfile} profile    Profile used for summoning.
      * @param {SummoningOptions} options  Additional summoning options.
      * @returns {boolean}                 Explicitly return `false` to prevent summoning.
      */
-    if ( Hooks.call("dnd5e.preSummon", this.item, profile, options) === false ) return;
+    if ( Hooks.call("dnd5a.preSummon", this.item, profile, options) === false ) return;
 
     // Fetch the actor that will be summoned
     const summonUuid = this.mode === "cr" ? await this.queryActor(profile) : profile.uuid;
@@ -214,7 +214,7 @@ export class SummonsData extends foundry.abstract.DataModel {
 
     // Verify ownership of actor
     if ( !actor.isOwner ) {
-      throw new Error(game.i18n.format("DND5E.Summoning.Warning.NoOwnership", { actor: actor.name }));
+      throw new Error(game.i18n.format("DND5A.Summoning.Warning.NoOwnership", { actor: actor.name }));
     }
 
     const tokensData = [];
@@ -235,7 +235,7 @@ export class SummonsData extends foundry.abstract.DataModel {
         /**
          * A hook event that fires before a specific token is summoned. After placement has been determined but before
          * the final token data is constructed.
-         * @function dnd5e.preSummonToken
+         * @function dnd5a.preSummonToken
          * @memberof hookEvents
          * @param {Item5e} item               The item that is performing the summoning.
          * @param {SummonsProfile} profile    Profile used for summoning.
@@ -243,21 +243,21 @@ export class SummonsData extends foundry.abstract.DataModel {
          * @param {SummoningOptions} options  Additional summoning options.
          * @returns {boolean}                 Explicitly return `false` to prevent this token from being summoned.
          */
-        if ( Hooks.call("dnd5e.preSummonToken", this.item, profile, tokenUpdateData, options) === false ) continue;
+        if ( Hooks.call("dnd5a.preSummonToken", this.item, profile, tokenUpdateData, options) === false ) continue;
 
         // Create a token document and apply updates
         const tokenData = await this.getTokenData(tokenUpdateData);
 
         /**
          * A hook event that fires after token creation data is prepared, but before summoning occurs.
-         * @function dnd5e.summonToken
+         * @function dnd5a.summonToken
          * @memberof hookEvents
          * @param {Item5e} item               The item that is performing the summoning.
          * @param {SummonsProfile} profile    Profile used for summoning.
          * @param {object} tokenData          Data for creating a token.
          * @param {SummoningOptions} options  Additional summoning options.
          */
-        Hooks.callAll("dnd5e.summonToken", this.item, profile, tokenData, options);
+        Hooks.callAll("dnd5a.summonToken", this.item, profile, tokenData, options);
 
         tokensData.push(tokenData);
       }
@@ -269,14 +269,14 @@ export class SummonsData extends foundry.abstract.DataModel {
 
     /**
      * A hook event that fires when summoning is complete.
-     * @function dnd5e.postSummon
+     * @function dnd5a.postSummon
      * @memberof hookEvents
      * @param {Item5e} item               The item that is performing the summoning.
      * @param {SummonsProfile} profile    Profile used for summoning.
      * @param {Token5e[]} tokens          Tokens that have been created.
      * @param {SummoningOptions} options  Additional summoning options.
      */
-    Hooks.callAll("dnd5e.postSummon", this.item, profile, createdTokens, options);
+    Hooks.callAll("dnd5a.postSummon", this.item, profile, createdTokens, options);
   }
 
   /* -------------------------------------------- */
@@ -288,36 +288,36 @@ export class SummonsData extends foundry.abstract.DataModel {
    */
   async fetchActor(uuid) {
     const actor = await fromUuid(uuid);
-    if ( !actor ) throw new Error(game.i18n.format("DND5E.Summoning.Warning.NoActor", { uuid }));
+    if ( !actor ) throw new Error(game.i18n.format("DND5A.Summoning.Warning.NoActor", { uuid }));
 
     const actorLink = actor.prototypeToken.actorLink;
-    if ( !actor.pack && (!actorLink || actor.getFlag("dnd5e", "summon.origin") === this.item.uuid )) return actor;
+    if ( !actor.pack && (!actorLink || actor.getFlag("dnd5a", "summon.origin") === this.item.uuid )) return actor;
 
     // Search world actors to see if any usable summoned actor instances are present from prior summonings.
     // Linked actors must match the summoning origin (item) to be considered.
     const localActor = game.actors.find(a =>
       // Has been cloned for summoning use
-      a.getFlag("dnd5e", "summonedCopy")
+      a.getFlag("dnd5a", "summonedCopy")
       // Sourced from the desired actor UUID
       && (a.getFlag("core", "sourceId") === uuid)
       // Unlinked or created from this item specifically
-      && ((a.getFlag("dnd5e", "summon.origin") === this.item.uuid) || !a.prototypeToken.actorLink)
+      && ((a.getFlag("dnd5a", "summon.origin") === this.item.uuid) || !a.prototypeToken.actorLink)
     );
     if ( localActor ) return localActor;
 
     // Check permissions to create actors before importing
-    if ( !game.user.can("ACTOR_CREATE") ) throw new Error(game.i18n.localize("DND5E.Summoning.Warning.CreateActor"));
+    if ( !game.user.can("ACTOR_CREATE") ) throw new Error(game.i18n.localize("DND5A.Summoning.Warning.CreateActor"));
 
     // No suitable world actor was found, create a new actor for this summoning instance.
     if ( actor.pack ) {
       // Template actor resides only in compendium, import the actor into the world and set the flag.
       return game.actors.importFromCompendium(game.packs.get(actor.pack), actor.id, {
-        "flags.dnd5e.summonedCopy": true
+        "flags.dnd5a.summonedCopy": true
       });
     } else {
       // Template actor (linked) found in world, create a copy for this user's item.
       return actor.clone({
-        "flags.dnd5e.summonedCopy": true,
+        "flags.dnd5a.summonedCopy": true,
         "flags.core.sourceId": actor.uuid,
         "_stats.compendiumSource": actor.uuid
       }, {save: true});
@@ -363,7 +363,7 @@ export class SummonsData extends foundry.abstract.DataModel {
     const prof = rollData.attributes?.prof ?? 0;
 
     // Add flags
-    actorUpdates["flags.dnd5e.summon"] = {
+    actorUpdates["flags.dnd5a.summon"] = {
       level: this.relevantLevel,
       mod: rollData.mod,
       origin: this.item.uuid,
@@ -373,7 +373,7 @@ export class SummonsData extends foundry.abstract.DataModel {
     // Match proficiency
     if ( this.match.proficiency ) {
       const proficiencyEffect = new ActiveEffect({
-        _id: staticID("dnd5eMatchProficiency"),
+        _id: staticID("dnd5aMatchProficiency"),
         changes: [{
           key: "system.attributes.prof",
           mode: CONST.ACTIVE_EFFECT_MODES.OVERRIDE,
@@ -381,7 +381,7 @@ export class SummonsData extends foundry.abstract.DataModel {
         }],
         disabled: false,
         icon: "icons/skills/targeting/crosshair-bars-yellow.webp",
-        name: game.i18n.localize("DND5E.Summoning.Match.Proficiency.Label")
+        name: game.i18n.localize("DND5A.Summoning.Match.Proficiency.Label")
       });
       actorUpdates.effects.push(proficiencyEffect.toObject());
     }
@@ -395,7 +395,7 @@ export class SummonsData extends foundry.abstract.DataModel {
           actorUpdates["system.attributes.ac.flat"] = (actor.system.attributes.ac.flat ?? 0) + acBonus.total;
         } else {
           actorUpdates.effects.push((new ActiveEffect({
-            _id: staticID("dnd5eACBonus"),
+            _id: staticID("dnd5aACBonus"),
             changes: [{
               key: "system.attributes.ac.bonus",
               mode: CONST.ACTIVE_EFFECT_MODES.ADD,
@@ -403,7 +403,7 @@ export class SummonsData extends foundry.abstract.DataModel {
             }],
             disabled: false,
             icon: "icons/magic/defensive/shield-barrier-blue.webp",
-            name: game.i18n.localize("DND5E.Summoning.Bonuses.ArmorClass.Label")
+            name: game.i18n.localize("DND5A.Summoning.Bonuses.ArmorClass.Label")
           })).toObject());
         }
       }
@@ -415,7 +415,7 @@ export class SummonsData extends foundry.abstract.DataModel {
       await hdBonus.evaluate();
       if ( hdBonus.total ) {
         actorUpdates.effects.push((new ActiveEffect({
-          _id: staticID("dnd5eHDBonus"),
+          _id: staticID("dnd5aHDBonus"),
           changes: [{
             key: "system.attributes.hd.max",
             mode: CONST.ACTIVE_EFFECT_MODES.ADD,
@@ -423,7 +423,7 @@ export class SummonsData extends foundry.abstract.DataModel {
           }],
           disabled: false,
           icon: "icons/sundries/gaming/dice-runed-brown.webp",
-          name: game.i18n.localize("DND5E.Summoning.Bonuses.HitDice.Label")
+          name: game.i18n.localize("DND5A.Summoning.Bonuses.HitDice.Label")
         })).toObject());
       }
     }
@@ -440,7 +440,7 @@ export class SummonsData extends foundry.abstract.DataModel {
         // Helper function for modifying max HP ('bonuses.overall' or 'max')
         const maxHpEffect = hpField => {
           return (new ActiveEffect({
-            _id: staticID("dnd5eHPBonus"),
+            _id: staticID("dnd5aHPBonus"),
             changes: [{
               key: `system.attributes.hp.${hpField}`,
               mode: CONST.ACTIVE_EFFECT_MODES.ADD,
@@ -448,7 +448,7 @@ export class SummonsData extends foundry.abstract.DataModel {
             }],
             disabled: false,
             icon: "icons/magic/life/heart-glowing-red.webp",
-            name: game.i18n.localize("DND5E.Summoning.Bonuses.HitPoints.Label")
+            name: game.i18n.localize("DND5A.Summoning.Bonuses.HitPoints.Label")
           })).toObject();
         };
 
@@ -470,7 +470,7 @@ export class SummonsData extends foundry.abstract.DataModel {
     // Change creature size
     if ( this.creatureSizes.size ) {
       const size = this.creatureSizes.has(options.creatureSize) ? options.creatureSize : this.creatureSizes.first();
-      const config = CONFIG.DND5E.actorSizes[size];
+      const config = CONFIG.DND5A.actorSizes[size];
       if ( config ) {
         actorUpdates["system.traits.size"] = size;
         tokenUpdates.width = config.token ?? 1;
@@ -538,14 +538,14 @@ export class SummonsData extends foundry.abstract.DataModel {
 
       if ( changes.length ) {
         const effect = (new ActiveEffect({
-          _id: staticID("dnd5eItemChanges"),
+          _id: staticID("dnd5aItemChanges"),
           changes,
           disabled: false,
           icon: "icons/skills/melee/strike-slashes-orange.webp",
-          name: game.i18n.localize("DND5E.Summoning.ItemChanges.Label"),
+          name: game.i18n.localize("DND5A.Summoning.ItemChanges.Label"),
           origin: this.item.uuid,
           flags: {
-            dnd5e: { type: "enchantment" }
+            dnd5a: { type: "enchantment" }
           }
         })).toObject();
         actorUpdates.items.push({ _id: item.id, effects: [effect] });
@@ -568,7 +568,7 @@ export class SummonsData extends foundry.abstract.DataModel {
     // Ensure the token matches the final size
     if ( this.creatureSizes.size ) {
       const size = this.creatureSizes.has(options.creatureSize) ? options.creatureSize : this.creatureSizes.first();
-      const config = CONFIG.DND5E.actorSizes[size];
+      const config = CONFIG.DND5A.actorSizes[size];
       if ( config ) token = token.clone({ width: config.token ?? 1, height: config.token ?? 1 });
     }
 
@@ -599,7 +599,7 @@ export class SummonsData extends foundry.abstract.DataModel {
     if ( actor.prototypeToken.randomImg && !game.user.can("FILES_BROWSE") ) {
       tokenUpdates.texture ??= {};
       tokenUpdates.texture.src ??= actor.img;
-      ui.notifications.warn("DND5E.Summoning.Warning.Wildcard", { localize: true });
+      ui.notifications.warn("DND5A.Summoning.Warning.Wildcard", { localize: true });
     }
 
     delete placement.prototypeToken;
@@ -645,7 +645,7 @@ export class SummonsData extends foundry.abstract.DataModel {
       switch ( this.mode ) {
         case "cr":
           const cr = simplifyBonus(profile.cr, rollData);
-          label = game.i18n.format("DND5E.Summoning.Profile.ChallengeRatingLabel", { cr: formatCR(cr) });
+          label = game.i18n.format("DND5A.Summoning.Profile.ChallengeRatingLabel", { cr: formatCR(cr) });
           break;
         default:
           const doc = fromUuidSync(profile.uuid);

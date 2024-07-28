@@ -15,7 +15,7 @@ export default class JournalRulePageSheet extends JournalTextPageSheet {
   /** @inheritdoc */
   get template() {
     return this.isEditable
-      ? "systems/dnd5e/templates/journal/page-rule-edit.hbs"
+      ? "systems/dnd5a/templates/journal/page-rule-edit.hbs"
       : "templates/journal/page-text-view.html";
   }
 
@@ -24,7 +24,7 @@ export default class JournalRulePageSheet extends JournalTextPageSheet {
   /** @inheritdoc */
   async getData(options) {
     const context = await super.getData(options);
-    context.CONFIG = CONFIG.DND5E;
+    context.CONFIG = CONFIG.DND5A;
     context.enrichedTooltip = await TextEditor.enrichHTML(this.object.system.tooltip, {
       relativeTo: this.object,
       secrets: this.object.isOwner,

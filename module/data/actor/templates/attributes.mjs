@@ -29,8 +29,8 @@ export default class AttributesFields {
     return {
       init: new RollConfigField({
         ability: "",
-        bonus: new FormulaField({required: true, label: "DND5E.InitiativeBonus"})
-      }, { label: "DND5E.Initiative" }),
+        bonus: new FormulaField({required: true, label: "DND5A.InitiativeBonus"})
+      }, { label: "DND5A.Initiative" }),
       movement: new MovementField()
     };
   }
@@ -65,23 +65,23 @@ export default class AttributesFields {
     return {
       attunement: new foundry.data.fields.SchemaField({
         max: new foundry.data.fields.NumberField({
-          required: true, nullable: false, integer: true, min: 0, initial: 3, label: "DND5E.AttunementMax"
+          required: true, nullable: false, integer: true, min: 0, initial: 3, label: "DND5A.AttunementMax"
         })
-      }, {label: "DND5E.Attunement"}),
+      }, {label: "DND5A.Attunement"}),
       senses: new SensesField(),
       spellcasting: new foundry.data.fields.StringField({
-        required: true, blank: true, initial: "int", label: "DND5E.SpellAbility"
+        required: true, blank: true, initial: "int", label: "DND5A.SpellAbility"
       }),
       exhaustion: new foundry.data.fields.NumberField({
-        required: true, nullable: false, integer: true, min: 0, initial: 0, label: "DND5E.Exhaustion"
+        required: true, nullable: false, integer: true, min: 0, initial: 0, label: "DND5A.Exhaustion"
       }),
       concentration: new RollConfigField({
         ability: "",
         bonuses: new foundry.data.fields.SchemaField({
-          save: new FormulaField({required: true, label: "DND5E.SaveBonus"})
+          save: new FormulaField({required: true, label: "DND5A.SaveBonus"})
         }),
-        limit: new foundry.data.fields.NumberField({integer: true, min: 0, initial: 1, label: "DND5E.AttrConcentration.Limit"})
-      }, {label: "DND5E.Concentration"})
+        limit: new foundry.data.fields.NumberField({integer: true, min: 0, initial: 1, label: "DND5A.AttrConcentration.Limit"})
+      }, {label: "DND5A.Concentration"})
     };
   }
 
@@ -141,7 +141,7 @@ export default class AttributesFields {
    */
   static prepareConcentration(rollData) {
     const { concentration } = this.attributes;
-    const abilityId = concentration.ability || CONFIG.DND5E.defaultAbilities.concentration;
+    const abilityId = concentration.ability || CONFIG.DND5A.defaultAbilities.concentration;
     const ability = this.abilities?.[abilityId] || {};
     const bonus = simplifyBonus(concentration.bonuses.save, rollData);
     concentration.save = (ability.save ?? 0) + bonus;
@@ -157,11 +157,11 @@ export default class AttributesFields {
    * @param {Function} [options.validateItem]  Determine whether an item's weight should count toward encumbrance.
    */
   static prepareEncumbrance(rollData, { validateItem }={}) {
-    const config = CONFIG.DND5E.encumbrance;
+    const config = CONFIG.DND5A.encumbrance;
     const encumbrance = this.attributes.encumbrance ??= {};
-    const baseUnits = CONFIG.DND5E.encumbrance.baseUnits[this.parent.type]
-      ?? CONFIG.DND5E.encumbrance.baseUnits.default;
-    const unitSystem = game.settings.get("dnd5e", "metricWeightUnits") ? "metric" : "imperial";
+    const baseUnits = CONFIG.DND5A.encumbrance.baseUnits[this.parent.type]
+      ?? CONFIG.DND5A.encumbrance.baseUnits.default;
+    const unitSystem = game.settings.get("dnd5a", "metricWeightUnits") ? "metric" : "imperial";
 
     // Get the total weight from items
     let weight = this.parent.items
@@ -170,7 +170,7 @@ export default class AttributesFields {
 
     // [Optional] add Currency Weight (for non-transformed actors)
     const currency = this.currency;
-    if ( game.settings.get("dnd5e", "currencyWeight") && currency ) {
+    if ( game.settings.get("dnd5a", "currencyWeight") && currency ) {
       const numCoins = Object.values(currency).reduce((val, denom) => val + Math.max(denom, 0), 0);
       const currencyPerWeight = config.currencyPerWeight[unitSystem];
       weight += convertWeight(
@@ -181,10 +181,10 @@ export default class AttributesFields {
     }
 
     // Determine the Encumbrance size class
-    const keys = Object.keys(CONFIG.DND5E.actorSizes);
+    const keys = Object.keys(CONFIG.DND5A.actorSizes);
     const index = keys.findIndex(k => k === this.traits.size);
-    const sizeConfig = CONFIG.DND5E.actorSizes[
-      keys[this.parent.flags.dnd5e?.powerfulBuild ? Math.min(index + 1, keys.length - 1) : index]
+    const sizeConfig = CONFIG.DND5A.actorSizes[
+      keys[this.parent.flags.dnd5a?.powerfulBuild ? Math.min(index + 1, keys.length - 1) : index]
     ];
     const sizeMod = sizeConfig?.capacityMultiplier ?? sizeConfig?.token ?? 1;
     let maximumMultiplier;
@@ -226,7 +226,7 @@ export default class AttributesFields {
    */
   static prepareExhaustionLevel() {
     const exhaustion = this.parent.effects.get(ActiveEffect5e.ID.EXHAUSTION);
-    const level = exhaustion?.getFlag("dnd5e", "exhaustionLevel");
+    const level = exhaustion?.getFlag("dnd5a", "exhaustionLevel");
     this.attributes.exhaustion = Number.isFinite(level) ? level : 0;
   }
 
@@ -267,18 +267,18 @@ export default class AttributesFields {
     const exceedingCarryingCapacity = statuses.has("exceedingCarryingCapacity");
     const crawl = this.parent.hasConditionEffect("crawl");
     const units = this.attributes.movement.units;
-    for ( const type in CONFIG.DND5E.movementTypes ) {
+    for ( const type in CONFIG.DND5A.movementTypes ) {
       let speed = this.attributes.movement[type];
       if ( noMovement || (crawl && (type !== "walk")) ) speed = 0;
       else {
         if ( halfMovement ) speed *= 0.5;
         if ( heavilyEncumbered ) {
-          speed = Math.max(0, speed - (CONFIG.DND5E.encumbrance.speedReduction.heavilyEncumbered[units] ?? 0));
+          speed = Math.max(0, speed - (CONFIG.DND5A.encumbrance.speedReduction.heavilyEncumbered[units] ?? 0));
         } else if ( encumbered ) {
-          speed = Math.max(0, speed - (CONFIG.DND5E.encumbrance.speedReduction.encumbered[units] ?? 0));
+          speed = Math.max(0, speed - (CONFIG.DND5A.encumbrance.speedReduction.encumbered[units] ?? 0));
         }
         if ( exceedingCarryingCapacity ) {
-          speed = Math.min(speed, CONFIG.DND5E.encumbrance.speedReduction.exceedingCarryingCapacity[units] ?? 0);
+          speed = Math.min(speed, CONFIG.DND5A.encumbrance.speedReduction.exceedingCarryingCapacity[units] ?? 0);
         }
       }
       this.attributes.movement[type] = speed;
@@ -296,7 +296,7 @@ export default class AttributesFields {
    * @this {CharacterData|NPCData}
    */
   static prepareRace(race, { force=false }={}) {
-    for ( const key of Object.keys(CONFIG.DND5E.movementTypes) ) {
+    for ( const key of Object.keys(CONFIG.DND5A.movementTypes) ) {
       if ( !race.system.movement[key] || (!force && (this.attributes.movement[key] !== null)) ) continue;
       this.attributes.movement[key] = race.system.movement[key];
     }
@@ -304,7 +304,7 @@ export default class AttributesFields {
     if ( force && race.system.movement.units ) this.attributes.movement.units = race.system.movement.units;
     else this.attributes.movement.units ??= race.system.movement.units;
 
-    for ( const key of Object.keys(CONFIG.DND5E.senses) ) {
+    for ( const key of Object.keys(CONFIG.DND5A.senses) ) {
       if ( !race.system.senses[key] || (!force && (this.attributes.senses[key] !== null)) ) continue;
       this.attributes.senses[key] = race.system.senses[key];
     }

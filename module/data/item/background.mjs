@@ -15,8 +15,8 @@ export default class BackgroundData extends ItemDataModel.mixin(ItemDescriptionT
   /** @inheritdoc */
   static defineSchema() {
     return this.mergeSchema(super.defineSchema(), {
-      identifier: new IdentifierField({required: true, label: "DND5E.Identifier"}),
-      advancement: new foundry.data.fields.ArrayField(new AdvancementField(), {label: "DND5E.AdvancementTitle"})
+      identifier: new IdentifierField({required: true, label: "DND5A.Identifier"}),
+      advancement: new foundry.data.fields.ArrayField(new AdvancementField(), {label: "DND5A.AdvancementTitle"})
     });
   }
 

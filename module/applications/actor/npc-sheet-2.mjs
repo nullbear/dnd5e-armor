@@ -9,7 +9,7 @@ import { simplifyBonus } from "../../utils.mjs";
 export default class ActorSheet5eNPC2 extends ActorSheetV2Mixin(ActorSheet5eNPC) {
   static get defaultOptions() {
     return foundry.utils.mergeObject(super.defaultOptions, {
-      classes: ["dnd5e2", "sheet", "actor", "npc", "vertical-tabs"],
+      classes: ["dnd5a2", "sheet", "actor", "npc", "vertical-tabs"],
       width: 700,
       height: 700,
       resizable: true,
@@ -20,11 +20,11 @@ export default class ActorSheet5eNPC2 extends ActorSheetV2Mixin(ActorSheet5eNPC)
 
   /** @override */
   static TABS = [
-    { tab: "features", label: "DND5E.Features", icon: "fas fa-list" },
-    { tab: "inventory", label: "DND5E.Inventory", svg: "backpack" },
+    { tab: "features", label: "DND5A.Features", icon: "fas fa-list" },
+    { tab: "inventory", label: "DND5A.Inventory", svg: "backpack" },
     { tab: "spells", label: "TYPES.Item.spellPl", icon: "fas fa-book" },
-    { tab: "effects", label: "DND5E.Effects", icon: "fas fa-bolt" },
-    { tab: "biography", label: "DND5E.Biography", icon: "fas fa-feather" }
+    { tab: "effects", label: "DND5A.Effects", icon: "fas fa-bolt" },
+    { tab: "biography", label: "DND5A.Biography", icon: "fas fa-feather" }
   ];
 
   /**
@@ -36,8 +36,8 @@ export default class ActorSheet5eNPC2 extends ActorSheetV2Mixin(ActorSheet5eNPC)
   /* -------------------------------------------- */
 
   get template() {
-    if ( !game.user.isGM && this.actor.limited ) return "systems/dnd5e/templates/actors/limited-sheet-2.hbs";
-    return "systems/dnd5e/templates/actors/npc-sheet-2.hbs";
+    if ( !game.user.isGM && this.actor.limited ) return "systems/dnd5a/templates/actors/limited-sheet-2.hbs";
+    return "systems/dnd5a/templates/actors/npc-sheet-2.hbs";
   }
 
   /* -------------------------------------------- */
@@ -51,8 +51,8 @@ export default class ActorSheet5eNPC2 extends ActorSheetV2Mixin(ActorSheet5eNPC)
     elements.classList.add("header-elements");
     elements.innerHTML = `
       <div class="source-book">
-        <a class="config-button" data-action="source" data-tooltip="DND5E.SourceConfig"
-           aria-label="${game.i18n.localize("DND5E.SourceConfig")}">
+        <a class="config-button" data-action="source" data-tooltip="DND5A.SourceConfig"
+           aria-label="${game.i18n.localize("DND5A.SourceConfig")}">
           <i class="fas fa-cog"></i>
         </a>
         <span></span>
@@ -76,9 +76,9 @@ export default class ActorSheet5eNPC2 extends ActorSheetV2Mixin(ActorSheet5eNPC)
     const sourceLabel = details.source.label;
     elements.querySelector(".config-button")?.toggleAttribute("hidden", !editable);
     elements.querySelector(".source-book > span").innerText = editable
-      ? (sourceLabel || game.i18n.localize("DND5E.Source"))
+      ? (sourceLabel || game.i18n.localize("DND5A.Source"))
       : sourceLabel;
-    elements.querySelector(".cr-xp").innerText = game.i18n.format("DND5E.ExperiencePointsFormat", {
+    elements.querySelector(".cr-xp").innerText = game.i18n.format("DND5A.ExperiencePointsFormat", {
       value: new Intl.NumberFormat(game.i18n.lang).format(details.xp.value)
     });
   }
@@ -94,22 +94,22 @@ export default class ActorSheet5eNPC2 extends ActorSheetV2Mixin(ActorSheet5eNPC)
     // Ability Scores
     Object.entries(context.abilities).forEach(([k, ability]) => {
       ability.key = k;
-      ability.abbr = CONFIG.DND5E.abilities[k]?.abbreviation ?? "";
+      ability.abbr = CONFIG.DND5A.abilities[k]?.abbreviation ?? "";
       ability.baseValue = context.source.abilities[k]?.value ?? 0;
-      ability.icon = CONFIG.DND5E.abilities[k]?.icon;
+      ability.icon = CONFIG.DND5A.abilities[k]?.icon;
     });
 
     // Show Death Saves
     context.showDeathSaves = !foundry.utils.isEmpty(this.actor.classes)
-      || this.actor.getFlag("dnd5e", "showDeathSaves");
+      || this.actor.getFlag("dnd5a", "showDeathSaves");
 
     // Speed
-    context.speed = Object.entries(CONFIG.DND5E.movementTypes).reduce((obj, [k, label]) => {
+    context.speed = Object.entries(CONFIG.DND5A.movementTypes).reduce((obj, [k, label]) => {
       const value = attributes.movement[k];
       if ( value ) {
         obj[k] = { label, value };
         if ( (k === "fly") && attributes.movement.hover ) obj.fly.icons = [{
-          icon: "fas fa-cloud", label: game.i18n.localize("DND5E.MovementHover")
+          icon: "fas fa-cloud", label: game.i18n.localize("DND5A.MovementHover")
         }];
       }
       return obj;
@@ -120,7 +120,7 @@ export default class ActorSheet5eNPC2 extends ActorSheetV2Mixin(ActorSheet5eNPC)
 
     // Senses
     context.senses.passivePerception = {
-      label: game.i18n.localize("DND5E.PassivePerception"), value: this.actor.system.skills.prc.passive
+      label: game.i18n.localize("DND5A.PassivePerception"), value: this.actor.system.skills.prc.passive
     };
 
     // Legendary Actions & Resistances
@@ -134,8 +134,8 @@ export default class ActorSheet5eNPC2 extends ActorSheetV2Mixin(ActorSheet5eNPC)
         if ( filled ) classes.push("filled");
         return {
           n, filled,
-          tooltip: `DND5E.${i18n}`,
-          label: game.i18n.format(`DND5E.${i18n}N.${plurals.select(n)}`, { n }),
+          tooltip: `DND5A.${i18n}`,
+          label: game.i18n.format(`DND5A.${i18n}N.${plurals.select(n)}`, { n }),
           classes: classes.join(" ")
         };
       });
@@ -199,29 +199,29 @@ export default class ActorSheet5eNPC2 extends ActorSheetV2Mixin(ActorSheet5eNPC)
       return true;
     });
     // TODO: These labels should be pluralised.
-    Object.entries(CONFIG.DND5E.abilityActivationTypes).forEach(([type, label]) => features.push({
+    Object.entries(CONFIG.DND5A.abilityActivationTypes).forEach(([type, label]) => features.push({
       label, items: [], hasActions: true, dataset: { type }
     }));
     context.features = {
       sections: features,
       filters: [
-        { key: "action", label: "DND5E.Action" },
-        { key: "bonus", label: "DND5E.BonusAction" },
-        { key: "reaction", label: "DND5E.Reaction" },
-        { key: "legendary", label: "DND5E.LegendaryActionLabel" },
-        { key: "lair", label: "DND5E.LairActionLabel" }
+        { key: "action", label: "DND5A.Action" },
+        { key: "bonus", label: "DND5A.BonusAction" },
+        { key: "reaction", label: "DND5A.Reaction" },
+        { key: "legendary", label: "DND5A.LegendaryActionLabel" },
+        { key: "lair", label: "DND5A.LairActionLabel" }
       ]
     };
     features.forEach(section => {
       section.categories = [
-        { classes: "item-uses", label: "DND5E.Uses", partial: "dnd5e.column-uses" },
-        { classes: "item-roll", label: "DND5E.SpellHeader.Roll", partial: "dnd5e.column-roll" },
-        { classes: "item-formula", label: "DND5E.SpellHeader.Formula", partial: "dnd5e.column-formula" },
-        { classes: "item-controls", partial: "dnd5e.column-feature-controls" }
+        { classes: "item-uses", label: "DND5A.Uses", partial: "dnd5a.column-uses" },
+        { classes: "item-roll", label: "DND5A.SpellHeader.Roll", partial: "dnd5a.column-roll" },
+        { classes: "item-formula", label: "DND5A.SpellHeader.Formula", partial: "dnd5a.column-formula" },
+        { classes: "item-controls", partial: "dnd5a.column-feature-controls" }
       ];
     });
     context.inventory = Object.values(inventory);
-    context.inventory.push({ label: "DND5E.Contents", items: [], dataset: { type: "all" } });
+    context.inventory.push({ label: "DND5A.Contents", items: [], dataset: { type: "all" } });
     context.classes = classes;
     context.hasClasses = classes.length;
   }
@@ -245,18 +245,18 @@ export default class ActorSheet5eNPC2 extends ActorSheetV2Mixin(ActorSheet5eNPC)
     const mod = spellAbility?.mod ?? 0;
     const attackBonus = msak === rsak ? msak : 0;
     context.spellcasting.push({
-      label: game.i18n.format("DND5E.SpellcastingClass", { class: spellcaster?.name ?? game.i18n.format("DND5E.NPC") }),
+      label: game.i18n.format("DND5A.SpellcastingClass", { class: spellcaster?.name ?? game.i18n.format("DND5A.NPC") }),
       level: spellcaster?.system.levels ?? details.spellLevel,
       ability: {
         ability, mod,
-        label: CONFIG.DND5E.abilities[ability]?.abbreviation
+        label: CONFIG.DND5A.abilities[ability]?.abbreviation
       },
       attack: mod + attributes.prof + attackBonus,
       save: spellAbility?.dc ?? 0,
       noSpellcaster: !spellcaster,
       concentration: {
         mod: attributes.concentration.save,
-        tooltip: game.i18n.format("DND5E.AbilityConfigure", { ability: game.i18n.localize("DND5E.Concentration") })
+        tooltip: game.i18n.format("DND5A.AbilityConfigure", { ability: game.i18n.localize("DND5A.Concentration") })
       }
     });
   }

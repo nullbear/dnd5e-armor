@@ -8,7 +8,7 @@ export default class SheetConfig5e extends DocumentSheetConfig {
   /** @inheritdoc */
   static get defaultOptions() {
     return foundry.utils.mergeObject(super.defaultOptions, {
-      template: "systems/dnd5e/templates/shared/sheet-config.hbs"
+      template: "systems/dnd5a/templates/shared/sheet-config.hbs"
     });
   }
 
@@ -17,7 +17,7 @@ export default class SheetConfig5e extends DocumentSheetConfig {
   /** @inheritdoc */
   getData(options) {
     const context = super.getData(options);
-    context.CONFIG = CONFIG.DND5E;
+    context.CONFIG = CONFIG.DND5A;
     return context;
   }
 
@@ -29,9 +29,9 @@ export default class SheetConfig5e extends DocumentSheetConfig {
     delete formData.defaultClass;
     this.object.update(formData);
 
-    if ( "flags.dnd5e.theme" in formData ) {
+    if ( "flags.dnd5a.theme" in formData ) {
       const sheet = this.object.sheet.element?.[0];
-      if ( sheet ) setTheme(sheet, formData["flags.dnd5e.theme"]);
+      if ( sheet ) setTheme(sheet, formData["flags.dnd5a.theme"]);
     }
   }
 }

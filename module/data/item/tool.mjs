@@ -19,7 +19,7 @@ import ActivatedEffectTemplate from "./templates/activated-effect.mjs";
  *
  * @property {string} ability     Default ability when this tool is being used.
  * @property {string} chatFlavor  Additional text added to chat when this tool is used.
- * @property {number} proficient  Level of proficiency in this tool as defined in `DND5E.proficiencyLevels`.
+ * @property {number} proficient  Level of proficiency in this tool as defined in `DND5A.proficiencyLevels`.
  * @property {string} bonus       Bonus formula added to tool rolls.
  */
 export default class ToolData extends ItemDataModel.mixin(
@@ -29,18 +29,18 @@ export default class ToolData extends ItemDataModel.mixin(
   /** @inheritdoc */
   static defineSchema() {
     return this.mergeSchema(super.defineSchema(), {
-      type: new ItemTypeField({subtype: false}, {label: "DND5E.ItemToolType"}),
+      type: new ItemTypeField({subtype: false}, {label: "DND5A.ItemToolType"}),
       ability: new foundry.data.fields.StringField({
-        required: true, blank: true, label: "DND5E.DefaultAbilityCheck"
+        required: true, blank: true, label: "DND5A.DefaultAbilityCheck"
       }),
-      chatFlavor: new foundry.data.fields.StringField({required: true, label: "DND5E.ChatFlavor"}),
+      chatFlavor: new foundry.data.fields.StringField({required: true, label: "DND5A.ChatFlavor"}),
       proficient: new foundry.data.fields.NumberField({
-        required: true, initial: null, min: 0, max: 2, step: 0.5, label: "DND5E.ItemToolProficiency"
+        required: true, initial: null, min: 0, max: 2, step: 0.5, label: "DND5A.ItemToolProficiency"
       }),
       properties: new foundry.data.fields.SetField(new foundry.data.fields.StringField(), {
-        label: "DND5E.ItemToolProperties"
+        label: "DND5A.ItemToolProperties"
       }),
-      bonus: new FormulaField({required: true, label: "DND5E.ItemToolBonus"})
+      bonus: new FormulaField({required: true, label: "DND5A.ItemToolBonus"})
     });
   }
 
@@ -59,10 +59,10 @@ export default class ToolData extends ItemDataModel.mixin(
   static get compendiumBrowserFilters() {
     return new Map([
       ["type", {
-        label: "DND5E.ItemToolType",
+        label: "DND5A.ItemToolType",
         type: "set",
         config: {
-          choices: CONFIG.DND5E.toolTypes,
+          choices: CONFIG.DND5A.toolTypes,
           keyPath: "system.type.value"
         }
       }],
@@ -99,7 +99,7 @@ export default class ToolData extends ItemDataModel.mixin(
   /** @inheritDoc */
   prepareDerivedData() {
     super.prepareDerivedData();
-    this.type.label = CONFIG.DND5E.toolTypes[this.type.value] ?? game.i18n.localize(CONFIG.Item.typeLabels.tool);
+    this.type.label = CONFIG.DND5A.toolTypes[this.type.value] ?? game.i18n.localize(CONFIG.Item.typeLabels.tool);
   }
 
   /* -------------------------------------------- */
@@ -128,7 +128,7 @@ export default class ToolData extends ItemDataModel.mixin(
    * @type {string[]}
    */
   get chatProperties() {
-    return [CONFIG.DND5E.abilities[this.ability]?.label];
+    return [CONFIG.DND5A.abilities[this.ability]?.label];
   }
 
   /* -------------------------------------------- */
@@ -138,7 +138,7 @@ export default class ToolData extends ItemDataModel.mixin(
    * @type {string[]}
    */
   get cardProperties() {
-    return [CONFIG.DND5E.abilities[this.ability]?.label];
+    return [CONFIG.DND5A.abilities[this.ability]?.label];
   }
 
   /* -------------------------------------------- */

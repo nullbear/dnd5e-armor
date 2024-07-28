@@ -28,25 +28,25 @@ export default class FeatData extends ItemDataModel.mixin(
 ) {
 
   /** @override */
-  static LOCALIZATION_PREFIXES = ["DND5E.Enchantment", "DND5E.Prerequisites"];
+  static LOCALIZATION_PREFIXES = ["DND5A.Enchantment", "DND5A.Prerequisites"];
 
   /** @inheritdoc */
   static defineSchema() {
     return this.mergeSchema(super.defineSchema(), {
-      type: new ItemTypeField({baseItem: false}, {label: "DND5E.ItemFeatureType"}),
+      type: new ItemTypeField({baseItem: false}, {label: "DND5A.ItemFeatureType"}),
       prerequisites: new SchemaField({
         level: new NumberField({integer: true, min: 0})
       }),
       properties: new SetField(new StringField(), {
-        label: "DND5E.ItemFeatureProperties"
+        label: "DND5A.ItemFeatureProperties"
       }),
-      requirements: new StringField({required: true, nullable: true, label: "DND5E.Requirements"}),
+      requirements: new StringField({required: true, nullable: true, label: "DND5A.Requirements"}),
       recharge: new SchemaField({
         value: new NumberField({
-          required: true, integer: true, min: 1, label: "DND5E.FeatureRechargeOn"
+          required: true, integer: true, min: 1, label: "DND5A.FeatureRechargeOn"
         }),
-        charged: new BooleanField({required: true, label: "DND5E.Charged"})
-      }, {label: "DND5E.FeatureActionRecharge"})
+        charged: new BooleanField({required: true, label: "DND5A.Charged"})
+      }, {label: "DND5A.FeatureActionRecharge"})
     });
   }
 
@@ -56,18 +56,18 @@ export default class FeatData extends ItemDataModel.mixin(
   static get compendiumBrowserFilters() {
     return new Map([
       ["category", {
-        label: "DND5E.Item.Category.Label",
+        label: "DND5A.Item.Category.Label",
         type: "set",
         config: {
-          choices: CONFIG.DND5E.featureTypes,
+          choices: CONFIG.DND5A.featureTypes,
           keyPath: "system.type.value"
         }
       }],
       ["subtype", {
-        label: "DND5E.ItemFeatureType",
+        label: "DND5A.ItemFeatureType",
         type: "set",
         config: {
-          choices: Object.values(CONFIG.DND5E.featureTypes).reduce((obj, config) => {
+          choices: Object.values(CONFIG.DND5A.featureTypes).reduce((obj, config) => {
             for ( const [key, label] of Object.entries(config.subtypes ?? {}) ) obj[key] = label;
             return obj;
           }, {}),
@@ -87,7 +87,7 @@ export default class FeatData extends ItemDataModel.mixin(
     super.prepareDerivedData();
 
     if ( this.type.value ) {
-      const config = CONFIG.DND5E.featureTypes[this.type.value];
+      const config = CONFIG.DND5A.featureTypes[this.type.value];
       if ( config ) this.type.label = config.subtypes?.[this.type.subtype] ?? null;
       else this.type.label = game.i18n.localize(CONFIG.Item.typeLabels.feat);
     }

@@ -27,8 +27,8 @@ export default class ShortRestDialog extends Dialog {
   /** @inheritDoc */
   static get defaultOptions() {
     return foundry.utils.mergeObject(super.defaultOptions, {
-      template: "systems/dnd5e/templates/apps/short-rest.hbs",
-      classes: ["dnd5e", "dialog"],
+      template: "systems/dnd5a/templates/apps/short-rest.hbs",
+      classes: ["dnd5a", "dialog"],
       height: "auto"
     });
   }
@@ -57,7 +57,7 @@ export default class ShortRestDialog extends Dialog {
     }
 
     // Determine rest type
-    const variant = game.settings.get("dnd5e", "restVariant");
+    const variant = game.settings.get("dnd5a", "restVariant");
     context.promptNewDay = variant !== "epic";     // It's never a new day when only resting 1 minute
     context.newDay = false;                        // It may be a new day, but not by default
     return context;
@@ -100,11 +100,11 @@ export default class ShortRestDialog extends Dialog {
   static async shortRestDialog({ actor }={}) {
     return new Promise((resolve, reject) => {
       const dlg = new this(actor, {
-        title: `${game.i18n.localize("DND5E.ShortRest")}: ${actor.name}`,
+        title: `${game.i18n.localize("DND5A.ShortRest")}: ${actor.name}`,
         buttons: {
           rest: {
             icon: '<i class="fas fa-bed"></i>',
-            label: game.i18n.localize("DND5E.Rest"),
+            label: game.i18n.localize("DND5A.Rest"),
             callback: html => {
               const formData = new FormDataExtended(html.find("form")[0]);
               resolve(formData.object);

@@ -79,7 +79,7 @@ export default class TokenRing {
 
     // Configure token ring textures and visuals
     if ( this.enabled ) {
-      const tokenRingFlag = this.token.document.getFlag("dnd5e", "tokenRing");
+      const tokenRingFlag = this.token.document.getFlag("dnd5a", "tokenRing");
       this._configureTexture({mesh, ...tokenRingFlag});
       this.configureVisuals({...tokenRingFlag});
     }
@@ -198,7 +198,7 @@ export default class TokenRing {
     if ( !this.enabled || Number.isNaN(color) ) return;
 
     const originalColor = Color.from(foundry.utils.mergeObject(
-      this.token.document.getFlag("dnd5e", "tokenRing.colors") ?? {},
+      this.token.document.getFlag("dnd5a", "tokenRing.colors") ?? {},
       this.token.document.getRingColors(),
       { inplace: false }
     ).ring ?? 0xFFFFFF).littleEndian;
@@ -327,7 +327,7 @@ export default class TokenRing {
       if ( module.active ) Object.assign(this.subjectPaths, mappings);
     }
 
-    this.tokenRingSamplerShader = CONFIG.DND5E.tokenRings.shaderClass;
+    this.tokenRingSamplerShader = CONFIG.DND5A.tokenRings.shaderClass;
     if ( game.release.generation >= 12 ) {
       PrimaryBaseSamplerShader.classPluginName = this.tokenRingSamplerShader.classPluginName;
     }
@@ -353,7 +353,7 @@ export default class TokenRing {
    * @param {string[]} additionalSources
    */
   static pushToLoad(additionalSources) {
-    additionalSources.push(CONFIG.DND5E.tokenRings.spriteSheet);
+    additionalSources.push(CONFIG.DND5A.tokenRings.spriteSheet);
     for ( const tokenDocument of canvas.scene.tokens ) {
       const subjectSrc = tokenDocument.subjectPath;
       if ( tokenDocument.hasDynamicRing && subjectSrc ) additionalSources.push(subjectSrc);
@@ -368,7 +368,7 @@ export default class TokenRing {
   static createAssetsUVs() {
     if ( !this.enabled ) return;
 
-    const spritesheet = TextureLoader.loader.getCache(CONFIG.DND5E.tokenRings.spriteSheet);
+    const spritesheet = TextureLoader.loader.getCache(CONFIG.DND5A.tokenRings.spriteSheet);
     this.baseTexture = spritesheet.baseTexture;
     this.texturesData = {};
     this.#ringData = [];

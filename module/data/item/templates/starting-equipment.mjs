@@ -57,8 +57,8 @@ export class EquipmentEntryData extends foundry.abstract.DataModel {
    * @enum {string}
    */
   static GROUPING_TYPES = {
-    OR: "DND5E.StartingEquipment.Operator.OR",
-    AND: "DND5E.StartingEquipment.Operator.AND"
+    OR: "DND5A.StartingEquipment.Operator.OR",
+    AND: "DND5A.StartingEquipment.Operator.AND"
   };
 
   /**
@@ -67,13 +67,13 @@ export class EquipmentEntryData extends foundry.abstract.DataModel {
    */
   static OPTION_TYPES = {
     // Category types
-    armor: "DND5E.StartingEquipment.Choice.Armor",
-    tool: "DND5E.StartingEquipment.Choice.Tool",
-    weapon: "DND5E.StartingEquipment.Choice.Weapon",
-    focus: "DND5E.StartingEquipment.Choice.Focus",
+    armor: "DND5A.StartingEquipment.Choice.Armor",
+    tool: "DND5A.StartingEquipment.Choice.Tool",
+    weapon: "DND5A.StartingEquipment.Choice.Weapon",
+    focus: "DND5A.StartingEquipment.Choice.Focus",
 
     // Generic item type
-    linked: "DND5E.StartingEquipment.SpecificItem"
+    linked: "DND5A.StartingEquipment.SpecificItem"
   };
 
   /**
@@ -87,16 +87,16 @@ export class EquipmentEntryData extends foundry.abstract.DataModel {
   /* -------------------------------------------- */
 
   /**
-   * Where in `CONFIG.DND5E` to find the type category labels.
+   * Where in `CONFIG.DND5A` to find the type category labels.
    * @enum {{ label: string, config: string }}
    */
   static CATEGORIES = {
     armor: {
-      label: "DND5E.Armor",
+      label: "DND5A.Armor",
       config: "armorTypes"
     },
     focus: {
-      label: "DND5E.Focus.Label",
+      label: "DND5A.Focus.Label",
       config: "focusTypes"
     },
     tool: {
@@ -120,7 +120,7 @@ export class EquipmentEntryData extends foundry.abstract.DataModel {
       type: new StringField({required: true, initial: "OR", choices: this.TYPES}),
       count: new NumberField({initial: undefined}),
       key: new StringField({initial: undefined}),
-      requiresProficiency: new BooleanField({label: "DND5E.StartingEquipment.Proficient.Label"})
+      requiresProficiency: new BooleanField({label: "DND5A.StartingEquipment.Proficient.Label"})
     };
   }
 
@@ -167,9 +167,9 @@ export class EquipmentEntryData extends foundry.abstract.DataModel {
 
     if ( !label ) return;
     if ( this.count > 1 ) label = `${formatNumber(this.count)} ${label}`;
-    else if ( this.type !== "linked" ) label = game.i18n.format("DND5E.TraitConfigChooseAnyUncounted", { type: label });
+    else if ( this.type !== "linked" ) label = game.i18n.format("DND5A.TraitConfigChooseAnyUncounted", { type: label });
     if ( (this.type === "linked") && this.requiresProficiency ) {
-      label += ` (${game.i18n.localize("DND5E.StartingEquipment.IfProficient").toLowerCase()})`;
+      label += ` (${game.i18n.localize("DND5A.StartingEquipment.IfProficient").toLowerCase()})`;
     }
     return label;
   }
@@ -195,7 +195,7 @@ export class EquipmentEntryData extends foundry.abstract.DataModel {
     let label = configEntry?.label ?? configEntry;
     if ( !label ) return this.blankLabel.toLowerCase();
 
-    if ( this.type === "weapon" ) label = game.i18n.format("DND5E.WeaponCategory", { category: label });
+    if ( this.type === "weapon" ) label = game.i18n.format("DND5A.WeaponCategory", { category: label });
     return label.toLowerCase();
   }
 
@@ -206,8 +206,8 @@ export class EquipmentEntryData extends foundry.abstract.DataModel {
    * @returns {Record<string, string>}
    */
   get keyOptions() {
-    const config = foundry.utils.deepClone(CONFIG.DND5E[this.constructor.CATEGORIES[this.type]?.config]);
-    if ( this.type === "weapon" ) foundry.utils.mergeObject(config, CONFIG.DND5E.weaponTypes);
+    const config = foundry.utils.deepClone(CONFIG.DND5A[this.constructor.CATEGORIES[this.type]?.config]);
+    if ( this.type === "weapon" ) foundry.utils.mergeObject(config, CONFIG.DND5A.weaponTypes);
     return Object.entries(config).reduce((obj, [k, v]) => {
       obj[k] = foundry.utils.getType(v) === "Object" ? v.label : v;
       return obj;

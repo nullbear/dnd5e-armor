@@ -40,24 +40,24 @@ export default class EquipmentData extends ItemDataModel.mixin(
   /** @inheritdoc */
   static defineSchema() {
     return this.mergeSchema(super.defineSchema(), {
-      type: new ItemTypeField({value: "light", subtype: false}, {label: "DND5E.ItemEquipmentType"}),
+      type: new ItemTypeField({value: "light", subtype: false}, {label: "DND5A.ItemEquipmentType"}),
       armor: new SchemaField({
-        value: new NumberField({required: true, integer: true, min: 0, label: "DND5E.ArmorClass"}),
-        magicalBonus: new NumberField({min: 0, integer: true, label: "DND5E.MagicalBonus"}),
-        dex: new NumberField({required: true, integer: true, label: "DND5E.ItemEquipmentDexMod"})
+        value: new NumberField({required: true, integer: true, min: 0, label: "DND5A.ArmorClass"}),
+        magicalBonus: new NumberField({min: 0, integer: true, label: "DND5A.MagicalBonus"}),
+        dex: new NumberField({required: true, integer: true, label: "DND5A.ItemEquipmentDexMod"})
       }),
       properties: new SetField(new StringField(), {
-        label: "DND5E.ItemEquipmentProperties"
+        label: "DND5A.ItemEquipmentProperties"
       }),
       speed: new SchemaField({
-        value: new NumberField({required: true, min: 0, label: "DND5E.Speed"}),
-        conditions: new StringField({required: true, label: "DND5E.SpeedConditions"})
-      }, {label: "DND5E.Speed"}),
+        value: new NumberField({required: true, min: 0, label: "DND5A.Speed"}),
+        conditions: new StringField({required: true, label: "DND5A.SpeedConditions"})
+      }, {label: "DND5A.Speed"}),
       strength: new NumberField({
-        required: true, integer: true, min: 0, label: "DND5E.ItemRequiredStr"
+        required: true, integer: true, min: 0, label: "DND5A.ItemRequiredStr"
       }),
       proficient: new NumberField({
-        required: true, min: 0, max: 1, integer: true, initial: null, label: "DND5E.ProficiencyLevel"
+        required: true, min: 0, max: 1, integer: true, initial: null, label: "DND5A.ProficiencyLevel"
       })
     });
   }
@@ -77,10 +77,10 @@ export default class EquipmentData extends ItemDataModel.mixin(
   static get compendiumBrowserFilters() {
     return new Map([
       ["type", {
-        label: "DND5E.ItemEquipmentType",
+        label: "DND5A.ItemEquipmentType",
         type: "set",
         config: {
-          choices: CONFIG.DND5E.equipmentTypes,
+          choices: CONFIG.DND5A.equipmentTypes,
           keyPath: "system.type.value"
         }
       }],
@@ -150,7 +150,7 @@ export default class EquipmentData extends ItemDataModel.mixin(
    */
   static _migrateStealth(source) {
     if ( foundry.utils.getProperty(source, "system.stealth") === true ) {
-      foundry.utils.setProperty(source, "flags.dnd5e.migratedProperties", ["stealthDisadvantage"]);
+      foundry.utils.setProperty(source, "flags.dnd5a.migratedProperties", ["stealthDisadvantage"]);
     }
   }
 
@@ -172,7 +172,7 @@ export default class EquipmentData extends ItemDataModel.mixin(
   prepareDerivedData() {
     super.prepareDerivedData();
     this.armor.value = (this._source.armor.value ?? 0) + (this.magicAvailable ? (this.armor.magicalBonus ?? 0) : 0);
-    this.type.label = CONFIG.DND5E.equipmentTypes[this.type.value]
+    this.type.label = CONFIG.DND5A.equipmentTypes[this.type.value]
       ?? game.i18n.localize(CONFIG.Item.typeLabels.equipment);
   }
 
@@ -206,7 +206,7 @@ export default class EquipmentData extends ItemDataModel.mixin(
     return [
       this.type.label,
       (this.isArmor || this.isMountable) ? (this.parent.labels?.armor ?? null) : null,
-      this.properties.has("stealthDisadvantage") ? game.i18n.localize("DND5E.Item.Property.StealthDisadvantage") : null
+      this.properties.has("stealthDisadvantage") ? game.i18n.localize("DND5A.Item.Property.StealthDisadvantage") : null
     ];
   }
 
@@ -219,7 +219,7 @@ export default class EquipmentData extends ItemDataModel.mixin(
   get cardProperties() {
     return [
       (this.isArmor || this.isMountable) ? (this.parent.labels?.armor ?? null) : null,
-      this.properties.has("stealthDisadvantage") ? game.i18n.localize("DND5E.Item.Property.StealthDisadvantage") : null
+      this.properties.has("stealthDisadvantage") ? game.i18n.localize("DND5A.Item.Property.StealthDisadvantage") : null
     ];
   }
 
@@ -230,7 +230,7 @@ export default class EquipmentData extends ItemDataModel.mixin(
    * @type {boolean}
    */
   get isArmor() {
-    return this.type.value in CONFIG.DND5E.armorTypes;
+    return this.type.value in CONFIG.DND5A.armorTypes;
   }
 
   /* -------------------------------------------- */
@@ -255,7 +255,7 @@ export default class EquipmentData extends ItemDataModel.mixin(
     const actor = this.parent.actor;
     if ( !actor ) return 0;
     if ( actor.type === "npc" ) return 1; // NPCs are always considered proficient with any armor in their stat block.
-    const config = CONFIG.DND5E.armorProficienciesMap;
+    const config = CONFIG.DND5A.armorProficienciesMap;
     const itemProf = config[this.type.value];
     const actorProfs = actor.system.traits?.armorProf?.value ?? new Set();
     const isProficient = (itemProf === true) || actorProfs.has(itemProf) || actorProfs.has(this.type.baseItem);

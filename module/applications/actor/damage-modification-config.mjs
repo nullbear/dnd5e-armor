@@ -9,8 +9,8 @@ export default class DamageModificationConfig extends BaseConfig {
   /** @inheritDoc */
   static get defaultOptions() {
     return foundry.utils.mergeObject(super.defaultOptions, {
-      classes: ["dnd5e", "damage-modification", "trait-selector", "subconfig"],
-      template: "systems/dnd5e/templates/apps/damage-modification-config.hbs",
+      classes: ["dnd5a", "damage-modification", "trait-selector", "subconfig"],
+      template: "systems/dnd5a/templates/apps/damage-modification-config.hbs",
       width: 320,
       height: "auto"
     });
@@ -20,7 +20,7 @@ export default class DamageModificationConfig extends BaseConfig {
 
   /** @inheritDoc */
   get title() {
-    return game.i18n.localize("DND5E.DamageModification.Label");
+    return game.i18n.localize("DND5A.DamageModification.Label");
   }
 
   /* -------------------------------------------- */
@@ -29,11 +29,11 @@ export default class DamageModificationConfig extends BaseConfig {
   async getData(options={}) {
     const context = await super.getData(options);
     const data = foundry.utils.getProperty(this.document, "system.traits.dm");
-    context.bypasses = Object.entries(CONFIG.DND5E.itemProperties).reduce((obj, [k, v]) => {
+    context.bypasses = Object.entries(CONFIG.DND5A.itemProperties).reduce((obj, [k, v]) => {
       if ( v.isPhysical ) obj[k] = { ...v, chosen: data.bypasses.has(k) };
       return obj;
     }, {});
-    context.modifications = Object.entries(CONFIG.DND5E.damageTypes).reduce((obj, [k, v]) => {
+    context.modifications = Object.entries(CONFIG.DND5A.damageTypes).reduce((obj, [k, v]) => {
       obj[k] = {
         ...v,
         value: data.amount[k]
