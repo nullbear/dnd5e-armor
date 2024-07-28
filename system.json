@@ -2,7 +2,7 @@
   "id": "dnd5a",
   "title": "Dungeons & Dragons Armor Edition",
   "description": "A system for playing the fifth edition of the world's most popular role-playing game in the Foundry Virtual Tabletop environment.",
-  "version": "3.3.2",
+  "version": "3.3.3",
   "compatibility": {
     "minimum": "11.315",
     "verified": "12"
@@ -19,6 +19,9 @@
   ],
   "esmodules": [
     "dnd5a.mjs"
+  ],
+  "styles": [
+    "dnd5e.css"
   ],
   "languages": [
     {
@@ -53,8 +56,8 @@
     "needsMigrationVersion": "3.1.0",
     "compatibleMigrationVersion": "0.8",
     "hotReload": {
-      "extensions": ["hbs", "json"],
-      "paths": ["templates", "lang"]
+      "extensions": ["css", "hbs", "json"],
+      "paths": ["dnd5e.css", "templates", "lang"]
     }
   }
 }
