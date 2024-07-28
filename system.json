@@ -20,9 +20,6 @@
   "esmodules": [
     "dnd5e.mjs"
   ],
-  "styles": [
-    "dnd5e.css"
-  ],
   "packs": [
     {
       "name": "heroes",
@@ -266,8 +263,8 @@
     "needsMigrationVersion": "3.1.0",
     "compatibleMigrationVersion": "0.8",
     "hotReload": {
-      "extensions": ["css", "hbs", "json"],
-      "paths": ["dnd5e.css", "templates", "lang"]
+      "extensions": ["hbs", "json"],
+      "paths": ["templates", "lang"]
     }
   }
 }
