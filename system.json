@@ -1,15 +1,15 @@
 {
   "id": "dnd5e",
-  "title": "Dungeons & Dragons Fifth Edition",
+  "title": "Dungeons & Dragons Armor Edition",
   "description": "A system for playing the fifth edition of the world's most popular role-playing game in the Foundry Virtual Tabletop environment.",
   "version": "3.3.1",
   "compatibility": {
     "minimum": "11.315",
     "verified": "12"
   },
-  "url": "https://github.com/foundryvtt/dnd5e/",
-  "manifest": "https://raw.githubusercontent.com/foundryvtt/dnd5e/master/system.json",
-  "download": "https://github.com/foundryvtt/dnd5e/releases/download/release-3.3.1/dnd5e-release-3.3.1.zip",
+  "url": "https://github.com/nullbear/dnd5e-armor/tree/3.3.a",
+  "manifest": "https://github.com/nullbear/dnd5e-armor/raw/3.3.a/system.json",
+  "download": "https://github.com/nullbear/dnd5e-armor/archive/refs/heads/3.3.a.zip",
   "authors": [
     {
       "name": "Atropos",
