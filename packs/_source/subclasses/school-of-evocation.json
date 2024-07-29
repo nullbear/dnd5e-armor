@@ -21,8 +21,8 @@
         "type": "ItemGrant",
         "configuration": {
           "items": [
-            "Compendium.dnd5e.classfeatures.7uzJ2JkmsdRGLra3",
-            "Compendium.dnd5e.classfeatures.6VBXkjjBgjSpNElh"
+            "Compendium.dnd5a.classfeatures.7uzJ2JkmsdRGLra3",
+            "Compendium.dnd5a.classfeatures.6VBXkjjBgjSpNElh"
           ],
           "optional": false,
           "spell": {
@@ -43,7 +43,7 @@
         "type": "ItemGrant",
         "configuration": {
           "items": [
-            "Compendium.dnd5e.classfeatures.evEWCpE5MYgr5RRW"
+            "Compendium.dnd5a.classfeatures.evEWCpE5MYgr5RRW"
           ],
           "optional": false,
           "spell": {
@@ -64,7 +64,7 @@
         "type": "ItemGrant",
         "configuration": {
           "items": [
-            "Compendium.dnd5e.classfeatures.7O85kj6uDEG5NzUE"
+            "Compendium.dnd5a.classfeatures.7O85kj6uDEG5NzUE"
           ],
           "optional": false,
           "spell": {
@@ -85,7 +85,7 @@
         "type": "ItemGrant",
         "configuration": {
           "items": [
-            "Compendium.dnd5e.classfeatures.VUtSLeCzFubGXmGx"
+            "Compendium.dnd5a.classfeatures.VUtSLeCzFubGXmGx"
           ],
           "optional": false,
           "spell": {
@@ -116,12 +116,12 @@
   "flags": {},
   "_id": "Ye5f3FReEnuXfi0y",
   "_stats": {
-    "systemId": "dnd5e",
+    "systemId": "dnd5a",
     "systemVersion": "3.0.0",
     "coreVersion": "11.315",
     "createdTime": 1661787234295,
     "modifiedTime": 1704824717229,
-    "lastModifiedBy": "dnd5ebuilder0000"
+    "lastModifiedBy": "dnd5abuilder0000"
   },
   "_key": "!items!Ye5f3FReEnuXfi0y"
 }

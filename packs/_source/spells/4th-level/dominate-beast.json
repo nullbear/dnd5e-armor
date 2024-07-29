@@ -99,7 +99,7 @@
     {
       "name": "Dominate Beast",
       "icon": "icons/magic/air/air-burst-spiral-large-teal-green.webp",
-      "origin": "Compendium.dnd5e.spells.Item.LrPvWHBPmiMQQsKB",
+      "origin": "Compendium.dnd5a.spells.Item.LrPvWHBPmiMQQsKB",
       "duration": {
         "startTime": null,
         "seconds": 60,
@@ -124,12 +124,12 @@
   ],
   "folder": "5auWSClKMDUIV5Ni",
   "_stats": {
-    "systemId": "dnd5e",
+    "systemId": "dnd5a",
     "systemVersion": "3.0.0",
     "coreVersion": "11.315",
     "createdTime": 1661787234122,
     "modifiedTime": 1706145911755,
-    "lastModifiedBy": "dnd5ebuilder0000"
+    "lastModifiedBy": "dnd5abuilder0000"
   },
   "_key": "!items!LrPvWHBPmiMQQsKB"
 }

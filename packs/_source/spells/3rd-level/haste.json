@@ -100,7 +100,7 @@
     {
       "name": "Haste",
       "icon": "icons/magic/control/buff-flight-wings-runes-purple.webp",
-      "origin": "Compendium.dnd5e.spells.Item.Szvk5FEVQW3uhJi5",
+      "origin": "Compendium.dnd5a.spells.Item.Szvk5FEVQW3uhJi5",
       "duration": {
         "startTime": null,
         "seconds": 60,
@@ -155,7 +155,7 @@
       "statuses": [],
       "flags": {
         "core": {
-          "sourceId": "Compendium.dnd5e.spells.Item.yqUDoxk4x0NWG5Bz.ActiveEffect.YtN8kTDQyxFaxpEx"
+          "sourceId": "Compendium.dnd5a.spells.Item.yqUDoxk4x0NWG5Bz.ActiveEffect.YtN8kTDQyxFaxpEx"
         }
       },
       "tint": null,
@@ -164,12 +164,12 @@
   ],
   "folder": "5Si35RRLLaaoWvC3",
   "_stats": {
-    "systemId": "dnd5e",
+    "systemId": "dnd5a",
     "systemVersion": "3.0.0",
     "coreVersion": "11.315",
     "createdTime": 1661787234143,
     "modifiedTime": 1706146315548,
-    "lastModifiedBy": "dnd5ebuilder0000"
+    "lastModifiedBy": "dnd5abuilder0000"
   },
   "_key": "!items!Szvk5FEVQW3uhJi5"
 }

@@ -104,7 +104,7 @@
     {
       "name": "Feeblemind",
       "icon": "icons/magic/light/explosion-star-large-teal-purple.webp",
-      "origin": "Compendium.dnd5e.spells.Item.hYCrN82dMJFuJODB",
+      "origin": "Compendium.dnd5a.spells.Item.hYCrN82dMJFuJODB",
       "duration": {
         "startTime": null,
         "seconds": null,
@@ -140,12 +140,12 @@
   ],
   "folder": "x1XTiOgx4DJ34wc5",
   "_stats": {
-    "systemId": "dnd5e",
+    "systemId": "dnd5a",
     "systemVersion": "3.0.0",
     "coreVersion": "11.315",
     "createdTime": 1661787234195,
     "modifiedTime": 1706143663072,
-    "lastModifiedBy": "dnd5ebuilder0000"
+    "lastModifiedBy": "dnd5abuilder0000"
   },
   "_key": "!items!hYCrN82dMJFuJODB"
 }

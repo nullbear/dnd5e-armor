@@ -100,7 +100,7 @@
     {
       "name": "Banishment",
       "icon": "icons/magic/control/energy-stream-link-spiral-teal.webp",
-      "origin": "Compendium.dnd5e.spells.Item.pxpb2eOB6bv4phAf",
+      "origin": "Compendium.dnd5a.spells.Item.pxpb2eOB6bv4phAf",
       "duration": {
         "startTime": null,
         "seconds": 60,
@@ -125,12 +125,12 @@
   ],
   "folder": "5auWSClKMDUIV5Ni",
   "_stats": {
-    "systemId": "dnd5e",
+    "systemId": "dnd5a",
     "systemVersion": "3.0.0",
     "coreVersion": "11.315",
     "createdTime": 1661787234230,
     "modifiedTime": 1706146069291,
-    "lastModifiedBy": "dnd5ebuilder0000"
+    "lastModifiedBy": "dnd5abuilder0000"
   },
   "_key": "!items!pxpb2eOB6bv4phAf"
 }

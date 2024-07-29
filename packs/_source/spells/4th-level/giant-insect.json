@@ -106,7 +106,7 @@
           "count": "10",
           "name": "",
           "_id": "xLVPgOloyb3QJ0i1",
-          "uuid": "Compendium.dnd5e.monsters.Actor.Hn8FFLEzscgT7azz",
+          "uuid": "Compendium.dnd5a.monsters.Actor.Hn8FFLEzscgT7azz",
           "level": {
             "min": null,
             "max": null
@@ -116,7 +116,7 @@
           "count": "",
           "name": "",
           "_id": "zzh3sTByUIvUYVvE",
-          "uuid": "Compendium.dnd5e.monsters.Actor.GxgIVRX5GbVTifiF",
+          "uuid": "Compendium.dnd5a.monsters.Actor.GxgIVRX5GbVTifiF",
           "level": {
             "min": null,
             "max": null
@@ -126,7 +126,7 @@
           "count": "3",
           "name": "",
           "_id": "Mjp51GLFAYyA6NgW",
-          "uuid": "Compendium.dnd5e.monsters.Actor.v99wOosUJjUgcUNF",
+          "uuid": "Compendium.dnd5a.monsters.Actor.v99wOosUJjUgcUNF",
           "level": {
             "min": null,
             "max": null
@@ -136,7 +136,7 @@
           "count": "5",
           "name": "",
           "_id": "LkxYBiqNIyzUJxuH",
-          "uuid": "Compendium.dnd5e.monsters.Actor.4tl0s2SnaLjkoDiI",
+          "uuid": "Compendium.dnd5a.monsters.Actor.4tl0s2SnaLjkoDiI",
           "level": {
             "min": null,
             "max": null
@@ -151,12 +151,12 @@
   "effects": [],
   "folder": "5auWSClKMDUIV5Ni",
   "_stats": {
-    "systemId": "dnd5e",
+    "systemId": "dnd5a",
     "systemVersion": "3.2.0",
     "coreVersion": "11.315",
     "createdTime": 1661787234177,
     "modifiedTime": 1714077185843,
-    "lastModifiedBy": "dnd5ebuilder0000"
+    "lastModifiedBy": "dnd5abuilder0000"
   },
   "_key": "!items!czXrVRx6XYRWsHAi"
 }

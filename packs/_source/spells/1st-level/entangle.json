@@ -93,7 +93,7 @@
     {
       "name": "Entangle",
       "icon": "icons/magic/nature/vines-thorned-curled-glow-green.webp",
-      "origin": "Compendium.dnd5e.spells.Item.gMrWeG8fMDPRFiVe",
+      "origin": "Compendium.dnd5a.spells.Item.gMrWeG8fMDPRFiVe",
       "duration": {
         "startTime": null,
         "seconds": 60,
@@ -124,12 +124,12 @@
     "default": 0
   },
   "_stats": {
-    "systemId": "dnd5e",
+    "systemId": "dnd5a",
     "systemVersion": "3.0.0",
     "coreVersion": "11.315",
     "createdTime": 1661787234191,
     "modifiedTime": 1706147248472,
-    "lastModifiedBy": "dnd5ebuilder0000"
+    "lastModifiedBy": "dnd5abuilder0000"
   },
   "_key": "!items!gMrWeG8fMDPRFiVe"
 }

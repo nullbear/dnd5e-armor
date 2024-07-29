@@ -97,7 +97,7 @@
     {
       "name": "Divine Word (50 hp or fewer)",
       "icon": "icons/magic/light/explosion-star-large-orange-purple.webp",
-      "origin": "Compendium.dnd5e.spells.Item.T1vpZLam7LezjToj",
+      "origin": "Compendium.dnd5a.spells.Item.T1vpZLam7LezjToj",
       "duration": {
         "startTime": null,
         "seconds": 60,
@@ -122,7 +122,7 @@
     {
       "name": "Divine Word (40 hp or fewer)",
       "icon": "icons/magic/light/explosion-star-large-orange-purple.webp",
-      "origin": "Compendium.dnd5e.spells.Item.T1vpZLam7LezjToj",
+      "origin": "Compendium.dnd5a.spells.Item.T1vpZLam7LezjToj",
       "duration": {
         "startTime": null,
         "seconds": 600,
@@ -148,7 +148,7 @@
     {
       "name": "Divine Word (30 hp or fewer)",
       "icon": "icons/magic/light/explosion-star-large-orange-purple.webp",
-      "origin": "Compendium.dnd5e.spells.Item.T1vpZLam7LezjToj",
+      "origin": "Compendium.dnd5a.spells.Item.T1vpZLam7LezjToj",
       "duration": {
         "startTime": null,
         "seconds": 3600,
@@ -176,12 +176,12 @@
   ],
   "folder": "irCSpQWIMtp978TA",
   "_stats": {
-    "systemId": "dnd5e",
+    "systemId": "dnd5a",
     "systemVersion": "3.0.0",
     "coreVersion": "11.315",
     "createdTime": 1661787234144,
     "modifiedTime": 1706144091449,
-    "lastModifiedBy": "dnd5ebuilder0000"
+    "lastModifiedBy": "dnd5abuilder0000"
   },
   "_key": "!items!T1vpZLam7LezjToj"
 }

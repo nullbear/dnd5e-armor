@@ -98,12 +98,12 @@
   "effects": [],
   "folder": "bG9QTayc46rfNkv2",
   "_stats": {
-    "systemId": "dnd5e",
+    "systemId": "dnd5a",
     "systemVersion": "3.0.0",
     "coreVersion": "11.315",
     "createdTime": 1661787234232,
     "modifiedTime": 1704823526023,
-    "lastModifiedBy": "dnd5ebuilder0000"
+    "lastModifiedBy": "dnd5abuilder0000"
   },
   "_key": "!items!r3243JU4AyQJyfX4"
 }

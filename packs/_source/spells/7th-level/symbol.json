@@ -104,7 +104,7 @@
     {
       "name": "Symbol (fear)",
       "icon": "icons/magic/symbols/runes-star-pentagon-blue.webp",
-      "origin": "Compendium.dnd5e.spells.Item.B2kbmgbA2WQR00kx",
+      "origin": "Compendium.dnd5a.spells.Item.B2kbmgbA2WQR00kx",
       "duration": {
         "startTime": null,
         "seconds": 60,
@@ -129,7 +129,7 @@
     {
       "name": "Symbol (pain)",
       "icon": "icons/magic/symbols/runes-star-pentagon-blue.webp",
-      "origin": "Compendium.dnd5e.spells.Item.B2kbmgbA2WQR00kx",
+      "origin": "Compendium.dnd5a.spells.Item.B2kbmgbA2WQR00kx",
       "duration": {
         "startTime": null,
         "seconds": 60,
@@ -154,7 +154,7 @@
     {
       "name": "Symbol (sleep)",
       "icon": "icons/magic/symbols/runes-star-pentagon-blue.webp",
-      "origin": "Compendium.dnd5e.spells.Item.B2kbmgbA2WQR00kx",
+      "origin": "Compendium.dnd5a.spells.Item.B2kbmgbA2WQR00kx",
       "duration": {
         "startTime": null,
         "seconds": 600,
@@ -180,7 +180,7 @@
     {
       "name": "Symbol (stunning)",
       "icon": "icons/magic/symbols/runes-star-pentagon-blue.webp",
-      "origin": "Compendium.dnd5e.spells.Item.B2kbmgbA2WQR00kx",
+      "origin": "Compendium.dnd5a.spells.Item.B2kbmgbA2WQR00kx",
       "duration": {
         "startTime": null,
         "seconds": 60,
@@ -206,12 +206,12 @@
   ],
   "folder": "irCSpQWIMtp978TA",
   "_stats": {
-    "systemId": "dnd5e",
+    "systemId": "dnd5a",
     "systemVersion": "3.0.0",
     "coreVersion": "11.315",
     "createdTime": 1661787234090,
     "modifiedTime": 1706144672863,
-    "lastModifiedBy": "dnd5ebuilder0000"
+    "lastModifiedBy": "dnd5abuilder0000"
   },
   "_key": "!items!B2kbmgbA2WQR00kx"
 }

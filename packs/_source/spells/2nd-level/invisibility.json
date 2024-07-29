@@ -100,7 +100,7 @@
     {
       "name": "Invisibility",
       "icon": "icons/magic/air/fog-gas-smoke-dense-gray.webp",
-      "origin": "Compendium.dnd5e.spells.Item.1N8dDMMgZ1h1YJ3B",
+      "origin": "Compendium.dnd5a.spells.Item.1N8dDMMgZ1h1YJ3B",
       "duration": {
         "startTime": null,
         "seconds": 3600,
@@ -125,12 +125,12 @@
   ],
   "folder": "Qi4Se3we69ukl2V9",
   "_stats": {
-    "systemId": "dnd5e",
+    "systemId": "dnd5a",
     "systemVersion": "3.0.0",
     "coreVersion": "11.315",
     "createdTime": 1661787234056,
     "modifiedTime": 1706146756572,
-    "lastModifiedBy": "dnd5ebuilder0000"
+    "lastModifiedBy": "dnd5abuilder0000"
   },
   "_key": "!items!1N8dDMMgZ1h1YJ3B"
 }

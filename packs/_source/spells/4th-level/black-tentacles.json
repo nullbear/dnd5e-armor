@@ -105,7 +105,7 @@
     {
       "name": "Black Tentacles",
       "icon": "icons/magic/nature/vines-thorned-curled-glow-teal-purple.webp",
-      "origin": "Compendium.dnd5e.spells.Item.DGONTFbk5eORs5qv",
+      "origin": "Compendium.dnd5a.spells.Item.DGONTFbk5eORs5qv",
       "duration": {
         "startTime": null,
         "seconds": 60,
@@ -130,12 +130,12 @@
   ],
   "folder": "5auWSClKMDUIV5Ni",
   "_stats": {
-    "systemId": "dnd5e",
+    "systemId": "dnd5a",
     "systemVersion": "3.0.0",
     "coreVersion": "11.315",
     "createdTime": 1661787234098,
     "modifiedTime": 1706146031998,
-    "lastModifiedBy": "dnd5ebuilder0000"
+    "lastModifiedBy": "dnd5abuilder0000"
   },
   "_key": "!items!DGONTFbk5eORs5qv"
 }

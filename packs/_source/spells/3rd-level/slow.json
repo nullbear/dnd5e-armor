@@ -100,7 +100,7 @@
     {
       "name": "Slow",
       "icon": "icons/magic/air/fog-gas-smoke-dense-pink.webp",
-      "origin": "Compendium.dnd5e.spells.Item.yqUDoxk4x0NWG5Bz",
+      "origin": "Compendium.dnd5a.spells.Item.yqUDoxk4x0NWG5Bz",
       "duration": {
         "startTime": null,
         "seconds": 60,
@@ -154,12 +154,12 @@
   ],
   "folder": "5Si35RRLLaaoWvC3",
   "_stats": {
-    "systemId": "dnd5e",
+    "systemId": "dnd5a",
     "systemVersion": "3.0.0",
     "coreVersion": "11.315",
     "createdTime": 1661787234243,
     "modifiedTime": 1706146260888,
-    "lastModifiedBy": "dnd5ebuilder0000"
+    "lastModifiedBy": "dnd5abuilder0000"
   },
   "_key": "!items!yqUDoxk4x0NWG5Bz"
 }

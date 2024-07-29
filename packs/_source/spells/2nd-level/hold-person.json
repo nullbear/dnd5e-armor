@@ -100,7 +100,7 @@
     {
       "name": "Hold Person",
       "icon": "icons/magic/control/debuff-chains-ropes-purple.webp",
-      "origin": "Compendium.dnd5e.spells.Item.3Lo9boi7P2ro6QV4",
+      "origin": "Compendium.dnd5a.spells.Item.3Lo9boi7P2ro6QV4",
       "duration": {
         "startTime": null,
         "seconds": 60,
@@ -126,12 +126,12 @@
   ],
   "folder": "Qi4Se3we69ukl2V9",
   "_stats": {
-    "systemId": "dnd5e",
+    "systemId": "dnd5a",
     "systemVersion": "3.0.0",
     "coreVersion": "11.315",
     "createdTime": 1661787234063,
     "modifiedTime": 1706146785487,
-    "lastModifiedBy": "dnd5ebuilder0000"
+    "lastModifiedBy": "dnd5abuilder0000"
   },
   "_key": "!items!3Lo9boi7P2ro6QV4"
 }

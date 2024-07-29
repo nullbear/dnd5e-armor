@@ -102,7 +102,7 @@
     {
       "name": "Geas",
       "icon": "icons/magic/air/air-burst-spiral-large-yellow.webp",
-      "origin": "Compendium.dnd5e.spells.Item.JQyigMNPiDnGI18b",
+      "origin": "Compendium.dnd5a.spells.Item.JQyigMNPiDnGI18b",
       "duration": {
         "startTime": null,
         "seconds": null,
@@ -127,12 +127,12 @@
   ],
   "folder": "bG9QTayc46rfNkv2",
   "_stats": {
-    "systemId": "dnd5e",
+    "systemId": "dnd5a",
     "systemVersion": "3.0.0",
     "coreVersion": "11.315",
     "createdTime": 1661787234114,
     "modifiedTime": 1706145425887,
-    "lastModifiedBy": "dnd5ebuilder0000"
+    "lastModifiedBy": "dnd5abuilder0000"
   },
   "_key": "!items!JQyigMNPiDnGI18b"
 }

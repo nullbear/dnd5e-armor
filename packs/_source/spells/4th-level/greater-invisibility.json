@@ -99,7 +99,7 @@
     {
       "name": "Greater Invisibility",
       "icon": "icons/magic/air/fog-gas-smoke-swirling-gray.webp",
-      "origin": "Compendium.dnd5e.spells.Item.tEpDmYZNGc9f5OhJ",
+      "origin": "Compendium.dnd5a.spells.Item.tEpDmYZNGc9f5OhJ",
       "duration": {
         "startTime": null,
         "seconds": 60,
@@ -124,12 +124,12 @@
   ],
   "folder": "5auWSClKMDUIV5Ni",
   "_stats": {
-    "systemId": "dnd5e",
+    "systemId": "dnd5a",
     "systemVersion": "3.0.0",
     "coreVersion": "11.315",
     "createdTime": 1661787234234,
     "modifiedTime": 1706145768323,
-    "lastModifiedBy": "dnd5ebuilder0000"
+    "lastModifiedBy": "dnd5abuilder0000"
   },
   "_key": "!items!tEpDmYZNGc9f5OhJ"
 }

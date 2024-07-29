@@ -99,7 +99,7 @@
     {
       "name": "Eyebite (alseep)",
       "icon": "icons/magic/perception/eye-ringed-glow-angry-large-red.webp",
-      "origin": "Compendium.dnd5e.spells.Item.ZRqu3Xh9FmlBCZGy",
+      "origin": "Compendium.dnd5a.spells.Item.ZRqu3Xh9FmlBCZGy",
       "duration": {
         "startTime": null,
         "seconds": 60,
@@ -125,7 +125,7 @@
     {
       "name": "Eyebite (panicked)",
       "icon": "icons/magic/perception/eye-ringed-glow-angry-large-red.webp",
-      "origin": "Compendium.dnd5e.spells.Item.ZRqu3Xh9FmlBCZGy",
+      "origin": "Compendium.dnd5a.spells.Item.ZRqu3Xh9FmlBCZGy",
       "duration": {
         "startTime": null,
         "seconds": 60,
@@ -150,12 +150,12 @@
   ],
   "folder": "0pdesvXqKd55VOh2",
   "_stats": {
-    "systemId": "dnd5e",
+    "systemId": "dnd5a",
     "systemVersion": "3.0.0",
     "coreVersion": "11.315",
     "createdTime": 1661787234163,
     "modifiedTime": 1706145345941,
-    "lastModifiedBy": "dnd5ebuilder0000"
+    "lastModifiedBy": "dnd5abuilder0000"
   },
   "_key": "!items!ZRqu3Xh9FmlBCZGy"
 }

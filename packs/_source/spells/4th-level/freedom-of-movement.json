@@ -99,7 +99,7 @@
     {
       "name": "Freedom of Movement",
       "icon": "icons/skills/melee/strike-blade-knife-white-red.webp",
-      "origin": "Compendium.dnd5e.spells.Item.da0a1t2FqaTjRZGT",
+      "origin": "Compendium.dnd5a.spells.Item.da0a1t2FqaTjRZGT",
       "duration": {
         "startTime": null,
         "seconds": null,
@@ -135,12 +135,12 @@
   ],
   "folder": "5auWSClKMDUIV5Ni",
   "_stats": {
-    "systemId": "dnd5e",
+    "systemId": "dnd5a",
     "systemVersion": "3.0.0",
     "coreVersion": "11.315",
     "createdTime": 1661787234180,
     "modifiedTime": 1706145828975,
-    "lastModifiedBy": "dnd5ebuilder0000"
+    "lastModifiedBy": "dnd5abuilder0000"
   },
   "_key": "!items!da0a1t2FqaTjRZGT"
 }

@@ -102,12 +102,12 @@
   "effects": [],
   "folder": "irCSpQWIMtp978TA",
   "_stats": {
-    "systemId": "dnd5e",
+    "systemId": "dnd5a",
     "systemVersion": "3.0.0",
     "coreVersion": "11.315",
     "createdTime": 1661787234107,
     "modifiedTime": 1704823522987,
-    "lastModifiedBy": "dnd5ebuilder0000"
+    "lastModifiedBy": "dnd5abuilder0000"
   },
   "_key": "!items!HPvZm8YJO91k6Qdg"
 }

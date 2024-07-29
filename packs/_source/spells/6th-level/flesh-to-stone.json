@@ -100,7 +100,7 @@
     {
       "name": "Flesh to Stone",
       "icon": "icons/magic/control/energy-stream-link-large-blue.webp",
-      "origin": "Compendium.dnd5e.spells.Item.kozNy29b0X6exFhY",
+      "origin": "Compendium.dnd5a.spells.Item.kozNy29b0X6exFhY",
       "duration": {
         "startTime": null,
         "seconds": null,
@@ -125,12 +125,12 @@
   ],
   "folder": "0pdesvXqKd55VOh2",
   "_stats": {
-    "systemId": "dnd5e",
+    "systemId": "dnd5a",
     "systemVersion": "3.0.0",
     "coreVersion": "11.315",
     "createdTime": 1661787234215,
     "modifiedTime": 1706145097201,
-    "lastModifiedBy": "dnd5ebuilder0000"
+    "lastModifiedBy": "dnd5abuilder0000"
   },
   "_key": "!items!kozNy29b0X6exFhY"
 }

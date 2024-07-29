@@ -100,7 +100,7 @@
     {
       "name": "Shield of Faith",
       "icon": "icons/magic/defensive/shield-barrier-flaming-diamond-blue-yellow.webp",
-      "origin": "Compendium.dnd5e.spells.Item.jZ6JNykRtdQ90MOo",
+      "origin": "Compendium.dnd5a.spells.Item.jZ6JNykRtdQ90MOo",
       "duration": {
         "startTime": null,
         "seconds": 600,
@@ -130,12 +130,12 @@
   ],
   "folder": "ERuXllkhTQF51rDJ",
   "_stats": {
-    "systemId": "dnd5e",
+    "systemId": "dnd5a",
     "systemVersion": "3.0.0",
     "coreVersion": "11.315",
     "createdTime": 1661787234212,
     "modifiedTime": 1706147066200,
-    "lastModifiedBy": "dnd5ebuilder0000"
+    "lastModifiedBy": "dnd5abuilder0000"
   },
   "_key": "!items!jZ6JNykRtdQ90MOo"
 }

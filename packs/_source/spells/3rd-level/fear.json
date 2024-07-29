@@ -100,7 +100,7 @@
     {
       "name": "Fear",
       "icon": "icons/magic/control/fear-fright-monster-purple-blue.webp",
-      "origin": "Compendium.dnd5e.spells.Item.XXUDGFELgoskdOD0",
+      "origin": "Compendium.dnd5a.spells.Item.XXUDGFELgoskdOD0",
       "duration": {
         "startTime": null,
         "seconds": 60,
@@ -125,12 +125,12 @@
   ],
   "folder": "5Si35RRLLaaoWvC3",
   "_stats": {
-    "systemId": "dnd5e",
+    "systemId": "dnd5a",
     "systemVersion": "3.0.0",
     "coreVersion": "11.315",
     "createdTime": 1661787234157,
     "modifiedTime": 1706146504632,
-    "lastModifiedBy": "dnd5ebuilder0000"
+    "lastModifiedBy": "dnd5abuilder0000"
   },
   "_key": "!items!XXUDGFELgoskdOD0"
 }

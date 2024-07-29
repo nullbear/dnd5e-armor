@@ -98,7 +98,7 @@
     {
       "name": "Protection from Poison",
       "icon": "icons/magic/defensive/shield-barrier-glowing-triangle-green.webp",
-      "origin": "Compendium.dnd5e.spells.Item.MAxM77CDUu8dgIRQ",
+      "origin": "Compendium.dnd5a.spells.Item.MAxM77CDUu8dgIRQ",
       "duration": {
         "startTime": null,
         "seconds": 3600,
@@ -127,12 +127,12 @@
   ],
   "folder": "Qi4Se3we69ukl2V9",
   "_stats": {
-    "systemId": "dnd5e",
+    "systemId": "dnd5a",
     "systemVersion": "3.0.0",
     "coreVersion": "11.315",
     "createdTime": 1661787234123,
     "modifiedTime": 1706146721162,
-    "lastModifiedBy": "dnd5ebuilder0000"
+    "lastModifiedBy": "dnd5abuilder0000"
   },
   "_key": "!items!MAxM77CDUu8dgIRQ"
 }

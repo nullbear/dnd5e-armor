@@ -104,7 +104,7 @@
         {
           "name": "",
           "_id": "H4LmY7OuwtEQFipO",
-          "uuid": "Compendium.dnd5e.monsters.Actor.zwT2WjWo7cTm2631"
+          "uuid": "Compendium.dnd5a.monsters.Actor.zwT2WjWo7cTm2631"
         }
       ]
     }
@@ -115,12 +115,12 @@
   "effects": [],
   "folder": "Z8kZlnggh1PtuF3Y",
   "_stats": {
-    "systemId": "dnd5e",
+    "systemId": "dnd5a",
     "systemVersion": "3.2.0",
     "coreVersion": "11.315",
     "createdTime": 1661787234148,
     "modifiedTime": 1712088767209,
-    "lastModifiedBy": "dnd5ebuilder0000"
+    "lastModifiedBy": "dnd5abuilder0000"
   },
   "_key": "!items!Utk1OQRwYkMkFRD3"
 }
